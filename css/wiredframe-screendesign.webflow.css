@@ -25,6 +25,7 @@ body {
 /* Remove inner shadow from inputs on mobile iOS */
 textarea, input[type="text"] {
   -webkit-appearance: none;
+  appearance: none;
   }
 h1 {
   display: inline-block;
