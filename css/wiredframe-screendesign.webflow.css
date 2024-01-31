@@ -32,7 +32,7 @@ h1 {
   margin: 10px 0px 0px;
   padding: 0px 10px 5px;
   background-color: var(--color-2);
-  font-family: 'Poppins 2';
+  font-family: 'Poppins';
   color: var(--color-3);
   font-size: 50px;
   line-height: 60px;
@@ -45,7 +45,7 @@ h2 {
   width: 100%;
   margin: auto 0px 10px;
   padding: 9px 0px 20px;
-  font-family: 'Poppins 2';
+  font-family: 'Poppins';
   color: var(--color-2);
   font-size: 40px;
   line-height: 36px;
@@ -57,7 +57,7 @@ h2 {
 h3 {
   margin: 0px;
   padding-bottom: 30px;
-  font-family: 'Poppins 2';
+  font-family: 'Poppins';
   color: var(--color-2);
   font-size: 24px;
   line-height: 30px;
@@ -93,7 +93,7 @@ p {
   width: 100%;
   margin-top: 0px;
   margin-bottom: 0px;
-  font-family: 'Poppins 2';
+  font-family: 'Poppins';
   color: var(--color-5);
   font-size: 20px;
   line-height: 30px;
@@ -153,7 +153,7 @@ p {
   font-family: MavenProLight, sans-serif;
   color: var(--color-1);
   font-size: 100px;
-  font-weight: 200;
+  font-weight: 700;
 }
 
 .more-link {
@@ -504,7 +504,7 @@ p {
   min-height: 0px;
   padding-top: 0px;
   padding-bottom: 0px;
-  background-color: var(--color-10);
+  background-color: var(--color-8);
   opacity: 1;
 }
 
