@@ -1,8 +1,24 @@
+:root {
+--color-1: #333;
+--color-2: #59bac3;
+--color-3: #efebe4;
+--color-4: #000;
+--color-5: #b4bdbf;
+--color-6: #3e4b51;
+--color-7: #0093a7;
+--color-8: #fff;
+--color-9: #505759;
+--color-10: #f0f3f3;
+--color-11: #e76e66;
+--color-12: #c7534d;
+--color-13: #e5e9eb;
+}
+
 body {
   margin-bottom: 0px;
   padding-bottom: 0px;
   font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
-  color: #333;
+  color: var(--color-1);
   font-size: 12px;
   line-height: 20px;
 }
@@ -14,9 +30,9 @@ h1 {
   display: inline-block;
   margin: 10px 0px 0px;
   padding: 0px 10px 5px;
-  background-color: #59bac3;
+  background-color: var(--color-2);
   font-family: 'Exo 2';
-  color: #efebe4;
+  color: var(--color-3);
   font-size: 50px;
   line-height: 60px;
   font-weight: 400;
@@ -29,7 +45,7 @@ h2 {
   margin: auto 0px 10px;
   padding: 9px 0px 20px;
   font-family: 'Exo 2';
-  color: #59bac3;
+  color: var(--color-2);
   font-size: 40px;
   line-height: 36px;
   font-weight: 500;
@@ -41,7 +57,7 @@ h3 {
   margin: 0px;
   padding-bottom: 30px;
   font-family: 'Exo 2';
-  color: #59bac3;
+  color: var(--color-2);
   font-size: 24px;
   line-height: 30px;
   font-weight: 400;
@@ -50,7 +66,7 @@ h3 {
 h4 {
   margin: 0px 0px 6px;
   border-width: 1px;
-  border-color: #000;
+  border-color: var(--color-4);
   box-shadow: none;
   font-size: 18px;
   line-height: 24px;
@@ -77,7 +93,7 @@ p {
   margin-top: 0px;
   margin-bottom: 0px;
   font-family: 'Exo 2';
-  color: #b4bdbf;
+  color: var(--color-5);
   font-size: 20px;
   line-height: 30px;
   text-align: center;
@@ -91,7 +107,7 @@ p {
   -webkit-transition: background-color 500ms ease;
   transition: background-color 500ms ease;
   font-family: 'Maven Pro', sans-serif;
-  color: #3e4b51;
+  color: var(--color-6);
   font-size: 20px;
   font-weight: 400;
   text-decoration: none;
@@ -101,11 +117,11 @@ p {
 .nav-link:hover {
   -webkit-transition: all 200ms ease;
   transition: all 200ms ease;
-  color: #59bac3;
+  color: var(--color-2);
 }
 
 .nav-link.w--current {
-  color: #0093a7;
+  color: var(--color-7);
 }
 
 .subtitle {
@@ -114,7 +130,7 @@ p {
   -ms-transform: none;
   transform: none;
   font-family: 'Maven Pro', sans-serif;
-  color: #0093a7;
+  color: var(--color-7);
   font-size: 30px;
   line-height: 120%;
   font-weight: 400;
@@ -134,7 +150,7 @@ p {
   padding-top: 0px;
   padding-bottom: 0px;
   font-family: MavenProLight, sans-serif;
-  color: #fff;
+  color: var(--color-8);
   font-size: 100px;
   font-weight: 200;
 }
@@ -143,14 +159,14 @@ p {
   display: inline-block;
   margin-top: 40px;
   padding: 15px;
-  border: 3px solid #505759;
+  border: 3px solid var(--color-9);
   border-radius: 50px;
   -webkit-transition: -webkit-transform 200ms ease;
   transition: -webkit-transform 200ms ease;
   transition: transform 200ms ease;
   transition: transform 200ms ease, -webkit-transform 200ms ease;
   font-family: 'Maven Pro', sans-serif;
-  color: #505759;
+  color: var(--color-9);
   font-size: 24px;
   line-height: 110%;
   text-align: center;
@@ -159,18 +175,18 @@ p {
 }
 
 .more-link:hover {
-  border: 3px solid #0093a7;
-  background-color: #0093a7;
+  border: 3px solid var(--color-7);
+  background-color: var(--color-7);
   -webkit-transform: scale(1.1);
   -ms-transform: scale(1.1);
   transform: scale(1.1);
   -webkit-transition: all 200ms ease;
   transition: all 200ms ease;
-  color: #fff;
+  color: var(--color-8);
 }
 
 .more-link.w--current:hover {
-  color: #fff;
+  color: var(--color-8);
 }
 
 .footer-text {
@@ -179,7 +195,7 @@ p {
   -ms-flex: 0 auto;
   flex: 0 auto;
   font-family: 'Maven Pro', sans-serif;
-  color: #3e4b51;
+  color: var(--color-6);
   font-size: 14px;
 }
 
@@ -191,21 +207,21 @@ p {
 .header-text {
   padding-top: 20px;
   font-family: 'Maven Pro', sans-serif;
-  color: #505759;
+  color: var(--color-9);
   font-size: 18px;
   text-align: center;
 }
 
 .header-text.middle {
   width: auto;
-  color: #3e4b51;
+  color: var(--color-6);
   text-align: center;
 }
 
 .counter {
   width: 550px;
   font-family: 'Maven Pro', sans-serif;
-  color: #0093a7;
+  color: var(--color-7);
   font-size: 150px;
   line-height: 100%;
   text-align: left;
@@ -229,8 +245,8 @@ p {
   padding-top: 10px;
   padding-left: 10px;
   border-radius: 50px;
-  background-color: #f0f3f3;
-  color: #0093a7;
+  background-color: var(--color-10);
+  color: var(--color-7);
   font-size: 60px;
   line-height: 80px;
 }
@@ -240,7 +256,7 @@ p {
   height: auto;
   padding: 30px 15px;
   font-family: 'Maven Pro', sans-serif;
-  color: #3e4b51;
+  color: var(--color-6);
   font-size: 18px;
   line-height: 24px;
   cursor: default;
@@ -260,17 +276,17 @@ p {
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
-  color: #b4bdbf;
+  color: var(--color-5);
   text-align: center;
   text-decoration: none;
 }
 
 .label {
-  border: 0px solid #000;
+  border: 0px solid var(--color-4);
   border-radius: 0px;
   background-color: transparent;
   font-family: 'Maven Pro', sans-serif;
-  color: #3e4b51;
+  color: var(--color-6);
   font-size: 18px;
   text-align: left;
 }
@@ -279,7 +295,7 @@ p {
   padding-top: 0px;
   padding-right: 40px;
   padding-left: 40px;
-  color: #fff;
+  color: var(--color-8);
   line-height: 25px;
   text-align: center;
 }
@@ -289,22 +305,22 @@ p {
 }
 
 .submit {
-  background-color: #e76e66;
+  background-color: var(--color-11);
   font-family: 'Maven Pro', sans-serif;
-  color: #efebe4;
+  color: var(--color-3);
   font-size: 20px;
   font-weight: 500;
 }
 
 .submit:hover {
-  background-color: #c7534d;
+  background-color: var(--color-12);
 }
 
 .jobtitle {
   padding-top: 0px;
   padding-bottom: 0px;
   font-family: 'Maven Pro', sans-serif;
-  color: #0093a7;
+  color: var(--color-7);
   font-size: 40px;
   line-height: 200%;
 }
@@ -313,7 +329,7 @@ p {
   display: inline-block;
   padding-top: 20px;
   padding-bottom: 20px;
-  color: #b4bdbf;
+  color: var(--color-5);
   font-size: 20px;
 }
 
@@ -332,7 +348,7 @@ p {
   padding-left: 0px;
   background-color: transparent;
   font-family: 'Maven Pro', sans-serif;
-  color: #3e4b51;
+  color: var(--color-6);
   font-size: 70px;
   line-height: 110%;
   font-weight: 400;
@@ -365,7 +381,7 @@ p {
 .heading-4 {
   padding-bottom: 0px;
   font-family: 'Maven Pro', sans-serif;
-  color: #3e4b51;
+  color: var(--color-6);
   font-size: 20px;
   line-height: 30px;
 }
@@ -408,7 +424,7 @@ p {
   -webkit-align-content: center;
   -ms-flex-line-pack: center;
   align-content: center;
-  background-color: #fff;
+  background-color: var(--color-8);
 }
 
 .hero-section.grey {
@@ -426,7 +442,7 @@ p {
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
-  background-color: #f0f3f3;
+  background-color: var(--color-10);
 }
 
 .hero-section.start {
@@ -457,7 +473,7 @@ p {
   min-height: 0px;
   padding-top: 0px;
   padding-bottom: 0px;
-  background-color: #f0f3f3;
+  background-color: var(--color-10);
   opacity: 1;
 }
 
@@ -590,7 +606,7 @@ p {
   -webkit-flex: 0 auto;
   -ms-flex: 0 auto;
   flex: 0 auto;
-  background-color: #fff;
+  background-color: var(--color-8);
 }
 
 .to-top {
@@ -610,7 +626,7 @@ p {
   -ms-flex-align: center;
   align-items: center;
   border-radius: 50px;
-  background-color: #0093a7;
+  background-color: var(--color-7);
   opacity: 0;
   -webkit-transition: -webkit-transform 200ms ease;
   transition: -webkit-transform 200ms ease;
@@ -815,16 +831,16 @@ p {
   height: 50px;
   margin-bottom: 20px;
   padding: 15px 20px;
-  border: 2px solid #e5e9eb;
+  border: 2px solid var(--color-13);
   border-radius: 50px;
   -webkit-transition: border-color 200ms ease;
   transition: border-color 200ms ease;
-  color: #3e4b51;
+  color: var(--color-6);
   line-height: 20px;
 }
 
 .input:focus {
-  border-color: #0093a7;
+  border-color: var(--color-7);
 }
 
 .input.textarea {
@@ -836,8 +852,8 @@ p {
   -webkit-flex-basis: 50%;
   -ms-flex-preferred-size: 50%;
   flex-basis: 50%;
-  background-color: #0093a7;
-  color: #fff;
+  background-color: var(--color-7);
+  color: var(--color-8);
   font-weight: 400;
 }
 
@@ -857,7 +873,7 @@ p {
   -ms-flex-align: center;
   align-items: center;
   border-radius: 50%;
-  background-color: #e5e9eb;
+  background-color: var(--color-13);
   -webkit-transition: background-color 200ms ease;
   transition: background-color 200ms ease;
   text-align: center;
@@ -865,7 +881,7 @@ p {
 }
 
 .social-link:hover {
-  background-color: #0093a7;
+  background-color: var(--color-7);
 }
 
 .social-link.close {
@@ -904,7 +920,7 @@ p {
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
-  background-color: #0093a7;
+  background-color: var(--color-7);
 }
 
 .popup-job {
@@ -915,8 +931,8 @@ p {
   width: 400px;
   padding: 30px;
   border-radius: 25px;
-  background-color: #fff;
-  box-shadow: 0 21px 50px -25px #3e4b51;
+  background-color: var(--color-8);
+  box-shadow: 0 21px 50px -25px var(--color-6);
   opacity: 0;
 }
 
@@ -933,7 +949,7 @@ p {
 
 .success-message {
   border-radius: 25px;
-  background-color: #0093a7;
+  background-color: var(--color-7);
 }
 
 .column {
@@ -1035,14 +1051,14 @@ html.w-mod-js *[data-ix="intoviewanimation"] {
   }
   .nav-menu {
     padding-bottom: 20px;
-    background-color: #fff;
+    background-color: var(--color-8);
     box-shadow: 0 2px 3px -1px rgba(0, 0, 0, .21);
   }
   .menu-button {
     background-color: transparent;
   }
   .menu-button.w--open {
-    background-color: #fff;
+    background-color: var(--color-8);
   }
   .brand {
     -webkit-box-flex: 1;
