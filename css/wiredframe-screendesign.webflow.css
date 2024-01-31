@@ -1,14 +1,14 @@
 :root {
---color-1: #333;
---color-2: #59bac3;
---color-3: #efebe4;
---color-4: #000;
+--color-1: #042E3E;
+--color-2: #3FF390;
+--color-3: #aebab3;
+--color-4: #042E3E;
 --color-5: #b4bdbf;
---color-6: #3e4b51;
---color-7: #0093a7;
+--color-6: #042E3E;
+--color-7: #3FF390;
 --color-8: #fff;
---color-9: #505759;
---color-10: #f0f3f3;
+--color-9: #042E3E;
+--color-10: #042E3E;
 --color-11: #e76e66;
 --color-12: #c7534d;
 --color-13: #e5e9eb;
@@ -151,7 +151,7 @@ p {
   padding-top: 0px;
   padding-bottom: 0px;
   font-family: MavenProLight, sans-serif;
-  color: var(--color-8);
+  color: var(--color-1);
   font-size: 100px;
   font-weight: 200;
 }
@@ -168,6 +168,24 @@ p {
   transition: transform 200ms ease, -webkit-transform 200ms ease;
   font-family: 'Poppins', sans-serif;
   color: var(--color-9);
+  font-size: 24px;
+  line-height: 110%;
+  text-align: center;
+  text-decoration: none;
+  text-transform: none;
+}
+.more-link.dark {
+  display: inline-block;
+  margin-top: 40px;
+  padding: 15px;
+  border: 3px solid var(--color-7);
+  border-radius: 50px;
+  -webkit-transition: -webkit-transform 200ms ease;
+  transition: -webkit-transform 200ms ease;
+  transition: transform 200ms ease;
+  transition: transform 200ms ease, -webkit-transform 200ms ease;
+  font-family: 'Poppins', sans-serif;
+  color: var(--color-7);
   font-size: 24px;
   line-height: 110%;
   text-align: center;
@@ -212,6 +230,9 @@ p {
   color: var(--color-9);
   font-size: 18px;
   text-align: center;
+}
+.header-text.dark {
+  color: var(--color-3);
 }
 
 .header-text.middle {
@@ -293,11 +314,15 @@ p {
   text-align: left;
 }
 
+.label.dark {
+  color: var(--color-3);
+}
+
 .label.profile {
   padding-top: 0px;
   padding-right: 40px;
   padding-left: 40px;
-  color: var(--color-8);
+  color: var(--color-1);
   line-height: 25px;
   text-align: center;
 }
@@ -341,6 +366,7 @@ p {
   padding-top: 30px;
   padding-bottom: 70px;
   opacity: 0;
+  background: var(--color-8);
 }
 
 .heading {
@@ -356,6 +382,9 @@ p {
   font-weight: 400;
   text-align: center;
   text-transform: none;
+}
+.heading.dark {
+  color: var(--color-2);
 }
 
 .navbar {
