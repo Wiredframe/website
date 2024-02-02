@@ -35,7 +35,7 @@ h1 {
   margin: 10px 0px 0px;
   padding: 0px 10px 5px;
   background-color: var(--color-2);
-  font-family: 'Poppins';
+  font-family: 'Comfortaa';
   color: var(--color-3);
   font-size: 50px;
   line-height: 60px;
@@ -48,7 +48,7 @@ h2 {
   width: 100%;
   margin: auto 0px 10px;
   padding: 9px 0px 20px;
-  font-family: 'Poppins';
+  font-family: 'Comfortaa';
   color: var(--color-2);
   font-size: 40px;
   line-height: 36px;
@@ -60,7 +60,7 @@ h2 {
 h3 {
   margin: 0px;
   padding-bottom: 30px;
-  font-family: 'Poppins';
+  font-family: 'Comfortaa';
   color: var(--color-2);
   font-size: 24px;
   line-height: 30px;
@@ -96,7 +96,7 @@ p {
   width: 100%;
   margin-top: 0px;
   margin-bottom: 0px;
-  font-family: 'Poppins';
+  font-family: 'Comfortaa';
   color: var(--color-5);
   font-size: 20px;
   line-height: 30px;
@@ -110,7 +110,7 @@ p {
   border-radius: 5px;
   -webkit-transition: background-color 500ms ease;
   transition: background-color 500ms ease;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Comfortaa', sans-serif;
   color: var(--color-6);
   font-size: 20px;
   font-weight: 400;
@@ -133,7 +133,7 @@ p {
   -webkit-transform: none;
   -ms-transform: none;
   transform: none;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Comfortaa', sans-serif;
   color: var(--color-7);
   font-size: 30px;
   line-height: 120%;
@@ -144,19 +144,16 @@ p {
 .subtitle.bullets {
   padding-top: 0px;
   padding-bottom: 10px;
-  font-size: 40px;
+  font-size: 30px;
   text-align: left;
 }
 
 .subtitle.profile {
-  height: 100px;
-  margin-top: -30px;
+  color: var(--color-1);  
+  font-size:80px;
+  font-weight: 500;
+  line-height: 1em;
   padding-top: 0px;
-  padding-bottom: 0px;
-  font-family: MavenProLight, sans-serif;
-  color: var(--color-1);
-  font-size: 100px;
-  font-weight: 700;
 }
 
 .more-link {
@@ -169,7 +166,7 @@ p {
   transition: -webkit-transform 200ms ease;
   transition: transform 200ms ease;
   transition: transform 200ms ease, -webkit-transform 200ms ease;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Comfortaa', sans-serif;
   color: var(--color-9);
   font-size: 24px;
   line-height: 110%;
@@ -188,7 +185,7 @@ p {
   transition: -webkit-transform 200ms ease;
   transition: transform 200ms ease;
   transition: transform 200ms ease, -webkit-transform 200ms ease;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Comfortaa', sans-serif;
   color: var(--color-7);
   font-size: 24px;
   line-height: 110%;
@@ -217,7 +214,7 @@ p {
   -webkit-flex: 0 auto;
   -ms-flex: 0 auto;
   flex: 0 auto;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Comfortaa', sans-serif;
   color: var(--color-6);
   font-size: 14px;
 }
@@ -229,7 +226,7 @@ p {
 
 .header-text {
   padding-top: 20px;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Comfortaa', sans-serif;
   font-weight: 300;
   color: var(--color-9);
   font-size: 18px;
@@ -248,7 +245,7 @@ p {
 
 .counter {
   width: 550px;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Comfortaa', sans-serif;
   color: var(--color-7);
   font-size: 150px;
   line-height: 100%;
@@ -283,7 +280,7 @@ p {
   width: 25%;
   height: auto;
   padding: 30px 15px;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Comfortaa', sans-serif;
   color: var(--color-6);
   font-size: 18px;
   line-height: 24px;
@@ -313,9 +310,9 @@ p {
   border: 0px solid var(--color-4);
   border-radius: 0px;
   background-color: transparent;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Comfortaa', sans-serif;
   color: var(--color-6);
-  font-size: 18px;
+  font-size: 16px;
   text-align: left;
 }
 
@@ -324,21 +321,21 @@ p {
 }
 
 .label.profile {
-  padding-top: 0px;
   padding-right: 40px;
   padding-left: 40px;
   color: var(--color-1);
-  line-height: 25px;
   text-align: center;
+  line-height: 1em;
+  padding-bottom: 0px;
 }
 
 .profile {
-  padding-top: 50px;
+
 }
 
 .submit {
   background-color: var(--color-11);
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Comfortaa', sans-serif;
   color: var(--color-3);
   font-size: 20px;
   font-weight: 500;
@@ -351,7 +348,7 @@ p {
 .jobtitle {
   padding-top: 0px;
   padding-bottom: 0px;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Comfortaa', sans-serif;
   color: var(--color-7);
   font-size: 40px;
   line-height: 200%;
@@ -380,11 +377,11 @@ p {
   padding-right: 0px;
   padding-left: 0px;
   background-color: transparent;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Comfortaa', sans-serif;
   color: var(--color-6);
   font-size: 70px;
   line-height: 110%;
-  font-weight: 400;
+  font-weight: 600;
   text-align: center;
   text-transform: none;
 }
@@ -412,12 +409,12 @@ p {
 }
 
 .body {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Comfortaa', sans-serif;
 }
 
 .heading-4 {
   padding-bottom: 0px;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Comfortaa', sans-serif;
   color: var(--color-6);
   font-size: 20px;
   line-height: 30px;
