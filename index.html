@@ -68,10 +68,10 @@
       </div>
     </div>
     <div class="content-container start w-container" data-ix="intoviewanimation">
-      <h1 class="heading">Niemand hat die Absicht eine Website zu errichten ...</h1>
-      <div class="subtitle">... und doch passiert es jeden Tag - seit vielen Jahren.&nbsp;</div>
+      <h1 class="heading">Niemand hat die Absicht eine Website zu errichten!</h1>
+      <div class="subtitle">Und doch passiert es jeden Tag - seit vielen Jahren.</div>
       <p class="header-text">Auf dieser schockierenden Enthüllungs-Website erfahren Sie alles über das Geschäft mit den
-        Webseiten, die verwendeten Technologien und warum “die da oben” nicht wollen, dass Sie es erfahren.</p><a
+        Websites, die verwendeten Technologien und warum “die da oben” nicht wollen, dass Sie es erfahren.</p><a
         class="more-link" href="#wahrheit">Die ganze Wahrheit <span class="arrowdown">▼</span></a>
     </div>
     <div class="hero-image tr"></div>
@@ -79,7 +79,7 @@
   <div class="grey hero-section" id="wahrheit">
     <div class="content-container w-container" data-ix="intoviewanimation">
       <p class="counter" id="counter">141567</p>
-      <p class="subtitle">Webseiten werden jeden Tag gegen ihren Willen online gestellt.</p>
+      <p class="subtitle">Websites werden jeden Tag gegen ihren Willen online gestellt.</p>
       <p class="header-text dark">Jeden Tag werden unzählige Websites gebaut und hinter dem Rücken der Bürger einfach
         online gestellt. Besonders tragisch:&nbsp;Viele bemerken es nicht einmal, denn oft sind diese schon bei
         Fertigstellung veraltet, langweilig oder schlicht unauffindbar, trotzdem haben die Auftraggeber viel Geld dafür
@@ -115,7 +115,7 @@
     <div class="content-container w-container" data-ix="intoviewanimation">
       <h1 class="heading dark" data-ix="headertextfadein">Wiredframe hilft</h1>
       <p class="header-text dark">Das einzig bekannte Gegenmittel gegen schleches Webdesign ist Leidenschaft. Egal ob
-        für ein neues Projekt oder einen Relaunch, seit 13 Jahren setzt sich Wiredframe für Webdesign ein und ist
+        für ein neues Projekt oder einen Relaunch, seit <span id="jahreSeit"></span> Jahren setzt sich Wiredframe für Webdesign ein und ist
         besonders spezialisiert auf:</p>
     </div>
     <div class="columns content-container w-container" data-ix="intoviewanimation">
@@ -169,7 +169,7 @@
       </div>
       <div class="leistungen profile" data-ix="scale-1-1">
         <div>
-          <p class="profile subtitle">13</p>
+          <p class="profile subtitle" id="jahreSeitBig"></p>
           <p class="label profile" data-ix="aufzaehlungfadein1">Jahre Berufserfahrung</p>
         </div>
       </div>
@@ -856,6 +856,15 @@
     }
     $(counterWebsitesOnline);
   </script>
+  <script>
+    function jahreSeit(jahr) {
+        const aktuellesJahr = new Date().getFullYear();
+        return aktuellesJahr - jahr;
+    }
+
+    document.getElementById('jahreSeit').textContent = `${jahreSeit(2005)}`;
+    document.getElementById('jahreSeitBig').textContent = `${jahreSeit(2005)}`;
+</script>
   <style>
     .w-webflow-badge {
       display: none !important;
