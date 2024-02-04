@@ -168,7 +168,7 @@ p {
   transition: transform 200ms ease, -webkit-transform 200ms ease;
   font-family: 'Maven Pro', sans-serif;
   color: var(--color-9);
-  font-size: 24px;
+  font-size: 20px;
   line-height: 110%;
   text-align: center;
   text-decoration: none;
@@ -187,7 +187,7 @@ p {
   transition: transform 200ms ease, -webkit-transform 200ms ease;
   font-family: 'Maven Pro', sans-serif;
   color: var(--color-7);
-  font-size: 24px;
+  font-size: 20px;
   line-height: 110%;
   text-align: center;
   text-decoration: none;
@@ -195,18 +195,18 @@ p {
 }
 
 .more-link:hover {
-  border: 3px solid var(--color-7);
   background-color: var(--color-7);
+  border: 3px solid var(--color-7);
   -webkit-transform: scale(1.1);
   -ms-transform: scale(1.1);
   transform: scale(1.1);
   -webkit-transition: all 200ms ease;
   transition: all 200ms ease;
-  color: var(--color-8);
+  color: var(--color-1);
 }
 
 .more-link.w--current:hover {
-  color: var(--color-8);
+  color: var(--color-1);
 }
 
 .footer-text {
