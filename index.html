@@ -750,64 +750,58 @@
                 href="https://dg-datenschutz.de/muster-datenschutzerklarung/">BDSG uns DS-GVO
                 Datenschutzerklärungs-Generator</a> der Deutschen Gesellschaft für Datenschutz, in Kooperation mit der
               Kanzlei für <b><a href="https://www.wbs-law.de/taetigkeitsgebiete/medienrecht/">Medienrecht</a> WILDE
-                BEUGER SOLMECKE | Rechtsanwälte erstellt. </b></p><b>
-            </b>
-          </div><b>
-          </b>
-        </div><b>
-        </b>
-      </div><b>
-      </b>
-    </div><b>
-    </b>
-  </div><b>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js" type="text/javascript"></script>
-    <script src="js/webflow.js" type="text/javascript"></script>
-    <script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
-    <!-- [if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
-    <script>
-      // jQuery function to animate the counter element
-      $(document).ready(function () {
-        $('.counter').each(function () {
-          var $this = $(this),
-            countTo = $this.attr('data-count');
+                BEUGER SOLMECKE | Rechtsanwälte erstellt. </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js" type="text/javascript"></script>
+  <script src="js/webflow.js" type="text/javascript"></script>
+  <script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
+  <!-- [if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
+  <script>
+    // jQuery function to animate the counter element
+    $(document).ready(function () {
+      $('.counter').each(function () {
+        var $this = $(this),
+          countTo = $this.attr('data-count');
 
-          // Animate the counter from 100000 to the target number
-          $({ countNum: 100000 }).animate({
-            countNum: countTo
-          },
+        // Animate the counter from 100000 to the target number
+        $({ countNum: 100000 }).animate({
+          countNum: countTo
+        },
 
-            {
-              duration: 36000, // Duration of the animation in milliseconds
-              easing: 'easeOutQuad', // Easing function for the animation
-              step: function () {
-                $this.text(Math.floor(this.countNum)); // Update the counter text during the animation
-              },
-              complete: function () {
-                $this.text(this.countNum); // Ensure the final value is set correctly
-              }
-            });
-        });
+          {
+            duration: 36000, // Duration of the animation in milliseconds
+            easing: 'easeOutQuad', // Easing function for the animation
+            step: function () {
+              $this.text(Math.floor(this.countNum)); // Update the counter text during the animation
+            },
+            complete: function () {
+              $this.text(this.countNum); // Ensure the final value is set correctly
+            }
+          });
       });
-    </script>
-    <script>
-      function jahreSeit(jahr) {
-        const aktuellesJahr = new Date().getFullYear();
-        return aktuellesJahr - jahr;
-      }
+    });
+  </script>
+  <script>
+    function jahreSeit(jahr) {
+      const aktuellesJahr = new Date().getFullYear();
+      return aktuellesJahr - jahr;
+    }
 
-      document.getElementById('jahreSeit').textContent = `${jahreSeit(2005)}`;
-      document.getElementById('jahreSeitBig').textContent = `${jahreSeit(2005)}`;
-    </script>
-    <style>
-      .w-webflow-badge {
-        display: none !important;
-        width: 0px !important;
-        height: 0px !important;
-        opacity: 0 !important;
-      }
-    </style>
-  </b>
+    document.getElementById('jahreSeit').textContent = `${jahreSeit(2005)}`;
+    document.getElementById('jahreSeitBig').textContent = `${jahreSeit(2005)}`;
+  </script>
+  <style>
+    .w-webflow-badge {
+      display: none !important;
+      width: 0px !important;
+      height: 0px !important;
+      opacity: 0 !important;
+    }
+  </style>
 </body>
 
 </html>
