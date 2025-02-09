@@ -27,7 +27,8 @@ body {
 textarea,
 input[type="text"] {
   -webkit-appearance: none;
-  appearance: none;
+  -moz-appearance: none;
+       appearance: none;
 }
 
 h1 {
