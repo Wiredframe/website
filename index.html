@@ -209,16 +209,30 @@
           </svg>
         </span> E-Mail schreiben </a>
       <script>
-        // Enhanced E-Mail Obfuscation
-        (function () {
-          // Split and reverse to make scraping harder
-          var parts = ['ed', 'emarfderiw', 'ofni'];
-          var user = parts[2].split('').reverse().join('');
-          var domain = parts[1].split('').reverse().join('') + '.' + parts[0].split('').reverse().join('');
-          var link = document.getElementById('email-link');
-          link.setAttribute('href', 'mailto:' + user + '@' + domain);
-          link.querySelector('span').setAttribute('title', user + '@' + domain);
-        })();
+        // Globale E-Mail Obfuscation Function
+        function revealEmail(user, domain, elementOrSelector) {
+          var email = user + '@' + domain;
+          var el = typeof elementOrSelector === 'string' ? document.querySelector(elementOrSelector) : elementOrSelector;
+          if (el) {
+            if (el.tagName === 'A') {
+              el.setAttribute('href', 'mailto:' + email);
+              var icon = el.querySelector('span');
+              if (icon) icon.setAttribute('title', email);
+            } else {
+              el.textContent = email;
+              el.style.unicodeBidi = '';
+              el.style.direction = '';
+            }
+          }
+        }
+        // Daten für wiredframe.de
+        var parts = ['ed', 'emarfderiw', 'ofni'];
+        var user = parts[2].split('').reverse().join('');
+        var domain = parts[1].split('').reverse().join('') + '.' + parts[0].split('').reverse().join('');
+        // Kontaktbereich
+        revealEmail(user, domain, document.getElementById('email-link'));
+        // Impressum
+        revealEmail(user, domain, document.getElementById('impressum-email'));
       </script>
     </div>
     <div class="footer-text"><a href="#impressum" data-ix="aufklappen" class="link">Impressum</a></div>
@@ -231,31 +245,45 @@
           <h3 class="heading-4">Impressum</h3>
           <div class="footer-text">
             <span class="impressumtitle">Allgemeine Angaben</span><br>Ulf Schuster<br>Sindelsdorferstraße 27a<br>82377
-            Penzberg<br><br>eMail:&nbsp;info [ät] wiredframe.de&nbsp;<br><span class="impressumtitle">Inhaltlich
-              Verantwortlicher gemäß §6 MDStV</span><br>Ulf Schuster<br><span class="impressumtitle">Haftung für
-              Inhalte</span><br>Die Inhalte unserer Seiten wurden mit größter Sorgfalt erstellt. Für die Richtigkeit,
-            Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen. Als Diensteanbieter
-            sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen
-            verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte
-            oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine
-            rechtswidrige Tätigkeit hinweisen. Verpflichtungen zur Entfernung oder Sperrung der Nutzung von
-            Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt. Eine diesbezügliche Haftung ist
-            jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich. Bei bekannt werden von
-            entsprechenden Rechtsverletzungen werden wir diese Inhalte umgehend entfernen.<br><span
-              class="impressumtitle">Haftung für Links</span><br>Unser Angebot enthält Links zu externen Webseiten
-            Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch
-            keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder
-            Betreiber der Seiten verantwortlich. Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche
-            Rechtsverstöße überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar. Eine
-            permanente inhaltliche Kontrolle der verlinkten Seiten ist jedoch ohne konkrete Anhaltspunkte einer
-            Rechtsverletzung nicht zumutbar. Bei bekannt werden von Rechtsverletzungen werden wir derartige Links
-            umgehend entfernen.<br><span class="impressumtitle">Urheberrecht</span><br>Die durch die Seitenbetreiber
-            erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Beiträge Dritter sind
-            als solche gekennzeichnet. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung
-            außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw.
-            Erstellers. Downloads und Kopien dieser Seite sind nur für den privaten, nicht kommerziellen Gebrauch
-            gestattet.Die Betreiber der Seiten sind bemüht, stets die Urheberrechte anderer zu beachten bzw. auf selbst
-            erstellte sowie lizenzfreie Werke zurückzugreifen.<br>
+            Penzberg<br><br>eMail:&nbsp;<span id="impressum-email"
+              style="unicode-bidi:bidi-override;direction:rtl;">ed.emarfderiw@ofni</span>&nbsp;</span>
+            <script>
+              // Impressum E-Mail Obfuscation
+              (function () {
+                var parts = ['ed', 'emarfderiw', 'ofni'];
+                var user = parts[2].split('').reverse().join('');
+                var domain = parts[1].split('').reverse().join('') + '.' + parts[0].split('').reverse().join('');
+                var span = document.getElementById('impressum-email');
+                if (span) {
+                  span.style.unicodeBidi = '';
+                  span.style.direction = '';
+                  span.textContent = user + '@' + domain;
+                }
+              })();
+            </script><br><span class="impressumtitle">Inhaltlich Verantwortlicher gemäß §6 MDStV</span><br>Ulf
+            Schuster<br><span class="impressumtitle">Haftung für Inhalte</span><br>Die Inhalte unserer Seiten wurden mit
+            größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch
+            keine Gewähr übernehmen. Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen
+            Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter
+            jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach
+            Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen. Verpflichtungen zur Entfernung oder
+            Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt. Eine
+            diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung
+            möglich. Bei bekannt werden von entsprechenden Rechtsverletzungen werden wir diese Inhalte umgehend
+            entfernen.<br><span class="impressumtitle">Haftung für Links</span><br>Unser Angebot enthält Links zu
+            externen Webseiten Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese
+            fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige
+            Anbieter oder Betreiber der Seiten verantwortlich. Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung
+            auf mögliche Rechtsverstöße überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht
+            erkennbar. Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist jedoch ohne konkrete
+            Anhaltspunkte einer Rechtsverletzung nicht zumutbar. Bei bekannt werden von Rechtsverletzungen werden wir
+            derartige Links umgehend entfernen.<br><span class="impressumtitle">Urheberrecht</span><br>Die durch die
+            Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht.
+            Beiträge Dritter sind als solche gekennzeichnet. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art
+            der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen
+            Autors bzw. Erstellers. Downloads und Kopien dieser Seite sind nur für den privaten, nicht kommerziellen
+            Gebrauch gestattet.Die Betreiber der Seiten sind bemüht, stets die Urheberrechte anderer zu beachten bzw.
+            auf selbst erstellte sowie lizenzfreie Werke zurückzugreifen.<br>
           </div>
         </div>
       </div>
