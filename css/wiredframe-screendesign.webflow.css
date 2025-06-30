@@ -28,7 +28,7 @@ textarea,
 input[type="text"] {
   -webkit-appearance: none;
   -moz-appearance: none;
-       appearance: none;
+  appearance: none;
 }
 
 h1 {
@@ -806,7 +806,7 @@ p {
 }
 
 .leistungen.profile.picture {
-  background-image: url('../images/profile2x.png');
+  background-image: url('../images/shape-profile.svg');
 }
 
 .leistungen-icon {
