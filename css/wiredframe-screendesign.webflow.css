@@ -1046,10 +1046,6 @@ html.w-mod-js *[data-ix="intoviewanimation"] {
     width: auto;
   }
 
-  .header-text.middle {
-    text-align: left;
-  }
-
   .counter {
     -webkit-box-flex: 0;
     -webkit-flex: 0 auto;
@@ -1237,7 +1233,6 @@ html.w-mod-js *[data-ix="intoviewanimation"] {
     -webkit-transform: none;
     -ms-transform: none;
     transform: none;
-    text-align: left;
   }
 
   .subtitle.profile {
@@ -1249,14 +1244,14 @@ html.w-mod-js *[data-ix="intoviewanimation"] {
   }
 
   .header-text {
-    text-align: left;
+    text-align: center;
   }
 
   .counter {
     width: 100%;
     padding-top: 10px;
     font-size: 100px;
-    text-align: left;
+    text-align: center;
   }
 
   .ursachentext {
@@ -1271,7 +1266,7 @@ html.w-mod-js *[data-ix="intoviewanimation"] {
   .heading {
     margin-top: 0px;
     font-size: 50px;
-    text-align: left;
+    text-align: center;
   }
 
   .hero-section {
