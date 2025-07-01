@@ -234,62 +234,61 @@
         // Impressum
         revealEmail(user, domain, document.getElementById('impressum-email'));
       </script>
-      <div id="hit-counter"></div>
-      <script>
-        const startDate = new Date('2024-01-01'); // Launch-Datum anpassen
-        const now = new Date();
-        const daysPassed = Math.floor((now - startDate) / (1000 * 60 * 60 * 24));
-        let counterValue = daysPassed * 50;
+      <div
+        style="width: 100%; display: flex; gap: 1rem; flex-direction: column; align-items: center; margin-top: 3rem;">
+        <hr width="100%">
+        <div id="hit-counter"></div>
+        <script>
+          const startDate = new Date('2024-01-01'); // Launch-Datum anpassen
+          const now = new Date();
+          const daysPassed = Math.floor((now - startDate) / (1000 * 60 * 60 * 24));
+          let counterValue = daysPassed * 50;
+          const counterEl = document.getElementById('hit-counter');
+          const updateUI = () => {
+            counterEl.innerText = `${counterValue} Visits`;
+          };
+          const animateBump = () => {
+            counterEl.classList.add('bump');
+            setTimeout(() => counterEl.classList.remove('bump'), 300);
+          };
+          updateUI();
+          const bump = () => {
+            const interval = Math.floor(Math.random() * 10000) + 5000; // 5–15 Sek.
+            setTimeout(() => {
+              counterValue++;
+              updateUI();
+              animateBump();
+              bump();
+            }, interval);
+          };
+          bump();
+        </script>
+        <style>
+          #hit-counter {
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            background: #000;
+            color: #0f0;
+            padding: 6px 12px;
+            display: inline;
+            width: fit-content;
+            font-size: 16px;
+            border: 2px inset #ccc;
+            box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+            transition: transform 0.2s ease, background 0.2s ease;
+          }
 
-        const counterEl = document.getElementById('hit-counter');
-
-        const updateUI = () => {
-          counterEl.innerText = `${counterValue} Visits`;
-        };
-
-        const animateBump = () => {
-          counterEl.classList.add('bump');
-          setTimeout(() => counterEl.classList.remove('bump'), 300);
-        };
-
-        updateUI();
-
-        const bump = () => {
-          const interval = Math.floor(Math.random() * 10000) + 5000; // 5–15 Sek.
-          setTimeout(() => {
-            counterValue++;
-            updateUI();
-            animateBump();
-            bump();
-          }, interval);
-        };
-
-        bump();
-      </script>
-      <style>
-        #hit-counter {
-          font-family: 'Courier New', monospace;
-          font-weight: bold;
-          background: #000;
-          color: #0f0;
-          padding: 6px 12px;
-          display: inline-block;
-          font-size: 16px;
-          border: 2px inset #ccc;
-          box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
-          margin-top: 3rem;
-          transition: transform 0.2s ease, background 0.2s ease;
-        }
-
-        #hit-counter.bump {
-          transform: scale(1.1);
-          background: #060;
-        }
-      </style>
-      <div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; align-items: center;">
-        <img src="images/frontpage-1996.gif" alt="" srcset="">
-        <img src="images/get-flash-player-1996.gif" alt="" srcset="">
-        <img src="images/netscape-1996.gif" alt="" srcset="">
+          #hit-counter.bump {
+            transform: scale(1.1);
+            background: #060;
+          }
+        </style>
+        <div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; align-items: center;">
+          <img src="images/frontpage-1996.gif" alt="" srcset="">
+          <img src="images/get-flash-player-1996.gif" alt="" srcset="">
+          <img src="images/netscape-1996.gif" alt="" srcset="">
+        </div>
+        <hr width="100%">
       </div>
     </div>
     <div class="footer-text"><a href="#impressum" data-ix="aufklappen" class="link">Impressum</a></div>
