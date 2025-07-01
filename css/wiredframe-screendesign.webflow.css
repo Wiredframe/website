@@ -255,10 +255,8 @@ p {
 
 .arrowdown {
   position: relative;
-  top: -1px;
-  padding-left: 10px;
+  top: -3px;
   font-size: 16px;
-  line-height: 20px;
   text-align: left;
   letter-spacing: 0px;
 }
