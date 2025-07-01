@@ -265,22 +265,22 @@ p {
 
 .ursachentext {
   display: inline-block;
-  width: 100px;
-  height: 100px;
+  width: 72px;
+  height: 72px;
   margin-bottom: 20px;
-  padding-top: 10px;
-  padding-left: 10px;
+  padding-top: 8px;
+  padding-left: 5px;
   border-radius: 50px;
   background-color: var(--color-10);
   color: var(--color-7);
-  font-size: 60px;
-  line-height: 80px;
+  font-size: 40px;
+  line-height: 52px;
 }
 
 .mittigertext {
-  width: 25%;
+  width: 33%;
   height: auto;
-  padding: 30px 15px;
+  padding: 15px 15px;
   font-family: 'Maven Pro', sans-serif;
   color: var(--color-6);
   font-size: 18px;
