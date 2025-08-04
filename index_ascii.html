@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="de" class="tui-bg-blue-black" style="background-color: black;">
+
+</html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Wiredframe UI/UX</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/css/tuicss.min.css">
+  <script src="/js/tuicss.min.js"></script>
+  <style>
+    @font-face {
+      font-family: 'Perfect DOS';
+      src: url('/fonts/Perfect DOS VGA 437 Win.ttf') format('truetype'),
+        url('/fonts/Perfect DOS VGA 437 Win.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    body {
+      font-family: 'Perfect DOS', monospace;
+    }
+
+    .tui-window {
+      width: 700px;
+      max-width: 100%;
+    }
+  </style>
+</head>
+
+<body class="center" style="padding: 32px;">
+  <nav style="margin-bottom: 32px;">
+    <a href="#home" class="tui-button blue-168 white-text">Start</a>
+    <a href="#wahrheit" class="tui-button green-168 white-text">Wahrheit</a>
+    <a href="#ursachen" class="tui-button orange-168 white-text">Ursachen</a>
+    <a href="#loesung" class="tui-button red-168 white-text">Lösung</a>
+    <a href="#profil" class="tui-button purple-168 white-text">Profil</a>
+    <a href="#kontakt" class="tui-button cyan-168 black-text">Kontakt</a>
+  </nav>
+  <div style="display: flex; flex-direction: column; align-items: center; gap: 32px;">
+    <div class="tui-window blue-168" style="text-align:left;margin:auto;">
+      <fieldset class="tui-fieldset" id="home">
+        <legend class="center">Start</legend>
+        <h1>Niemand hat die Absicht eine Website zu errichten!</h1>
+        <p>Und doch passiert es jeden Tag – seit vielen Jahren.</p>
+        <a href="#wahrheit" class="tui-button red-168 white-text">Die ganze Wahrheit</a>
+      </fieldset>
+    </div>
+    <div class="tui-window red-168" style="text-align:left;margin:auto;">
+      <fieldset class="tui-fieldset" id="wahrheit">
+        <legend class="center">Wahrheit</legend>
+        <p class="center"><span id="counter" data-count="141567">0</span> Websites werden jetzt gerade – gegen ihren
+          Willen – online gestellt.</p>
+        <p>Jeden Tag werden unzählige Websites gebaut und hinter dem Rücken der Bürger einfach online gestellt.
+          Besonders tragisch: Viele bemerken es nicht einmal, denn oft sind diese schon bei Fertigstellung veraltet,
+          langweilig oder schlicht unauffindbar, trotzdem haben die Auftraggeber viel Geld dafür gezahlt.</p>
+        <a href="#ursachen" class="tui-button orange-168 white-text">Wie konnte es dazu kommen?</a>
+      </fieldset>
+    </div>
+    <div class="tui-window orange-168" style="text-align:left;margin:auto;">
+      <fieldset class="tui-fieldset" id="ursachen">
+        <legend class="center">Ursachen</legend>
+        <p>Viele Websites sind immer noch traumatisiert und wollen über das Erlebte nicht sprechen. Einigen Experten mit
+          jahrelanger Erfahrung in den Bereichen Webdesign und Webdevelopment ist es aber gelungen die Methoden
+          aufzudecken, wie Websites massenweise hergestellt werden. Diese Tatsachen sind schockierend, dennoch müssen
+          Sie veröffentlicht werden:</p>
+        <p>1. KI designt jetzt alles – sogar das Impressum.</p>
+        <p>2. „Mobile First“ heißt oft: Desktop vergessen.</p>
+        <p>3. Jeder Button braucht jetzt einen Darkmode.</p>
+        <p>4. Meetings über das Design dauern länger als das Design selbst.</p>
+        <p>5. Figma-Files mit 99+ Seiten – aber keiner weiß, wo das finale Design ist.</p>
+        <p>6. „No-Code“ heißt: Keiner weiß mehr, wie’s geht.</p>
+        <a href="#loesung" class="tui-button green-168 white-text">Was hilft?</a>
+      </fieldset>
+    </div>
+    <div class="tui-window green-168" style="text-align:left;margin:auto;">
+      <fieldset class="tui-fieldset" id="loesung">
+        <legend class="center">Lösung</legend>
+        <h2>Wiredframe hilft</h2>
+        <p>Das einzig bekannte Gegenmittel gegen schlechtes Webdesign ist Leidenschaft. Egal ob für ein neues Projekt
+          oder einen Relaunch, seit <span id="jahreSeit"></span> Jahren setzt sich Wiredframe für Webdesign ein und ist
+          besonders spezialisiert auf:</p>
+        <ul>
+          <li>
+            <p>- UI/UX Design mit Figma<br>Moderne User Interfaces und User Experience Design mit Figma, FigJam und
+              aktuellen Design-Standards.</p>
+          </li>
+          <li>
+            <p>- Interaktives Prototyping<br>Prototypen und Animationen mit Figma, Protopie und Webflow – für echtes
+              Look & Feel vor dem Launch.</p>
+          </li>
+          <li>
+            <p>- Design Systeme & Komponenten<br>Aufbau und Pflege von Design Systemen, Komponenten-Bibliotheken und
+              Styleguides für konsistente Markenauftritte.</p>
+          </li>
+          <li>
+            <p>- No-Code/Low-Code Webentwicklung<br>Schnelle Umsetzung von Websites und Landingpages mit Webflow, Framer
+              und anderen No-Code/Low-Code Tools.</p>
+          </li>
+        </ul>
+        <a href="#profil" class="tui-button purple-168 white-text">Wiredframe? Noch nie gehört!</a>
+      </fieldset>
+    </div>
+    <div class="tui-window purple-168" style="text-align:left;margin:auto;">
+      <fieldset class="tui-fieldset" id="profil">
+        <legend class="center">Profil</legend>
+        <h2>Was ist Wiredframe?</h2>
+        <p>Wiredframe, das ist Ulf Schuster – unabhängiger UI/UX Designer und Digital Creator aus Leidenschaft. Ich
+          arbeite remote und kollaborativ mit Agenturen, Startups und Unternehmen, um digitale Produkte, Websites und
+          Markenauftritte zu gestalten, die begeistern. Mein Fokus liegt auf nutzerzentriertem Design, Prototyping,
+          Design Systemen und der Umsetzung mit modernen Tools wie Figma, Webflow & Co. – von der ersten Idee bis zum
+          Launch.</p>
+        <ul>
+          <li>
+            <p>Mehr als <b>200</b> abgeschlossene Projekte, <b><span id="jahreSeitBig"></span></b> Jahre Berufserfahrung
+              und 0 Bock damit aufzuhören</p>
+          </li>
+        </ul>
+        <a href="#kontakt" class="tui-button cyan-168 black-text">Wie war nochmal die Faxnummer?</a>
+      </fieldset>
+    </div>
+    <div class="tui-window cyan-168" style="text-align:left;margin:auto;">
+      <fieldset class="tui-fieldset" id="kontakt">
+        <legend class="center">Kontakt</legend>
+        <h2>Kontakt</h2>
+        <p>Erreichbarkeit? Fast immer! Außer ich bin gerade beim Kreativlüften aufm Sattel unterwegs oder sortiere meine
+          Gedanken zwischen Pixeln und Pflanzen. Für gute Ideen, ehrliche Projekte und kreative Teams bin ich aber immer
+          zu haben. Schreib mir einfach – ich freu mich drauf.</p>
+        <a href="mailto:info@wiredframe.de" class="tui-button blue-168 white-text">E-Mail schreiben</a>
+        <a href="https://outlook.office.com/book/EinGesprchvereinbaren@wiredframe.onmicrosoft.com/?ismsaljsauthenabled"
+          class="tui-button orange-168 white-text">Microsoft Teams</a>
+      </fieldset>
+    </div>
+    <div class="tui-window yellow-168" style="text-align:left;margin:auto;">
+      <fieldset class="tui-fieldset" id="impressum">
+        <details>
+          <summary>Impressum</summary>
+          <p>Ulf Schuster<br>Sindelsdorferstraße 27a<br>82377 Penzberg<br>info@wiredframe.de</p>
+          <p>Wow. Du hast wirklich aufs Impressum geklickt? Dabei gab’s doch direkt oben drüber schon schicke
+            Kontakt-Buttons – aber nein, du musstest natürlich den Weg durch den Paragrafendschungel nehmen. Okay, here
+            we go: Adresse, Verantwortlichkeit, DSGVO-Zauber – alles da, alles safe. Also: Viel Spaß beim Stalk… äh,
+            Lesen!</p>
+          <b>Allgemeine Angaben</b><br>Ulf Schuster<br>Sindelsdorferstraße 27a<br>82377 Penzberg<br><br>eMail:
+          info@wiredframe.de<br>
+          <b>Inhaltlich Verantwortlicher gemäß §6 MDStV</b><br>Ulf Schuster<br>
+          <b>Haftung für Inhalte</b><br>Die Inhalte unserer Seiten wurden mit größter Sorgfalt erstellt. Für die
+          Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen. Als
+          Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen
+          Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet,
+          übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf
+          eine rechtswidrige Tätigkeit hinweisen. Verpflichtungen zur Entfernung oder Sperrung der Nutzung von
+          Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt. Eine diesbezügliche Haftung ist jedoch
+          erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich. Bei bekannt werden von
+          entsprechenden Rechtsverletzungen werden wir diese Inhalte umgehend entfernen.<br>
+          <b>Haftung für Links</b><br>Unser Angebot enthält Links zu externen Webseiten Dritter, auf deren Inhalte wir
+          keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die
+          Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich. Die
+          verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft. Rechtswidrige
+          Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar. Eine permanente inhaltliche Kontrolle der
+          verlinkten Seiten ist jedoch ohne konkrete Anhaltspunkte einer Rechtsverletzung nicht zumutbar. Bei bekannt
+          werden von Rechtsverletzungen werden wir derartige Links umgehend entfernen.<br>
+          <b>Urheberrecht</b><br>Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten
+          unterliegen dem deutschen Urheberrecht. Beiträge Dritter sind als solche gekennzeichnet. Die Vervielfältigung,
+          Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der
+          schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers. Downloads und Kopien dieser Seite sind nur für
+          den privaten, nicht kommerziellen Gebrauch gestattet. Die Betreiber der Seiten sind bemüht, stets die
+          Urheberrechte anderer zu beachten bzw. auf selbst erstellte sowie lizenzfreie Werke zurückzugreifen.<br>
+        </details>
+      </fieldset>
+    </div>
+  </div>
+  <script>
+    // Counter-Animation für "Wahrheit"
+    document.addEventListener('DOMContentLoaded', function () {
+      var counter = document.getElementById('counter');
+      if (counter) {
+        var countTo = parseInt(counter.getAttribute('data-count'), 10) || 0;
+        var duration = 36000;
+        var start = 100000;
+        var startTime = null;
+        function animateCounter(timestamp) {
+          if (!startTime) startTime = timestamp;
+          var progress = Math.min((timestamp - startTime) / duration, 1);
+          var value = Math.floor(start + (countTo - start) * progress);
+          counter.textContent = value;
+          if (progress < 1) {
+            requestAnimationFrame(animateCounter);
+          } else {
+            counter.textContent = countTo;
+          }
+        }
+        requestAnimationFrame(animateCounter);
+      }
+
+      // Oldschool Scroll-Effekt für Anchor-Links
+      function oldschoolScrollTo(targetY) {
+        var step = 18; // px pro "Zeile" (DOS-typisch)
+        var delay = 48; // ms pro Schritt (langsamer für noch mehr Oldschool)
+        var scrollInterval = setInterval(function () {
+          var currentY = window.scrollY;
+          var atEnd = (window.innerHeight + window.scrollY) >= document.body.scrollHeight;
+          if (Math.abs(currentY - targetY) <= step || atEnd) {
+            window.scrollTo(0, targetY);
+            clearInterval(scrollInterval);
+          } else if (currentY < targetY) {
+            window.scrollTo(0, currentY + step);
+          } else {
+            window.scrollTo(0, currentY - step);
+          }
+        }, delay);
+      }
+      document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+        a.addEventListener('click', function (e) {
+          var href = a.getAttribute('href');
+          if (href.length > 1 && document.getElementById(href.substring(1))) {
+            e.preventDefault();
+            var target = document.getElementById(href.substring(1));
+            var rect = target.getBoundingClientRect();
+            var targetY = rect.top + window.scrollY;
+            oldschoolScrollTo(targetY);
+          }
+        });
+      });
+
+      // Globales zeilenweises Scrollen (DOS-Style)
+      (function () {
+        var lineHeight = 18;
+        var isScrolling = false;
+        function scrollByLine(delta) {
+          if (isScrolling) return;
+          isScrolling = true;
+          var targetY = window.scrollY + (delta > 0 ? lineHeight : -lineHeight);
+          window.scrollTo({ top: targetY });
+          setTimeout(function () { isScrolling = false; }, 40);
+        }
+        window.addEventListener('wheel', function (e) {
+          if (e.ctrlKey) return; // Pinch-to-zoom erlauben
+          e.preventDefault();
+          scrollByLine(e.deltaY);
+        }, { passive: false });
+        window.addEventListener('keydown', function (e) {
+          if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            scrollByLine(1);
+          } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            scrollByLine(-1);
+          }
+        });
+      })();
+    });
+    const jahreSeit = (jahr) => new Date().getFullYear() - jahr;
+    document.getElementById('jahreSeit').textContent = jahreSeit(2005);
+    document.getElementById('jahreSeitBig').textContent = jahreSeit(2005);
+  </script>
+</body>
+
+</html>
