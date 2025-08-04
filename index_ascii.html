@@ -26,40 +26,98 @@
       width: 700px;
       max-width: 100%;
     }
+
+    #sections-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding-top: 40px;
+    }
+
+    .kontakt-buttons {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 16px;
+    }
   </style>
 </head>
 
-<body class="center" style="padding: 32px;">
-  <nav style="margin-bottom: 32px;">
-    <a href="#home" class="tui-button blue-168 white-text">Start</a>
-    <a href="#wahrheit" class="tui-button green-168 white-text">Wahrheit</a>
-    <a href="#ursachen" class="tui-button orange-168 white-text">Ursachen</a>
-    <a href="#loesung" class="tui-button red-168 white-text">Lösung</a>
-    <a href="#profil" class="tui-button purple-168 white-text">Profil</a>
-    <a href="#kontakt" class="tui-button cyan-168 black-text">Kontakt</a>
+<body class="center">
+  <nav class="tui-nav absolute">
+    <span class="tui-datetime" data-format="h:m:s a"></span>
+    <ul style="text-align: left;">
+      <li class="tui-sidenav-button purple-168-text" data-section="home">≡</li>
+      <li class="tui-dropdown">
+        <span class="purple-168-text">M</span>enü <div class="tui-dropdown-content">
+          <ul>
+            <li><a href="#" data-section="home"><span class="purple-168-text">S</span>tart</a></li>
+            <li><a href="#" data-section="wahrheit"><span class="purple-168-text">W</span>ahrheit</a></li>
+            <li><a href="#" data-section="ursachen"><span class="purple-168-text">U</span>rsachen</a></li>
+            <li><a href="#" data-section="loesung"><span class="purple-168-text">L</span>ösung</a></li>
+            <li><a href="#" data-section="profil"><span class="purple-168-text">P</span>rofil</a></li>
+            <li><a href="#" data-section="kontakt"><span class="purple-168-text">K</span>ontakt</a></li>
+            <div class="tui-black-divider"></div>
+            <li><a href="#" data-section="impressum"><span class="purple-168-text">I</span>mpressum</a></li>
+            <div class="tui-black-divider"></div>
+            <li><a href="#quit"><span class="purple-168-text">Q</span>uit <span class="tui-shortcut">F10</span></a>
+            </li>
+          </ul>
+        </div>
+      </li>
+      <li class="tui-dropdown">
+        <span class="purple-168-text">B</span>earbeiten
+      </li>
+      <li class="tui-dropdown">
+        <span class="purple-168-text">A</span>nsicht
+      </li>
+      <li class="tui-dropdown">
+        <span class="purple-168-text">H</span>ilfe
+      </li>
+    </ul>
   </nav>
-  <div style="display: flex; flex-direction: column; align-items: center; gap: 32px;">
-    <div class="tui-window blue-168" style="text-align:left;margin:auto;">
-      <fieldset class="tui-fieldset" id="home">
-        <legend class="center">Start</legend>
+  <div id="sections-container">
+    <div class="tui-window blue-168 fpa-section center" id="home-section">
+      <fieldset class="tui-fieldset" id="home" style="">
+        <legend class="center">Wiredframe V2.1</legend>
+        <pre style="text-align:center; line-height: 1; margin-bottom: 16px;">
+                 ░░░░░░░
+               ░░░░░░░░░░░
+             ░░░░█████████░░
+           ░░██████████████░░░
+         ░░░████▒▒▒▒▒█▒▒▒███░░░░
+        ░░░░███▒▒▒▒▒▒▒██▒▒███░░░░
+        ░░░░███▒▒▒▒▒▒▒▒▒▒▒███░░░░
+        ░░░░███▒▒▒▒▒▒▒▒▒▒▒███░░░░
+         ░░░░███▒▒▒▒▒▒▒▒▒████░░░
+           ░░░██████████████░░
+             ░░█████████░░░░
+               ░░░░░░░░░░░
+               ░░░░░░░
+          </pre>
+        </pre>
         <h1>Niemand hat die Absicht eine Website zu errichten!</h1>
         <p>Und doch passiert es jeden Tag – seit vielen Jahren.</p>
-        <a href="#wahrheit" class="tui-button red-168 white-text">Die ganze Wahrheit</a>
+        <a href="#" class="tui-button purple-168 white-text" data-section="wahrheit">Die ganze Wahrheit</a>
       </fieldset>
     </div>
-    <div class="tui-window red-168" style="text-align:left;margin:auto;">
-      <fieldset class="tui-fieldset" id="wahrheit">
+    <div class="tui-window purple-168 fpa-section center" id="wahrheit-section" style="display:none;">
+      <fieldset class="tui-fieldset" id="wahrheit"
+        style="width: 100%; height: 100%; box-sizing: border-box; margin: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;">
         <legend class="center">Wahrheit</legend>
         <p class="center"><span id="counter" data-count="141567">0</span> Websites werden jetzt gerade – gegen ihren
           Willen – online gestellt.</p>
         <p>Jeden Tag werden unzählige Websites gebaut und hinter dem Rücken der Bürger einfach online gestellt.
           Besonders tragisch: Viele bemerken es nicht einmal, denn oft sind diese schon bei Fertigstellung veraltet,
           langweilig oder schlicht unauffindbar, trotzdem haben die Auftraggeber viel Geld dafür gezahlt.</p>
-        <a href="#ursachen" class="tui-button orange-168 white-text">Wie konnte es dazu kommen?</a>
+        <a href="#" class="tui-button blue-168 white-text" data-section="ursachen">Wie konnte es dazu kommen?</a>
       </fieldset>
     </div>
-    <div class="tui-window orange-168" style="text-align:left;margin:auto;">
-      <fieldset class="tui-fieldset" id="ursachen">
+    <div class="tui-window blue-168 fpa-section center" id="ursachen-section" style="display:none;">
+      <fieldset class="tui-fieldset" id="ursachen"
+        style="width: 100%; height: 100%; box-sizing: border-box; margin: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;">
         <legend class="center">Ursachen</legend>
         <p>Viele Websites sind immer noch traumatisiert und wollen über das Erlebte nicht sprechen. Einigen Experten mit
           jahrelanger Erfahrung in den Bereichen Webdesign und Webdevelopment ist es aber gelungen die Methoden
@@ -71,11 +129,12 @@
         <p>4. Meetings über das Design dauern länger als das Design selbst.</p>
         <p>5. Figma-Files mit 99+ Seiten – aber keiner weiß, wo das finale Design ist.</p>
         <p>6. „No-Code“ heißt: Keiner weiß mehr, wie’s geht.</p>
-        <a href="#loesung" class="tui-button green-168 white-text">Was hilft?</a>
+        <a href="#" class="tui-button cyan-168 black-text" data-section="loesung">Was hilft?</a>
       </fieldset>
     </div>
-    <div class="tui-window green-168" style="text-align:left;margin:auto;">
-      <fieldset class="tui-fieldset" id="loesung">
+    <div class="tui-window cyan-168 fpa-section center" id="loesung-section" style="display:none;">
+      <fieldset class="tui-fieldset" id="loesung"
+        style="width: 100%; height: 100%; box-sizing: border-box; margin: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;">
         <legend class="center">Lösung</legend>
         <h2>Wiredframe hilft</h2>
         <p>Das einzig bekannte Gegenmittel gegen schlechtes Webdesign ist Leidenschaft. Egal ob für ein neues Projekt
@@ -99,11 +158,12 @@
               und anderen No-Code/Low-Code Tools.</p>
           </li>
         </ul>
-        <a href="#profil" class="tui-button purple-168 white-text">Wiredframe? Noch nie gehört!</a>
+        <a href="#" class="tui-button purple-168 white-text" data-section="profil">Wiredframe? Noch nie gehört!</a>
       </fieldset>
     </div>
-    <div class="tui-window purple-168" style="text-align:left;margin:auto;">
-      <fieldset class="tui-fieldset" id="profil">
+    <div class="tui-window purple-168 fpa-section center" id="profil-section" style="display:none;">
+      <fieldset class="tui-fieldset" id="profil"
+        style="width: 100%; height: 100%; box-sizing: border-box; margin: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;">
         <legend class="center">Profil</legend>
         <h2>Was ist Wiredframe?</h2>
         <p>Wiredframe, das ist Ulf Schuster – unabhängiger UI/UX Designer und Digital Creator aus Leidenschaft. Ich
@@ -113,64 +173,91 @@
           Launch.</p>
         <ul>
           <li>
-            <p>Mehr als <b>200</b> abgeschlossene Projekte, <b><span id="jahreSeitBig"></span></b> Jahre Berufserfahrung
-              und 0 Bock damit aufzuhören</p>
+            <p>Mehr als 200 abgeschlossene Projekte, <span id="jahreSeitBig"></span> Jahre Berufserfahrung und 0 Bock
+              damit aufzuhören</p>
           </li>
         </ul>
-        <a href="#kontakt" class="tui-button cyan-168 black-text">Wie war nochmal die Faxnummer?</a>
+        <a href="#" class="tui-button cyan-168 black-text" data-section="kontakt">Wie war nochmal die Faxnummer?</a>
       </fieldset>
     </div>
-    <div class="tui-window cyan-168" style="text-align:left;margin:auto;">
-      <fieldset class="tui-fieldset" id="kontakt">
+    <div class="tui-window cyan-168 fpa-section center" id="kontakt-section" style="display:none;">
+      <fieldset class="tui-fieldset" id="kontakt"
+        style="width: 100%; height: 100%; box-sizing: border-box; margin: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;">
         <legend class="center">Kontakt</legend>
         <h2>Kontakt</h2>
         <p>Erreichbarkeit? Fast immer! Außer ich bin gerade beim Kreativlüften aufm Sattel unterwegs oder sortiere meine
           Gedanken zwischen Pixeln und Pflanzen. Für gute Ideen, ehrliche Projekte und kreative Teams bin ich aber immer
           zu haben. Schreib mir einfach – ich freu mich drauf.</p>
-        <a href="mailto:info@wiredframe.de" class="tui-button blue-168 white-text">E-Mail schreiben</a>
-        <a href="https://outlook.office.com/book/EinGesprchvereinbaren@wiredframe.onmicrosoft.com/?ismsaljsauthenabled"
-          class="tui-button orange-168 white-text">Microsoft Teams</a>
+        <div class="kontakt-buttons">
+          <a href="mailto:info@wiredframe.de" class="tui-button blue-168 white-text">E-Mail schreiben</a>
+          <a href="https://outlook.office.com/book/EinGesprchvereinbaren@wiredframe.onmicrosoft.com/?ismsaljsauthenabled"
+            class="tui-button blue-168 white-text" data-section="impressum">Microsoft Teams</a>
+        </div>
       </fieldset>
     </div>
-    <div class="tui-window yellow-168" style="text-align:left;margin:auto;">
-      <fieldset class="tui-fieldset" id="impressum">
-        <details>
-          <summary>Impressum</summary>
-          <p>Ulf Schuster<br>Sindelsdorferstraße 27a<br>82377 Penzberg<br>info@wiredframe.de</p>
-          <p>Wow. Du hast wirklich aufs Impressum geklickt? Dabei gab’s doch direkt oben drüber schon schicke
-            Kontakt-Buttons – aber nein, du musstest natürlich den Weg durch den Paragrafendschungel nehmen. Okay, here
-            we go: Adresse, Verantwortlichkeit, DSGVO-Zauber – alles da, alles safe. Also: Viel Spaß beim Stalk… äh,
-            Lesen!</p>
-          <b>Allgemeine Angaben</b><br>Ulf Schuster<br>Sindelsdorferstraße 27a<br>82377 Penzberg<br><br>eMail:
-          info@wiredframe.de<br>
-          <b>Inhaltlich Verantwortlicher gemäß §6 MDStV</b><br>Ulf Schuster<br>
-          <b>Haftung für Inhalte</b><br>Die Inhalte unserer Seiten wurden mit größter Sorgfalt erstellt. Für die
-          Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen. Als
-          Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen
-          Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet,
-          übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf
-          eine rechtswidrige Tätigkeit hinweisen. Verpflichtungen zur Entfernung oder Sperrung der Nutzung von
-          Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt. Eine diesbezügliche Haftung ist jedoch
-          erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich. Bei bekannt werden von
-          entsprechenden Rechtsverletzungen werden wir diese Inhalte umgehend entfernen.<br>
-          <b>Haftung für Links</b><br>Unser Angebot enthält Links zu externen Webseiten Dritter, auf deren Inhalte wir
-          keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die
-          Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich. Die
-          verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft. Rechtswidrige
-          Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar. Eine permanente inhaltliche Kontrolle der
-          verlinkten Seiten ist jedoch ohne konkrete Anhaltspunkte einer Rechtsverletzung nicht zumutbar. Bei bekannt
-          werden von Rechtsverletzungen werden wir derartige Links umgehend entfernen.<br>
-          <b>Urheberrecht</b><br>Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten
-          unterliegen dem deutschen Urheberrecht. Beiträge Dritter sind als solche gekennzeichnet. Die Vervielfältigung,
-          Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der
-          schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers. Downloads und Kopien dieser Seite sind nur für
-          den privaten, nicht kommerziellen Gebrauch gestattet. Die Betreiber der Seiten sind bemüht, stets die
-          Urheberrechte anderer zu beachten bzw. auf selbst erstellte sowie lizenzfreie Werke zurückzugreifen.<br>
-        </details>
+    <div class="tui-window blue-168 fpa-section center" id="impressum-section" style="display:none;">
+      <fieldset class="tui-fieldset" id="impressum"
+        style="width: 100%; height: 100%; box-sizing: border-box; margin: 0; display: flex; flex-direction: column;">
+        <legend class="center">Impressum</legend>
+        <p>Ulf Schuster<br>Sindelsdorferstraße 27a<br>82377 Penzberg<br>info@wiredframe.de</p>
+        <p>Wow. Du hast wirklich aufs Impressum geklickt? Dabei gab’s doch direkt oben drüber schon schicke
+          Kontakt-Buttons – aber nein, du musstest natürlich den Weg durch den Paragrafendschungel nehmen. Okay, here we
+          go: Adresse, Verantwortlichkeit, DSGVO-Zauber – alles da, alles safe. Also: Viel Spaß beim Stalk… äh, Lesen!
+        </p>
+        <b>Allgemeine Angaben</b><br>Ulf Schuster<br>Sindelsdorferstraße 27a<br>82377 Penzberg<br><br>eMail:
+        info@wiredframe.de<br>
+        <b>Inhaltlich Verantwortlicher gemäß §6 MDStV</b><br>Ulf Schuster<br>
+        <b>Haftung für Inhalte</b><br>Die Inhalte unserer Seiten wurden mit größter Sorgfalt erstellt. Für die
+        Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen. Als
+        Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen
+        verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder
+        gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige
+        Tätigkeit hinweisen. Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den
+        allgemeinen Gesetzen bleiben hiervon unberührt. Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der
+        Kenntnis einer konkreten Rechtsverletzung möglich. Bei bekannt werden von entsprechenden Rechtsverletzungen
+        werden wir diese Inhalte umgehend entfernen.<br>
+        <b>Haftung für Links</b><br>Unser Angebot enthält Links zu externen Webseiten Dritter, auf deren Inhalte wir
+        keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die
+        Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich. Die
+        verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft. Rechtswidrige
+        Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar. Eine permanente inhaltliche Kontrolle der verlinkten
+        Seiten ist jedoch ohne konkrete Anhaltspunkte einer Rechtsverletzung nicht zumutbar. Bei bekannt werden von
+        Rechtsverletzungen werden wir derartige Links umgehend entfernen.<br>
+        <b>Urheberrecht</b><br>Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen
+        dem deutschen Urheberrecht. Beiträge Dritter sind als solche gekennzeichnet. Die Vervielfältigung, Bearbeitung,
+        Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen
+        Zustimmung des jeweiligen Autors bzw. Erstellers. Downloads und Kopien dieser Seite sind nur für den privaten,
+        nicht kommerziellen Gebrauch gestattet. Die Betreiber der Seiten sind bemüht, stets die Urheberrechte anderer zu
+        beachten bzw. auf selbst erstellte sowie lizenzfreie Werke zurückzugreifen.<br>
       </fieldset>
     </div>
   </div>
+  </div>
   <script>
+    // Section Navigation Logic
+    function showSection(section) {
+      document.querySelectorAll('.fpa-section').forEach(function (div) {
+        div.style.display = 'none';
+        div.style.justifyContent = '';
+        div.style.alignItems = '';
+      });
+      var el = document.getElementById(section + '-section');
+      if (el) {
+        el.style.display = 'block';
+        el.style.justifyContent = 'center';
+        el.style.alignItems = 'center';
+      }
+    }
+    document.querySelectorAll('[data-section]').forEach(function (el) {
+      el.addEventListener('click', function (e) {
+        var section = el.getAttribute('data-section');
+        if (section) {
+          e.preventDefault();
+          showSection(section);
+        }
+      });
+    });
+
     // Counter-Animation für "Wahrheit"
     document.addEventListener('DOMContentLoaded', function () {
       var counter = document.getElementById('counter');
@@ -195,8 +282,8 @@
 
       // Oldschool Scroll-Effekt für Anchor-Links
       function oldschoolScrollTo(targetY) {
-        var step = 18; // px pro "Zeile" (DOS-typisch)
-        var delay = 48; // ms pro Schritt (langsamer für noch mehr Oldschool)
+        var step = 40; // px pro "Zeile" (DOS-typisch)
+        var delay = 40; // ms pro Schritt (langsamer für noch mehr Oldschool)
         var scrollInterval = setInterval(function () {
           var currentY = window.scrollY;
           var atEnd = (window.innerHeight + window.scrollY) >= document.body.scrollHeight;
@@ -225,14 +312,14 @@
 
       // Globales zeilenweises Scrollen (DOS-Style)
       (function () {
-        var lineHeight = 18;
+        var lineHeight = 20;
         var isScrolling = false;
         function scrollByLine(delta) {
           if (isScrolling) return;
           isScrolling = true;
           var targetY = window.scrollY + (delta > 0 ? lineHeight : -lineHeight);
           window.scrollTo({ top: targetY });
-          setTimeout(function () { isScrolling = false; }, 40);
+          setTimeout(function () { isScrolling = false; }, 5);
         }
         window.addEventListener('wheel', function (e) {
           if (e.ctrlKey) return; // Pinch-to-zoom erlauben
