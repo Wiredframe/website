@@ -1,25 +1,31 @@
 <!DOCTYPE html>
-<html lang="de" class="tui-bg-blue-black" style="background-color: black;">
-
-</html>
+<html lang="de" class="tui-bg-blue-white" style="background-color: black;">
 
 <head>
   <meta charset="utf-8">
   <title>Wiredframe UI/UX</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="/css/tuicss.min.css">
-  <script src="/js/tuicss.min.js"></script>
   <style>
     @font-face {
       font-family: 'Perfect DOS';
-      src: url('/fonts/Perfect DOS VGA 437 Win.ttf') format('truetype'),
-        url('/fonts/Perfect DOS VGA 437 Win.ttf') format('truetype');
+      src: url('/fonts/Perfect DOS VGA 437 Win.ttf') format('truetype');
       font-weight: normal;
       font-style: normal;
     }
 
     body {
       font-family: 'Perfect DOS', monospace;
+    }
+
+    .center {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .tui-nav {
+      position: relative !important;
     }
 
     .tui-window {
@@ -32,7 +38,6 @@
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
-      padding-top: 40px;
     }
 
     .kontakt-buttons {
@@ -43,13 +48,13 @@
       margin-top: 16px;
     }
   </style>
+  <script src="/js/tuicss.min.js"></script>
 </head>
 
 <body class="center">
   <nav class="tui-nav absolute">
     <span class="tui-datetime" data-format="h:m:s a"></span>
     <ul style="text-align: left;">
-      <li class="tui-sidenav-button purple-168-text" data-section="home">≡</li>
       <li class="tui-dropdown">
         <span class="purple-168-text">M</span>enü <div class="tui-dropdown-content">
           <ul>
@@ -62,41 +67,34 @@
             <div class="tui-black-divider"></div>
             <li><a href="#" data-section="impressum"><span class="purple-168-text">I</span>mpressum</a></li>
             <div class="tui-black-divider"></div>
-            <li><a href="#quit"><span class="purple-168-text">Q</span>uit <span class="tui-shortcut">F10</span></a>
-            </li>
+            <li><a href="#quit"><span class="purple-168-text">Q</span>uit <span class="tui-shortcut">F10</span></a></li>
           </ul>
         </div>
       </li>
-      <li class="tui-dropdown">
-        <span class="purple-168-text">B</span>earbeiten
-      </li>
-      <li class="tui-dropdown">
-        <span class="purple-168-text">A</span>nsicht
-      </li>
-      <li class="tui-dropdown">
-        <span class="purple-168-text">H</span>ilfe
-      </li>
+      <li class="tui-dropdown"><span class="purple-168-text">B</span>earbeiten</li>
+      <li class="tui-dropdown"><span class="purple-168-text">A</span>nsicht</li>
+      <li class="tui-dropdown"><span class="purple-168-text">H</span>ilfe</li>
     </ul>
   </nav>
   <div id="sections-container">
     <div class="tui-window blue-168 fpa-section center" id="home-section">
-      <fieldset class="tui-fieldset" id="home" style="">
+      <fieldset class="tui-fieldset" id="home">
         <legend class="center">Wiredframe V2.1</legend>
         <pre style="text-align:center; line-height: 1; margin-bottom: 16px;">
-                 ░░░░░░░
-               ░░░░░░░░░░░
-             ░░░░█████████░░
-           ░░██████████████░░░
-         ░░░████▒▒▒▒▒█▒▒▒███░░░░
-        ░░░░███▒▒▒▒▒▒▒██▒▒███░░░░
-        ░░░░███▒▒▒▒▒▒▒▒▒▒▒███░░░░
-        ░░░░███▒▒▒▒▒▒▒▒▒▒▒███░░░░
-         ░░░░███▒▒▒▒▒▒▒▒▒████░░░
-           ░░░██████████████░░
-             ░░█████████░░░░
-               ░░░░░░░░░░░
-               ░░░░░░░
-          </pre>
+           ░░░░░░░          
+         ░░░░░░░░░░░        
+      ░░░░░████████░░░     
+    ░░███████████████░░    
+  ░░█████▒▒▒▒▒▒▒▒▒███▒░░░  
+ ░░░████▒▒▒▒▒▒▒██▒▒███░░░░ 
+░░░░████▒▒▒▒▒▒▒▒▒▒▒████░░░░
+░░░░▓███▒▒▒▒▒▒▒▒▒▒▒████░░░░
+ ░░░░███▒▒▒▒▒▒▒▒▒▒▒████░░░░
+  ░░░░███▒▒▒▒▒▒▒▒▒█████░░  
+    ░░███████████████░░░   
+      ░░████████░░░░░░     
+      ░░░░░░░░░░░░       
+       ░░░░░░░          
         </pre>
         <h1>Niemand hat die Absicht eine Website zu errichten!</h1>
         <p>Und doch passiert es jeden Tag – seit vielen Jahren.</p>
@@ -104,8 +102,7 @@
       </fieldset>
     </div>
     <div class="tui-window purple-168 fpa-section center" id="wahrheit-section" style="display:none;">
-      <fieldset class="tui-fieldset" id="wahrheit"
-        style="width: 100%; height: 100%; box-sizing: border-box; margin: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+      <fieldset class="tui-fieldset" id="wahrheit">
         <legend class="center">Wahrheit</legend>
         <p class="center"><span id="counter" data-count="141567">0</span> Websites werden jetzt gerade – gegen ihren
           Willen – online gestellt.</p>
@@ -116,54 +113,49 @@
       </fieldset>
     </div>
     <div class="tui-window blue-168 fpa-section center" id="ursachen-section" style="display:none;">
-      <fieldset class="tui-fieldset" id="ursachen"
-        style="width: 100%; height: 100%; box-sizing: border-box; margin: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+      <fieldset class="tui-fieldset" id="ursachen">
         <legend class="center">Ursachen</legend>
         <p>Viele Websites sind immer noch traumatisiert und wollen über das Erlebte nicht sprechen. Einigen Experten mit
           jahrelanger Erfahrung in den Bereichen Webdesign und Webdevelopment ist es aber gelungen die Methoden
           aufzudecken, wie Websites massenweise hergestellt werden. Diese Tatsachen sind schockierend, dennoch müssen
           Sie veröffentlicht werden:</p>
-        <p>1. KI designt jetzt alles – sogar das Impressum.</p>
-        <p>2. „Mobile First“ heißt oft: Desktop vergessen.</p>
-        <p>3. Jeder Button braucht jetzt einen Darkmode.</p>
-        <p>4. Meetings über das Design dauern länger als das Design selbst.</p>
-        <p>5. Figma-Files mit 99+ Seiten – aber keiner weiß, wo das finale Design ist.</p>
-        <p>6. „No-Code“ heißt: Keiner weiß mehr, wie’s geht.</p>
-        <a href="#" class="tui-button cyan-168 black-text" data-section="loesung">Was hilft?</a>
+        <p>
+        <ul>
+          <li>1. KI designt jetzt alles – sogar das Impressum.</li>
+          <li>2. „Mobile First“ heißt oft: Desktop vergessen.</li>
+          <li>3. Jeder Button braucht jetzt einen Darkmode.</li>
+          <li>4. Meetings über das Design dauern länger als das Design selbst.</li>
+          <li>5. Figma-Files mit 99+ Seiten – aber keiner weiß, wo das finale Design ist.</li>
+          <li>6. „No-Code“ heißt: Keiner weiß mehr, wie’s geht.</li>
+        </ul>
+        </p>
+        <a href="#" class="tui-button cyan-168 black-text" data-section="loesung">Was können wir dagegen tun?</a>
       </fieldset>
     </div>
     <div class="tui-window cyan-168 fpa-section center" id="loesung-section" style="display:none;">
-      <fieldset class="tui-fieldset" id="loesung"
-        style="width: 100%; height: 100%; box-sizing: border-box; margin: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+      <fieldset class="tui-fieldset" id="loesung">
         <legend class="center">Lösung</legend>
         <h2>Wiredframe hilft</h2>
         <p>Das einzig bekannte Gegenmittel gegen schlechtes Webdesign ist Leidenschaft. Egal ob für ein neues Projekt
           oder einen Relaunch, seit <span id="jahreSeit"></span> Jahren setzt sich Wiredframe für Webdesign ein und ist
           besonders spezialisiert auf:</p>
+        <p>
         <ul>
-          <li>
-            <p>- UI/UX Design mit Figma<br>Moderne User Interfaces und User Experience Design mit Figma, FigJam und
-              aktuellen Design-Standards.</p>
-          </li>
-          <li>
-            <p>- Interaktives Prototyping<br>Prototypen und Animationen mit Figma, Protopie und Webflow – für echtes
-              Look & Feel vor dem Launch.</p>
-          </li>
-          <li>
-            <p>- Design Systeme & Komponenten<br>Aufbau und Pflege von Design Systemen, Komponenten-Bibliotheken und
-              Styleguides für konsistente Markenauftritte.</p>
-          </li>
-          <li>
-            <p>- No-Code/Low-Code Webentwicklung<br>Schnelle Umsetzung von Websites und Landingpages mit Webflow, Framer
-              und anderen No-Code/Low-Code Tools.</p>
-          </li>
+          <li>- UI/UX Design mit Figma<br>Moderne User Interfaces und User Experience Design mit Figma, FigJam und
+            aktuellen Design-Standards.</li>
+          <li>- Interaktives Prototyping<br>Prototypen und Animationen mit Figma, Protopie und Webflow – für echtes Look
+            & Feel vor dem Launch.</li>
+          <li>- Design Systeme & Komponenten<br>Aufbau und Pflege von Design Systemen, Komponenten-Bibliotheken und
+            Styleguides für konsistente Markenauftritte.</li>
+          <li>- No-Code/Low-Code Webentwicklung<br>Schnelle Umsetzung von Websites und Landingpages mit Webflow, Framer
+            und anderen No-Code/Low-Code Tools.</li>
         </ul>
+        </p>
         <a href="#" class="tui-button purple-168 white-text" data-section="profil">Wiredframe? Noch nie gehört!</a>
       </fieldset>
     </div>
     <div class="tui-window purple-168 fpa-section center" id="profil-section" style="display:none;">
-      <fieldset class="tui-fieldset" id="profil"
-        style="width: 100%; height: 100%; box-sizing: border-box; margin: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+      <fieldset class="tui-fieldset" id="profil">
         <legend class="center">Profil</legend>
         <h2>Was ist Wiredframe?</h2>
         <p>Wiredframe, das ist Ulf Schuster – unabhängiger UI/UX Designer und Digital Creator aus Leidenschaft. Ich
@@ -171,33 +163,30 @@
           Markenauftritte zu gestalten, die begeistern. Mein Fokus liegt auf nutzerzentriertem Design, Prototyping,
           Design Systemen und der Umsetzung mit modernen Tools wie Figma, Webflow & Co. – von der ersten Idee bis zum
           Launch.</p>
+        <p>
         <ul>
-          <li>
-            <p>Mehr als 200 abgeschlossene Projekte, <span id="jahreSeitBig"></span> Jahre Berufserfahrung und 0 Bock
-              damit aufzuhören</p>
-          </li>
+          <li>Mehr als 200 abgeschlossene Projekte, <span id="jahreSeitBig"></span> Jahre Berufserfahrung und 0 Bock
+            damit aufzuhören.</li>
         </ul>
+        </p>
         <a href="#" class="tui-button cyan-168 black-text" data-section="kontakt">Wie war nochmal die Faxnummer?</a>
       </fieldset>
     </div>
     <div class="tui-window cyan-168 fpa-section center" id="kontakt-section" style="display:none;">
-      <fieldset class="tui-fieldset" id="kontakt"
-        style="width: 100%; height: 100%; box-sizing: border-box; margin: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+      <fieldset class="tui-fieldset" id="kontakt">
         <legend class="center">Kontakt</legend>
-        <h2>Kontakt</h2>
         <p>Erreichbarkeit? Fast immer! Außer ich bin gerade beim Kreativlüften aufm Sattel unterwegs oder sortiere meine
           Gedanken zwischen Pixeln und Pflanzen. Für gute Ideen, ehrliche Projekte und kreative Teams bin ich aber immer
           zu haben. Schreib mir einfach – ich freu mich drauf.</p>
         <div class="kontakt-buttons">
           <a href="mailto:info@wiredframe.de" class="tui-button blue-168 white-text">E-Mail schreiben</a>
           <a href="https://outlook.office.com/book/EinGesprchvereinbaren@wiredframe.onmicrosoft.com/?ismsaljsauthenabled"
-            class="tui-button blue-168 white-text" data-section="impressum">Microsoft Teams</a>
+            target="_blank" class="tui-button blue-168 white-text">Microsoft Teams</a>
         </div>
       </fieldset>
     </div>
     <div class="tui-window blue-168 fpa-section center" id="impressum-section" style="display:none;">
-      <fieldset class="tui-fieldset" id="impressum"
-        style="width: 100%; height: 100%; box-sizing: border-box; margin: 0; display: flex; flex-direction: column;">
+      <fieldset class="tui-fieldset" id="impressum">
         <legend class="center">Impressum</legend>
         <p>Ulf Schuster<br>Sindelsdorferstraße 27a<br>82377 Penzberg<br>info@wiredframe.de</p>
         <p>Wow. Du hast wirklich aufs Impressum geklickt? Dabei gab’s doch direkt oben drüber schon schicke
@@ -232,20 +221,39 @@
       </fieldset>
     </div>
   </div>
+  <div class="tui-statusbar">
+    <ul>
+      <li>
+        <a href="mailto:info@wiredframe.de"></a>
+        <span class="red-168-text">F1</span> E-Mail </a>
+      </li>
+      <span class="tui-statusbar-divider"></span>
+      <li>
+        <a href="https://outlook.office.com/book/EinGesprchvereinbaren@wiredframe.onmicrosoft.com/?ismsaljsauthenabled"
+          target="_blank">
+          <span class="red-168-text">F2</span> Teams Meeting </a>
+      </li>
+      <span class="tui-statusbar-divider"></span>
+      <li>
+        <a href="/index.html" target="_blank">
+          <span class="red-168-text">F9</span> Moderne Version </a>
+      </li>
+      <span class="tui-statusbar-divider"></span>
+      <li>
+        <a href="#" data-section="impressum">
+          <span class="red-168-text">F10</span> Impressum </a>
+      </li>
+    </ul>
   </div>
   <script>
     // Section Navigation Logic
     function showSection(section) {
       document.querySelectorAll('.fpa-section').forEach(function (div) {
         div.style.display = 'none';
-        div.style.justifyContent = '';
-        div.style.alignItems = '';
       });
       var el = document.getElementById(section + '-section');
       if (el) {
         el.style.display = 'block';
-        el.style.justifyContent = 'center';
-        el.style.alignItems = 'center';
       }
     }
     document.querySelectorAll('[data-section]').forEach(function (el) {
@@ -257,7 +265,6 @@
         }
       });
     });
-
     // Counter-Animation für "Wahrheit"
     document.addEventListener('DOMContentLoaded', function () {
       var counter = document.getElementById('counter');
@@ -279,11 +286,10 @@
         }
         requestAnimationFrame(animateCounter);
       }
-
       // Oldschool Scroll-Effekt für Anchor-Links
       function oldschoolScrollTo(targetY) {
-        var step = 40; // px pro "Zeile" (DOS-typisch)
-        var delay = 40; // ms pro Schritt (langsamer für noch mehr Oldschool)
+        var step = 40;
+        var delay = 40;
         var scrollInterval = setInterval(function () {
           var currentY = window.scrollY;
           var atEnd = (window.innerHeight + window.scrollY) >= document.body.scrollHeight;
@@ -309,7 +315,6 @@
           }
         });
       });
-
       // Globales zeilenweises Scrollen (DOS-Style)
       (function () {
         var lineHeight = 20;
@@ -322,7 +327,7 @@
           setTimeout(function () { isScrolling = false; }, 5);
         }
         window.addEventListener('wheel', function (e) {
-          if (e.ctrlKey) return; // Pinch-to-zoom erlauben
+          if (e.ctrlKey) return;
           e.preventDefault();
           scrollByLine(e.deltaY);
         }, { passive: false });
@@ -336,10 +341,13 @@
           }
         });
       })();
+      // Jahre-Berechnung
+      const jahreSeit = (jahr) => new Date().getFullYear() - jahr;
+      var js = document.getElementById('jahreSeit');
+      if (js) js.textContent = jahreSeit(2005);
+      var jsb = document.getElementById('jahreSeitBig');
+      if (jsb) jsb.textContent = jahreSeit(2005);
     });
-    const jahreSeit = (jahr) => new Date().getFullYear() - jahr;
-    document.getElementById('jahreSeit').textContent = jahreSeit(2005);
-    document.getElementById('jahreSeitBig').textContent = jahreSeit(2005);
   </script>
 </body>
 
