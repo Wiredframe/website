@@ -129,6 +129,7 @@
         <legend class="center">Wahrheit</legend>
         <p><span id="counter" data-count="141567">0</span> Websites werden jetzt gerade – gegen ihren Willen – online
           gestellt.</p>
+        <div class="tui-divider"></div>
         <p>Jeden Tag werden unzählige Websites gebaut und hinter dem Rücken der Bürger einfach online gestellt.
           Besonders tragisch: Viele bemerken es nicht einmal, denn oft sind diese schon bei Fertigstellung veraltet,
           langweilig oder schlicht unauffindbar, trotzdem haben die Auftraggeber viel Geld dafür gezahlt.</p>
@@ -305,21 +306,15 @@
       var counter = document.getElementById('counter');
       if (counter) {
         var countTo = parseInt(counter.getAttribute('data-count'), 10) || 0;
-        var duration = 36000;
-        var start = 100000;
-        var startTime = null;
-        function animateCounter(timestamp) {
-          if (!startTime) startTime = timestamp;
-          var progress = Math.min((timestamp - startTime) / duration, 1);
-          var value = Math.floor(start + (countTo - start) * progress);
+        var value = 127879;
+        var increment = 1; // Schrittweite
+        var interval = 50; // ms, Geschwindigkeit
+        function animateCounter() {
+          value += increment;
           counter.textContent = value;
-          if (progress < 1) {
-            requestAnimationFrame(animateCounter);
-          } else {
-            counter.textContent = countTo;
-          }
+          setTimeout(animateCounter, interval);
         }
-        requestAnimationFrame(animateCounter);
+        animateCounter();
       }
       // Oldschool Scroll-Effekt für Anchor-Links
       function oldschoolScrollTo(targetY) {
