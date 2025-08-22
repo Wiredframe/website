@@ -19,7 +19,12 @@
 			touch-action: pan-y;
 			font-weight: normal !important;
 			font-style: normal !important;
-			font-size: 15px !important
+			font-size: 15px !important;
+			text-shadow: 0.06rem 0 0.06rem #ea36af79, -0.125rem 0 0.06rem #75fa6979;
+			animation-duration: 0.01s;
+			animation-name: textflicker;
+			animation-iteration-count: infinite;
+			animation-direction: alternate;
 		}
 
 		body {
@@ -80,6 +85,73 @@
 		/* Verstecken über hidden Attribut */
 		[hidden] {
 			display: none !important;
+		}
+
+		/* Neon / Retro RGB Split Flicker Effekt (ohne Markup-Änderung) */
+		/* Optional: Eigenen Font hinzufügen – aktuell wird vorhandene monospace/DOS Schrift genutzt */
+		/* Basis Selektor: alle typischen Textelemente + Buttons + Nav */
+		body,
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6,
+		p,
+		a,
+		li,
+		legend,
+		label,
+		.tui-button,
+		.tui-nav,
+		.tui-statusbar,
+		.tui-fieldset,
+		.tui-datetime {
+			letter-spacing: 0.12em;
+			/* Start-Shadow (wird durch Animation variiert) */
+			text-shadow: 0.06rem 0 0.06rem #ea36af79, -0.125rem 0 0.06rem #75fa6979;
+			animation: textflicker 0.11s alternate infinite;
+		}
+
+		/* Etwas stärkere Wirkung für prominente Überschriften */
+		h1,
+		h2,
+		legend {
+			animation-duration: 0.09s;
+		}
+
+		@keyframes textflicker {
+			from {
+				text-shadow: 1px 0 0 #ea36af79, -2px 0 0 #75fa6979;
+			}
+
+			to {
+				text-shadow: 2px 0.5px 2px #ea36af79, -1px -0.5px 2px #75fa6979;
+			}
+		}
+
+		/* Respect user preferences: reduce motion => keine Flicker-Animation */
+		@media (prefers-reduced-motion: reduce) {
+
+			body,
+			h1,
+			h2,
+			h3,
+			h4,
+			h5,
+			h6,
+			p,
+			a,
+			li,
+			legend,
+			label,
+			.tui-button,
+			.tui-nav,
+			.tui-statusbar,
+			.tui-fieldset,
+			.tui-datetime {
+				animation: none;
+			}
 		}
 	</style>
 	<script src="/js/tuicss.min.js" defer></script>
@@ -157,23 +229,18 @@
 			<div class="tui-window blue-168 fpa-section center" id="ursachen-section" hidden>
 				<fieldset class="tui-fieldset" id="ursachen">
 					<legend class="center">Ursachen</legend>
-					<p>Viele Websites sind immer noch traumatisiert und wollen über das Erlebte nicht sprechen. Einigen
-						Experten mit jahrelanger Erfahrung in den Bereichen Webdesign und Webdevelopment ist es aber
-						gelungen die Methoden aufzudecken, wie Websites massenweise hergestellt werden. Diese Tatsachen
-						sind schockierend, dennoch müssen Sie veröffentlicht werden:</p>
-					<ul style="text-align: left;">
-						<li>- Webseiten werden veröffentlicht, bevor sie jemand getestet hat – Hauptsache, sie sind
-							online. </li>
-						<li>- Impressum und Datenschutz sind versteckt wie Ostereier.</li>
-						<li>- Navigation? Gibt’s, aber nur für Eingeweihte und mit Glück.</li>
-						<li>- Kontaktformulare funktionieren nur, wenn der Mond richtig steht.</li>
-						<li>- Barrierefreiheit? Wird mit einem Plugin „erledigt“ – und nie geprüft.</li>
-						<li>- Die Startseite lädt 12 MB an Bildern, aber das Logo ist verpixelt.</li>
-						<li>- „Responsive“ heißt: Auf dem Handy ist alles winzig – oder riesig.</li>
-						<li>- Cookie-Banner blockiert alles, außer die eigentliche Information.</li>
-						<li>- Texte sind so lang wie AGBs, aber niemand liest sie (nicht mal Google).</li>
-						<li>- Nach dem Launch weiß keiner mehr, wer Admin ist – oder wie man was ändert.</li>
-					</ul><br>
+					<div style="text-align: left;"></div> Experten mit jahrelanger Erfahrung in den Bereichen Webdesign
+					und Webdevelopment ist es aber gelungen die Methoden aufzudecken, wie Websites massenweise
+					hergestellt werden. Diese Tatsachen sind schockierend, dennoch müssen Sie veröffentlicht werden:</p>
+					<div style="text-align: left;">
+						<p>1. KI designt jetzt alles – sogar das Impressum.</p>
+						<p>2. „Mobile First“ heißt oft: Desktop vergessen.</p>
+						<p>3. Jeder Button braucht jetzt einen Darkmode.</p>
+						<p>4. Meetings über das Design dauern länger als das Design selbst.</p>
+						<p>5. Figma-Files mit 99+ Seiten – aber keiner weiß, wo das finale Design ist.</p>
+						<p>6. „No-Code“ heißt: Keiner weiß mehr, wie’s geht.</p>
+					</div>
+					<br>
 					<div class="tui-divider"></div><br>
 					<a href="#" class="tui-button cyan-168 white-text" data-section="loesung">Was können wir dagegen
 						tun?</a><br><br>
