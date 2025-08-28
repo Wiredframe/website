@@ -20,11 +20,6 @@
 			font-weight: normal !important;
 			font-style: normal !important;
 			font-size: 15px !important;
-			text-shadow: 0.06rem 0 0.06rem #ea36af79, -0.125rem 0 0.06rem #75fa6979;
-			animation-duration: 0.01s;
-			animation-name: textflicker;
-			animation-iteration-count: infinite;
-			animation-direction: alternate;
 		}
 
 		body {
@@ -85,32 +80,6 @@
 		/* Verstecken über hidden Attribut */
 		[hidden] {
 			display: none !important;
-		}
-
-		/* Neon / Retro RGB Split Flicker Effekt (ohne Markup-Änderung) */
-		/* Optional: Eigenen Font hinzufügen – aktuell wird vorhandene monospace/DOS Schrift genutzt */
-		/* Basis Selektor: alle typischen Textelemente + Buttons + Nav */
-		body,
-		h1,
-		h2,
-		h3,
-		h4,
-		h5,
-		h6,
-		p,
-		a,
-		li,
-		legend,
-		label,
-		.tui-button,
-		.tui-nav,
-		.tui-statusbar,
-		.tui-fieldset,
-		.tui-datetime {
-			letter-spacing: 0.12em;
-			/* Start-Shadow (wird durch Animation variiert) */
-			text-shadow: 0.06rem 0 0.06rem #ea36af79, -0.125rem 0 0.06rem #75fa6979;
-			animation: textflicker 0.11s alternate infinite;
 		}
 
 		/* Etwas stärkere Wirkung für prominente Überschriften */
@@ -214,8 +183,8 @@
 			<div class="tui-window purple-168 fpa-section center" id="wahrheit-section" hidden>
 				<fieldset class="tui-fieldset" id="wahrheit">
 					<legend class="center">Wahrheit</legend>
-					<p><span id="counter" data-count="141567">0</span> Websites werden jetzt gerade – gegen ihren Willen
-						– online gestellt.</p>
+					<p><span id="counter" data-count="">0</span> Websites werden jetzt gerade – gegen ihren Willen –
+						online gestellt.</p>
 					<div class="tui-divider"></div>
 					<p>Jeden Tag werden unzählige Websites gebaut und hinter dem Rücken der Bürger einfach online
 						gestellt. Besonders tragisch: Viele bemerken es nicht einmal, denn oft sind diese schon bei
@@ -228,9 +197,8 @@
 			</div>
 			<div class="tui-window blue-168 fpa-section center" id="ursachen-section" hidden>
 				<fieldset class="tui-fieldset" id="ursachen">
-					<legend class="center">Ursachen</legend>
-					<div style="text-align: left;"></div> Experten mit jahrelanger Erfahrung in den Bereichen Webdesign
-					und Webdevelopment ist es aber gelungen die Methoden aufzudecken, wie Websites massenweise
+					<legend class="center">Ursachen</legend> Experten mit jahrelanger Erfahrung in den Bereichen
+					Webdesign und Webdevelopment ist es aber gelungen die Methoden aufzudecken, wie Websites massenweise
 					hergestellt werden. Diese Tatsachen sind schockierend, dennoch müssen Sie veröffentlicht werden:</p>
 					<div style="text-align: left;">
 						<p>1. KI designt jetzt alles – sogar das Impressum.</p>
@@ -365,6 +333,9 @@
 	</div>
 	<script>
 		'use strict';
+		// Bekannte Abschnitts-IDs (für URL-Hash-Navigation)
+		const SECTION_IDS = ['home', 'wahrheit', 'ursachen', 'loesung', 'profil', 'kontakt', 'impressum'];
+
 		// Section Navigation Logic (nutzt hidden Attribute)
 		function showSection(section) {
 			const sections = document.querySelectorAll('.fpa-section');
@@ -372,11 +343,32 @@
 			const el = document.getElementById(section + '-section');
 			if (el) el.hidden = false;
 		}
-		// Delegiertes Handling für Section Links
+
+		// Hash -> Section anwenden (für Initial-Ladezustand und History-Navigation)
+		function applyHashSection() {
+			const hash = (location.hash || '').replace('#', '');
+			if (SECTION_IDS.includes(hash)) {
+				showSection(hash);
+			} else {
+				// Fallback auf Startseite
+				showSection('home');
+			}
+		}
+
+		// Browser-Navigation (Zurück/Vor) abfangen
+		window.addEventListener('hashchange', applyHashSection);
+		// Delegiertes Handling für Section Links: URL aktualisieren
 		document.querySelectorAll('[data-section]').forEach(el => {
 			el.addEventListener('click', e => {
 				const section = el.getAttribute('data-section');
-				if (section) { e.preventDefault(); showSection(section); }
+				if (!section) return;
+				e.preventDefault();
+				const targetHash = '#' + section;
+				if (location.hash !== targetHash) {
+					location.hash = targetHash; // triggert hashchange -> applyHashSection
+				} else {
+					showSection(section);
+				}
 			});
 		});
 		// Counter-Animation (rAF, adaptives Timing)
@@ -396,60 +388,22 @@
 				}
 				requestAnimationFrame(step);
 			}
-			// Oldschool Scroll-Effekt für Anchor-Links
-			function oldschoolScrollTo(targetY) {
-				const step = 40;
-				const delay = 40;
-				const scrollInterval = setInterval(() => {
-					const currentY = window.scrollY;
-					const atEnd = (window.innerHeight + window.scrollY) >= document.body.scrollHeight;
-					if (Math.abs(currentY - targetY) <= step || atEnd) {
-						window.scrollTo(0, targetY);
-						clearInterval(scrollInterval);
-					} else if (currentY < targetY) {
-						window.scrollTo(0, currentY + step);
-					} else {
-						window.scrollTo(0, currentY - step);
-					}
-				}, delay);
-			}
-			document.querySelectorAll('a[href^="#"]').forEach(a => {
-				a.addEventListener('click', e => {
-					const href = a.getAttribute('href');
-					if (href.length > 1 && document.getElementById(href.substring(1))) {
-						e.preventDefault();
-						const target = document.getElementById(href.substring(1));
-						const rect = target.getBoundingClientRect();
-						const targetY = rect.top + window.scrollY;
-						oldschoolScrollTo(targetY);
-					}
-				});
-			});
-			// Globales zeilenweises Scrollen (DOS-Style)
-			(() => {
-				const lineHeight = 20;
-				let isScrolling = false;
-				function scrollByLine(delta) {
-					if (isScrolling) return;
-					isScrolling = true;
-					const targetY = window.scrollY + (delta > 0 ? lineHeight : -lineHeight);
-					window.scrollTo({ top: targetY });
-					setTimeout(() => { isScrolling = false; }, 5);
-				}
-				window.addEventListener('wheel', e => {
-					if (e.ctrlKey) return;
-					e.preventDefault();
-					scrollByLine(e.deltaY);
-				}, { passive: false });
-				window.addEventListener('keydown', e => {
-					if (e.key === 'ArrowDown') { e.preventDefault(); scrollByLine(1); }
-					else if (e.key === 'ArrowUp') { e.preventDefault(); scrollByLine(-1); }
-				});
-			})();
+
 			// Jahre-Berechnung
 			const jahreSeit = jahr => new Date().getFullYear() - jahr;
 			const js = document.getElementById('jahreSeit'); if (js) js.textContent = jahreSeit(2005);
 			const jsb = document.getElementById('jahreSeitBig'); if (jsb) jsb.textContent = jahreSeit(2005);
+
+			// HREFs für data-section-Links setzen (Progressive Enhancement)
+			document.querySelectorAll('[data-section]').forEach(el => {
+				const section = el.getAttribute('data-section');
+				if (section && SECTION_IDS.includes(section)) {
+					el.setAttribute('href', '#' + section);
+				}
+			});
+
+			// Initialen Hash-Zustand anwenden (oder auf home fallen)
+			applyHashSection();
 		});
 	</script>
 </body>
