@@ -90,7 +90,7 @@
 <body class="bg-gray-100 text-gray-900 no-shadow">
 	<main class="max-w-6xl mx-auto px-6 py-12">
 		<header class="mb-8">
-			<h1 class="text-6xl font-regular">Referenzen</h1>
+			<h1 class="text-6xl font-regular">Projekte</h1>
 			<p class="text-sm text-gray-600 mt-1">Eine Auswahl meiner Projekte. Filtere live nach Jahr, Typ oder
 				Branche. </p>
 		</header>
@@ -190,6 +190,7 @@
 			const filterType = document.getElementById('filter-type');
 			const filterBranch = document.getElementById('filter-branch');
 			const clear = document.getElementById('clear');
+			const resultsCountEl = document.getElementById('results-count');
 
 			// populate filter options - skip empty/falsy values
 			uniqueSorted(data.map(d => d.Jahr).filter(v => v && String(v).trim() !== '')).forEach(y => createOption(filterYear, y));
@@ -201,6 +202,10 @@
 			let currentList = []; // filtered list
 			let renderedCount = 0;
 			const sentinel = document.getElementById('scroll-sentinel');
+
+			// shared image handlers to avoid allocating per-image functions
+			function handleImageLoad(e) { e.currentTarget.classList.add('is-loaded'); }
+			function handleImageError(e) { const img = e.currentTarget; img.onerror = null; img.src = placeholderImage(img.alt || ''); img.classList.add('is-loaded'); }
 
 			function renderPage(items) {
 				const frag = document.createDocumentFragment();
@@ -222,12 +227,11 @@
 					const imageFile = item.Image || (slugify(item.Projekttitel) + '.png');
 					const imagePath = imageFile ? `images/referenzen/${imageFile}` : '';
 					if (imagePath) {
-						// fade-in when loaded
+						// reuse handlers to avoid per-image closures
 						img.classList.remove('is-loaded');
-						img.onload = function () { img.classList.add('is-loaded'); };
-						img.onerror = function () { img.onerror = null; img.src = placeholderImage(item.Projekttitel); img.classList.add('is-loaded'); };
-						// set src last so load event fires
-						img.src = imagePath;
+						img.onload = handleImageLoad;
+						img.onerror = handleImageError;
+						img.src = imagePath; // set src last
 					} else {
 						img.src = placeholderImage(item.Projekttitel);
 						img.classList.add('is-loaded');
@@ -255,7 +259,6 @@
 				renderedCount = 0;
 				grid.innerHTML = '';
 				const total = data.length || 0;
-				const resultsCountEl = document.getElementById('results-count');
 				if (resultsCountEl) resultsCountEl.textContent = `${currentList.length} von ${total} Referenzen`;
 				if (!currentList.length) {
 					grid.innerHTML = '<p class="text-gray-500">Keine Projekte gefunden.</p>';
@@ -265,17 +268,12 @@
 			}
 
 			function renderMore() {
-				if (!currentList.length) return;
 				const next = currentList.slice(renderedCount, renderedCount + PAGE_SIZE);
-				if (!next.length) return;
+				if (!next.length) { sentinel.style.display = 'none'; return; }
 				renderPage(next);
 				renderedCount += next.length;
-				// if more to load, keep sentinel visible, else hide
-				if (renderedCount >= currentList.length) {
-					sentinel.style.display = 'none';
-				} else {
-					sentinel.style.display = 'block';
-				}
+				// show sentinel only if there are more items
+				sentinel.style.display = renderedCount < currentList.length ? 'block' : 'none';
 			}
 
 			// IntersectionObserver for sentinel -> load more pages
@@ -326,9 +324,12 @@
 				};
 			}
 
-			// events: debounce search for 250ms, selects use 'change' to avoid closing native pickers on touch
-			search.addEventListener('input', debounce(applyFilters, 0));
-			[filterYear, filterType, filterBranch].forEach(el => el.addEventListener('change', applyFilters));
+			// events: debounce search for 250ms. Use the same debounce helper for selects
+			// with a much smaller delay so rapid picker interactions on iOS don't trigger
+			// immediate re-renders that could close the native picker.
+			search.addEventListener('input', debounce(applyFilters, 250));
+			const selectHandler = debounce(applyFilters, 120);
+			[filterYear, filterType, filterBranch].forEach(el => el.addEventListener('change', selectHandler));
 			clear.addEventListener('click', () => { search.value = ''; filterYear.value = ''; filterType.value = ''; filterBranch.value = ''; applyFilters(); });
 
 			render(data);
