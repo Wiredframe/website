@@ -126,6 +126,15 @@
     "URL": ""
   },
   {
+    "Jahr": "2023",
+    "Projekttitel": "IWEST Onlineshop",
+    "Typ": "Shopware",
+    "Branche": "Tiernahrung / E-Commerce",
+    "Agentur": "datamints",
+    "Image": "iwest-onlineshop.png",
+    "URL": ""
+  },
+  {
     "Jahr": "2022",
     "Projekttitel": "Ausbildungskompass",
     "Typ": "Website",
@@ -225,15 +234,6 @@
     "URL": ""
   },
   {
-    "Jahr": "2019",
-    "Projekttitel": "IWEST Website",
-    "Typ": "Website",
-    "Branche": "Tiernahrung / Agrar",
-    "Agentur": "datamints",
-    "Image": "iwest-website.png",
-    "URL": ""
-  },
-  {
     "Jahr": "2021",
     "Projekttitel": "Stadtwerke Weilheim",
     "Typ": "Website",
@@ -249,15 +249,6 @@
     "Branche": "Sportverein",
     "Agentur": "eveca",
     "Image": "sg-post-sued-regensburg.png",
-    "URL": ""
-  },
-  {
-    "Jahr": "2023",
-    "Projekttitel": "IWEST Onlineshop",
-    "Typ": "Shopware",
-    "Branche": "Tiernahrung / E-Commerce",
-    "Agentur": "datamints",
-    "Image": "iwest-onlineshop.png",
     "URL": ""
   },
   {
@@ -324,15 +315,6 @@
     "URL": ""
   },
   {
-    "Jahr": "2019",
-    "Projekttitel": "Olmogo",
-    "Typ": "Website",
-    "Branche": "Software / Webentwicklung",
-    "Agentur": "–",
-    "Image": "olmogo.png",
-    "URL": ""
-  },
-  {
     "Jahr": "2020",
     "Projekttitel": "Psychotherapiepraxis Dr. Loohs",
     "Typ": "Website",
@@ -357,6 +339,24 @@
     "Branche": "Software / Webentwicklung",
     "Agentur": "–",
     "Image": "olmogo-app.png",
+    "URL": ""
+  },
+  {
+    "Jahr": "2019",
+    "Projekttitel": "IWEST Website",
+    "Typ": "Website",
+    "Branche": "Tiernahrung / Agrar",
+    "Agentur": "datamints",
+    "Image": "iwest-website.png",
+    "URL": ""
+  },
+  {
+    "Jahr": "2019",
+    "Projekttitel": "Olmogo",
+    "Typ": "Website",
+    "Branche": "Software / Webentwicklung",
+    "Agentur": "–",
+    "Image": "olmogo.png",
     "URL": ""
   },
   {
