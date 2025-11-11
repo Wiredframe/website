@@ -326,9 +326,9 @@
 				};
 			}
 
-			// events: debounce search for 250ms, immediate on selects and clear
+			// events: debounce search for 250ms, selects use 'change' to avoid closing native pickers on touch
 			search.addEventListener('input', debounce(applyFilters, 250));
-			[filterYear, filterType, filterBranch].forEach(el => el.addEventListener('input', applyFilters));
+			[filterYear, filterType, filterBranch].forEach(el => el.addEventListener('change', applyFilters));
 			clear.addEventListener('click', () => { search.value = ''; filterYear.value = ''; filterType.value = ''; filterBranch.value = ''; applyFilters(); });
 
 			render(data);
