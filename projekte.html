@@ -58,6 +58,24 @@
 			transition-timing-function: cubic-bezier(0.60, 0.07, 0.61, 1.00);
 			transition-delay: 0ms;
 		}
+
+		/* custom select arrow: hide native arrow and show a subtle SVG */
+		.filter-bar select {
+			/* remove default */
+			-webkit-appearance: none;
+			-moz-appearance: none;
+			appearance: none;
+			background-repeat: no-repeat;
+			background-position: right 0.9rem center;
+			background-size: 1.25rem;
+			padding-right: 2.5rem;
+			/* ensure space for icon */
+		}
+
+		/* subtle inline SVG arrow (gray) */
+		.filter-bar select {
+			background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%239CA3AF'%3E%3Cpath d='M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z'/%3E%3C/svg%3E");
+		}
 	</style>
 </head>
 
@@ -69,22 +87,22 @@
 				Branche. </p>
 		</header>
 		<section class="mb-6">
-			<div class="flex flex-wrap gap-3 items-center">
+			<div class="flex flex-wrap gap-3 items-center filter-bar">
 				<input id="search" type="search" placeholder="Suche Projekt, Agentur…"
 					class="w-full md:w-64 px-4 h-12 text-base rounded-full border border-gray-200 bg-white placeholder-gray-400"
 					aria-label="Suche Referenzen">
 				<select id="filter-year"
-					class="w-full sm:w-auto md:w-48 px-4 h-12 text-base rounded-full border border-gray-200 bg-white"
+					class="w-full sm:w-auto md:w-48 px-4 pr-10 h-12 text-base rounded-full border border-gray-200 bg-white"
 					aria-label="Filter Jahr">
 					<option value="">Alle Jahre</option>
 				</select>
 				<select id="filter-type"
-					class="w-full sm:w-auto md:w-48 px-4 h-12 text-base rounded-full border border-gray-200 bg-white"
+					class="w-full sm:w-auto md:w-48 px-4 pr-10 h-12 text-base rounded-full border border-gray-200 bg-white"
 					aria-label="Filter Typ">
 					<option value="">Alle Typen</option>
 				</select>
 				<select id="filter-branch"
-					class="w-full sm:w-auto md:w-48 px-4 h-12 text-base rounded-full border border-gray-200 bg-white"
+					class="w-full sm:w-auto md:w-48 px-4 pr-10 h-12 text-base rounded-full border border-gray-200 bg-white"
 					aria-label="Filter Branche">
 					<option value="">Alle Branchen</option>
 				</select>
