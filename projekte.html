@@ -39,6 +39,25 @@
 		body {
 			font-family: 'Maven Pro', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
 		}
+
+		/* Image intrinsic-size + aspect ratio to avoid layout shift for lazy images */
+		.placeholder-img {
+			aspect-ratio: 1 / 1;
+			contain-intrinsic-size: 400px 400px;
+			background-color: #f3f4f6;
+			/* ensure smooth panning between object-position values
+		   - default (mouseout) is short so it snaps back quickly
+		   - on hover we lengthen the duration via .group:hover below */
+			object-position: top;
+			transition: object-position 300ms cubic-bezier(.2, .8, .2, 1);
+		}
+
+		/* when the card is hovered, make the pan slower for a gentle reveal */
+		.group:hover .placeholder-img {
+			transition-duration: 5000ms;
+			transition-timing-function: linear;
+			transition-delay: 1000ms;
+		}
 	</style>
 </head>
 
@@ -77,11 +96,14 @@
 			</div>
 		</section>
 		<div id="grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+		<!-- sentinel for infinite scroll -->
+		<div id="scroll-sentinel" class="h-8"></div>
 		<template id="card-template">
-			<article class="card border border-gray-100 p-4 bg-white">
-				<div class="w-full h-72 bg-gray-100 rounded-md mb-4 flex items-center justify-center">
+			<article class="card border border-gray-100 p-4 bg-white group">
+				<div class="w-full aspect-square bg-gray-100 rounded-md mb-4 overflow-hidden">
 					<img src="" alt="Projektbild"
-						class="w-full h-full object-cover object-top rounded-md placeholder-img" />
+						class="w-full h-full object-cover object-top group-hover:object-bottom placeholder-img"
+						loading="lazy" decoding="async" fetchpriority="low" />
 				</div>
 				<h3 class="text-lg font-medium project-title"></h3>
 				<p class="text-sm text-gray-500 mt-1 project-meta"></p>
@@ -93,7 +115,7 @@
 		</template>
 	</main>
 	<script>
-		// Try to fetch JSON; if not available, fallback to embedded minimal data
+		// Try to fetch JSON; if not available, fallback to a single "No entries found" item
 		async function loadData() {
 			try {
 				const res = await fetch('data/references.json');
@@ -101,9 +123,7 @@
 				return await res.json();
 			} catch (e) {
 				return [
-					{ "Jahr": "2025", "Projekttitel": "Stadt Unterschleißheim", "Typ": "Website", "Branche": "Öffentliche Einrichtung", "Agentur": "datamints" },
-					{ "Jahr": "2024", "Projekttitel": "Memodo Website", "Typ": "Website", "Branche": "Photovoltaik", "Agentur": "datamints" },
-					{ "Jahr": "2023", "Projekttitel": "Lupus Produkte Shop", "Typ": "Shopware", "Branche": "Bürobedarf", "Agentur": "datamints" }
+					{ "Jahr": "", "Projekttitel": "No entries found", "Typ": "", "Branche": "", "Agentur": "" }
 				];
 			}
 		}
@@ -131,6 +151,12 @@
 
 		(async function () {
 			const data = await loadData();
+			// default sort: newest year first
+			data.sort((a, b) => {
+				const ya = parseInt(a && a.Jahr) || 0;
+				const yb = parseInt(b && b.Jahr) || 0;
+				return yb - ya;
+			});
 			const grid = document.getElementById('grid');
 			const tmpl = document.getElementById('card-template');
 			const search = document.getElementById('search');
@@ -144,16 +170,15 @@
 			uniqueSorted(data.map(d => d.Typ).filter(v => v && String(v).trim() !== '')).forEach(t => createOption(filterType, t));
 			uniqueSorted(data.map(d => d.Branche).filter(v => v && String(v).trim() !== '')).forEach(b => createOption(filterBranch, b));
 
-			function render(list) {
-				grid.innerHTML = '';
-				const total = data.length || 0;
-				const resultsCountEl = document.getElementById('results-count');
-				if (resultsCountEl) resultsCountEl.textContent = `${list.length} von ${total} Referenzen`;
-				if (!list.length) {
-					grid.innerHTML = '<p class="text-gray-500">Keine Projekte gefunden.</p>';
-					return;
-				}
-				list.forEach(item => {
+			// Pagination / infinite-scroll rendering
+			const PAGE_SIZE = 24; // cards per page
+			let currentList = []; // filtered list
+			let renderedCount = 0;
+			const sentinel = document.getElementById('scroll-sentinel');
+
+			function renderPage(items) {
+				const frag = document.createDocumentFragment();
+				items.forEach(item => {
 					const node = tmpl.content.cloneNode(true);
 					const article = node.querySelector('article');
 					const img = node.querySelector('img');
@@ -171,6 +196,7 @@
 					const imageFile = item.Image || (slugify(item.Projekttitel) + '.png');
 					const imagePath = imageFile ? `images/referenzen/${imageFile}` : '';
 					if (imagePath) {
+						// use data-src pattern so lazy browser loading decides when to fetch
 						img.src = imagePath;
 						img.onerror = function () { this.onerror = null; this.src = placeholderImage(item.Projekttitel); };
 					} else {
@@ -183,15 +209,52 @@
 						a.href = url;
 						a.target = '_blank';
 						a.rel = 'noopener noreferrer';
-						// Tailwind hover/transition classes for subtle lift
 						a.className = 'block transition-transform transform hover:-translate-y-1 hover:shadow-lg';
 						a.appendChild(article);
-						grid.appendChild(a);
+						frag.appendChild(a);
 					} else {
-						grid.appendChild(article);
+						frag.appendChild(article);
 					}
 				});
+				grid.appendChild(frag);
 			}
+
+			function render(list) {
+				// reset pagination
+				currentList = list || [];
+				renderedCount = 0;
+				grid.innerHTML = '';
+				const total = data.length || 0;
+				const resultsCountEl = document.getElementById('results-count');
+				if (resultsCountEl) resultsCountEl.textContent = `${currentList.length} von ${total} Referenzen`;
+				if (!currentList.length) {
+					grid.innerHTML = '<p class="text-gray-500">Keine Projekte gefunden.</p>';
+					return;
+				}
+				renderMore();
+			}
+
+			function renderMore() {
+				if (!currentList.length) return;
+				const next = currentList.slice(renderedCount, renderedCount + PAGE_SIZE);
+				if (!next.length) return;
+				renderPage(next);
+				renderedCount += next.length;
+				// if more to load, keep sentinel visible, else hide
+				if (renderedCount >= currentList.length) {
+					sentinel.style.display = 'none';
+				} else {
+					sentinel.style.display = 'block';
+				}
+			}
+
+			// IntersectionObserver for sentinel -> load more pages
+			const io = new IntersectionObserver(entries => {
+				entries.forEach(e => {
+					if (e.isIntersecting) renderMore();
+				});
+			}, { root: null, rootMargin: '400px', threshold: 0 });
+			io.observe(sentinel);
 
 			function slugify(title) {
 				if (!title) return '';
@@ -209,7 +272,7 @@
 				const y = filterYear.value;
 				const t = filterType.value;
 				const b = filterBranch.value;
-				const filtered = data.filter(d => {
+				let filtered = data.filter(d => {
 					if (y && d.Jahr !== y) return false;
 					if (t && d.Typ !== t) return false;
 					if (b && d.Branche !== b) return false;
@@ -219,6 +282,8 @@
 					}
 					return true;
 				});
+				// keep results sorted by year (newest first)
+				filtered = filtered.sort((a, b) => (parseInt(b && b.Jahr) || 0) - (parseInt(a && a.Jahr) || 0));
 				render(filtered);
 			}
 

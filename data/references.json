@@ -46,6 +46,15 @@
   },
   {
     "Jahr": "2024",
+    "Projekttitel": "Radio Eins Shop",
+    "Typ": "E-Commerce",
+    "Branche": "Medien / Merchandising",
+    "Agentur": "netgrade",
+    "Image": "radio-eins-shop.png",
+    "URL": ""
+  },
+  {
+    "Jahr": "2024",
     "Projekttitel": "RBB Shop / Sandmännchen Shop",
     "Typ": "E-Commerce",
     "Branche": "Medien / Merchandising",
@@ -91,15 +100,6 @@
   },
   {
     "Jahr": "2023",
-    "Projekttitel": "IHK Service Portal",
-    "Typ": "Webportal",
-    "Branche": "Öffentliche Einrichtung",
-    "Agentur": "datamints",
-    "Image": "ihk-service-portal-2.png",
-    "URL": ""
-  },
-  {
-    "Jahr": "2023",
     "Projekttitel": "Lupus Produkte Shop",
     "Typ": "Shopware",
     "Branche": "Bürobedarf",
@@ -127,11 +127,11 @@
   },
   {
     "Jahr": "2022",
-    "Projekttitel": "Ausbildungskompass Website",
+    "Projekttitel": "Ausbildungskompass",
     "Typ": "Website",
     "Branche": "Bildung / Karriere",
     "Agentur": "datamints",
-    "Image": "ausbildungskompass-website.png",
+    "Image": "ausbildungskompass.png",
     "URL": ""
   },
   {
@@ -172,6 +172,24 @@
   },
   {
     "Jahr": "2022",
+    "Projekttitel": "ZVK Network Intelligence",
+    "Typ": "Website",
+    "Branche": "IT / Netzwerktechnik",
+    "Agentur": "eveca",
+    "Image": "zvk-network.png",
+    "URL": ""
+  },
+  {
+    "Jahr": "2022",
+    "Projekttitel": "Herbert Fleischmann",
+    "Typ": "Website",
+    "Branche": "Industrie / Anlagenbau",
+    "Agentur": "datamints",
+    "Image": "herbert-fleischmann.png",
+    "URL": ""
+  },
+  {
+    "Jahr": "2022",
     "Projekttitel": "Gustav Mahler Gesellschaft",
     "Typ": "Website",
     "Branche": "Kultur / Verein",
@@ -194,11 +212,20 @@
     "Typ": "Website",
     "Branche": "Netzwerktechnik / Industrie",
     "Agentur": "eveca",
-    "Image": "easylan.png",
+    "Image": "easy-lan.png",
     "URL": ""
   },
   {
     "Jahr": "2021",
+    "Projekttitel": "Willburger System",
+    "Typ": "Website",
+    "Branche": "Industrie",
+    "Agentur": "eveca",
+    "Image": "willburger-system.png",
+    "URL": ""
+  },
+  {
+    "Jahr": "2019",
     "Projekttitel": "IWEST Website",
     "Typ": "Website",
     "Branche": "Tiernahrung / Agrar",
@@ -225,7 +252,7 @@
     "URL": ""
   },
   {
-    "Jahr": "2021",
+    "Jahr": "2023",
     "Projekttitel": "IWEST Onlineshop",
     "Typ": "Shopware",
     "Branche": "Tiernahrung / E-Commerce",
@@ -266,16 +293,7 @@
     "Typ": "E-Commerce",
     "Branche": "Autozubehör / Technik",
     "Agentur": "datamints",
-    "Image": "flat-jack-onlineshop.png",
-    "URL": ""
-  },
-  {
-    "Jahr": "2020",
-    "Projekttitel": "Seniorenheim Kemmelpark",
-    "Typ": "Website",
-    "Branche": "Pflege / Soziales",
-    "Agentur": "datamints",
-    "Image": "seniorenheim-kemmelpark.png",
+    "Image": "flat-jack.png",
     "URL": ""
   },
   {
@@ -315,16 +333,7 @@
     "URL": ""
   },
   {
-    "Jahr": "2019",
-    "Projekttitel": "EasyLan d.center",
-    "Typ": "Website",
-    "Branche": "Netzwerktechnik / Industrie",
-    "Agentur": "eveca",
-    "Image": "easylan-dcenter.png",
-    "URL": ""
-  },
-  {
-    "Jahr": "2019",
+    "Jahr": "2020",
     "Projekttitel": "Psychotherapiepraxis Dr. Loohs",
     "Typ": "Website",
     "Branche": "Gesundheit / Psychotherapie",
@@ -333,43 +342,7 @@
     "URL": ""
   },
   {
-    "Jahr": "2019",
-    "Projekttitel": "Bechtold",
-    "Typ": "Website",
-    "Branche": "Metallverarbeitung / Industrie",
-    "Agentur": "datamints",
-    "Image": "bechtold.png",
-    "URL": ""
-  },
-  {
-    "Jahr": "2019",
-    "Projekttitel": "ASLED",
-    "Typ": "Website",
-    "Branche": "Beleuchtung / Technik",
-    "Agentur": "datamints",
-    "Image": "asled.png",
-    "URL": ""
-  },
-  {
-    "Jahr": "2019",
-    "Projekttitel": "Lernbiene",
-    "Typ": "Website",
-    "Branche": "Bildung / Verlag",
-    "Agentur": "datamints",
-    "Image": "lernbiene.png",
-    "URL": ""
-  },
-  {
-    "Jahr": "2019",
-    "Projekttitel": "iWEST",
-    "Typ": "Website",
-    "Branche": "Tiernahrung / Agrar",
-    "Agentur": "datamints",
-    "Image": "iwest.png",
-    "URL": ""
-  },
-  {
-    "Jahr": "2019",
+    "Jahr": "2020",
     "Projekttitel": "Stadtwerke Unterschleißheim",
     "Typ": "Website",
     "Branche": "Energieversorger",
@@ -378,21 +351,12 @@
     "URL": ""
   },
   {
-    "Jahr": "2019",
-    "Projekttitel": "Diakonie Regensburg",
-    "Typ": "Website",
-    "Branche": "Soziale Einrichtung / Kirche",
-    "Agentur": "eveca",
-    "Image": "diakonie-regensburg.png",
-    "URL": ""
-  },
-  {
-    "Jahr": "2019",
+    "Jahr": "2020",
     "Projekttitel": "Olmogo",
     "Typ": "App",
     "Branche": "Software / Webentwicklung",
     "Agentur": "–",
-    "Image": "olmogo-2.png",
+    "Image": "olmogo-app.png",
     "URL": ""
   },
   {
@@ -464,7 +428,7 @@
     "Typ": "Shopware",
     "Branche": "Bildung / Verlag",
     "Agentur": "datamints",
-    "Image": "lernbiene-2.png",
+    "Image": "lernbiene.png",
     "URL": ""
   },
   {
@@ -541,7 +505,7 @@
   },
   {
     "Jahr": "2016",
-    "Projekttitel": "Europpark",
+    "Projekttitel": "Europapark",
     "Typ": "Shop",
     "Branche": "Freizeit / Event / Merch",
     "Agentur": "CosmoShop",
