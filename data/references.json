@@ -860,7 +860,7 @@
     "Typ": "OXID eShop",
     "Branche": "Einzelhandel / Fashion",
     "Agentur": "datamints",
-    "Image": "nk23-eshop.png",
+    "Image": "nk23-shop.png",
     "URL": ""
   },
   {
@@ -1058,7 +1058,7 @@
     "Typ": "Website",
     "Branche": "Spirituosen / Handel",
     "Agentur": "datamints",
-    "Image": "the-whisky-store-2.png",
+    "Image": "the-whisky-store-website.png",
     "URL": ""
   },
   {
@@ -1423,29 +1423,11 @@
   },
   {
     "Jahr": "2007",
-    "Projekttitel": "Stadtwerke Penzberg",
-    "Typ": "Website",
-    "Branche": "Energieversorger",
-    "Agentur": "datamints",
-    "Image": "stadtwerke-penzberg-2.png",
-    "URL": ""
-  },
-  {
-    "Jahr": "2007",
     "Projekttitel": "VHS Business Akademie",
     "Typ": "Website",
     "Branche": "Bildung",
     "Agentur": "datamints",
     "Image": "vhs-business-akademie.png",
-    "URL": ""
-  },
-  {
-    "Jahr": "",
-    "Projekttitel": "",
-    "Typ": "",
-    "Branche": "",
-    "Agentur": "",
-    "Image": "project-166.png",
     "URL": ""
   }
 ]
