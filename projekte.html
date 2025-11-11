@@ -327,7 +327,7 @@
 			}
 
 			// events: debounce search for 250ms, selects use 'change' to avoid closing native pickers on touch
-			search.addEventListener('input', debounce(applyFilters, 250));
+			search.addEventListener('input', debounce(applyFilters, 0));
 			[filterYear, filterType, filterBranch].forEach(el => el.addEventListener('change', applyFilters));
 			clear.addEventListener('click', () => { search.value = ''; filterYear.value = ''; filterType.value = ''; filterBranch.value = ''; applyFilters(); });
 
