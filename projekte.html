@@ -45,25 +45,26 @@
 			aspect-ratio: 1 / 1;
 			contain-intrinsic-size: 400px 400px;
 			background-color: #f3f4f6;
-			/* ensure smooth panning between object-position values
-		   - default (mouseout) is short so it snaps back quickly
-		   - on hover we lengthen the duration via .group:hover below */
+			/* separate durations: --img-fade-duration controls opacity fade, --img-pan-duration controls object-position pan */
+			--img-fade-duration: 360ms;
+			--img-pan-duration: 300ms;
+			--img-pan-ease: cubic-bezier(.2, .8, .2, 1);
 			object-position: top;
-			/* fade-in when image loads + object-position transition for panning */
 			opacity: 0;
-			transition: opacity 360ms ease, object-position 300ms cubic-bezier(.2, .8, .2, 1);
+			transition: opacity var(--img-fade-duration) ease, object-position var(--img-pan-duration) var(--img-pan-ease);
+		}
+
+		/* when the card is hovered, make the pan slower for a gentle reveal
+		   only change the pan duration variable so opacity fade remains short */
+		.group:hover .placeholder-img {
+			--img-pan-duration: 2000ms;
+			/* long, gentle pan while hovered */
+			--img-pan-ease: cubic-bezier(0.60, 0.07, 0.61, 1.00) 500ms;
 		}
 
 		/* visible state when image finished loading */
 		.placeholder-img.is-loaded {
 			opacity: 1;
-		}
-
-		/* when the card is hovered, make the pan slower for a gentle reveal */
-		.group:hover .placeholder-img {
-			transition-duration: 5000ms;
-			transition-timing-function: cubic-bezier(0.60, 0.07, 0.61, 1.00);
-			transition-delay: 0ms;
 		}
 
 		/* custom select arrow: hide native arrow and show a subtle SVG */
