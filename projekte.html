@@ -52,22 +52,26 @@
 		<section class="mb-6">
 			<div class="flex flex-wrap gap-3 items-center">
 				<input id="search" type="search" placeholder="Suche Projekt, Agentur…"
-					class="flex-1 min-w-[220px] px-4 py-2 border border-gray-200 card focus:outline-none focus:ring-2 focus:ring-gray-200">
-				<select id="filter-year" class="px-3 py-2 border border-gray-200 card bg-white">
+					class="flex-1 px-4 py-2 border border-gray-200 card focus:outline-none focus:ring-2 focus:ring-gray-200"
+					aria-label="Suche Referenzen">
+				<select id="filter-year" class="px-3 py-2 border border-gray-200 card bg-white"
+					aria-label="Filter Jahr">
 					<option value="">Alle Jahre</option>
 				</select>
-				<select id="filter-type" class="px-3 py-2 border border-gray-200 card bg-white">
+				<select id="filter-type" class="px-3 py-2 border border-gray-200 card bg-white" aria-label="Filter Typ">
 					<option value="">Alle Typen</option>
 				</select>
-				<select id="filter-branch" class="px-3 py-2 border border-gray-200 card bg-white">
+				<select id="filter-branch" class="px-3 py-2 border border-gray-200 card bg-white"
+					aria-label="Filter Branche">
 					<option value="">Alle Branchen</option>
 				</select>
-				<button id="clear" class="px-4 py-2 border border-gray-200 card">Zurücksetzen</button>
+				<button id="clear" type="button" class="px-4 py-2 border border-gray-200 card">Zurücksetzen</button>
+			</div>
+			<!-- Results count -->
+			<div id="results-count" class="mt-3 text-sm text-gray-600" role="status" aria-live="polite">Lade Referenzen…
 			</div>
 		</section>
-		<section>
-			<div id="grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
-		</section>
+		<div id="grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
 		<template id="card-template">
 			<article class="card border border-gray-100 p-4 bg-white">
 				<div class="w-full h-40 bg-gray-100 rounded-md mb-4 flex items-center justify-center">
@@ -106,12 +110,15 @@
 		}
 
 		function uniqueSorted(arr) {
-			return Array.from(new Set(arr)).sort((a, b) => b.localeCompare(a));
+			return Array.from(new Set(arr.filter(Boolean))).sort((a, b) => b.localeCompare(a));
 		}
 
+		// safe placeholder generator: handles missing/short titles
 		function placeholderImage(title) {
-			// Simple SVG data URL placeholder with initials
-			const initials = title.split(' ').slice(0, 2).map(w => w[0]).join('').toUpperCase();
+			const safeTitle = (title || '').trim();
+			const initials = safeTitle
+				? safeTitle.split(/\s+/).slice(0, 2).map(w => (w[0] || '')).join('').toUpperCase()
+				: '?';
 			const svg = `<?xml version='1.0' encoding='utf-8'?><svg xmlns='http://www.w3.org/2000/svg' width='800' height='600'><rect width='100%' height='100%' fill='#ffffff'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='#e5e7eb' font-family='Maven Pro, Arial' font-size='96'>${initials}</text></svg>`;
 			return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
 		}
@@ -126,36 +133,56 @@
 			const filterBranch = document.getElementById('filter-branch');
 			const clear = document.getElementById('clear');
 
-			// populate filter options
-			uniqueSorted(data.map(d => d.Jahr)).forEach(y => createOption(filterYear, y));
-			uniqueSorted(data.map(d => d.Typ)).forEach(t => createOption(filterType, t));
-			uniqueSorted(data.map(d => d.Branche)).forEach(b => createOption(filterBranch, b));
+			// populate filter options - skip empty/falsy values
+			uniqueSorted(data.map(d => d.Jahr).filter(v => v && String(v).trim() !== '')).forEach(y => createOption(filterYear, y));
+			uniqueSorted(data.map(d => d.Typ).filter(v => v && String(v).trim() !== '')).forEach(t => createOption(filterType, t));
+			uniqueSorted(data.map(d => d.Branche).filter(v => v && String(v).trim() !== '')).forEach(b => createOption(filterBranch, b));
 
 			function render(list) {
 				grid.innerHTML = '';
+				const total = data.length || 0;
+				const resultsCountEl = document.getElementById('results-count');
+				if (resultsCountEl) resultsCountEl.textContent = `${list.length} von ${total} Referenzen`;
 				if (!list.length) {
 					grid.innerHTML = '<p class="text-gray-500">Keine Projekte gefunden.</p>';
 					return;
 				}
 				list.forEach(item => {
 					const node = tmpl.content.cloneNode(true);
+					const article = node.querySelector('article');
 					const img = node.querySelector('img');
+					const titleEl = node.querySelector('.project-title');
+					const metaEl = node.querySelector('.project-meta');
+					const agencyEl = node.querySelector('.agency');
+					const typeEl = node.querySelector('.type');
+
+					titleEl.textContent = item.Projekttitel || 'Untitled';
+					metaEl.textContent = [item.Jahr, item.Branche].filter(Boolean).join(' • ');
+					agencyEl.textContent = item.Agentur || '–';
+					typeEl.textContent = item.Typ || '–';
+
 					img.alt = item.Projekttitel || '';
-					// prefer explicit Image field, otherwise construct slugified filename
 					const imageFile = item.Image || (slugify(item.Projekttitel) + '.png');
 					const imagePath = imageFile ? `images/referenzen/${imageFile}` : '';
-					// set src to imagePath but fallback to placeholder on error
 					if (imagePath) {
 						img.src = imagePath;
-						img.onerror = function () { img.src = placeholderImage(item.Projekttitel); };
+						img.onerror = function () { this.onerror = null; this.src = placeholderImage(item.Projekttitel); };
 					} else {
 						img.src = placeholderImage(item.Projekttitel);
 					}
-					node.querySelector('.project-title').textContent = item.Projekttitel;
-					node.querySelector('.project-meta').textContent = `${item.Jahr} • ${item.Branche}`;
-					node.querySelector('.agency').textContent = item.Agentur || '–';
-					node.querySelector('.type').textContent = item.Typ || '–';
-					grid.appendChild(node);
+
+					const url = (item.URL || '').trim();
+					if (url) {
+						const a = document.createElement('a');
+						a.href = url;
+						a.target = '_blank';
+						a.rel = 'noopener noreferrer';
+						a.className = 'card-link block';
+						a.appendChild(article);
+						grid.appendChild(a);
+					} else {
+						grid.appendChild(article);
+					}
 				});
 			}
 
@@ -188,8 +215,18 @@
 				render(filtered);
 			}
 
-			// events
-			[search, filterYear, filterType, filterBranch].forEach(el => el.addEventListener('input', applyFilters));
+			// debounce helper
+			function debounce(fn, wait) {
+				let t;
+				return function (...args) {
+					clearTimeout(t);
+					t = setTimeout(() => fn.apply(this, args), wait);
+				};
+			}
+
+			// events: debounce search for 250ms, immediate on selects and clear
+			search.addEventListener('input', debounce(applyFilters, 250));
+			[filterYear, filterType, filterBranch].forEach(el => el.addEventListener('input', applyFilters));
 			clear.addEventListener('click', () => { search.value = ''; filterYear.value = ''; filterType.value = ''; filterBranch.value = ''; applyFilters(); });
 
 			render(data);
