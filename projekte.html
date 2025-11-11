@@ -49,7 +49,14 @@
 		   - default (mouseout) is short so it snaps back quickly
 		   - on hover we lengthen the duration via .group:hover below */
 			object-position: top;
-			transition: object-position 300ms cubic-bezier(.2, .8, .2, 1);
+			/* fade-in when image loads + object-position transition for panning */
+			opacity: 0;
+			transition: opacity 360ms ease, object-position 300ms cubic-bezier(.2, .8, .2, 1);
+		}
+
+		/* visible state when image finished loading */
+		.placeholder-img.is-loaded {
+			opacity: 1;
 		}
 
 		/* when the card is hovered, make the pan slower for a gentle reveal */
@@ -214,11 +221,15 @@
 					const imageFile = item.Image || (slugify(item.Projekttitel) + '.png');
 					const imagePath = imageFile ? `images/referenzen/${imageFile}` : '';
 					if (imagePath) {
-						// use data-src pattern so lazy browser loading decides when to fetch
+						// fade-in when loaded
+						img.classList.remove('is-loaded');
+						img.onload = function () { img.classList.add('is-loaded'); };
+						img.onerror = function () { img.onerror = null; img.src = placeholderImage(item.Projekttitel); img.classList.add('is-loaded'); };
+						// set src last so load event fires
 						img.src = imagePath;
-						img.onerror = function () { this.onerror = null; this.src = placeholderImage(item.Projekttitel); };
 					} else {
 						img.src = placeholderImage(item.Projekttitel);
+						img.classList.add('is-loaded');
 					}
 
 					const url = (item.URL || '').trim();
