@@ -2,6 +2,17 @@
 <html lang="de">
 
 <head>
+	<!--
+	  Seitenbeschreibung / Funktionalität (kurz & vollständig):
+	  - Lädt Referenzdaten aus `data/references.json` (Fallback: eine "No entries found"-Kachel).
+	  - Baut eine filterbare, paginierte Grid-Ansicht (infinite scroll) aus Template-Karten auf.
+	  - Filter/Suche: Live-Textsuche (debounced), Filter nach Jahr, Typ und Branche; Resultatzahl-Anzeige.
+	  - Bilder: Lazy-Loading der Thumbnails, Fallback-SVG-Placeholder mit Initialen bei fehlendem Bild.
+	  - Modal-Details: Klick auf eine Karte öffnet ein nativen <dialog> mit großem Bild, Metadaten und optionaler Website-/Figma-Link.
+	  - Modal-Navigation: Prev/Next Buttons + Tastatur (ArrowLeft/ArrowRight), Escape oder Klick auf Backdrop schließt Modal.
+	  - Scroll-Lock: Öffnen des Modals sperrt Seiten-Scroll und stellt die Position beim Schließen wieder her.
+	  - Performance-Optimierungen: Event-Delegation für Karten-Clicks, gemeinsame Bild-Handler, deduplizierte Helper-Funktionen.
+	-->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<!-- Prevent search engines from indexing this page -->
@@ -129,8 +140,7 @@
 		}
 
 		dialog#card-modal::backdrop {
-			/* background: rgba(0, 0, 0, 0.5); */
-			backdrop-filter: blur(32px);
+			background: rgba(0, 0, 0, 0.25);
 		}
 
 		.modal-content {
@@ -198,6 +208,12 @@
 
 		.modal-nav button.next::before {
 			transform: rotate(-90deg);
+		}
+
+		/* Allow modal images to use natural height (don't force aspect-ratio applied to thumbnails) */
+		.modal-image .placeholder-img {
+			aspect-ratio: auto;
+			contain-intrinsic-size: auto;
 		}
 	</style>
 </head>
@@ -276,51 +292,64 @@
 				</div>
 			</div>
 		</div>
-	</dialog> /* Allow modal images to use natural height (don't force aspect-ratio applied to thumbnails) */
-	.modal-image .placeholder-img { aspect-ratio: auto; contain-intrinsic-size: auto; }
+	</dialog>
 	<script>
-		// Try to fetch JSON; if not available, fallback to a single "No entries found" item
-		async function loadData() {
-			try {
-				const res = await fetch('data/references.json');
-				if (!res.ok) throw new Error('No file');
-				return await res.json();
-			} catch (e) {
-				return [
-					{ "Jahr": "", "Projekttitel": "No entries found", "Typ": "", "Branche": "", "Agentur": "" }
-				];
-			}
-		}
-
-		function createOption(select, value) {
-			const opt = document.createElement('option');
-			opt.value = value;
-			opt.textContent = value;
-			select.appendChild(opt);
-		}
-
-		function uniqueSorted(arr) {
-			return Array.from(new Set(arr.filter(Boolean))).sort((a, b) => b.localeCompare(a));
-		}
-
-		// safe placeholder generator: handles missing/short titles
-		function placeholderImage(title) {
-			const safeTitle = (title || '').trim();
-			const initials = safeTitle
-				? safeTitle.split(/\s+/).slice(0, 2).map(w => (w[0] || '')).join('').toUpperCase()
-				: '?';
-			const svg = `<?xml version='1.0' encoding='utf-8'?><svg xmlns='http://www.w3.org/2000/svg' width='800' height='600'><rect width='100%' height='100%' fill='#ffffff'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='#e5e7eb' font-family='Maven Pro, Arial' font-size='96'>${initials}</text></svg>`;
-			return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
-		}
-
+		// Compact, delegated version of the original script
 		(async function () {
+			// --- helpers ---
+			async function loadData() {
+				try {
+					const res = await fetch('data/references.json');
+					if (!res.ok) throw new Error('No file');
+					return await res.json();
+				} catch (e) {
+					return [{ Jahr: '', Projekttitel: 'No entries found', Typ: '', Branche: '', Agentur: '' }];
+				}
+			}
+
+			function createOption(select, value) {
+				const opt = document.createElement('option'); opt.value = value; opt.textContent = value; select.appendChild(opt);
+			}
+
+			function uniqueSorted(arr) { return Array.from(new Set(arr.filter(Boolean))).sort((a, b) => b.localeCompare(a)); }
+
+			function placeholderImage(title) {
+				const safe = (title || '').trim();
+				const initials = safe ? safe.split(/\s+/).slice(0, 2).map(w => w[0] || '').join('').toUpperCase() : '?';
+				const svg = `<?xml version='1.0' encoding='utf-8'?><svg xmlns='http://www.w3.org/2000/svg' width='800' height='600'><rect width='100%' height='100%' fill='#ffffff'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='#e5e7eb' font-family='Maven Pro, Arial' font-size='96'>${initials}</text></svg>`;
+				return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
+			}
+
+			function slugify(title) {
+				if (!title) return '';
+				return title.trim().toLowerCase()
+					.replace(/ä/g, 'ae').replace(/ö/g, 'oe').replace(/ü/g, 'ue').replace(/ß/g, 'ss')
+					.replace(/&/g, 'and')
+					.replace(/[\s\/\\]+/g, '-')
+					.replace(/[^a-z0-9\-]/g, '')
+					.replace(/-+/g, '-')
+					.replace(/^-+|-+$/g, '');
+			}
+
+			function normalizeUrl(raw) {
+				try {
+					const trimmed = String(raw).trim();
+					if (/^[a-zA-Z][a-zA-Z0-9+.-]*:/.test(trimmed)) return trimmed;
+					return 'https://' + trimmed;
+				} catch (e) { return raw; }
+			}
+
+			function debounce(fn, wait) { let t; return function (...args) { clearTimeout(t); t = setTimeout(() => fn.apply(this, args), wait); }; }
+
+			// --- state ---
 			const data = await loadData();
-			// default sort: newest year first
-			data.sort((a, b) => {
-				const ya = parseInt(a && a.Jahr) || 0;
-				const yb = parseInt(b && b.Jahr) || 0;
-				return yb - ya;
-			});
+			data.sort((a, b) => (parseInt(b.Jahr) || 0) - (parseInt(a.Jahr) || 0));
+			const PAGE_SIZE = 24;
+			let currentList = [];
+			let renderedCount = 0;
+			let _currentIndex = -1;
+
+			// --- DOM refs ---
 			const grid = document.getElementById('grid');
 			const tmpl = document.getElementById('card-template');
 			const search = document.getElementById('search');
@@ -329,22 +358,25 @@
 			const filterBranch = document.getElementById('filter-branch');
 			const clear = document.getElementById('clear');
 			const resultsCountEl = document.getElementById('results-count');
+			const sentinel = document.getElementById('scroll-sentinel');
+			const dialog = document.getElementById('card-modal');
+			const modalImg = document.getElementById('modal-img');
+			const modalTitle = document.getElementById('modal-title');
+			const modalPairs = document.getElementById('modal-pairs');
+			const modalClose = document.getElementById('modal-close');
+			const modalPrevBtn = document.getElementById('modal-prev');
+			const modalNextBtn = document.getElementById('modal-next');
 
-			// populate filter options - skip empty/falsy values
+			// --- populate filters ---
 			uniqueSorted(data.map(d => d.Jahr).filter(v => v && String(v).trim() !== '')).forEach(y => createOption(filterYear, y));
 			uniqueSorted(data.map(d => d.Typ).filter(v => v && String(v).trim() !== '')).forEach(t => createOption(filterType, t));
 			uniqueSorted(data.map(d => d.Branche).filter(v => v && String(v).trim() !== '')).forEach(b => createOption(filterBranch, b));
 
-			// Pagination / infinite-scroll rendering
-			const PAGE_SIZE = 24; // cards per page
-			let currentList = []; // filtered list
-			let renderedCount = 0;
-			const sentinel = document.getElementById('scroll-sentinel');
-
-			// shared image handlers to avoid allocating per-image functions
+			// --- image handlers (shared) ---
 			function handleImageLoad(e) { e.currentTarget.classList.add('is-loaded'); }
 			function handleImageError(e) { const img = e.currentTarget; img.onerror = null; img.src = placeholderImage(img.alt || ''); img.classList.add('is-loaded'); }
 
+			// --- rendering ---
 			function renderPage(items) {
 				const frag = document.createDocumentFragment();
 				items.forEach((item, i) => {
@@ -364,36 +396,18 @@
 					img.alt = item.Projekttitel || '';
 					const imageFile = item.Image || (slugify(item.Projekttitel) + '.jpg');
 					const imagePath = imageFile ? `images/referenzen/${imageFile}` : '';
-					if (imagePath) {
-						// reuse handlers to avoid per-image closures
-						img.classList.remove('is-loaded');
-						img.onload = handleImageLoad;
-						img.onerror = handleImageError;
-						img.src = imagePath; // set src last
-					} else {
-						img.src = placeholderImage(item.Projekttitel);
-						img.classList.add('is-loaded');
-					}
+					if (imagePath) { img.classList.remove('is-loaded'); img.onload = handleImageLoad; img.onerror = handleImageError; img.src = imagePath; }
+					else { img.src = placeholderImage(item.Projekttitel); img.classList.add('is-loaded'); }
 
-					// attach data attributes for modal population
+					article.dataset.index = renderedCount + i;
+					article.dataset.image = imagePath || '';
 					article.dataset.title = item.Projekttitel || '';
 					article.dataset.jahr = item.Jahr || '';
 					article.dataset.typ = item.Typ || '';
 					article.dataset.branche = item.Branche || '';
 					article.dataset.agentur = item.Agentur || '';
-					article.dataset.url = (item.URL || '').trim();
-					// mark all cards clickable (they open the modal) so they get the subtle hover lift
+					article.dataset.url = (item.URL || item.url || '').trim();
 					article.classList.add('clickable-url');
-					article.dataset.image = imagePath || '';
-
-					// store absolute index in the currentList (used for modal navigation)
-					article.dataset.index = renderedCount + i;
-
-					// open modal on click
-					article.addEventListener('click', (ev) => {
-						ev.preventDefault();
-						showModalAtIndex(parseInt(article.dataset.index, 10));
-					});
 
 					frag.appendChild(article);
 				});
@@ -401,16 +415,12 @@
 			}
 
 			function render(list) {
-				// reset pagination
 				currentList = list || [];
 				renderedCount = 0;
 				grid.innerHTML = '';
 				const total = data.length || 0;
 				if (resultsCountEl) resultsCountEl.textContent = `${currentList.length} von ${total} Referenzen`;
-				if (!currentList.length) {
-					grid.innerHTML = '<p class="text-gray-500">Keine Projekte gefunden.</p>';
-					return;
-				}
+				if (!currentList.length) { grid.innerHTML = '<p class="text-gray-500">Keine Projekte gefunden.</p>'; sentinel.style.display = 'none'; return; }
 				renderMore();
 			}
 
@@ -419,71 +429,25 @@
 				if (!next.length) { sentinel.style.display = 'none'; return; }
 				renderPage(next);
 				renderedCount += next.length;
-				// show sentinel only if there are more items
 				sentinel.style.display = renderedCount < currentList.length ? 'block' : 'none';
 			}
 
-			// IntersectionObserver for sentinel -> load more pages
-			const io = new IntersectionObserver(entries => {
-				entries.forEach(e => {
-					if (e.isIntersecting) renderMore();
-				});
-			}, { root: null, rootMargin: '400px', threshold: 0 });
+			const io = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) renderMore(); }); }, { root: null, rootMargin: '400px', threshold: 0 });
 			io.observe(sentinel);
 
-			function slugify(title) {
-				if (!title) return '';
-				return title.trim().toLowerCase()
-					.replace(/ä/g, 'ae').replace(/ö/g, 'oe').replace(/ü/g, 'ue').replace(/ß/g, 'ss')
-					.replace(/&/g, 'and')
-					.replace(/[\s\/\\]+/g, '-')
-					.replace(/[^a-z0-9\-]/g, '')
-					.replace(/-+/g, '-')
-					.replace(/^-+|-+$/g, '');
-			}
-
-			function normalizeUrl(raw) {
-				try {
-					const trimmed = String(raw).trim();
-					// if it already has a scheme, return as-is
-					if (/^[a-zA-Z][a-zA-Z0-9+.-]*:/.test(trimmed)) return trimmed;
-					// add https by default
-					return 'https://' + trimmed;
-				} catch (e) { return raw; }
-			}
-
+			// --- filtering ---
 			function applyFilters() {
 				const q = search.value.trim().toLowerCase();
-				const y = filterYear.value;
-				const t = filterType.value;
-				const b = filterBranch.value;
+				const y = filterYear.value; const t = filterType.value; const b = filterBranch.value;
 				let filtered = data.filter(d => {
-					if (y && d.Jahr !== y) return false;
-					if (t && d.Typ !== t) return false;
-					if (b && d.Branche !== b) return false;
-					if (q) {
-						const hay = (d.Projekttitel + ' ' + (d.Agentur || '') + ' ' + (d.Typ || '') + ' ' + (d.Branche || '')).toLowerCase();
-						return hay.indexOf(q) !== -1;
-					}
+					if (y && d.Jahr !== y) return false; if (t && d.Typ !== t) return false; if (b && d.Branche !== b) return false;
+					if (q) { const hay = (d.Projekttitel + ' ' + (d.Agentur || '') + ' ' + (d.Typ || '') + ' ' + (d.Branche || '')).toLowerCase(); return hay.indexOf(q) !== -1; }
 					return true;
 				});
-				// keep results sorted by year (newest first)
 				filtered = filtered.sort((a, b) => (parseInt(b && b.Jahr) || 0) - (parseInt(a && a.Jahr) || 0));
 				render(filtered);
 			}
 
-			// debounce helper
-			function debounce(fn, wait) {
-				let t;
-				return function (...args) {
-					clearTimeout(t);
-					t = setTimeout(() => fn.apply(this, args), wait);
-				};
-			}
-
-			// events: debounce search for 250ms. Use the same debounce helper for selects
-			// with a much smaller delay so rapid picker interactions on iOS don't trigger
-			// immediate re-renders that could close the native picker.
 			search.addEventListener('input', debounce(applyFilters, 250));
 			const selectHandler = debounce(applyFilters, 120);
 			[filterYear, filterType, filterBranch].forEach(el => el.addEventListener('change', selectHandler));
@@ -491,186 +455,67 @@
 
 			render(data);
 
-			/* Modal logic: open dialog, populate details, implement vertical panning for image */
+			// --- modal & interactions (delegated) ---
+			function lockBodyScroll() { const y = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0; document.body.classList.add('modal-scroll-lock'); document.body.style.top = `-${y}px`; document._modalScrollY = y; }
+			function unlockBodyScroll() { document.body.classList.remove('modal-scroll-lock'); document.body.style.top = ''; window.scrollTo(0, document._modalScrollY || 0); }
 
-			const dialog = document.getElementById('card-modal');
-			const modalImg = document.getElementById('modal-img');
-			const modalTitle = document.getElementById('modal-title');
-			const modalPairs = document.getElementById('modal-pairs');
-			const modalClose = document.getElementById('modal-close');
-
-			// Scroll lock helpers: preserve scroll position and lock body
-			let _scrollY = 0;
-			function lockBodyScroll() {
-				_scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
-				document.body.classList.add('modal-scroll-lock');
-				// set top so body appears at same position while fixed
-				document.body.style.top = `-${_scrollY}px`;
-			}
-
-			function unlockBodyScroll() {
-				document.body.classList.remove('modal-scroll-lock');
-				document.body.style.top = '';
-				// restore scroll position
-				window.scrollTo(0, _scrollY);
-			}
-
-			function openCardModal(data) {
-				// populate title
-				modalTitle.textContent = data.title || '';
-				// image
-				const imgSrc = data.image || '';
-				modalImg.alt = data.title || '';
-				// attach shared handlers and set src last to trigger load
-				modalImg.classList.remove('is-loaded');
-				modalImg.onload = handleImageLoad;
-				modalImg.onerror = handleImageError;
-				modalImg.src = imgSrc || placeholderImage(data.title);
-				// build key/value pairs - show Projekttitel as first larger title already shown
-				modalPairs.innerHTML = '';
-				const pairs = [
-					['Jahr', data.jahr || '–'],
-					['Agentur', data.agentur || '–'],
-					['Typ', data.typ || '–'],
-					['Branche', data.branche || '–']
-				];
-				pairs.forEach(([k, v]) => {
-					const el = document.createElement('div');
-					// keep requested classes and enforce vertical stacking with flex-col
-					el.className = 'pair flex items-baseline gap-1 flex-col';
-					el.innerHTML = `<div class="key text-sm text-gray-500">${k}</div><div class="value text-base text-gray-700">${v}</div>`;
-					modalPairs.appendChild(el);
-				});
-
-				// show link/button if a URL is present
-				if (data.url && String(data.url).trim()) {
-					const raw = String(data.url).trim();
-					const href = normalizeUrl(raw);
-					const el = document.createElement('div');
-					el.className = 'pair flex items-baseline gap-1 flex-col';
-					const key = document.createElement('div');
-					key.className = 'key text-sm text-gray-500';
-					key.textContent = 'Website';
-					const val = document.createElement('div');
-					val.className = 'value text-base';
-					const a = document.createElement('a');
-					a.href = href;
-					a.target = '_blank';
-					a.rel = 'noopener noreferrer';
-					a.className = 'text-base text-gray-700 underline';
-					// if figma URL, show friendly label
-					if (/figma\.com/i.test(href)) {
-						a.textContent = 'Figma Prototype';
-					} else {
-						a.textContent = raw;
-					}
-					val.appendChild(a);
-					el.appendChild(key);
-					el.appendChild(val);
-					modalPairs.appendChild(el);
-				}
-
-				// show dialog
-				if (typeof dialog.showModal === 'function') {
-					dialog.showModal();
-					dialog.setAttribute('aria-hidden', 'false');
-					// lock background scroll while modal is open
-					lockBodyScroll();
-				} else {
-					// fallback for old browsers
-					dialog.style.display = 'block';
-					lockBodyScroll();
-				}
-
-				// ensure CSS-based placeholder pan is used
-				modalImg.style.transform = '';
-			}
-
-			// -- modal navigation (global) --
-			let _currentIndex = -1;
-
-			function showModalAtIndex(idx) {
-				if (!Array.isArray(currentList) || !currentList.length) return;
-				if (idx < 0) idx = currentList.length - 1; // wrap
-				if (idx >= currentList.length) idx = 0; // wrap
-				_currentIndex = idx;
-				const item = currentList[_currentIndex];
-				// populate modal fields
+			function populateModalFromItem(item) {
 				modalTitle.textContent = item.Projekttitel || '';
 				const imgPath = item.Image || (slugify(item.Projekttitel) + '.jpg');
 				const imagePath = imgPath ? `images/referenzen/${imgPath}` : '';
 				modalImg.alt = item.Projekttitel || '';
-				modalImg.classList.remove('is-loaded');
-				modalImg.onload = handleImageLoad;
-				modalImg.onerror = handleImageError;
+				modalImg.classList.remove('is-loaded'); modalImg.onload = handleImageLoad; modalImg.onerror = handleImageError;
 				modalImg.src = imagePath || placeholderImage(item.Projekttitel);
 				modalPairs.innerHTML = '';
 				[['Jahr', item.Jahr || '–'], ['Agentur', item.Agentur || '–'], ['Typ', item.Typ || '–'], ['Branche', item.Branche || '–']]
-					.forEach(([k, v]) => {
-						const el = document.createElement('div');
-						el.className = 'pair flex items-baseline gap-1 flex-col';
-						el.innerHTML = `<div class="key text-sm text-gray-500">${k}</div><div class="value text-base text-gray-700">${v}</div>`;
-						modalPairs.appendChild(el);
-					});
-
-				// Website link if present in data (item may have URL or url)
+					.forEach(([k, v]) => { const el = document.createElement('div'); el.className = 'pair flex items-baseline gap-1 flex-col'; el.innerHTML = `<div class="key text-sm text-gray-500">${k}</div><div class="value text-base text-gray-700">${v}</div>`; modalPairs.appendChild(el); });
 				const rawUrl = item.URL || item.url || '';
-				if (rawUrl && String(rawUrl).trim()) {
-					const raw = String(rawUrl).trim();
-					const href = normalizeUrl(raw);
-					const el = document.createElement('div');
-					el.className = 'pair flex items-baseline gap-1 flex-col';
-					const isFigma = /figma\.com/i.test(href);
-					el.innerHTML = `<div class="key text-sm text-gray-500">Website</div><div class="value text-base"><a class="text-base text-gray-700 underline" target="_blank" rel="noopener noreferrer" href="${href}">${isFigma ? 'Figma Prototype' : raw}</a></div>`;
-					modalPairs.appendChild(el);
-				}
+				if (rawUrl && String(rawUrl).trim()) { const raw = String(rawUrl).trim(); const href = normalizeUrl(raw); const isFigma = /figma\.com/i.test(href); const el = document.createElement('div'); el.className = 'pair flex items-baseline gap-1 flex-col'; el.innerHTML = `<div class="key text-sm text-gray-500">Website</div><div class="value text-base"><a class="text-base text-gray-700 underline" target="_blank" rel="noopener noreferrer" href="${href}">${isFigma ? 'Figma Prototype' : raw}</a></div>`; modalPairs.appendChild(el); }
+			}
 
-				if (typeof dialog.showModal === 'function' && !dialog.open) {
-					dialog.showModal();
-					dialog.setAttribute('aria-hidden', 'false');
-					lockBodyScroll();
-				} else if (!dialog.open) {
-					dialog.style.display = 'block';
-					lockBodyScroll();
-				}
+			function showModalAtIndex(idx) {
+				if (!Array.isArray(currentList) || !currentList.length) return;
+				if (idx < 0) idx = currentList.length - 1; if (idx >= currentList.length) idx = 0;
+				_currentIndex = idx;
+				populateModalFromItem(currentList[_currentIndex]);
+				if (typeof dialog.showModal === 'function' && !dialog.open) { dialog.showModal(); dialog.setAttribute('aria-hidden', 'false'); lockBodyScroll(); }
+				else if (!dialog.open) { dialog.style.display = 'block'; lockBodyScroll(); }
 			}
 
 			function modalPrev() { showModalAtIndex(_currentIndex - 1); }
 			function modalNext() { showModalAtIndex(_currentIndex + 1); }
 
-			// wire buttons
-			const modalPrevBtn = document.getElementById('modal-prev');
-			const modalNextBtn = document.getElementById('modal-next');
+			// delegated click handler for cards
+			grid.addEventListener('click', (e) => {
+				const article = e.target.closest('article');
+				if (!article || !grid.contains(article)) return;
+				e.preventDefault();
+				const idx = parseInt(article.dataset.index, 10);
+				if (!Number.isNaN(idx)) showModalAtIndex(idx);
+			});
+
 			if (modalPrevBtn) modalPrevBtn.addEventListener('click', (e) => { e.stopPropagation(); modalPrev(); });
 			if (modalNextBtn) modalNextBtn.addEventListener('click', (e) => { e.stopPropagation(); modalNext(); });
 
-			// keyboard navigation (left/right arrows) while dialog open
 			document.addEventListener('keydown', (e) => {
-				if (!dialog.open) return;
-				if (e.key === 'ArrowLeft') { e.preventDefault(); modalPrev(); }
-				if (e.key === 'ArrowRight') { e.preventDefault(); modalNext(); }
+				if (dialog && dialog.open) {
+					if (e.key === 'ArrowLeft') { e.preventDefault(); modalPrev(); }
+					if (e.key === 'ArrowRight') { e.preventDefault(); modalNext(); }
+				}
+				if (e.key === 'Escape' && dialog && dialog.open) { if (typeof dialog.close === 'function') dialog.close(); dialog.setAttribute('aria-hidden', 'true'); unlockBodyScroll(); }
 			});
 
-			function closeCardModal() {
-				if (typeof dialog.close === 'function') dialog.close();
-				dialog.setAttribute('aria-hidden', 'true');
-				// unlock background scroll
-				unlockBodyScroll();
-			}
+			modalClose.addEventListener('click', () => { if (typeof dialog.close === 'function') dialog.close(); dialog.setAttribute('aria-hidden', 'true'); unlockBodyScroll(); });
+			dialog.addEventListener('click', (e) => { if (e.target === dialog) { if (typeof dialog.close === 'function') dialog.close(); dialog.setAttribute('aria-hidden', 'true'); unlockBodyScroll(); } });
 
-			modalClose.addEventListener('click', closeCardModal);
-			dialog.addEventListener('click', (e) => {
-				// close when clicking backdrop area (dialog element itself)
-				if (e.target === dialog) closeCardModal();
-			});
-
-			document.addEventListener('keydown', (e) => {
-				if (e.key === 'Escape' && dialog.open) closeCardModal();
-			});
-
-			// manual panning removed; modal image uses CSS object-position animation
 		})();
 	</script>
+	<footer role="contentinfo" class="mt-8 text-center">
+		<p class="text-xs text-gray-500 leading-none"> Made with <span aria-hidden="true">♥</span> and GitHub Copilot by
+			<a href="https://www.wiredframe.de" target="_blank" rel="noopener noreferrer"
+				class="text-gray-600 hover:underline"> wiredframe </a>
+		</p>
+	</footer>
 </body>
 
 </html>
