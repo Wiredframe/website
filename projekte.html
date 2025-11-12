@@ -292,7 +292,7 @@
 		<button id="modal-close" aria-label="Schließen"
 			class="absolute top-4 right-4 z-20 w-12 h-12 rounded-full bg-white border">✕</button>
 		<div class="grid md:grid-cols-3 gap-6">
-			<div class="modal-image md:col-span-2 bg-gray-100 rounded-md h-64 md:h-[70vh]">
+			<div class="modal-image md:col-span-2 bg-gray-100 rounded-md h-64 md:h-[80vh]">
 				<img id="modal-img" src="" alt="" class="w-full h-auto placeholder-img" />
 			</div>
 			<div class="modal-details md:col-span-1 overflow-auto">
@@ -494,10 +494,11 @@
 				_currentIndex = idx;
 				populateModalFromItem(currentList[_currentIndex]);
 				const openDialog = () => {
+					// Lock scroll first to preserve current viewport position, then show the dialog.
+					lockBodyScroll();
 					if (typeof dialog.showModal === 'function' && !dialog.open) dialog.showModal();
 					else dialog.style.display = 'block';
 					dialog.setAttribute('aria-hidden', 'false');
-					lockBodyScroll();
 					// ensure DOM cycle then add class to trigger transition on the dialog itself
 					dialog.classList.remove('is-open');
 					requestAnimationFrame(() => requestAnimationFrame(() => {
