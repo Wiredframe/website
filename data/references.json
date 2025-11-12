@@ -10,6 +10,33 @@
   },
   {
     "Jahr": "2025",
+    "Projekttitel": "SBC Franken",
+    "Typ": "Website",
+    "Branche": "Photovoltaik / Technik",
+    "Agentur": "ideenmühle",
+    "Image": "sbc-franken.png",
+    "URL": ""
+  },
+  {
+    "Jahr": "2024",
+    "Projekttitel": "AUKOM",
+    "Typ": "Website",
+    "Branche": "Messtechnik / Industrie",
+    "Agentur": "datamints",
+    "Image": "aukom.png",
+    "URL": ""
+  },
+  {
+    "Jahr": "2024",
+    "Projekttitel": "AUKOM Webapp",
+    "Typ": "Website",
+    "Branche": "Messtechnik / Industrie",
+    "Agentur": "datamints",
+    "Image": "aukom-app.png",
+    "URL": ""
+  },
+  {
+    "Jahr": "2025",
     "Projekttitel": "Schaffelhuber",
     "Typ": "Shopware",
     "Branche": "Ersatzteilehandel",
