@@ -148,17 +148,19 @@
 			width: 100%;
 		}
 
-		/* modal navigation buttons inside right column */
+		/* modal navigation buttons inside right column (use normal flow, responsive) */
 		.modal-details {
+			display: flex;
+			flex-direction: column;
 			position: relative;
 		}
 
 		.modal-nav {
-			position: absolute;
-			right: 1rem;
-			bottom: 1rem;
+			/* keep buttons in document flow; push to bottom using margin-top */
 			display: flex;
+			justify-content: flex-end;
 			gap: .75rem;
+			margin-top: auto;
 		}
 
 		.modal-nav button {
