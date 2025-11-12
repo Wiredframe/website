@@ -42,8 +42,6 @@
 
 		/* Image intrinsic-size + aspect ratio to avoid layout shift for lazy images */
 		.placeholder-img {
-			aspect-ratio: 1 / 1;
-			contain-intrinsic-size: 400px 400px;
 			background-color: #f3f4f6;
 			/* separate durations: --img-fade-duration controls opacity fade, --img-pan-duration controls object-position pan */
 			--img-fade-duration: 360ms;
@@ -54,12 +52,50 @@
 			transition: opacity var(--img-fade-duration) ease, object-position var(--img-pan-duration) var(--img-pan-ease);
 		}
 
-		/* when the card is hovered, make the pan slower for a gentle reveal
-		   only change the pan duration variable so opacity fade remains short */
-		.group:hover .placeholder-img {
-			--img-pan-duration: 2000ms;
-			/* long, gentle pan while hovered */
-			--img-pan-ease: cubic-bezier(0.60, 0.07, 0.61, 1.00) 500ms;
+		/* card thumbnails: disable image pan on hover (we want modal hover pan only) */
+		/* (previously .group:hover controlled pan; removed to keep thumbnails static) */
+		/* clickable linked cards: subtle lift on hover */
+		.card.clickable-url {
+			cursor: pointer;
+			transition: transform 180ms ease, box-shadow 180ms ease;
+		}
+
+		.card.clickable-url:hover {
+			transform: translateY(-6px);
+			box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+		}
+
+		/* modal image: disable pan; instead make image scrollable vertically on hover */
+		.modal-image {
+			overflow-y: hidden;
+		}
+
+		.modal-image:hover {
+			overflow-y: auto;
+		}
+
+		.modal-image .placeholder-img {
+			object-position: top;
+		}
+
+		/* custom scrollbar (webkit) shown on hover */
+		.modal-image::-webkit-scrollbar {
+			width: 8px;
+		}
+
+		.modal-image::-webkit-scrollbar-thumb {
+			background: rgba(0, 0, 0, 0.18);
+			border-radius: 999px;
+		}
+
+		/* firefox scrollbar control */
+		.modal-image {
+			scrollbar-width: none;
+		}
+
+		.modal-image:hover {
+			scrollbar-width: thin;
+			scrollbar-color: rgba(0, 0, 0, 0.18) transparent;
 		}
 
 		/* visible state when image finished loading */
@@ -83,6 +119,83 @@
 		/* subtle inline SVG arrow (gray) */
 		.filter-bar select {
 			background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%239CA3AF'%3E%3Cpath d='M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z'/%3E%3C/svg%3E");
+		}
+
+		/* Simplified native dialog styling: use ::backdrop and restrict modal content height */
+		dialog#card-modal {
+			padding: 0;
+			border: 0;
+			background: transparent;
+		}
+
+		dialog#card-modal::backdrop {
+			/* background: rgba(0, 0, 0, 0.5); */
+			backdrop-filter: blur(32px);
+		}
+
+		.modal-content {
+			border-radius: var(--rounded-lg);
+			max-height: calc(100vh - 4rem);
+			overflow: auto;
+		}
+
+		/* when modal open, lock page scroll by applying this class to <body> */
+		body.modal-scroll-lock {
+			position: fixed !important;
+			inset: 0;
+			/* top:0; right:0; bottom:0; left:0 */
+			overflow: hidden !important;
+			width: 100%;
+		}
+
+		/* modal navigation buttons inside right column */
+		.modal-details {
+			position: relative;
+		}
+
+		.modal-nav {
+			position: absolute;
+			right: 1rem;
+			bottom: 1rem;
+			display: flex;
+			gap: .75rem;
+		}
+
+		.modal-nav button {
+			width: 48px;
+			height: 48px;
+			border-radius: 9999px;
+			border: 1px solid rgba(0, 0, 0, 0.08);
+			background: white;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			cursor: pointer;
+		}
+
+		.modal-nav button:hover {
+			transform: translateY(-2px);
+		}
+
+		/* use inline SVG as icon for modal nav buttons */
+		.modal-nav button::before {
+			content: '';
+			display: block;
+			width: 18px;
+			height: 18px;
+			background-repeat: no-repeat;
+			background-position: center;
+			background-size: contain;
+			background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%239CA3AF'%3E%3Cpath d='M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z'/%3E%3C/svg%3E");
+		}
+
+		/* rotate icons so prev points left and next points right */
+		.modal-nav button.prev::before {
+			transform: rotate(90deg);
+		}
+
+		.modal-nav button.next::before {
+			transform: rotate(-90deg);
 		}
 	</style>
 </head>
@@ -127,8 +240,7 @@
 		<template id="card-template">
 			<article class="card border border-gray-100 p-4 bg-white group">
 				<div class="w-full aspect-square bg-gray-100 rounded-md mb-4 overflow-hidden">
-					<img src="" alt="Projektbild"
-						class="w-full h-full object-cover object-top group-hover:object-bottom placeholder-img"
+					<img src="" alt="Projektbild" class="w-full h-full object-cover object-top placeholder-img"
 						loading="lazy" decoding="async" fetchpriority="low" />
 				</div>
 				<h3 class="text-lg font-medium project-title"></h3>
@@ -140,6 +252,30 @@
 			</article>
 		</template>
 	</main>
+	<!-- Native dialog modal for card details (updated layout) -->
+	<dialog id="card-modal" aria-hidden="true">
+		<div class="modal-content card w-[92vw] md:w-[70vw] bg-white p-8 mx-auto relative">
+			<button id="modal-close" aria-label="Schließen"
+				class="absolute top-4 right-4 z-20 w-12 h-12 rounded-full bg-white border">✕</button>
+			<div class="grid md:grid-cols-3 gap-6">
+				<div class="modal-image md:col-span-2 bg-gray-100 rounded-md h-64 md:h-[70vh]">
+					<img id="modal-img" src="" alt="" class="w-full h-auto placeholder-img" />
+				</div>
+				<div class="modal-details md:col-span-1 overflow-auto">
+					<h2 id="modal-title" class="text-4xl font-normal mb-6 md:mt-8"></h2>
+					<div id="modal-pairs" class="details flex flex-row flex-wrap gap-8   gap-y-4 text-base"></div>
+					<!-- modal navigation buttons (prev / next) -->
+					<div class="modal-nav" aria-hidden="false">
+						<button id="modal-prev" class="prev" title="Vorheriges" aria-label="Vorheriges"
+							aria-hidden="false"></button>
+						<button id="modal-next" class="next" title="Nächstes" aria-label="Nächstes"
+							aria-hidden="false"></button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</dialog> /* Allow modal images to use natural height (don't force aspect-ratio applied to thumbnails) */
+	.modal-image .placeholder-img { aspect-ratio: auto; contain-intrinsic-size: auto; }
 	<script>
 		// Try to fetch JSON; if not available, fallback to a single "No entries found" item
 		async function loadData() {
@@ -209,7 +345,7 @@
 
 			function renderPage(items) {
 				const frag = document.createDocumentFragment();
-				items.forEach(item => {
+				items.forEach((item, i) => {
 					const node = tmpl.content.cloneNode(true);
 					const article = node.querySelector('article');
 					const img = node.querySelector('img');
@@ -224,7 +360,7 @@
 					typeEl.textContent = item.Typ || '–';
 
 					img.alt = item.Projekttitel || '';
-					const imageFile = item.Image || (slugify(item.Projekttitel) + '.png');
+					const imageFile = item.Image || (slugify(item.Projekttitel) + '.jpg');
 					const imagePath = imageFile ? `images/referenzen/${imageFile}` : '';
 					if (imagePath) {
 						// reuse handlers to avoid per-image closures
@@ -237,18 +373,27 @@
 						img.classList.add('is-loaded');
 					}
 
-					const url = (item.URL || '').trim();
-					if (url) {
-						const a = document.createElement('a');
-						a.href = url;
-						a.target = '_blank';
-						a.rel = 'noopener noreferrer';
-						a.className = 'block transition-transform transform hover:-translate-y-1 hover:shadow-lg';
-						a.appendChild(article);
-						frag.appendChild(a);
-					} else {
-						frag.appendChild(article);
-					}
+					// attach data attributes for modal population
+					article.dataset.title = item.Projekttitel || '';
+					article.dataset.jahr = item.Jahr || '';
+					article.dataset.typ = item.Typ || '';
+					article.dataset.branche = item.Branche || '';
+					article.dataset.agentur = item.Agentur || '';
+					article.dataset.url = (item.URL || '').trim();
+					// mark all cards clickable (they open the modal) so they get the subtle hover lift
+					article.classList.add('clickable-url');
+					article.dataset.image = imagePath || '';
+
+					// store absolute index in the currentList (used for modal navigation)
+					article.dataset.index = renderedCount + i;
+
+					// open modal on click
+					article.addEventListener('click', (ev) => {
+						ev.preventDefault();
+						showModalAtIndex(parseInt(article.dataset.index, 10));
+					});
+
+					frag.appendChild(article);
 				});
 				grid.appendChild(frag);
 			}
@@ -295,6 +440,16 @@
 					.replace(/^-+|-+$/g, '');
 			}
 
+			function normalizeUrl(raw) {
+				try {
+					const trimmed = String(raw).trim();
+					// if it already has a scheme, return as-is
+					if (/^[a-zA-Z][a-zA-Z0-9+.-]*:/.test(trimmed)) return trimmed;
+					// add https by default
+					return 'https://' + trimmed;
+				} catch (e) { return raw; }
+			}
+
 			function applyFilters() {
 				const q = search.value.trim().toLowerCase();
 				const y = filterYear.value;
@@ -333,6 +488,185 @@
 			clear.addEventListener('click', () => { search.value = ''; filterYear.value = ''; filterType.value = ''; filterBranch.value = ''; applyFilters(); });
 
 			render(data);
+
+			/* Modal logic: open dialog, populate details, implement vertical panning for image */
+
+			const dialog = document.getElementById('card-modal');
+			const modalImg = document.getElementById('modal-img');
+			const modalTitle = document.getElementById('modal-title');
+			const modalPairs = document.getElementById('modal-pairs');
+			const modalClose = document.getElementById('modal-close');
+
+			// Scroll lock helpers: preserve scroll position and lock body
+			let _scrollY = 0;
+			function lockBodyScroll() {
+				_scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
+				document.body.classList.add('modal-scroll-lock');
+				// set top so body appears at same position while fixed
+				document.body.style.top = `-${_scrollY}px`;
+			}
+
+			function unlockBodyScroll() {
+				document.body.classList.remove('modal-scroll-lock');
+				document.body.style.top = '';
+				// restore scroll position
+				window.scrollTo(0, _scrollY);
+			}
+
+			function openCardModal(data) {
+				// populate title
+				modalTitle.textContent = data.title || '';
+				// image
+				const imgSrc = data.image || '';
+				modalImg.alt = data.title || '';
+				// attach shared handlers and set src last to trigger load
+				modalImg.classList.remove('is-loaded');
+				modalImg.onload = handleImageLoad;
+				modalImg.onerror = handleImageError;
+				modalImg.src = imgSrc || placeholderImage(data.title);
+				// build key/value pairs - show Projekttitel as first larger title already shown
+				modalPairs.innerHTML = '';
+				const pairs = [
+					['Jahr', data.jahr || '–'],
+					['Agentur', data.agentur || '–'],
+					['Typ', data.typ || '–'],
+					['Branche', data.branche || '–']
+				];
+				pairs.forEach(([k, v]) => {
+					const el = document.createElement('div');
+					// keep requested classes and enforce vertical stacking with flex-col
+					el.className = 'pair flex items-baseline gap-1 flex-col';
+					el.innerHTML = `<div class="key text-sm text-gray-500">${k}</div><div class="value text-base text-gray-700">${v}</div>`;
+					modalPairs.appendChild(el);
+				});
+
+				// show link/button if a URL is present
+				if (data.url && String(data.url).trim()) {
+					const raw = String(data.url).trim();
+					const href = normalizeUrl(raw);
+					const el = document.createElement('div');
+					el.className = 'pair flex items-baseline gap-1 flex-col';
+					const key = document.createElement('div');
+					key.className = 'key text-sm text-gray-500';
+					key.textContent = 'Website';
+					const val = document.createElement('div');
+					val.className = 'value text-base';
+					const a = document.createElement('a');
+					a.href = href;
+					a.target = '_blank';
+					a.rel = 'noopener noreferrer';
+					a.className = 'text-base text-gray-700 underline';
+					// if figma URL, show friendly label
+					if (/figma\.com/i.test(href)) {
+						a.textContent = 'Figma Prototype';
+					} else {
+						a.textContent = raw;
+					}
+					val.appendChild(a);
+					el.appendChild(key);
+					el.appendChild(val);
+					modalPairs.appendChild(el);
+				}
+
+				// show dialog
+				if (typeof dialog.showModal === 'function') {
+					dialog.showModal();
+					dialog.setAttribute('aria-hidden', 'false');
+					// lock background scroll while modal is open
+					lockBodyScroll();
+				} else {
+					// fallback for old browsers
+					dialog.style.display = 'block';
+					lockBodyScroll();
+				}
+
+				// ensure CSS-based placeholder pan is used
+				modalImg.style.transform = '';
+			}
+
+			// -- modal navigation (global) --
+			let _currentIndex = -1;
+
+			function showModalAtIndex(idx) {
+				if (!Array.isArray(currentList) || !currentList.length) return;
+				if (idx < 0) idx = currentList.length - 1; // wrap
+				if (idx >= currentList.length) idx = 0; // wrap
+				_currentIndex = idx;
+				const item = currentList[_currentIndex];
+				// populate modal fields
+				modalTitle.textContent = item.Projekttitel || '';
+				const imgPath = item.Image || (slugify(item.Projekttitel) + '.jpg');
+				const imagePath = imgPath ? `images/referenzen/${imgPath}` : '';
+				modalImg.alt = item.Projekttitel || '';
+				modalImg.classList.remove('is-loaded');
+				modalImg.onload = handleImageLoad;
+				modalImg.onerror = handleImageError;
+				modalImg.src = imagePath || placeholderImage(item.Projekttitel);
+				modalPairs.innerHTML = '';
+				[['Jahr', item.Jahr || '–'], ['Agentur', item.Agentur || '–'], ['Typ', item.Typ || '–'], ['Branche', item.Branche || '–']]
+					.forEach(([k, v]) => {
+						const el = document.createElement('div');
+						el.className = 'pair flex items-baseline gap-1 flex-col';
+						el.innerHTML = `<div class="key text-sm text-gray-500">${k}</div><div class="value text-base text-gray-700">${v}</div>`;
+						modalPairs.appendChild(el);
+					});
+
+				// Website link if present in data (item may have URL or url)
+				const rawUrl = item.URL || item.url || '';
+				if (rawUrl && String(rawUrl).trim()) {
+					const raw = String(rawUrl).trim();
+					const href = normalizeUrl(raw);
+					const el = document.createElement('div');
+					el.className = 'pair flex items-baseline gap-1 flex-col';
+					const isFigma = /figma\.com/i.test(href);
+					el.innerHTML = `<div class="key text-sm text-gray-500">Website</div><div class="value text-base"><a class="text-base text-gray-700 underline" target="_blank" rel="noopener noreferrer" href="${href}">${isFigma ? 'Figma Prototype' : raw}</a></div>`;
+					modalPairs.appendChild(el);
+				}
+
+				if (typeof dialog.showModal === 'function' && !dialog.open) {
+					dialog.showModal();
+					dialog.setAttribute('aria-hidden', 'false');
+					lockBodyScroll();
+				} else if (!dialog.open) {
+					dialog.style.display = 'block';
+					lockBodyScroll();
+				}
+			}
+
+			function modalPrev() { showModalAtIndex(_currentIndex - 1); }
+			function modalNext() { showModalAtIndex(_currentIndex + 1); }
+
+			// wire buttons
+			const modalPrevBtn = document.getElementById('modal-prev');
+			const modalNextBtn = document.getElementById('modal-next');
+			if (modalPrevBtn) modalPrevBtn.addEventListener('click', (e) => { e.stopPropagation(); modalPrev(); });
+			if (modalNextBtn) modalNextBtn.addEventListener('click', (e) => { e.stopPropagation(); modalNext(); });
+
+			// keyboard navigation (left/right arrows) while dialog open
+			document.addEventListener('keydown', (e) => {
+				if (!dialog.open) return;
+				if (e.key === 'ArrowLeft') { e.preventDefault(); modalPrev(); }
+				if (e.key === 'ArrowRight') { e.preventDefault(); modalNext(); }
+			});
+
+			function closeCardModal() {
+				if (typeof dialog.close === 'function') dialog.close();
+				dialog.setAttribute('aria-hidden', 'true');
+				// unlock background scroll
+				unlockBodyScroll();
+			}
+
+			modalClose.addEventListener('click', closeCardModal);
+			dialog.addEventListener('click', (e) => {
+				// close when clicking backdrop area (dialog element itself)
+				if (e.target === dialog) closeCardModal();
+			});
+
+			document.addEventListener('keydown', (e) => {
+				if (e.key === 'Escape' && dialog.open) closeCardModal();
+			});
+
+			// manual panning removed; modal image uses CSS object-position animation
 		})();
 	</script>
 </body>

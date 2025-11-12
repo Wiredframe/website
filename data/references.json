@@ -4,8 +4,8 @@
     "Projekttitel": "Stadt Unterschleißheim",
     "Typ": "Website",
     "Branche": "Öffentliche Einrichtung",
-    "Agentur": "",
-    "Image": "stadt-unterschleissheim.png",
+    "Agentur": "wiredframe",
+    "Image": "stadt-unterschleissheim.jpg",
     "URL": "https://www.figma.com/proto/7xpm078ThimqcEvnRCllTV/Stadt-Unterschlei%C3%9Fheim---Design-System-2025?page-id=0%3A1&node-id=14018-4850&p=f&viewport=618%2C303%2C0.02&t=nuynliMuCFPfkV0I-8&scaling=scale-down-width&content-scaling=fixed&starting-point-node-id=14018%3A4850&show-proto-sidebar=1&hide-ui=1"
   },
   {
@@ -14,7 +14,7 @@
     "Typ": "Website",
     "Branche": "Photovoltaik / Technik",
     "Agentur": "ideenmühle",
-    "Image": "sbc-franken.png",
+    "Image": "sbc-franken.jpg",
     "URL": ""
   },
   {
@@ -23,7 +23,7 @@
     "Typ": "Website",
     "Branche": "Messtechnik / Industrie",
     "Agentur": "datamints",
-    "Image": "aukom.png",
+    "Image": "aukom.jpg",
     "URL": ""
   },
   {
@@ -32,7 +32,7 @@
     "Typ": "Website",
     "Branche": "Messtechnik / Industrie",
     "Agentur": "datamints",
-    "Image": "aukom-app.png",
+    "Image": "aukom-app.jpg",
     "URL": ""
   },
   {
@@ -41,8 +41,8 @@
     "Typ": "Shopware",
     "Branche": "Ersatzteilehandel",
     "Agentur": "datamints",
-    "Image": "schaffelhuber.png",
-    "URL": ""
+    "Image": "schaffelhuber.jpg",
+    "URL": "https://www.figma.com/proto/Yc8nq7wcfkjOlnNTNCa3zK/Schaffelhuber---Shopware-6-UI-Design?page-id=0%3A1&node-id=13501-25&viewport=1311%2C-68%2C0.14&t=EOmAztMCOpm6qEoV-8&scaling=scale-down-width&content-scaling=fixed&starting-point-node-id=13501%3A25&show-proto-sidebar=1&hide-ui=1"
   },
   {
     "Jahr": "2025",
@@ -50,7 +50,7 @@
     "Typ": "Shopware",
     "Branche": "Baustoffhandel",
     "Agentur": "netgrade",
-    "Image": "kraft-baustoffe.png",
+    "Image": "kraft-baustoffe.jpg",
     "URL": ""
   },
   {
@@ -59,8 +59,8 @@
     "Typ": "Website",
     "Branche": "Biotechnologie",
     "Agentur": "datamints",
-    "Image": "biom-biotech-cluster.png",
-    "URL": ""
+    "Image": "biom-biotech-cluster.jpg",
+    "URL": "https://www.figma.com/proto/i7hwhfdeQtKVLJNXx9WjLa/BioM---Website-Design-System-2025?page-id=0%3A1&node-id=13769-6581&viewport=585%2C-5427%2C0.22&t=iTyCVRXa5L7nOMcv-8&scaling=scale-down-width&content-scaling=fixed&starting-point-node-id=13769%3A6581&show-proto-sidebar=1&hide-ui=1"
   },
   {
     "Jahr": "2024",
@@ -68,8 +68,8 @@
     "Typ": "Shopware",
     "Branche": "Photovoltaik",
     "Agentur": "datamints",
-    "Image": "memodo-shop-relaunch.png",
-    "URL": ""
+    "Image": "memodo-shop-relaunch.jpg",
+    "URL": "https://www.figma.com/proto/LIaG2YfoFN9iY1NPJ7qdRd/Memodo---Onlineshop-Design-System?page-id=410%3A7173&node-id=410-7302&p=f&viewport=25%2C147%2C0.51&t=Ji5vt5dtLmqKwlYl-8&scaling=scale-down-width&content-scaling=fixed&starting-point-node-id=410%3A7302&show-proto-sidebar=1&hide-ui=1"
   },
   {
     "Jahr": "2024",
@@ -77,7 +77,7 @@
     "Typ": "Shopware",
     "Branche": "Medien / Merchandising",
     "Agentur": "netgrade",
-    "Image": "radio-eins-shop.png",
+    "Image": "radio-eins-shop.jpg",
     "URL": ""
   },
   {
@@ -86,7 +86,7 @@
     "Typ": "Shopware",
     "Branche": "Medien / Merchandising",
     "Agentur": "netgrade",
-    "Image": "rbb-shop-sandmaennchen-shop.png",
+    "Image": "rbb-shop-sandmaennchen-shop.jpg",
     "URL": ""
   },
   {
@@ -95,7 +95,7 @@
     "Typ": "Website",
     "Branche": "Öffentliche Einrichtung",
     "Agentur": "netgrade",
-    "Image": "ihk-service-portal.png",
+    "Image": "ihk-service-portal.jpg",
     "URL": ""
   },
   {
@@ -104,7 +104,7 @@
     "Typ": "Website",
     "Branche": "Pharma / Medizin",
     "Agentur": "datamints",
-    "Image": "united-immunity.png",
+    "Image": "united-immunity.jpg",
     "URL": ""
   },
   {
@@ -113,7 +113,7 @@
     "Typ": "Website",
     "Branche": "Sozialverband",
     "Agentur": "datamints",
-    "Image": "lvkm.png",
+    "Image": "lvkm.jpg",
     "URL": ""
   },
   {
@@ -122,8 +122,8 @@
     "Typ": "Website",
     "Branche": "Photovoltaik",
     "Agentur": "datamints",
-    "Image": "memodo-website.png",
-    "URL": ""
+    "Image": "memodo-website.jpg",
+    "URL": "https://www.figma.com/proto/Ilx0zUPQSRSMhIl6XZcQBn/Memodo---Website-Design-System?page-id=0%3A1&node-id=1605-3581&p=f&viewport=834%2C25%2C0.04&t=X4UpSqmSlJMGULQz-8&scaling=scale-down-width&content-scaling=fixed&starting-point-node-id=1605%3A3581&show-proto-sidebar=1&hide-ui=1"
   },
   {
     "Jahr": "2023",
@@ -131,7 +131,7 @@
     "Typ": "Shopware",
     "Branche": "Bürobedarf",
     "Agentur": "datamints",
-    "Image": "lupus-produkte-shop.png",
+    "Image": "lupus-produkte-shop.jpg",
     "URL": ""
   },
   {
@@ -140,7 +140,7 @@
     "Typ": "Website",
     "Branche": "Aquaristik",
     "Agentur": "datamints",
-    "Image": "tunze-aquarientechnik.png",
+    "Image": "tunze-aquarientechnik.jpg",
     "URL": ""
   },
   {
@@ -149,7 +149,7 @@
     "Typ": "Website",
     "Branche": "Maschinenbau / Werkzeughandel",
     "Agentur": "datamints",
-    "Image": "hmr-jacob.png",
+    "Image": "hmr-jacob.jpg",
     "URL": ""
   },
   {
@@ -158,7 +158,7 @@
     "Typ": "Shopware",
     "Branche": "Tiernahrung / E-Commerce",
     "Agentur": "datamints",
-    "Image": "iwest-onlineshop.png",
+    "Image": "iwest-onlineshop.jpg",
     "URL": ""
   },
   {
@@ -167,7 +167,7 @@
     "Typ": "Website",
     "Branche": "Bildung / Karriere",
     "Agentur": "datamints",
-    "Image": "ausbildungskompass.png",
+    "Image": "ausbildungskompass.jpg",
     "URL": ""
   },
   {
@@ -176,7 +176,7 @@
     "Typ": "Shopware",
     "Branche": "Einzelhandel / Lebensmittel",
     "Agentur": "datamints",
-    "Image": "hieber-lindberg-shopware.png",
+    "Image": "hieber-lindberg-shopware.jpg",
     "URL": ""
   },
   {
@@ -185,7 +185,7 @@
     "Typ": "Shopware",
     "Branche": "Schmuck / E-Commerce",
     "Agentur": "netgrade",
-    "Image": "piercingline-shopware.png",
+    "Image": "piercingline-shopware.jpg",
     "URL": ""
   },
   {
@@ -194,7 +194,7 @@
     "Typ": "Website",
     "Branche": "Soziale Einrichtung / Gesundheit",
     "Agentur": "datamints",
-    "Image": "alzheimergesellschaft-muenchen.png",
+    "Image": "alzheimergesellschaft-muenchen.jpg",
     "URL": ""
   },
   {
@@ -203,7 +203,7 @@
     "Typ": "Website",
     "Branche": "Spielwaren / Bildung",
     "Agentur": "netgrade",
-    "Image": "beleduc-lernspielwaren.png",
+    "Image": "beleduc-lernspielwaren.jpg",
     "URL": ""
   },
   {
@@ -212,7 +212,7 @@
     "Typ": "Website",
     "Branche": "IT / Netzwerktechnik",
     "Agentur": "eveca",
-    "Image": "zvk-network.png",
+    "Image": "zvk-network.jpg",
     "URL": ""
   },
   {
@@ -221,7 +221,7 @@
     "Typ": "Website",
     "Branche": "Industrie / Anlagenbau",
     "Agentur": "datamints",
-    "Image": "herbert-fleischmann.png",
+    "Image": "herbert-fleischmann.jpg",
     "URL": ""
   },
   {
@@ -230,7 +230,7 @@
     "Typ": "Website",
     "Branche": "Kultur / Verein",
     "Agentur": "datamints",
-    "Image": "gustav-mahler-gesellschaft.png",
+    "Image": "gustav-mahler-gesellschaft.jpg",
     "URL": ""
   },
   {
@@ -239,7 +239,7 @@
     "Typ": "Shopware",
     "Branche": "E-Commerce / Klebemitteln",
     "Agentur": "datamints",
-    "Image": "sks-shopware.png",
+    "Image": "sks-shopware.jpg",
     "URL": ""
   },
   {
@@ -248,7 +248,7 @@
     "Typ": "Website",
     "Branche": "Netzwerktechnik / Industrie",
     "Agentur": "eveca",
-    "Image": "easy-lan.png",
+    "Image": "easy-lan.jpg",
     "URL": ""
   },
   {
@@ -257,7 +257,7 @@
     "Typ": "Website",
     "Branche": "Industrie",
     "Agentur": "eveca",
-    "Image": "willburger-system.png",
+    "Image": "willburger-system.jpg",
     "URL": ""
   },
   {
@@ -266,7 +266,7 @@
     "Typ": "Website",
     "Branche": "Energieversorger",
     "Agentur": "datamints",
-    "Image": "stadtwerke-weilheim.png",
+    "Image": "stadtwerke-weilheim.jpg",
     "URL": ""
   },
   {
@@ -275,7 +275,7 @@
     "Typ": "Website",
     "Branche": "Sportverein",
     "Agentur": "eveca",
-    "Image": "sg-post-sued-regensburg.png",
+    "Image": "sg-post-sued-regensburg.jpg",
     "URL": ""
   },
   {
@@ -284,7 +284,7 @@
     "Typ": "Website",
     "Branche": "Zigarren / Handel",
     "Agentur": "datamints",
-    "Image": "zechbauer.png",
+    "Image": "zechbauer.jpg",
     "URL": ""
   },
   {
@@ -293,7 +293,7 @@
     "Typ": "Website",
     "Branche": "Verlag / Medien",
     "Agentur": "datamints",
-    "Image": "verlag-oesterreich.png",
+    "Image": "verlag-oesterreich.jpg",
     "URL": ""
   },
   {
@@ -302,7 +302,7 @@
     "Typ": "Website",
     "Branche": "Soziale Einrichtung / Jugendhilfe",
     "Agentur": "datamints",
-    "Image": "kje-hilfe-garmisch.png",
+    "Image": "kje-hilfe-garmisch.jpg",
     "URL": ""
   },
   {
@@ -311,7 +311,7 @@
     "Typ": "Shopware",
     "Branche": "Autozubehör / Technik",
     "Agentur": "datamints",
-    "Image": "flat-jack.png",
+    "Image": "flat-jack.jpg",
     "URL": ""
   },
   {
@@ -320,7 +320,7 @@
     "Typ": "Website",
     "Branche": "Lebensmittel / Produktion",
     "Agentur": "datamints",
-    "Image": "rabeler-fruchtchips.png",
+    "Image": "rabeler-fruchtchips.jpg",
     "URL": ""
   },
   {
@@ -329,7 +329,7 @@
     "Typ": "Website",
     "Branche": "Architektur / Bauwesen",
     "Agentur": "datamints",
-    "Image": "schindhelm-architekten.png",
+    "Image": "schindhelm-architekten.jpg",
     "URL": ""
   },
   {
@@ -338,7 +338,7 @@
     "Typ": "Website",
     "Branche": "PR / Kommunikation",
     "Agentur": "datamints",
-    "Image": "pr-agentur-die-himmelsschreiber.png",
+    "Image": "pr-agentur-die-himmelsschreiber.jpg",
     "URL": ""
   },
   {
@@ -347,7 +347,7 @@
     "Typ": "Website",
     "Branche": "Gesundheit / Psychotherapie",
     "Agentur": "eveca",
-    "Image": "psychotherapiepraxis-dr-loohs.png",
+    "Image": "psychotherapiepraxis-dr-loohs.jpg",
     "URL": ""
   },
   {
@@ -356,7 +356,7 @@
     "Typ": "Website",
     "Branche": "Energieversorger",
     "Agentur": "datamints",
-    "Image": "stadtwerke-unterschleissheim.png",
+    "Image": "stadtwerke-unterschleissheim.jpg",
     "URL": ""
   },
   {
@@ -364,8 +364,8 @@
     "Projekttitel": "Olmogo",
     "Typ": "App",
     "Branche": "Software / Webentwicklung",
-    "Agentur": "–",
-    "Image": "olmogo-app.png",
+    "Agentur": "wiredframe",
+    "Image": "olmogo-app.jpg",
     "URL": ""
   },
   {
@@ -374,7 +374,7 @@
     "Typ": "Website",
     "Branche": "Tiernahrung / Agrar",
     "Agentur": "datamints",
-    "Image": "iwest-website.png",
+    "Image": "iwest-website.jpg",
     "URL": ""
   },
   {
@@ -382,8 +382,8 @@
     "Projekttitel": "Olmogo",
     "Typ": "Website",
     "Branche": "Software / Webentwicklung",
-    "Agentur": "–",
-    "Image": "olmogo.png",
+    "Agentur": "wiredframe",
+    "Image": "olmogo.jpg",
     "URL": ""
   },
   {
@@ -392,7 +392,7 @@
     "Typ": "Website",
     "Branche": "Immobilien / Projektentwicklung",
     "Agentur": "eveca",
-    "Image": "fronteris-immobilien.png",
+    "Image": "fronteris-immobilien.jpg",
     "URL": ""
   },
   {
@@ -401,7 +401,7 @@
     "Typ": "Website",
     "Branche": "Handwerk / Innenausbau",
     "Agentur": "denkdigital",
-    "Image": "andreas-teusch-parkett-service.png",
+    "Image": "andreas-teusch-parkett-service.jpg",
     "URL": ""
   },
   {
@@ -410,7 +410,7 @@
     "Typ": "Website",
     "Branche": "Immobilien / Makler",
     "Agentur": "denkdigital",
-    "Image": "ahg-immobilien-frankfurt.png",
+    "Image": "ahg-immobilien-frankfurt.jpg",
     "URL": ""
   },
   {
@@ -419,7 +419,7 @@
     "Typ": "Website",
     "Branche": "Innenarchitektur / Bürodesign",
     "Agentur": "denkdigital",
-    "Image": "presber-neue-arbeitswelten.png",
+    "Image": "presber-neue-arbeitswelten.jpg",
     "URL": ""
   },
   {
@@ -428,7 +428,7 @@
     "Typ": "Website",
     "Branche": "IT / Systemintegration",
     "Agentur": "eveca",
-    "Image": "dcenter-zellner-group.png",
+    "Image": "dcenter-zellner-group.jpg",
     "URL": ""
   },
   {
@@ -437,7 +437,7 @@
     "Typ": "Website",
     "Branche": "Soziale Einrichtung / Kirche",
     "Agentur": "eveca",
-    "Image": "diakonie-passau.png",
+    "Image": "diakonie-passau.jpg",
     "URL": ""
   },
   {
@@ -446,7 +446,7 @@
     "Typ": "Website",
     "Branche": "Beleuchtung / Technik",
     "Agentur": "datamints",
-    "Image": "as-led-lighting.png",
+    "Image": "as-led-lighting.jpg",
     "URL": ""
   },
   {
@@ -455,7 +455,7 @@
     "Typ": "Shopware",
     "Branche": "Bildung / Verlag",
     "Agentur": "datamints",
-    "Image": "lernbiene.png",
+    "Image": "lernbiene.jpg",
     "URL": ""
   },
   {
@@ -464,7 +464,7 @@
     "Typ": "Website",
     "Branche": "Metallverarbeitung / Industrie",
     "Agentur": "datamints",
-    "Image": "bechtold-blechbearbeitung.png",
+    "Image": "bechtold-blechbearbeitung.jpg",
     "URL": ""
   },
   {
@@ -473,7 +473,7 @@
     "Typ": "Shopware",
     "Branche": "Mode / Fahrradhandel",
     "Agentur": "datamints",
-    "Image": "bodenfrost-bikes-and-fashion.png",
+    "Image": "bodenfrost-bikes-and-fashion.jpg",
     "URL": ""
   },
   {
@@ -482,7 +482,7 @@
     "Typ": "Website",
     "Branche": "Bauwesen / Ingenieurwesen",
     "Agentur": "datamints",
-    "Image": "ib-fey-ingenieurbuero-fuer-bauwesen.png",
+    "Image": "ib-fey-ingenieurbuero-fuer-bauwesen.jpg",
     "URL": ""
   },
   {
@@ -491,7 +491,7 @@
     "Typ": "CosmoShop",
     "Branche": "Spirituosen / Handel",
     "Agentur": "CosmoShop",
-    "Image": "world-wide-spirits.png",
+    "Image": "world-wide-spirits.jpg",
     "URL": ""
   },
   {
@@ -500,7 +500,7 @@
     "Typ": "Shopware",
     "Branche": "Spirituosen / Handel",
     "Agentur": "datamints",
-    "Image": "bavaria-selection.png",
+    "Image": "bavaria-selection.jpg",
     "URL": ""
   },
   {
@@ -509,7 +509,7 @@
     "Typ": "Website",
     "Branche": "Finanzdienstleistungen",
     "Agentur": "eveca",
-    "Image": "lacuna-fondsgesellschaft.png",
+    "Image": "lacuna-fondsgesellschaft.jpg",
     "URL": ""
   },
   {
@@ -518,7 +518,7 @@
     "Typ": "Website",
     "Branche": "Messtechnik / Industrie",
     "Agentur": "datamints",
-    "Image": "ifta-messe-ueberwachen-schuetzen.png",
+    "Image": "ifta-messe-ueberwachen-schuetzen.jpg",
     "URL": ""
   },
   {
@@ -527,7 +527,7 @@
     "Typ": "CosmoShop",
     "Branche": "Spirituosen / Manufaktur",
     "Agentur": "CosmoShop",
-    "Image": "grassl-bergbrennerei.png",
+    "Image": "grassl-bergbrennerei.jpg",
     "URL": ""
   },
   {
@@ -536,7 +536,7 @@
     "Typ": "CosmoShop",
     "Branche": "Freizeit / Event / Merch",
     "Agentur": "CosmoShop",
-    "Image": "europpark.png",
+    "Image": "europpark.jpg",
     "URL": ""
   },
   {
@@ -545,7 +545,7 @@
     "Typ": "Website",
     "Branche": "Freizeit / Entertainment",
     "Agentur": "datamints",
-    "Image": "intertrainment.png",
+    "Image": "intertrainment.jpg",
     "URL": ""
   },
   {
@@ -554,7 +554,7 @@
     "Typ": "Website",
     "Branche": "IT / Consulting",
     "Agentur": "datamints",
-    "Image": "ntt-data-the-open.png",
+    "Image": "ntt-data-the-open.jpg",
     "URL": ""
   },
   {
@@ -563,7 +563,7 @@
     "Typ": "Website",
     "Branche": "Bauinformatik / Software",
     "Agentur": "datamints",
-    "Image": "brz-organisation-und-bauinformatik.png",
+    "Image": "brz-organisation-und-bauinformatik.jpg",
     "URL": ""
   },
   {
@@ -572,7 +572,7 @@
     "Typ": "Website",
     "Branche": "Energieversorger",
     "Agentur": "datamints",
-    "Image": "stadtwerke-penzberg.png",
+    "Image": "stadtwerke-penzberg.jpg",
     "URL": ""
   },
   {
@@ -581,7 +581,7 @@
     "Typ": "Website",
     "Branche": "Tourismus / Stadtführungen",
     "Agentur": "datamints",
-    "Image": "weisser-stadtvogel.png",
+    "Image": "weisser-stadtvogel.jpg",
     "URL": ""
   },
   {
@@ -590,7 +590,7 @@
     "Typ": "App",
     "Branche": "Automotive / Forschung",
     "Agentur": "datamints",
-    "Image": "bmw-sera.png",
+    "Image": "bmw-sera.jpg",
     "URL": ""
   },
   {
@@ -599,7 +599,7 @@
     "Typ": "CosmoShop",
     "Branche": "Telekommunikation / Merch",
     "Agentur": "CosmoShop",
-    "Image": "vodafone-merchandising.png",
+    "Image": "vodafone-merchandising.jpg",
     "URL": ""
   },
   {
@@ -608,7 +608,7 @@
     "Typ": "CosmoShop",
     "Branche": "Design / Geschenkartikel",
     "Agentur": "CosmoShop",
-    "Image": "cedon.png",
+    "Image": "cedon.jpg",
     "URL": ""
   },
   {
@@ -617,7 +617,7 @@
     "Typ": "CosmoShop",
     "Branche": "Medizintechnik / Handel",
     "Agentur": "CosmoShop",
-    "Image": "nehs-gmbh.png",
+    "Image": "nehs-gmbh.jpg",
     "URL": ""
   },
   {
@@ -625,8 +625,8 @@
     "Projekttitel": "Landhaus Hub Café Bistro Extra",
     "Typ": "Website",
     "Branche": "Gastronomie",
-    "Agentur": "",
-    "Image": "landhaus-hub-caf-bistro-extra.png",
+    "Agentur": "wiredframe",
+    "Image": "landhaus-hub-caf-bistro-extra.jpg",
     "URL": ""
   },
   {
@@ -635,7 +635,7 @@
     "Typ": "Website",
     "Branche": "Friseur / Lifestyle",
     "Agentur": "denkdigital",
-    "Image": "schnittpunkt-haardesign.png",
+    "Image": "schnittpunkt-haardesign.jpg",
     "URL": ""
   },
   {
@@ -644,7 +644,7 @@
     "Typ": "Website",
     "Branche": "Tierschutz / NGO",
     "Agentur": "datamints",
-    "Image": "tierschutzverein-muenchen.png",
+    "Image": "tierschutzverein-muenchen.jpg",
     "URL": ""
   },
   {
@@ -653,7 +653,7 @@
     "Typ": "Website",
     "Branche": "Verlag / Regionalmagazin",
     "Agentur": "datamints",
-    "Image": "oberland-magazin.png",
+    "Image": "oberland-magazin.jpg",
     "URL": ""
   },
   {
@@ -662,7 +662,7 @@
     "Typ": "Website",
     "Branche": "Wirtschaft / Netzwerk",
     "Agentur": "eveca",
-    "Image": "unternehmerrunde-regensburg.png",
+    "Image": "unternehmerrunde-regensburg.jpg",
     "URL": ""
   },
   {
@@ -671,7 +671,7 @@
     "Typ": "App",
     "Branche": "Gastronomie / Lifestyle",
     "Agentur": "denkdigital",
-    "Image": "caf-latte-art-wiesbaden.png",
+    "Image": "caf-latte-art-wiesbaden.jpg",
     "URL": ""
   },
   {
@@ -680,7 +680,7 @@
     "Typ": "Website",
     "Branche": "Industrie / Anlagenbau",
     "Agentur": "eveca",
-    "Image": "linn-high-therm.png",
+    "Image": "linn-high-therm.jpg",
     "URL": ""
   },
   {
@@ -689,7 +689,7 @@
     "Typ": "Website",
     "Branche": "Kirche / Bildung",
     "Agentur": "datamints",
-    "Image": "credo-online-bistum-augsburg.png",
+    "Image": "credo-online-bistum-augsburg.jpg",
     "URL": ""
   },
   {
@@ -698,7 +698,7 @@
     "Typ": "Website",
     "Branche": "Elektronik / Handel",
     "Agentur": "datamints",
-    "Image": "jet-electronics.png",
+    "Image": "jet-electronics.jpg",
     "URL": ""
   },
   {
@@ -707,7 +707,7 @@
     "Typ": "Website",
     "Branche": "Metallbau / Industrie",
     "Agentur": "datamints",
-    "Image": "haslinger-metallbau.png",
+    "Image": "haslinger-metallbau.jpg",
     "URL": ""
   },
   {
@@ -716,7 +716,7 @@
     "Typ": "Website",
     "Branche": "Sozialunternehmen / Werkstätten",
     "Agentur": "eveca",
-    "Image": "werkhof-regensburg.png",
+    "Image": "werkhof-regensburg.jpg",
     "URL": ""
   },
   {
@@ -725,7 +725,7 @@
     "Typ": "Website",
     "Branche": "Softwareentwicklung / Testing",
     "Agentur": "datamints",
-    "Image": "qfs-quality-first-software.png",
+    "Image": "qfs-quality-first-software.jpg",
     "URL": ""
   },
   {
@@ -734,7 +734,7 @@
     "Typ": "Website",
     "Branche": "Immobilien / Projektentwicklung",
     "Agentur": "datamints",
-    "Image": "scharl-unternehmensgruppe.png",
+    "Image": "scharl-unternehmensgruppe.jpg",
     "URL": ""
   },
   {
@@ -743,7 +743,7 @@
     "Typ": "Website",
     "Branche": "Kommune / Tourismus",
     "Agentur": "datamints",
-    "Image": "seehausen-am-staffelsee.png",
+    "Image": "seehausen-am-staffelsee.jpg",
     "URL": ""
   },
   {
@@ -752,7 +752,7 @@
     "Typ": "Website",
     "Branche": "Elektronik / Komponenten",
     "Agentur": "datamints",
-    "Image": "capcomp-supercapacitors.png",
+    "Image": "capcomp-supercapacitors.jpg",
     "URL": ""
   },
   {
@@ -761,7 +761,7 @@
     "Typ": "Website",
     "Branche": "Pharma / Patientenservice",
     "Agentur": "datamints",
-    "Image": "abbvie-care.png",
+    "Image": "abbvie-care.jpg",
     "URL": ""
   },
   {
@@ -770,7 +770,7 @@
     "Typ": "Website",
     "Branche": "Ingenieurwesen / Bauwesen",
     "Agentur": "datamints",
-    "Image": "ingenieurbuero-vogt.png",
+    "Image": "ingenieurbuero-vogt.jpg",
     "URL": ""
   },
   {
@@ -779,7 +779,7 @@
     "Typ": "Website",
     "Branche": "Spirituosen / Handel",
     "Agentur": "datamints",
-    "Image": "the-whisky-store.png",
+    "Image": "the-whisky-store.jpg",
     "URL": ""
   },
   {
@@ -788,7 +788,7 @@
     "Typ": "Website",
     "Branche": "Coaching / Beratung",
     "Agentur": "datamints",
-    "Image": "stefanie-schuett-coaching.png",
+    "Image": "stefanie-schuett-coaching.jpg",
     "URL": ""
   },
   {
@@ -797,7 +797,7 @@
     "Typ": "Website",
     "Branche": "Unternehmensberatung",
     "Agentur": "datamints",
-    "Image": "stadler-schott-beratung-fuer-unternehmenskultur.png",
+    "Image": "stadler-schott-beratung-fuer-unternehmenskultur.jpg",
     "URL": ""
   },
   {
@@ -806,7 +806,7 @@
     "Typ": "Website",
     "Branche": "Wirtschaftsprüfung / Finanzen",
     "Agentur": "datamints",
-    "Image": "fiducon-wirtschaftspruefungsgesellschaft.png",
+    "Image": "fiducon-wirtschaftspruefungsgesellschaft.jpg",
     "URL": ""
   },
   {
@@ -815,7 +815,7 @@
     "Typ": "Website",
     "Branche": "Öffentliche Einrichtung",
     "Agentur": "datamints",
-    "Image": "stadt-unterschleissheim-2.png",
+    "Image": "stadt-unterschleissheim-2.jpg",
     "URL": ""
   },
   {
@@ -824,7 +824,7 @@
     "Typ": "Website",
     "Branche": "Freizeitbad / Kommune",
     "Agentur": "datamints",
-    "Image": "aquariush-unterschleissheim.png",
+    "Image": "aquariush-unterschleissheim.jpg",
     "URL": ""
   },
   {
@@ -833,7 +833,7 @@
     "Typ": "OXID eShop",
     "Branche": "Modellautos / Spielwaren",
     "Agentur": "datamints",
-    "Image": "toycar-shop.png",
+    "Image": "toycar-shop.jpg",
     "URL": ""
   },
   {
@@ -842,7 +842,7 @@
     "Typ": "OXID eShop",
     "Branche": "Spielwaren / Sammlerartikel",
     "Agentur": "datamints",
-    "Image": "tintoy-world.png",
+    "Image": "tintoy-world.jpg",
     "URL": ""
   },
   {
@@ -851,7 +851,7 @@
     "Typ": "OXID eShop",
     "Branche": "Spielwaren / Fachhandel",
     "Agentur": "datamints",
-    "Image": "augsburger-spielzeugkiste.png",
+    "Image": "augsburger-spielzeugkiste.jpg",
     "URL": ""
   },
   {
@@ -860,7 +860,7 @@
     "Typ": "Website",
     "Branche": "Hotellerie / Wellness",
     "Agentur": "datamints",
-    "Image": "the-monarch-hotel-bad-goegging.png",
+    "Image": "the-monarch-hotel-bad-goegging.jpg",
     "URL": ""
   },
   {
@@ -869,7 +869,7 @@
     "Typ": "Website",
     "Branche": "Verlag / Medien",
     "Agentur": "datamints",
-    "Image": "mbmedien-verlag.png",
+    "Image": "mbmedien-verlag.jpg",
     "URL": ""
   },
   {
@@ -878,7 +878,7 @@
     "Typ": "Website",
     "Branche": "Nachhaltigkeit / Zertifizierung",
     "Agentur": "datamints",
-    "Image": "check-organic.png",
+    "Image": "check-organic.jpg",
     "URL": ""
   },
   {
@@ -887,7 +887,7 @@
     "Typ": "OXID eShop",
     "Branche": "Einzelhandel / Fashion",
     "Agentur": "datamints",
-    "Image": "nk23-shop.png",
+    "Image": "nk23-shop.jpg",
     "URL": ""
   },
   {
@@ -896,7 +896,7 @@
     "Typ": "Website",
     "Branche": "Bildung / Erwachsenenbildung",
     "Agentur": "datamints",
-    "Image": "vhs-mainburg-ev.png",
+    "Image": "vhs-mainburg-ev.jpg",
     "URL": ""
   },
   {
@@ -905,7 +905,7 @@
     "Typ": "Website",
     "Branche": "Industrie / Laborautomation",
     "Agentur": "datamints",
-    "Image": "inheco-industrial-heating-and-cooling.png",
+    "Image": "inheco-industrial-heating-and-cooling.jpg",
     "URL": ""
   },
   {
@@ -914,7 +914,7 @@
     "Typ": "OXID eShop",
     "Branche": "Feuerwerk / Eventhandel",
     "Agentur": "datamints",
-    "Image": "nishiki-fireworks.png",
+    "Image": "nishiki-fireworks.jpg",
     "URL": ""
   },
   {
@@ -923,7 +923,7 @@
     "Typ": "Website",
     "Branche": "Immobilien / Bauunternehmen",
     "Agentur": "datamints",
-    "Image": "kraemmel-stadt-land-fluss.png",
+    "Image": "kraemmel-stadt-land-fluss.jpg",
     "URL": ""
   },
   {
@@ -932,7 +932,7 @@
     "Typ": "Website",
     "Branche": "Messebau / Eventdienstleister",
     "Agentur": "datamints",
-    "Image": "dega-expo-team.png",
+    "Image": "dega-expo-team.jpg",
     "URL": ""
   },
   {
@@ -941,7 +941,7 @@
     "Typ": "Website",
     "Branche": "Ingenieurwesen / Planung",
     "Agentur": "datamints",
-    "Image": "emt-ingenieur-gesellschaft.png",
+    "Image": "emt-ingenieur-gesellschaft.jpg",
     "URL": ""
   },
   {
@@ -950,7 +950,7 @@
     "Typ": "Website",
     "Branche": "Elektronik / Technologie",
     "Agentur": "datamints",
-    "Image": "sanyo-electronics-panasonic.png",
+    "Image": "sanyo-electronics-panasonic.jpg",
     "URL": ""
   },
   {
@@ -959,7 +959,7 @@
     "Typ": "OXID eShop",
     "Branche": "Spirituosen / Handel",
     "Agentur": "datamints",
-    "Image": "the-whisky-store-2.png",
+    "Image": "the-whisky-store-2.jpg",
     "URL": ""
   },
   {
@@ -968,7 +968,7 @@
     "Typ": "OXID eShop",
     "Branche": "Gesundheit / Nahrungsergänzung",
     "Agentur": "datamints",
-    "Image": "vitarama.png",
+    "Image": "vitarama.jpg",
     "URL": ""
   },
   {
@@ -977,7 +977,7 @@
     "Typ": "Website",
     "Branche": "Immobilien / Bauplanung",
     "Agentur": "datamints",
-    "Image": "kraemmel-ressourcenplanung.png",
+    "Image": "kraemmel-ressourcenplanung.jpg",
     "URL": ""
   },
   {
@@ -986,7 +986,7 @@
     "Typ": "Website",
     "Branche": "Metallbau / Industrie",
     "Agentur": "datamints",
-    "Image": "neuert-metallbau.png",
+    "Image": "neuert-metallbau.jpg",
     "URL": ""
   },
   {
@@ -995,7 +995,7 @@
     "Typ": "OXID eShop",
     "Branche": "Deko / Geschenkartikel",
     "Agentur": "datamints",
-    "Image": "saustark24.png",
+    "Image": "saustark24.jpg",
     "URL": ""
   },
   {
@@ -1004,7 +1004,7 @@
     "Typ": "Website",
     "Branche": "Kunst / Kultur",
     "Agentur": "datamints",
-    "Image": "kunst-ausstellung-mainburg.png",
+    "Image": "kunst-ausstellung-mainburg.jpg",
     "URL": ""
   },
   {
@@ -1013,7 +1013,7 @@
     "Typ": "Website",
     "Branche": "Elektronik / Einzelhandel",
     "Agentur": "datamints",
-    "Image": "smart-things.png",
+    "Image": "smart-things.jpg",
     "URL": ""
   },
   {
@@ -1022,7 +1022,7 @@
     "Typ": "Website",
     "Branche": "Energieversorger",
     "Agentur": "datamints",
-    "Image": "stadtwerke-landsberg.png",
+    "Image": "stadtwerke-landsberg.jpg",
     "URL": ""
   },
   {
@@ -1031,7 +1031,7 @@
     "Typ": "Website",
     "Branche": "Steuerberatung / Finanzen",
     "Agentur": "datamints",
-    "Image": "steuerkanzlei-riege.png",
+    "Image": "steuerkanzlei-riege.jpg",
     "URL": ""
   },
   {
@@ -1040,7 +1040,7 @@
     "Typ": "OXID eShop",
     "Branche": "Mode / Streetwear",
     "Agentur": "datamints",
-    "Image": "checkpoint-shop.png",
+    "Image": "checkpoint-shop.jpg",
     "URL": ""
   },
   {
@@ -1049,7 +1049,7 @@
     "Typ": "Website",
     "Branche": "Kirche / Gemeinde",
     "Agentur": "datamints",
-    "Image": "evangelische-kirchengemeinde-gap.png",
+    "Image": "evangelische-kirchengemeinde-gap.jpg",
     "URL": ""
   },
   {
@@ -1058,7 +1058,7 @@
     "Typ": "Website",
     "Branche": "Hotellerie / Wellness",
     "Agentur": "datamints",
-    "Image": "the-monarch-hotel-bad-goegging-2.png",
+    "Image": "the-monarch-hotel-bad-goegging-2.jpg",
     "URL": ""
   },
   {
@@ -1067,7 +1067,7 @@
     "Typ": "Website",
     "Branche": "Bauunternehmen / Immobilien",
     "Agentur": "datamints",
-    "Image": "kraemmel.png",
+    "Image": "kraemmel.jpg",
     "URL": ""
   },
   {
@@ -1076,7 +1076,7 @@
     "Typ": "Website",
     "Branche": "Bildung / Jugendhilfe",
     "Agentur": "datamints",
-    "Image": "projekt-jugendcoaching.png",
+    "Image": "projekt-jugendcoaching.jpg",
     "URL": ""
   },
   {
@@ -1085,7 +1085,7 @@
     "Typ": "Website",
     "Branche": "Spirituosen / Handel",
     "Agentur": "datamints",
-    "Image": "the-whisky-store-website.png",
+    "Image": "the-whisky-store-website.jpg",
     "URL": ""
   },
   {
@@ -1094,7 +1094,7 @@
     "Typ": "Website",
     "Branche": "Elektronik / Industrie",
     "Agentur": "datamints",
-    "Image": "tq-group.png",
+    "Image": "tq-group.jpg",
     "URL": ""
   },
   {
@@ -1103,7 +1103,7 @@
     "Typ": "OXID eShop",
     "Branche": "Mode / Lifestyle",
     "Agentur": "datamints",
-    "Image": "trendy-planets.png",
+    "Image": "trendy-planets.jpg",
     "URL": ""
   },
   {
@@ -1112,7 +1112,7 @@
     "Typ": "Website",
     "Branche": "Forschung / Umwelt",
     "Agentur": "datamints",
-    "Image": "schneefernerhaus-zugspitze.png",
+    "Image": "schneefernerhaus-zugspitze.jpg",
     "URL": ""
   },
   {
@@ -1121,7 +1121,7 @@
     "Typ": "Website",
     "Branche": "Maschinenbau / Industrie",
     "Agentur": "datamints",
-    "Image": "wema-zerspanungstechnik.png",
+    "Image": "wema-zerspanungstechnik.jpg",
     "URL": ""
   },
   {
@@ -1129,8 +1129,8 @@
     "Projekttitel": "Heuboden Murnau",
     "Typ": "Website",
     "Branche": "Gastronomie",
-    "Agentur": "–",
-    "Image": "heuboden-murnau.png",
+    "Agentur": "wiredframe",
+    "Image": "heuboden-murnau.jpg",
     "URL": ""
   },
   {
@@ -1138,8 +1138,8 @@
     "Projekttitel": "St. Eurach Land und Golfclub",
     "Typ": "Website",
     "Branche": "Freizeit / Sport",
-    "Agentur": "–",
-    "Image": "st-eurach-land-und-golfclub.png",
+    "Agentur": "wiredframe",
+    "Image": "st-eurach-land-und-golfclub.jpg",
     "URL": ""
   },
   {
@@ -1147,8 +1147,8 @@
     "Projekttitel": "Walhaus an de Miälwellen",
     "Typ": "Website",
     "Branche": "Hotellerie",
-    "Agentur": "–",
-    "Image": "walhaus-an-de-miaelwellen.png",
+    "Agentur": "wiredframe",
+    "Image": "walhaus-an-de-miaelwellen.jpg",
     "URL": ""
   },
   {
@@ -1156,8 +1156,8 @@
     "Projekttitel": "Landgasthof und Hotel Krone",
     "Typ": "Website",
     "Branche": "Hotellerie",
-    "Agentur": "–",
-    "Image": "landgasthof-und-hotel-krone.png",
+    "Agentur": "wiredframe",
+    "Image": "landgasthof-und-hotel-krone.jpg",
     "URL": ""
   },
   {
@@ -1165,8 +1165,8 @@
     "Projekttitel": "Gasthof Lutz",
     "Typ": "Website",
     "Branche": "Hotellerie",
-    "Agentur": "–",
-    "Image": "gasthof-lutz.png",
+    "Agentur": "wiredframe",
+    "Image": "gasthof-lutz.jpg",
     "URL": ""
   },
   {
@@ -1174,8 +1174,8 @@
     "Projekttitel": "Schlossgasthof Strasser",
     "Typ": "Website",
     "Branche": "Hotellerie",
-    "Agentur": "–",
-    "Image": "schlossgasthof-strasser.png",
+    "Agentur": "wiredframe",
+    "Image": "schlossgasthof-strasser.jpg",
     "URL": ""
   },
   {
@@ -1183,8 +1183,8 @@
     "Projekttitel": "Hotel Pension Matschun",
     "Typ": "Website",
     "Branche": "Hotellerie",
-    "Agentur": "–",
-    "Image": "hotel-pension-matschun.png",
+    "Agentur": "wiredframe",
+    "Image": "hotel-pension-matschun.jpg",
     "URL": ""
   },
   {
@@ -1192,8 +1192,8 @@
     "Projekttitel": "Hotel zur Kloster-Mühle",
     "Typ": "Website",
     "Branche": "Hotellerie",
-    "Agentur": "–",
-    "Image": "hotel-zur-kloster-muehle.png",
+    "Agentur": "wiredframe",
+    "Image": "hotel-zur-kloster-muehle.jpg",
     "URL": ""
   },
   {
@@ -1201,8 +1201,8 @@
     "Projekttitel": "Wimmer Weißbräu Gasthof",
     "Typ": "Website",
     "Branche": "Hotellerie",
-    "Agentur": "–",
-    "Image": "wimmer-weissbraeu-gasthof.png",
+    "Agentur": "wiredframe",
+    "Image": "wimmer-weissbraeu-gasthof.jpg",
     "URL": ""
   },
   {
@@ -1210,8 +1210,8 @@
     "Projekttitel": "Posthotel Traube",
     "Typ": "Website",
     "Branche": "Hotellerie",
-    "Agentur": "–",
-    "Image": "posthotel-traube.png",
+    "Agentur": "wiredframe",
+    "Image": "posthotel-traube.jpg",
     "URL": ""
   },
   {
@@ -1219,8 +1219,8 @@
     "Projekttitel": "Landhotel Klotzbücher",
     "Typ": "Website",
     "Branche": "Hotellerie",
-    "Agentur": "–",
-    "Image": "landhotel-klotzbuecher.png",
+    "Agentur": "wiredframe",
+    "Image": "landhotel-klotzbuecher.jpg",
     "URL": ""
   },
   {
@@ -1228,8 +1228,8 @@
     "Projekttitel": "DeLaVista Faschion",
     "Typ": "Website",
     "Branche": "Mode / Einzelhandel",
-    "Agentur": "–",
-    "Image": "delavista-faschion.png",
+    "Agentur": "wiredframe",
+    "Image": "delavista-faschion.jpg",
     "URL": ""
   },
   {
@@ -1237,8 +1237,8 @@
     "Projekttitel": "Aurora Hotel Dachau",
     "Typ": "Website",
     "Branche": "Hotellerie",
-    "Agentur": "–",
-    "Image": "aurora-hotel-dachau.png",
+    "Agentur": "wiredframe",
+    "Image": "aurora-hotel-dachau.jpg",
     "URL": ""
   },
   {
@@ -1247,7 +1247,7 @@
     "Typ": "XT-Commerce Shop",
     "Branche": "Mode / Streetwear",
     "Agentur": "datamints",
-    "Image": "checkpoint-shop-2.png",
+    "Image": "checkpoint-shop-2.jpg",
     "URL": ""
   },
   {
@@ -1256,7 +1256,7 @@
     "Typ": "Website",
     "Branche": "Soziale Einrichtung / Bildung",
     "Agentur": "datamints",
-    "Image": "kinder-jugend-und-erwachsenenhilfe-ev.png",
+    "Image": "kinder-jugend-und-erwachsenenhilfe-ev.jpg",
     "URL": ""
   },
   {
@@ -1265,7 +1265,7 @@
     "Typ": "Website",
     "Branche": "Bauwesen / Immobilien",
     "Agentur": "datamints",
-    "Image": "kraemmel-baukonfigurator.png",
+    "Image": "kraemmel-baukonfigurator.jpg",
     "URL": ""
   },
   {
@@ -1274,7 +1274,7 @@
     "Typ": "Website",
     "Branche": "Maschinenbau / Hydraulik",
     "Agentur": "datamints",
-    "Image": "luvra-hydraulik-und-regeltechnik.png",
+    "Image": "luvra-hydraulik-und-regeltechnik.jpg",
     "URL": ""
   },
   {
@@ -1283,7 +1283,7 @@
     "Typ": "Website",
     "Branche": "Lebensmittel / Bäckerei",
     "Agentur": "datamints",
-    "Image": "mein-gesundes-brot.png",
+    "Image": "mein-gesundes-brot.jpg",
     "URL": ""
   },
   {
@@ -1292,7 +1292,7 @@
     "Typ": "Website",
     "Branche": "IT / Community",
     "Agentur": "datamints",
-    "Image": "nt-4-admins.png",
+    "Image": "nt-4-admins.jpg",
     "URL": ""
   },
   {
@@ -1301,7 +1301,7 @@
     "Typ": "Website",
     "Branche": "Innenarchitektur / Design",
     "Agentur": "datamints",
-    "Image": "raum-gestaltung-probst.png",
+    "Image": "raum-gestaltung-probst.jpg",
     "URL": ""
   },
   {
@@ -1310,7 +1310,7 @@
     "Typ": "Website",
     "Branche": "Maschinenbau / Sondertechnik",
     "Agentur": "datamints",
-    "Image": "singer-sondermaschinen.png",
+    "Image": "singer-sondermaschinen.jpg",
     "URL": ""
   },
   {
@@ -1319,7 +1319,7 @@
     "Typ": "Website",
     "Branche": "Kindergarten / Soziale Einrichtung",
     "Agentur": "datamints",
-    "Image": "spatzennest-ev.png",
+    "Image": "spatzennest-ev.jpg",
     "URL": ""
   },
   {
@@ -1328,7 +1328,7 @@
     "Typ": "Website",
     "Branche": "Elektronik / Industrie",
     "Agentur": "datamints",
-    "Image": "ic-elektronik.png",
+    "Image": "ic-elektronik.jpg",
     "URL": ""
   },
   {
@@ -1337,7 +1337,7 @@
     "Typ": "Website",
     "Branche": "Photovoltaik / Technik",
     "Agentur": "datamints",
-    "Image": "solar-tc.png",
+    "Image": "solar-tc.jpg",
     "URL": ""
   },
   {
@@ -1346,7 +1346,7 @@
     "Typ": "Website",
     "Branche": "Aquaristik / Technik",
     "Agentur": "datamints",
-    "Image": "tunze-aquairentechnik.png",
+    "Image": "tunze-aquairentechnik.jpg",
     "URL": ""
   },
   {
@@ -1355,7 +1355,7 @@
     "Typ": "Website",
     "Branche": "Sportverein",
     "Agentur": "datamints",
-    "Image": "tus-geretsried-ev.png",
+    "Image": "tus-geretsried-ev.jpg",
     "URL": ""
   },
   {
@@ -1364,7 +1364,7 @@
     "Typ": "Website",
     "Branche": "Rechtsanwälte / Kanzlei",
     "Agentur": "datamints",
-    "Image": "von-bredow-luetteke-und-partner.png",
+    "Image": "von-bredow-luetteke-und-partner.jpg",
     "URL": ""
   },
   {
@@ -1373,7 +1373,7 @@
     "Typ": "Website",
     "Branche": "Kunst / Airbrush",
     "Agentur": "datamints",
-    "Image": "janet-mattis-airbrush.png",
+    "Image": "janet-mattis-airbrush.jpg",
     "URL": ""
   },
   {
@@ -1381,8 +1381,8 @@
     "Projekttitel": "FSC Forest Stewardship Council",
     "Typ": "Website",
     "Branche": "Umwelt / NGO",
-    "Agentur": "–",
-    "Image": "fsc-forest-stewardship-council.png",
+    "Agentur": "datamints",
+    "Image": "fsc-forest-stewardship-council.jpg",
     "URL": ""
   },
   {
@@ -1391,7 +1391,7 @@
     "Typ": "Website",
     "Branche": "Handwerk / Sanitär",
     "Agentur": "datamints",
-    "Image": "gruber-hksk.png",
+    "Image": "gruber-hksk.jpg",
     "URL": ""
   },
   {
@@ -1400,7 +1400,7 @@
     "Typ": "Website",
     "Branche": "Bildung / Gesundheit",
     "Agentur": "datamints",
-    "Image": "gesundheitsakademie-mainburg.png",
+    "Image": "gesundheitsakademie-mainburg.jpg",
     "URL": ""
   },
   {
@@ -1409,7 +1409,7 @@
     "Typ": "Website",
     "Branche": "Filmproduktion",
     "Agentur": "datamitns",
-    "Image": "moviepool.png",
+    "Image": "moviepool.jpg",
     "URL": ""
   },
   {
@@ -1418,7 +1418,7 @@
     "Typ": "Website",
     "Branche": "Ausbildungsportal",
     "Agentur": "datamints",
-    "Image": "stellwerk-penzberg.png",
+    "Image": "stellwerk-penzberg.jpg",
     "URL": ""
   },
   {
@@ -1426,8 +1426,8 @@
     "Projekttitel": "Neokeltic Shop",
     "Typ": "XT-Commerce Shop",
     "Branche": "Einzelhandel",
-    "Agentur": "–",
-    "Image": "neokeltic-shop.png",
+    "Agentur": "wiredframe",
+    "Image": "neokeltic-shop.jpg",
     "URL": ""
   },
   {
@@ -1436,7 +1436,7 @@
     "Typ": "Website",
     "Branche": "Soziale Einrichtung",
     "Agentur": "datamints",
-    "Image": "diakonie-weilheim-bad-toelz.png",
+    "Image": "diakonie-weilheim-bad-toelz.jpg",
     "URL": ""
   },
   {
@@ -1445,7 +1445,7 @@
     "Typ": "Website",
     "Branche": "Inklusion / NGO",
     "Agentur": "datamints",
-    "Image": "myhandicap.png",
+    "Image": "myhandicap.jpg",
     "URL": ""
   },
   {
@@ -1454,7 +1454,7 @@
     "Typ": "Website",
     "Branche": "Bildung",
     "Agentur": "datamints",
-    "Image": "vhs-business-akademie.png",
+    "Image": "vhs-business-akademie.jpg",
     "URL": ""
   }
 ]
