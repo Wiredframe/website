@@ -132,21 +132,37 @@
 			background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%239CA3AF'%3E%3Cpath d='M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z'/%3E%3C/svg%3E");
 		}
 
-		/* Simplified native dialog styling: use ::backdrop and restrict modal content height */
+		/* Simplified native dialog styling: keep backdrop but do not override element background/padding so utility classes can style the dialog */
 		dialog#card-modal {
-			padding: 0;
-			border: 0;
-			background: transparent;
+			/* allow classes like bg-white and p-8 to apply */
+			box-sizing: border-box;
+			/* remove default outline but keep accessibility focus handling via CSS when needed */
+			outline: none;
 		}
 
 		dialog#card-modal::backdrop {
-			background: rgba(0, 0, 0, 0.25);
+			background-color: rgba(0, 0, 0, 0);
+			transition: background-color 260ms cubic-bezier(.2, .9, .3, 1), opacity 260ms ease;
+		}
+
+		dialog#card-modal.is-open::backdrop {
+			background-color: rgba(0, 0, 0, 0.25);
 		}
 
 		.modal-content {
 			border-radius: var(--rounded-lg);
 			max-height: calc(100vh - 4rem);
 			overflow: auto;
+			/* animation: start hidden (moved down + transparent). When .is-open is present it fades in and moves up to natural position */
+			opacity: 0;
+			transform: translateY(50px);
+			transition: opacity 260ms ease, transform 260ms cubic-bezier(.2, .9, .3, 1);
+		}
+
+		/* visible/open state */
+		.modal-content.is-open {
+			opacity: 1;
+			transform: translateY(0);
 		}
 
 		/* when modal open, lock page scroll by applying this class to <body> */
@@ -271,24 +287,23 @@
 		</template>
 	</main>
 	<!-- Native dialog modal for card details (updated layout) -->
-	<dialog id="card-modal" aria-hidden="true">
-		<div class="modal-content card w-[92vw] md:w-[70vw] bg-white p-8 mx-auto relative">
-			<button id="modal-close" aria-label="Schließen"
-				class="absolute top-4 right-4 z-20 w-12 h-12 rounded-full bg-white border">✕</button>
-			<div class="grid md:grid-cols-3 gap-6">
-				<div class="modal-image md:col-span-2 bg-gray-100 rounded-md h-64 md:h-[70vh]">
-					<img id="modal-img" src="" alt="" class="w-full h-auto placeholder-img" />
-				</div>
-				<div class="modal-details md:col-span-1 overflow-auto">
-					<h2 id="modal-title" class="text-4xl font-normal mb-6 md:mt-8"></h2>
-					<div id="modal-pairs" class="details flex flex-row flex-wrap gap-8   gap-y-4 text-base"></div>
-					<!-- modal navigation buttons (prev / next) -->
-					<div class="modal-nav" aria-hidden="false">
-						<button id="modal-prev" class="prev" title="Vorheriges" aria-label="Vorheriges"
-							aria-hidden="false"></button>
-						<button id="modal-next" class="next" title="Nächstes" aria-label="Nächstes"
-							aria-hidden="false"></button>
-					</div>
+	<!-- Note: modal classes are on the dialog itself to avoid extra wrapping and enable smooth transitions -->
+	<dialog id="card-modal" class="modal-content card md:w-[80vw] bg-white p-8 mx-auto relative" aria-hidden="true">
+		<button id="modal-close" aria-label="Schließen"
+			class="absolute top-4 right-4 z-20 w-12 h-12 rounded-full bg-white border">✕</button>
+		<div class="grid md:grid-cols-3 gap-6">
+			<div class="modal-image md:col-span-2 bg-gray-100 rounded-md h-64 md:h-[70vh]">
+				<img id="modal-img" src="" alt="" class="w-full h-auto placeholder-img" />
+			</div>
+			<div class="modal-details md:col-span-1 overflow-auto">
+				<h2 id="modal-title" class="text-3xl md:text-4xl font-normal mb-6 md:mt-8"></h2>
+				<div id="modal-pairs" class="details flex flex-row flex-wrap gap-8   gap-y-4 text-base"></div>
+				<!-- modal navigation buttons (prev / next) -->
+				<div class="modal-nav" aria-hidden="false">
+					<button id="modal-prev" class="prev" title="Vorheriges" aria-label="Vorheriges"
+						aria-hidden="false"></button>
+					<button id="modal-next" class="next" title="Nächstes" aria-label="Nächstes"
+						aria-hidden="false"></button>
 				</div>
 			</div>
 		</div>
@@ -478,8 +493,19 @@
 				if (idx < 0) idx = currentList.length - 1; if (idx >= currentList.length) idx = 0;
 				_currentIndex = idx;
 				populateModalFromItem(currentList[_currentIndex]);
-				if (typeof dialog.showModal === 'function' && !dialog.open) { dialog.showModal(); dialog.setAttribute('aria-hidden', 'false'); lockBodyScroll(); }
-				else if (!dialog.open) { dialog.style.display = 'block'; lockBodyScroll(); }
+				const openDialog = () => {
+					if (typeof dialog.showModal === 'function' && !dialog.open) dialog.showModal();
+					else dialog.style.display = 'block';
+					dialog.setAttribute('aria-hidden', 'false');
+					lockBodyScroll();
+					// ensure DOM cycle then add class to trigger transition on the dialog itself
+					dialog.classList.remove('is-open');
+					requestAnimationFrame(() => requestAnimationFrame(() => {
+						dialog.classList.add('is-open');
+					}));
+				};
+
+				if (!dialog.open && !dialog.hasAttribute('data-animating')) openDialog();
 			}
 
 			function modalPrev() { showModalAtIndex(_currentIndex - 1); }
@@ -502,11 +528,33 @@
 					if (e.key === 'ArrowLeft') { e.preventDefault(); modalPrev(); }
 					if (e.key === 'ArrowRight') { e.preventDefault(); modalNext(); }
 				}
-				if (e.key === 'Escape' && dialog && dialog.open) { if (typeof dialog.close === 'function') dialog.close(); dialog.setAttribute('aria-hidden', 'true'); unlockBodyScroll(); }
+				if (e.key === 'Escape' && dialog && dialog.open) {
+					closeWithAnimation();
+				}
 			});
 
-			modalClose.addEventListener('click', () => { if (typeof dialog.close === 'function') dialog.close(); dialog.setAttribute('aria-hidden', 'true'); unlockBodyScroll(); });
-			dialog.addEventListener('click', (e) => { if (e.target === dialog) { if (typeof dialog.close === 'function') dialog.close(); dialog.setAttribute('aria-hidden', 'true'); unlockBodyScroll(); } });
+			// Close with animation: remove is-open to start closing transition, then close dialog after transitionend
+			function closeWithAnimation() {
+				const modal = dialog; // dialog now holds animation classes directly
+				if (!modal) { if (typeof dialog.close === 'function') dialog.close(); dialog.setAttribute('aria-hidden', 'true'); unlockBodyScroll(); return; }
+				if (dialog.hasAttribute('data-animating')) return; // already closing/opening
+				dialog.setAttribute('data-animating', 'true');
+				modal.classList.remove('is-open');
+				const onEnd = (ev) => {
+					if (ev.target !== modal) return;
+					modal.removeEventListener('transitionend', onEnd);
+					dialog.removeAttribute('data-animating');
+					if (typeof dialog.close === 'function') dialog.close();
+					dialog.setAttribute('aria-hidden', 'true');
+					unlockBodyScroll();
+				};
+				modal.addEventListener('transitionend', onEnd);
+				// fallback: ensure close after timeout even if transitionend doesn't fire
+				setTimeout(() => { if (dialog.hasAttribute('data-animating')) onEnd({ target: modal }); }, 400);
+			}
+
+			modalClose.addEventListener('click', closeWithAnimation);
+			dialog.addEventListener('click', (e) => { if (e.target === dialog) closeWithAnimation(); });
 
 		})();
 	</script>
