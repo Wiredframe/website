@@ -416,7 +416,7 @@ button {
 
 .subtitle {
 	padding-top: var(--spacing-lg);
-	font-size: var(--font-size-xl);
+	font-size: var(--font-size-2xl);
 	color: var(--color-accent);
 }
 
