@@ -231,340 +231,456 @@
 			aspect-ratio: auto;
 			contain-intrinsic-size: auto;
 		}
+
+		/* Password protection overlay */
+		#pw-overlay {
+			position: fixed;
+			inset: 0;
+			z-index: 99999;
+			background: #f3f4f6;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		#pw-overlay.hidden {
+			display: none;
+		}
+
+		#pw-box {
+			background: white;
+			padding: 2rem;
+			border-radius: 18px;
+			box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+			text-align: center;
+			max-width: 320px;
+			width: 90%;
+		}
+
+		#pw-box h2 {
+			margin: 0 0 0.5rem;
+			font-size: 1.25rem;
+			font-weight: 500;
+		}
+
+		#pw-box p {
+			margin: 0 0 1rem;
+			font-size: 0.875rem;
+			color: #6b7280;
+		}
+
+		#pw-input {
+			width: 100%;
+			padding: 0.75rem 1rem;
+			border: 1px solid #e5e7eb;
+			border-radius: 9999px;
+			margin-bottom: 0.75rem;
+			font-size: 1rem;
+		}
+
+		#pw-input:focus {
+			outline: none;
+			border-color: #3ff390;
+		}
+
+		#pw-submit {
+			width: 100%;
+			padding: 0.75rem;
+			background: #3ff390;
+			border: none;
+			border-radius: 9999px;
+			font-size: 1rem;
+			cursor: pointer;
+		}
+
+		#pw-submit:hover {
+			background: #36ce7a;
+		}
+
+		#pw-error {
+			color: #ef4444;
+			font-size: 0.875rem;
+			margin-top: 0.5rem;
+			display: none;
+		}
+
+		#main-content {
+			display: none;
+		}
+
+		#main-content.visible {
+			display: block;
+		}
 	</style>
 </head>
 
 <body class="bg-gray-100 text-gray-900 no-shadow">
-	<main class="max-w-6xl mx-auto px-6 py-12">
-		<header class="mb-8">
-			<h1 class="text-6xl font-regular">Projekte</h1>
-			<p class="text-sm text-gray-600 mt-1">Eine Auswahl meiner Projekte. Filtere live nach Jahr, Typ oder
-				Branche. </p>
-		</header>
-		<section class="mb-6">
-			<div class="flex flex-wrap gap-3 items-center filter-bar">
-				<input id="search" type="search" placeholder="Suche Projekt, Agentur…"
-					class="w-full md:w-64 px-4 h-12 text-base rounded-full border border-gray-200 bg-white placeholder-gray-400"
-					aria-label="Suche Referenzen">
-				<select id="filter-year"
-					class="w-full sm:w-auto md:w-48 px-4 pr-10 h-12 text-base rounded-full border border-gray-200 bg-white"
-					aria-label="Filter Jahr">
-					<option value="">Alle Jahre</option>
-				</select>
-				<select id="filter-type"
-					class="w-full sm:w-auto md:w-48 px-4 pr-10 h-12 text-base rounded-full border border-gray-200 bg-white"
-					aria-label="Filter Typ">
-					<option value="">Alle Typen</option>
-				</select>
-				<select id="filter-branch"
-					class="w-full sm:w-auto md:w-48 px-4 pr-10 h-12 text-base rounded-full border border-gray-200 bg-white"
-					aria-label="Filter Branche">
-					<option value="">Alle Branchen</option>
-				</select>
-				<button id="clear" type="button"
-					class="px-5 h-12 text-base rounded-full bg-[#3ff390] hover:bg-[#36ce7a] text-gray-600">Zurücksetzen</button>
-			</div>
-			<!-- Results count -->
-			<div id="results-count" class="mt-3 text-sm text-gray-600" role="status" aria-live="polite">Lade Referenzen…
-			</div>
-		</section>
-		<div id="grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
-		<!-- sentinel for infinite scroll -->
-		<div id="scroll-sentinel" class="h-8"></div>
-		<template id="card-template">
-			<article class="card border border-gray-100 p-4 bg-white group">
-				<div class="w-full aspect-square bg-gray-100 rounded-md mb-4 overflow-hidden">
-					<img src="" alt="Projektbild" class="w-full h-full object-cover object-top placeholder-img"
-						loading="lazy" decoding="async" fetchpriority="low" />
-				</div>
-				<h3 class="text-lg font-medium project-title"></h3>
-				<p class="text-sm text-gray-500 mt-1 project-meta"></p>
-				<div class="mt-3 flex gap-2 flex-wrap">
-					<span class="text-xs text-gray-600 px-3 py-1 border border-gray-200 pill agency"></span>
-					<span class="text-xs text-gray-600 px-3 py-1 border border-gray-200 pill type"></span>
-				</div>
-			</article>
-		</template>
-	</main>
-	<!-- Native dialog modal for card details (updated layout) -->
-	<!-- Note: modal classes are on the dialog itself to avoid extra wrapping and enable smooth transitions -->
-	<dialog id="card-modal" class="modal-content card md:w-[80vw] bg-white p-8 mx-auto relative" aria-hidden="true">
-		<button id="modal-close" aria-label="Schließen"
-			class="absolute top-4 right-4 z-20 w-12 h-12 rounded-full bg-white border">✕</button>
-		<div class="grid md:grid-cols-3 gap-6">
-			<div class="modal-image md:col-span-2 bg-gray-100 rounded-md h-64 md:h-[80vh]">
-				<img id="modal-img" src="" alt="" class="w-full h-auto placeholder-img" />
-			</div>
-			<div class="modal-details md:col-span-1 overflow-auto">
-				<h2 id="modal-title" class="text-3xl md:text-4xl font-normal mb-6 md:mt-8"></h2>
-				<div id="modal-pairs" class="details flex flex-row flex-wrap gap-8   gap-y-4 text-base"></div>
-				<!-- modal navigation buttons (prev / next) -->
-				<div class="modal-nav" aria-hidden="false">
-					<button id="modal-prev" class="prev" title="Vorheriges" aria-label="Vorheriges"
-						aria-hidden="false"></button>
-					<button id="modal-next" class="next" title="Nächstes" aria-label="Nächstes"
-						aria-hidden="false"></button>
-				</div>
-			</div>
+	<!-- Password Protection Overlay -->
+	<div id="pw-overlay">
+		<div id="pw-box">
+			<h2>Geschützter Bereich</h2>
+			<p>Diese Seite ist passwortgeschützt.</p>
+			<form id="pw-form">
+				<input type="password" id="pw-input" placeholder="Passwort eingeben" autocomplete="off">
+				<button type="submit" id="pw-submit">Zugang</button>
+				<div id="pw-error">Falsches Passwort</div>
+			</form>
 		</div>
-	</dialog>
+	</div>
+	<div id="main-content">
+		<main class="max-w-6xl mx-auto px-6 py-12">
+			<header class="mb-8">
+				<h1 class="text-6xl font-regular">Projekte</h1>
+				<p class="text-sm text-gray-600 mt-1">Eine Auswahl meiner Projekte. Filtere live nach Jahr, Typ oder
+					Branche. </p>
+			</header>
+			<section class="mb-6">
+				<div class="flex flex-wrap gap-3 items-center filter-bar">
+					<input id="search" type="search" placeholder="Suche Projekt, Agentur…"
+						class="w-full md:w-64 px-4 h-12 text-base rounded-full border border-gray-200 bg-white placeholder-gray-400"
+						aria-label="Suche Referenzen">
+					<select id="filter-year"
+						class="w-full sm:w-auto md:w-48 px-4 pr-10 h-12 text-base rounded-full border border-gray-200 bg-white"
+						aria-label="Filter Jahr">
+						<option value="">Alle Jahre</option>
+					</select>
+					<select id="filter-type"
+						class="w-full sm:w-auto md:w-48 px-4 pr-10 h-12 text-base rounded-full border border-gray-200 bg-white"
+						aria-label="Filter Typ">
+						<option value="">Alle Typen</option>
+					</select>
+					<select id="filter-branch"
+						class="w-full sm:w-auto md:w-48 px-4 pr-10 h-12 text-base rounded-full border border-gray-200 bg-white"
+						aria-label="Filter Branche">
+						<option value="">Alle Branchen</option>
+					</select>
+					<button id="clear" type="button"
+						class="px-5 h-12 text-base rounded-full bg-[#3ff390] hover:bg-[#36ce7a] text-gray-600">Zurücksetzen</button>
+				</div>
+				<!-- Results count -->
+				<div id="results-count" class="mt-3 text-sm text-gray-600" role="status" aria-live="polite">Lade
+					Referenzen… </div>
+			</section>
+			<div id="grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+			<!-- sentinel for infinite scroll -->
+			<div id="scroll-sentinel" class="h-8"></div>
+			<template id="card-template">
+				<article class="card border border-gray-100 p-4 bg-white group">
+					<div class="w-full aspect-square bg-gray-100 rounded-md mb-4 overflow-hidden">
+						<img src="" alt="Projektbild" class="w-full h-full object-cover object-top placeholder-img"
+							loading="lazy" decoding="async" fetchpriority="low" />
+					</div>
+					<h3 class="text-lg font-medium project-title"></h3>
+					<p class="text-sm text-gray-500 mt-1 project-meta"></p>
+					<div class="mt-3 flex gap-2 flex-wrap">
+						<span class="text-xs text-gray-600 px-3 py-1 border border-gray-200 pill agency"></span>
+						<span class="text-xs text-gray-600 px-3 py-1 border border-gray-200 pill type"></span>
+					</div>
+				</article>
+			</template>
+		</main>
+		<!-- Native dialog modal for card details (updated layout) -->
+		<!-- Note: modal classes are on the dialog itself to avoid extra wrapping and enable smooth transitions -->
+		<dialog id="card-modal" class="modal-content card md:w-[80vw] bg-white p-8 mx-auto relative" aria-hidden="true">
+			<button id="modal-close" aria-label="Schließen"
+				class="absolute top-4 right-4 z-20 w-12 h-12 rounded-full bg-white border">✕</button>
+			<div class="grid md:grid-cols-3 gap-6">
+				<div class="modal-image md:col-span-2 bg-gray-100 rounded-md h-64 md:h-[80vh]">
+					<img id="modal-img" src="" alt="" class="w-full h-auto placeholder-img" />
+				</div>
+				<div class="modal-details md:col-span-1 overflow-auto">
+					<h2 id="modal-title" class="text-3xl md:text-4xl font-normal mb-6 md:mt-8"></h2>
+					<div id="modal-pairs" class="details flex flex-row flex-wrap gap-8   gap-y-4 text-base"></div>
+					<!-- modal navigation buttons (prev / next) -->
+					<div class="modal-nav" aria-hidden="false">
+						<button id="modal-prev" class="prev" title="Vorheriges" aria-label="Vorheriges"
+							aria-hidden="false"></button>
+						<button id="modal-next" class="next" title="Nächstes" aria-label="Nächstes"
+							aria-hidden="false"></button>
+					</div>
+				</div>
+			</div>
+		</dialog>
+		<script>
+			// Compact, delegated version of the original script
+			(async function () {
+				// --- helpers ---
+				async function loadData() {
+					try {
+						const res = await fetch('data/references.json');
+						if (!res.ok) throw new Error('No file');
+						return await res.json();
+					} catch (e) {
+						return [{ Jahr: '', Projekttitel: 'No entries found', Typ: '', Branche: '', Agentur: '' }];
+					}
+				}
+
+				function createOption(select, value) {
+					const opt = document.createElement('option'); opt.value = value; opt.textContent = value; select.appendChild(opt);
+				}
+
+				function uniqueSorted(arr) { return Array.from(new Set(arr.filter(Boolean))).sort((a, b) => b.localeCompare(a)); }
+
+				function placeholderImage(title) {
+					const safe = (title || '').trim();
+					const initials = safe ? safe.split(/\s+/).slice(0, 2).map(w => w[0] || '').join('').toUpperCase() : '?';
+					const svg = `<?xml version='1.0' encoding='utf-8'?><svg xmlns='http://www.w3.org/2000/svg' width='800' height='600'><rect width='100%' height='100%' fill='#ffffff'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='#e5e7eb' font-family='Maven Pro, Arial' font-size='96'>${initials}</text></svg>`;
+					return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
+				}
+
+				function slugify(title) {
+					if (!title) return '';
+					return title.trim().toLowerCase()
+						.replace(/ä/g, 'ae').replace(/ö/g, 'oe').replace(/ü/g, 'ue').replace(/ß/g, 'ss')
+						.replace(/&/g, 'and')
+						.replace(/[\s\/\\]+/g, '-')
+						.replace(/[^a-z0-9\-]/g, '')
+						.replace(/-+/g, '-')
+						.replace(/^-+|-+$/g, '');
+				}
+
+				function normalizeUrl(raw) {
+					try {
+						const trimmed = String(raw).trim();
+						if (/^[a-zA-Z][a-zA-Z0-9+.-]*:/.test(trimmed)) return trimmed;
+						return 'https://' + trimmed;
+					} catch (e) { return raw; }
+				}
+
+				function debounce(fn, wait) { let t; return function (...args) { clearTimeout(t); t = setTimeout(() => fn.apply(this, args), wait); }; }
+
+				// --- state ---
+				const data = await loadData();
+				data.sort((a, b) => (parseInt(b.Jahr) || 0) - (parseInt(a.Jahr) || 0));
+				const PAGE_SIZE = 24;
+				let currentList = [];
+				let renderedCount = 0;
+				let _currentIndex = -1;
+
+				// --- DOM refs ---
+				const grid = document.getElementById('grid');
+				const tmpl = document.getElementById('card-template');
+				const search = document.getElementById('search');
+				const filterYear = document.getElementById('filter-year');
+				const filterType = document.getElementById('filter-type');
+				const filterBranch = document.getElementById('filter-branch');
+				const clear = document.getElementById('clear');
+				const resultsCountEl = document.getElementById('results-count');
+				const sentinel = document.getElementById('scroll-sentinel');
+				const dialog = document.getElementById('card-modal');
+				const modalImg = document.getElementById('modal-img');
+				const modalTitle = document.getElementById('modal-title');
+				const modalPairs = document.getElementById('modal-pairs');
+				const modalClose = document.getElementById('modal-close');
+				const modalPrevBtn = document.getElementById('modal-prev');
+				const modalNextBtn = document.getElementById('modal-next');
+
+				// --- populate filters ---
+				uniqueSorted(data.map(d => d.Jahr).filter(v => v && String(v).trim() !== '')).forEach(y => createOption(filterYear, y));
+				uniqueSorted(data.map(d => d.Typ).filter(v => v && String(v).trim() !== '')).forEach(t => createOption(filterType, t));
+				uniqueSorted(data.map(d => d.Branche).filter(v => v && String(v).trim() !== '')).forEach(b => createOption(filterBranch, b));
+
+				// --- image handlers (shared) ---
+				function handleImageLoad(e) { e.currentTarget.classList.add('is-loaded'); }
+				function handleImageError(e) { const img = e.currentTarget; img.onerror = null; img.src = placeholderImage(img.alt || ''); img.classList.add('is-loaded'); }
+
+				// --- rendering ---
+				function renderPage(items) {
+					const frag = document.createDocumentFragment();
+					items.forEach((item, i) => {
+						const node = tmpl.content.cloneNode(true);
+						const article = node.querySelector('article');
+						const img = node.querySelector('img');
+						const titleEl = node.querySelector('.project-title');
+						const metaEl = node.querySelector('.project-meta');
+						const agencyEl = node.querySelector('.agency');
+						const typeEl = node.querySelector('.type');
+
+						titleEl.textContent = item.Projekttitel || 'Untitled';
+						metaEl.textContent = [item.Jahr, item.Branche].filter(Boolean).join(' • ');
+						agencyEl.textContent = item.Agentur || '–';
+						typeEl.textContent = item.Typ || '–';
+
+						img.alt = item.Projekttitel || '';
+						const imageFile = item.Image || (slugify(item.Projekttitel) + '.jpg');
+						const imagePath = imageFile ? `images/referenzen/${imageFile}` : '';
+						if (imagePath) { img.classList.remove('is-loaded'); img.onload = handleImageLoad; img.onerror = handleImageError; img.src = imagePath; }
+						else { img.src = placeholderImage(item.Projekttitel); img.classList.add('is-loaded'); }
+
+						article.dataset.index = renderedCount + i;
+						article.dataset.image = imagePath || '';
+						article.dataset.title = item.Projekttitel || '';
+						article.dataset.jahr = item.Jahr || '';
+						article.dataset.typ = item.Typ || '';
+						article.dataset.branche = item.Branche || '';
+						article.dataset.agentur = item.Agentur || '';
+						article.dataset.url = (item.URL || item.url || '').trim();
+						article.classList.add('clickable-url');
+
+						frag.appendChild(article);
+					});
+					grid.appendChild(frag);
+				}
+
+				function render(list) {
+					currentList = list || [];
+					renderedCount = 0;
+					grid.innerHTML = '';
+					const total = data.length || 0;
+					if (resultsCountEl) resultsCountEl.textContent = `${currentList.length} von ${total} Referenzen`;
+					if (!currentList.length) { grid.innerHTML = '<p class="text-gray-500">Keine Projekte gefunden.</p>'; sentinel.style.display = 'none'; return; }
+					renderMore();
+				}
+
+				function renderMore() {
+					const next = currentList.slice(renderedCount, renderedCount + PAGE_SIZE);
+					if (!next.length) { sentinel.style.display = 'none'; return; }
+					renderPage(next);
+					renderedCount += next.length;
+					sentinel.style.display = renderedCount < currentList.length ? 'block' : 'none';
+				}
+
+				const io = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) renderMore(); }); }, { root: null, rootMargin: '400px', threshold: 0 });
+				io.observe(sentinel);
+
+				// --- filtering ---
+				function applyFilters() {
+					const q = search.value.trim().toLowerCase();
+					const y = filterYear.value; const t = filterType.value; const b = filterBranch.value;
+					let filtered = data.filter(d => {
+						if (y && d.Jahr !== y) return false; if (t && d.Typ !== t) return false; if (b && d.Branche !== b) return false;
+						if (q) { const hay = (d.Projekttitel + ' ' + (d.Agentur || '') + ' ' + (d.Typ || '') + ' ' + (d.Branche || '')).toLowerCase(); return hay.indexOf(q) !== -1; }
+						return true;
+					});
+					filtered = filtered.sort((a, b) => (parseInt(b && b.Jahr) || 0) - (parseInt(a && a.Jahr) || 0));
+					render(filtered);
+				}
+
+				search.addEventListener('input', debounce(applyFilters, 250));
+				const selectHandler = debounce(applyFilters, 120);
+				[filterYear, filterType, filterBranch].forEach(el => el.addEventListener('change', selectHandler));
+				clear.addEventListener('click', () => { search.value = ''; filterYear.value = ''; filterType.value = ''; filterBranch.value = ''; applyFilters(); });
+
+				render(data);
+
+				// --- modal & interactions (delegated) ---
+				function lockBodyScroll() { const y = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0; document.body.classList.add('modal-scroll-lock'); document.body.style.top = `-${y}px`; document._modalScrollY = y; }
+				function unlockBodyScroll() { document.body.classList.remove('modal-scroll-lock'); document.body.style.top = ''; window.scrollTo(0, document._modalScrollY || 0); }
+
+				function populateModalFromItem(item) {
+					modalTitle.textContent = item.Projekttitel || '';
+					const imgPath = item.Image || (slugify(item.Projekttitel) + '.jpg');
+					const imagePath = imgPath ? `images/referenzen/${imgPath}` : '';
+					modalImg.alt = item.Projekttitel || '';
+					modalImg.classList.remove('is-loaded'); modalImg.onload = handleImageLoad; modalImg.onerror = handleImageError;
+					modalImg.src = imagePath || placeholderImage(item.Projekttitel);
+					modalPairs.innerHTML = '';
+					[['Jahr', item.Jahr || '–'], ['Agentur', item.Agentur || '–'], ['Typ', item.Typ || '–'], ['Branche', item.Branche || '–']]
+						.forEach(([k, v]) => { const el = document.createElement('div'); el.className = 'pair flex items-baseline gap-1 flex-col'; el.innerHTML = `<div class="key text-sm text-gray-500">${k}</div><div class="value text-base text-gray-700">${v}</div>`; modalPairs.appendChild(el); });
+					const rawUrl = item.URL || item.url || '';
+					if (rawUrl && String(rawUrl).trim()) { const raw = String(rawUrl).trim(); const href = normalizeUrl(raw); const isFigma = /figma\.com/i.test(href); const el = document.createElement('div'); el.className = 'pair flex items-baseline gap-1 flex-col'; el.innerHTML = `<div class="key text-sm text-gray-500">Website</div><div class="value text-base"><a class="text-base text-gray-700 underline" target="_blank" rel="noopener noreferrer" href="${href}">${isFigma ? 'Figma Prototype' : raw}</a></div>`; modalPairs.appendChild(el); }
+				}
+
+				function showModalAtIndex(idx) {
+					if (!Array.isArray(currentList) || !currentList.length) return;
+					if (idx < 0) idx = currentList.length - 1; if (idx >= currentList.length) idx = 0;
+					_currentIndex = idx;
+					populateModalFromItem(currentList[_currentIndex]);
+					const openDialog = () => {
+						// Lock scroll first to preserve current viewport position, then show the dialog.
+						lockBodyScroll();
+						if (typeof dialog.showModal === 'function' && !dialog.open) dialog.showModal();
+						else dialog.style.display = 'block';
+						dialog.setAttribute('aria-hidden', 'false');
+						// ensure DOM cycle then add class to trigger transition on the dialog itself
+						dialog.classList.remove('is-open');
+						requestAnimationFrame(() => requestAnimationFrame(() => {
+							dialog.classList.add('is-open');
+						}));
+					};
+
+					if (!dialog.open && !dialog.hasAttribute('data-animating')) openDialog();
+				}
+
+				function modalPrev() { showModalAtIndex(_currentIndex - 1); }
+				function modalNext() { showModalAtIndex(_currentIndex + 1); }
+
+				// delegated click handler for cards
+				grid.addEventListener('click', (e) => {
+					const article = e.target.closest('article');
+					if (!article || !grid.contains(article)) return;
+					e.preventDefault();
+					const idx = parseInt(article.dataset.index, 10);
+					if (!Number.isNaN(idx)) showModalAtIndex(idx);
+				});
+
+				if (modalPrevBtn) modalPrevBtn.addEventListener('click', (e) => { e.stopPropagation(); modalPrev(); });
+				if (modalNextBtn) modalNextBtn.addEventListener('click', (e) => { e.stopPropagation(); modalNext(); });
+
+				document.addEventListener('keydown', (e) => {
+					if (dialog && dialog.open) {
+						if (e.key === 'ArrowLeft') { e.preventDefault(); modalPrev(); }
+						if (e.key === 'ArrowRight') { e.preventDefault(); modalNext(); }
+					}
+					if (e.key === 'Escape' && dialog && dialog.open) {
+						closeWithAnimation();
+					}
+				});
+
+				// Close with animation: remove is-open to start closing transition, then close dialog after transitionend
+				function closeWithAnimation() {
+					const modal = dialog; // dialog now holds animation classes directly
+					if (!modal) { if (typeof dialog.close === 'function') dialog.close(); dialog.setAttribute('aria-hidden', 'true'); unlockBodyScroll(); return; }
+					if (dialog.hasAttribute('data-animating')) return; // already closing/opening
+					dialog.setAttribute('data-animating', 'true');
+					modal.classList.remove('is-open');
+					const onEnd = (ev) => {
+						if (ev.target !== modal) return;
+						modal.removeEventListener('transitionend', onEnd);
+						dialog.removeAttribute('data-animating');
+						if (typeof dialog.close === 'function') dialog.close();
+						dialog.setAttribute('aria-hidden', 'true');
+						unlockBodyScroll();
+					};
+					modal.addEventListener('transitionend', onEnd);
+					// fallback: ensure close after timeout even if transitionend doesn't fire
+					setTimeout(() => { if (dialog.hasAttribute('data-animating')) onEnd({ target: modal }); }, 400);
+				}
+
+				modalClose.addEventListener('click', closeWithAnimation);
+				dialog.addEventListener('click', (e) => { if (e.target === dialog) closeWithAnimation(); });
+
+			})();
+		</script>
+		<footer role="contentinfo" class="mt-8 text-center py-8">
+			<p class="text-xs text-gray-500 leading-none"> Made with <span aria-hidden="true">♥</span> and GitHub
+				Copilot by <a href="https://www.wiredframe.de" target="_blank" rel="noopener noreferrer"
+					class="text-gray-600 hover:underline"> wiredframe </a>
+			</p>
+		</footer>
+	</div><!-- /#main-content -->
 	<script>
-		// Compact, delegated version of the original script
-		(async function () {
-			// --- helpers ---
-			async function loadData() {
-				try {
-					const res = await fetch('data/references.json');
-					if (!res.ok) throw new Error('No file');
-					return await res.json();
-				} catch (e) {
-					return [{ Jahr: '', Projekttitel: 'No entries found', Typ: '', Branche: '', Agentur: '' }];
-				}
+		(function () {
+			const HASH = 'd2lyZWRmcmFtZTIwMjY='; // base64 encoded password
+			const stored = sessionStorage.getItem('pw_ok');
+			if (stored === HASH) {
+				document.getElementById('pw-overlay').classList.add('hidden');
+				document.getElementById('main-content').classList.add('visible');
 			}
-
-			function createOption(select, value) {
-				const opt = document.createElement('option'); opt.value = value; opt.textContent = value; select.appendChild(opt);
-			}
-
-			function uniqueSorted(arr) { return Array.from(new Set(arr.filter(Boolean))).sort((a, b) => b.localeCompare(a)); }
-
-			function placeholderImage(title) {
-				const safe = (title || '').trim();
-				const initials = safe ? safe.split(/\s+/).slice(0, 2).map(w => w[0] || '').join('').toUpperCase() : '?';
-				const svg = `<?xml version='1.0' encoding='utf-8'?><svg xmlns='http://www.w3.org/2000/svg' width='800' height='600'><rect width='100%' height='100%' fill='#ffffff'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='#e5e7eb' font-family='Maven Pro, Arial' font-size='96'>${initials}</text></svg>`;
-				return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
-			}
-
-			function slugify(title) {
-				if (!title) return '';
-				return title.trim().toLowerCase()
-					.replace(/ä/g, 'ae').replace(/ö/g, 'oe').replace(/ü/g, 'ue').replace(/ß/g, 'ss')
-					.replace(/&/g, 'and')
-					.replace(/[\s\/\\]+/g, '-')
-					.replace(/[^a-z0-9\-]/g, '')
-					.replace(/-+/g, '-')
-					.replace(/^-+|-+$/g, '');
-			}
-
-			function normalizeUrl(raw) {
-				try {
-					const trimmed = String(raw).trim();
-					if (/^[a-zA-Z][a-zA-Z0-9+.-]*:/.test(trimmed)) return trimmed;
-					return 'https://' + trimmed;
-				} catch (e) { return raw; }
-			}
-
-			function debounce(fn, wait) { let t; return function (...args) { clearTimeout(t); t = setTimeout(() => fn.apply(this, args), wait); }; }
-
-			// --- state ---
-			const data = await loadData();
-			data.sort((a, b) => (parseInt(b.Jahr) || 0) - (parseInt(a.Jahr) || 0));
-			const PAGE_SIZE = 24;
-			let currentList = [];
-			let renderedCount = 0;
-			let _currentIndex = -1;
-
-			// --- DOM refs ---
-			const grid = document.getElementById('grid');
-			const tmpl = document.getElementById('card-template');
-			const search = document.getElementById('search');
-			const filterYear = document.getElementById('filter-year');
-			const filterType = document.getElementById('filter-type');
-			const filterBranch = document.getElementById('filter-branch');
-			const clear = document.getElementById('clear');
-			const resultsCountEl = document.getElementById('results-count');
-			const sentinel = document.getElementById('scroll-sentinel');
-			const dialog = document.getElementById('card-modal');
-			const modalImg = document.getElementById('modal-img');
-			const modalTitle = document.getElementById('modal-title');
-			const modalPairs = document.getElementById('modal-pairs');
-			const modalClose = document.getElementById('modal-close');
-			const modalPrevBtn = document.getElementById('modal-prev');
-			const modalNextBtn = document.getElementById('modal-next');
-
-			// --- populate filters ---
-			uniqueSorted(data.map(d => d.Jahr).filter(v => v && String(v).trim() !== '')).forEach(y => createOption(filterYear, y));
-			uniqueSorted(data.map(d => d.Typ).filter(v => v && String(v).trim() !== '')).forEach(t => createOption(filterType, t));
-			uniqueSorted(data.map(d => d.Branche).filter(v => v && String(v).trim() !== '')).forEach(b => createOption(filterBranch, b));
-
-			// --- image handlers (shared) ---
-			function handleImageLoad(e) { e.currentTarget.classList.add('is-loaded'); }
-			function handleImageError(e) { const img = e.currentTarget; img.onerror = null; img.src = placeholderImage(img.alt || ''); img.classList.add('is-loaded'); }
-
-			// --- rendering ---
-			function renderPage(items) {
-				const frag = document.createDocumentFragment();
-				items.forEach((item, i) => {
-					const node = tmpl.content.cloneNode(true);
-					const article = node.querySelector('article');
-					const img = node.querySelector('img');
-					const titleEl = node.querySelector('.project-title');
-					const metaEl = node.querySelector('.project-meta');
-					const agencyEl = node.querySelector('.agency');
-					const typeEl = node.querySelector('.type');
-
-					titleEl.textContent = item.Projekttitel || 'Untitled';
-					metaEl.textContent = [item.Jahr, item.Branche].filter(Boolean).join(' • ');
-					agencyEl.textContent = item.Agentur || '–';
-					typeEl.textContent = item.Typ || '–';
-
-					img.alt = item.Projekttitel || '';
-					const imageFile = item.Image || (slugify(item.Projekttitel) + '.jpg');
-					const imagePath = imageFile ? `images/referenzen/${imageFile}` : '';
-					if (imagePath) { img.classList.remove('is-loaded'); img.onload = handleImageLoad; img.onerror = handleImageError; img.src = imagePath; }
-					else { img.src = placeholderImage(item.Projekttitel); img.classList.add('is-loaded'); }
-
-					article.dataset.index = renderedCount + i;
-					article.dataset.image = imagePath || '';
-					article.dataset.title = item.Projekttitel || '';
-					article.dataset.jahr = item.Jahr || '';
-					article.dataset.typ = item.Typ || '';
-					article.dataset.branche = item.Branche || '';
-					article.dataset.agentur = item.Agentur || '';
-					article.dataset.url = (item.URL || item.url || '').trim();
-					article.classList.add('clickable-url');
-
-					frag.appendChild(article);
-				});
-				grid.appendChild(frag);
-			}
-
-			function render(list) {
-				currentList = list || [];
-				renderedCount = 0;
-				grid.innerHTML = '';
-				const total = data.length || 0;
-				if (resultsCountEl) resultsCountEl.textContent = `${currentList.length} von ${total} Referenzen`;
-				if (!currentList.length) { grid.innerHTML = '<p class="text-gray-500">Keine Projekte gefunden.</p>'; sentinel.style.display = 'none'; return; }
-				renderMore();
-			}
-
-			function renderMore() {
-				const next = currentList.slice(renderedCount, renderedCount + PAGE_SIZE);
-				if (!next.length) { sentinel.style.display = 'none'; return; }
-				renderPage(next);
-				renderedCount += next.length;
-				sentinel.style.display = renderedCount < currentList.length ? 'block' : 'none';
-			}
-
-			const io = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) renderMore(); }); }, { root: null, rootMargin: '400px', threshold: 0 });
-			io.observe(sentinel);
-
-			// --- filtering ---
-			function applyFilters() {
-				const q = search.value.trim().toLowerCase();
-				const y = filterYear.value; const t = filterType.value; const b = filterBranch.value;
-				let filtered = data.filter(d => {
-					if (y && d.Jahr !== y) return false; if (t && d.Typ !== t) return false; if (b && d.Branche !== b) return false;
-					if (q) { const hay = (d.Projekttitel + ' ' + (d.Agentur || '') + ' ' + (d.Typ || '') + ' ' + (d.Branche || '')).toLowerCase(); return hay.indexOf(q) !== -1; }
-					return true;
-				});
-				filtered = filtered.sort((a, b) => (parseInt(b && b.Jahr) || 0) - (parseInt(a && a.Jahr) || 0));
-				render(filtered);
-			}
-
-			search.addEventListener('input', debounce(applyFilters, 250));
-			const selectHandler = debounce(applyFilters, 120);
-			[filterYear, filterType, filterBranch].forEach(el => el.addEventListener('change', selectHandler));
-			clear.addEventListener('click', () => { search.value = ''; filterYear.value = ''; filterType.value = ''; filterBranch.value = ''; applyFilters(); });
-
-			render(data);
-
-			// --- modal & interactions (delegated) ---
-			function lockBodyScroll() { const y = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0; document.body.classList.add('modal-scroll-lock'); document.body.style.top = `-${y}px`; document._modalScrollY = y; }
-			function unlockBodyScroll() { document.body.classList.remove('modal-scroll-lock'); document.body.style.top = ''; window.scrollTo(0, document._modalScrollY || 0); }
-
-			function populateModalFromItem(item) {
-				modalTitle.textContent = item.Projekttitel || '';
-				const imgPath = item.Image || (slugify(item.Projekttitel) + '.jpg');
-				const imagePath = imgPath ? `images/referenzen/${imgPath}` : '';
-				modalImg.alt = item.Projekttitel || '';
-				modalImg.classList.remove('is-loaded'); modalImg.onload = handleImageLoad; modalImg.onerror = handleImageError;
-				modalImg.src = imagePath || placeholderImage(item.Projekttitel);
-				modalPairs.innerHTML = '';
-				[['Jahr', item.Jahr || '–'], ['Agentur', item.Agentur || '–'], ['Typ', item.Typ || '–'], ['Branche', item.Branche || '–']]
-					.forEach(([k, v]) => { const el = document.createElement('div'); el.className = 'pair flex items-baseline gap-1 flex-col'; el.innerHTML = `<div class="key text-sm text-gray-500">${k}</div><div class="value text-base text-gray-700">${v}</div>`; modalPairs.appendChild(el); });
-				const rawUrl = item.URL || item.url || '';
-				if (rawUrl && String(rawUrl).trim()) { const raw = String(rawUrl).trim(); const href = normalizeUrl(raw); const isFigma = /figma\.com/i.test(href); const el = document.createElement('div'); el.className = 'pair flex items-baseline gap-1 flex-col'; el.innerHTML = `<div class="key text-sm text-gray-500">Website</div><div class="value text-base"><a class="text-base text-gray-700 underline" target="_blank" rel="noopener noreferrer" href="${href}">${isFigma ? 'Figma Prototype' : raw}</a></div>`; modalPairs.appendChild(el); }
-			}
-
-			function showModalAtIndex(idx) {
-				if (!Array.isArray(currentList) || !currentList.length) return;
-				if (idx < 0) idx = currentList.length - 1; if (idx >= currentList.length) idx = 0;
-				_currentIndex = idx;
-				populateModalFromItem(currentList[_currentIndex]);
-				const openDialog = () => {
-					// Lock scroll first to preserve current viewport position, then show the dialog.
-					lockBodyScroll();
-					if (typeof dialog.showModal === 'function' && !dialog.open) dialog.showModal();
-					else dialog.style.display = 'block';
-					dialog.setAttribute('aria-hidden', 'false');
-					// ensure DOM cycle then add class to trigger transition on the dialog itself
-					dialog.classList.remove('is-open');
-					requestAnimationFrame(() => requestAnimationFrame(() => {
-						dialog.classList.add('is-open');
-					}));
-				};
-
-				if (!dialog.open && !dialog.hasAttribute('data-animating')) openDialog();
-			}
-
-			function modalPrev() { showModalAtIndex(_currentIndex - 1); }
-			function modalNext() { showModalAtIndex(_currentIndex + 1); }
-
-			// delegated click handler for cards
-			grid.addEventListener('click', (e) => {
-				const article = e.target.closest('article');
-				if (!article || !grid.contains(article)) return;
+			document.getElementById('pw-form').addEventListener('submit', function (e) {
 				e.preventDefault();
-				const idx = parseInt(article.dataset.index, 10);
-				if (!Number.isNaN(idx)) showModalAtIndex(idx);
-			});
-
-			if (modalPrevBtn) modalPrevBtn.addEventListener('click', (e) => { e.stopPropagation(); modalPrev(); });
-			if (modalNextBtn) modalNextBtn.addEventListener('click', (e) => { e.stopPropagation(); modalNext(); });
-
-			document.addEventListener('keydown', (e) => {
-				if (dialog && dialog.open) {
-					if (e.key === 'ArrowLeft') { e.preventDefault(); modalPrev(); }
-					if (e.key === 'ArrowRight') { e.preventDefault(); modalNext(); }
-				}
-				if (e.key === 'Escape' && dialog && dialog.open) {
-					closeWithAnimation();
+				const input = document.getElementById('pw-input').value;
+				if (btoa(input) === HASH) {
+					sessionStorage.setItem('pw_ok', HASH);
+					document.getElementById('pw-overlay').classList.add('hidden');
+					document.getElementById('main-content').classList.add('visible');
+				} else {
+					document.getElementById('pw-error').style.display = 'block';
+					document.getElementById('pw-input').value = '';
 				}
 			});
-
-			// Close with animation: remove is-open to start closing transition, then close dialog after transitionend
-			function closeWithAnimation() {
-				const modal = dialog; // dialog now holds animation classes directly
-				if (!modal) { if (typeof dialog.close === 'function') dialog.close(); dialog.setAttribute('aria-hidden', 'true'); unlockBodyScroll(); return; }
-				if (dialog.hasAttribute('data-animating')) return; // already closing/opening
-				dialog.setAttribute('data-animating', 'true');
-				modal.classList.remove('is-open');
-				const onEnd = (ev) => {
-					if (ev.target !== modal) return;
-					modal.removeEventListener('transitionend', onEnd);
-					dialog.removeAttribute('data-animating');
-					if (typeof dialog.close === 'function') dialog.close();
-					dialog.setAttribute('aria-hidden', 'true');
-					unlockBodyScroll();
-				};
-				modal.addEventListener('transitionend', onEnd);
-				// fallback: ensure close after timeout even if transitionend doesn't fire
-				setTimeout(() => { if (dialog.hasAttribute('data-animating')) onEnd({ target: modal }); }, 400);
-			}
-
-			modalClose.addEventListener('click', closeWithAnimation);
-			dialog.addEventListener('click', (e) => { if (e.target === dialog) closeWithAnimation(); });
-
 		})();
 	</script>
-	<footer role="contentinfo" class="mt-8 text-center py-8">
-		<p class="text-xs text-gray-500 leading-none"> Made with <span aria-hidden="true">♥</span> and GitHub Copilot by
-			<a href="https://www.wiredframe.de" target="_blank" rel="noopener noreferrer"
-				class="text-gray-600 hover:underline"> wiredframe </a>
-		</p>
-	</footer>
 </body>
 
 </html>

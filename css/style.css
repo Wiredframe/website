@@ -709,22 +709,9 @@ button {
 	height: 60px;
 	border-radius: 50%;
 	background: var(--color-accent);
-	transition: transform var(--transition-fast);
-	animation: back-to-top-fade linear both;
-	animation-timeline: scroll();
-	animation-range: 0 300px;
-}
-
-@keyframes back-to-top-fade {
-	from {
-		opacity: 0;
-		pointer-events: none;
-	}
-
-	to {
-		opacity: 1;
-		pointer-events: auto;
-	}
+	transition: transform var(--transition-fast), opacity 0.3s ease;
+	opacity: 0;
+	pointer-events: none;
 }
 
 .back-to-top:hover {
@@ -746,10 +733,16 @@ button {
 	}
 }
 
+/* Scroll Reveal via IntersectionObserver (konsistent in allen Browsern) */
 [data-animate] {
-	animation: scroll-reveal ease-out both;
-	animation-timeline: view();
-	animation-range: entry 0% entry 30%;
+	opacity: 0;
+	transform: translateY(40px);
+	transition: opacity 0.7s ease-out, transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+[data-animate].is-visible {
+	opacity: 1;
+	transform: translateY(0);
 }
 
 /* Staggered children */
@@ -765,34 +758,47 @@ button {
 	}
 }
 
+/* Fallback für staggered children */
 [data-animate="stagger"]>* {
-	animation: scroll-reveal-child 0.5s ease-out both;
-	animation-timeline: view();
-	animation-range: entry 0% entry 40%;
+	opacity: 0;
+	transform: translateY(20px);
+	transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
-[data-animate="stagger"]>*:nth-child(1) {
-	animation-delay: 0s;
+[data-animate="stagger"].is-visible>*:nth-child(1) {
+	opacity: 1;
+	transform: translateY(0);
+	transition-delay: 0s;
 }
 
-[data-animate="stagger"]>*:nth-child(2) {
-	animation-delay: 0.1s;
+[data-animate="stagger"].is-visible>*:nth-child(2) {
+	opacity: 1;
+	transform: translateY(0);
+	transition-delay: 0.1s;
 }
 
-[data-animate="stagger"]>*:nth-child(3) {
-	animation-delay: 0.2s;
+[data-animate="stagger"].is-visible>*:nth-child(3) {
+	opacity: 1;
+	transform: translateY(0);
+	transition-delay: 0.15s;
 }
 
-[data-animate="stagger"]>*:nth-child(4) {
-	animation-delay: 0.3s;
+[data-animate="stagger"].is-visible>*:nth-child(4) {
+	opacity: 1;
+	transform: translateY(0);
+	transition-delay: 0.2s;
 }
 
-[data-animate="stagger"]>*:nth-child(5) {
-	animation-delay: 0.4s;
+[data-animate="stagger"].is-visible>*:nth-child(5) {
+	opacity: 1;
+	transform: translateY(0);
+	transition-delay: 0.25s;
 }
 
-[data-animate="stagger"]>*:nth-child(6) {
-	animation-delay: 0.5s;
+[data-animate="stagger"].is-visible>*:nth-child(6) {
+	opacity: 1;
+	transform: translateY(0);
+	transition-delay: 0.3s;
 }
 
 /* ===========================================
