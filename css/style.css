@@ -123,7 +123,6 @@ button {
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	min-height: 100vh;
 	padding: var(--spacing-xl) 0 var(--spacing-2xl);
 }
 
@@ -405,7 +404,6 @@ button {
    =========================================== */
 .heading {
 	max-width: 950px;
-	margin-top: var(--spacing-lg);
 	font-size: var(--font-size-4xl);
 	font-weight: 500;
 	line-height: 1.1;
@@ -462,7 +460,6 @@ button {
    =========================================== */
 .btn {
 	display: inline-block;
-	margin-top: 40px;
 	padding: var(--spacing-xs) var(--spacing-sm);
 	border: 3px solid var(--color-primary);
 	border-radius: var(--border-radius);
@@ -609,7 +606,6 @@ button {
 	flex-wrap: wrap;
 	justify-content: center;
 	gap: var(--spacing-md);
-	margin-bottom: 48px;
 }
 
 .contact-btn__icon {
@@ -846,6 +842,10 @@ button {
    Responsive: Tablet (max 991px)
    =========================================== */
 @media (max-width: 991px) {
+	.section {
+		padding: var(--spacing-lg) 0 var(--spacing-xl);
+	}
+
 	.section--dark {
 		margin-inline: var(--spacing-sm);
 	}
@@ -960,10 +960,6 @@ button {
    Responsive: Mobile (max 767px)
    =========================================== */
 @media (max-width: 767px) {
-	.section {
-		min-height: auto;
-	}
-
 	.heading {
 		font-size: 50px;
 		text-align: center;
