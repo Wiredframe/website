@@ -45,14 +45,14 @@
 
 				// Nutze window.scrollTo statt scrollIntoView (Chrome-kompatibler)
 				const top = targetElement.getBoundingClientRect().top + window.pageYOffset;
-				
+
 				// Temporär CSS smooth deaktivieren, dann JS smooth nutzen
 				document.documentElement.style.scrollBehavior = 'auto';
 				window.scrollTo({
 					top: top,
 					behavior: 'smooth'
 				});
-				
+
 				// CSS smooth wieder aktivieren nach Animation
 				setTimeout(() => {
 					document.documentElement.style.scrollBehavior = '';
@@ -106,7 +106,7 @@
 			if (!startTime) startTime = timestamp;
 			const progress = Math.min((timestamp - startTime) / duration, 1);
 			const current = Math.floor(start + diff * easeOut(progress));
-			el.textContent = current.toLocaleString('de-DE');
+			el.textContent = current;
 
 			if (progress < 1) {
 				requestAnimationFrame(step);
