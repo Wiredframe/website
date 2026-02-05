@@ -846,6 +846,10 @@ button {
 		padding: var(--spacing-lg) 0 var(--spacing-xl);
 	}
 
+	.section--hero {
+		padding-top: 0;
+	}
+
 	.section--dark {
 		margin-inline: var(--spacing-sm);
 	}
@@ -1060,6 +1064,6 @@ button {
 	}
 
 	.section--hero {
-		padding-bottom: var(--spacing-xl);
+		padding-top: 0;
 	}
 }
