@@ -129,6 +129,8 @@ button {
 
 .section--dark {
 	background: var(--color-primary);
+	border-radius: var(--border-radius);
+	margin-inline: var(--spacing-xl);
 }
 
 .section--hero {
@@ -662,19 +664,26 @@ button {
 
 .retro__link {
 	font-family: 'Courier New', monospace;
-	color: var(--color-white);
+	color: inherit;
 }
 
 /* ===========================================
    BLOCK: Footer
    =========================================== */
 .footer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: var(--spacing-lg);
+	width: 100%;
+	margin-top: 3rem;
+	padding-bottom: 3rem;
 	font-size: var(--font-size-sm);
 	color: var(--color-primary);
 }
 
 .footer__link {
-	color: var(--color-white);
+	color: inherit;
 }
 
 .footer__link:hover {
@@ -837,6 +846,10 @@ button {
    Responsive: Tablet (max 991px)
    =========================================== */
 @media (max-width: 991px) {
+	.section--dark {
+		margin-inline: var(--spacing-sm);
+	}
+
 	.nav__menu {
 		display: flex;
 		position: absolute;
