@@ -2,28 +2,11 @@
 <html lang="de">
 
 <head>
-	<!--
-	  Seitenbeschreibung / Funktionalität (kurz & vollständig):
-	  - Lädt Referenzdaten aus `data/references.json` (Fallback: eine "No entries found"-Kachel).
-	  - Baut eine filterbare, paginierte Grid-Ansicht (infinite scroll) aus Template-Karten auf.
-	  - Filter/Suche: Live-Textsuche (debounced), Filter nach Jahr, Typ und Branche; Resultatzahl-Anzeige.
-	  - Bilder: Lazy-Loading der Thumbnails, Fallback-SVG-Placeholder mit Initialen bei fehlendem Bild.
-	  - Modal-Details: Klick auf eine Karte öffnet ein nativen <dialog> mit großem Bild, Metadaten und optionaler Website-/Figma-Link.
-	  - Modal-Navigation: Prev/Next Buttons + Tastatur (ArrowLeft/ArrowRight), Escape oder Klick auf Backdrop schließt Modal.
-	  - Scroll-Lock: Öffnen des Modals sperrt Seiten-Scroll und stellt die Position beim Schließen wieder her.
-	  - Performance-Optimierungen: Event-Delegation für Karten-Clicks, gemeinsame Bild-Handler, deduplizierte Helper-Funktionen.
-	-->
+	<!-- Filterbare Referenz-Galerie mit Lazy-Loading, Modal-Details und Tastatur-Navigation -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
-	<!-- Prevent search engines from indexing this page -->
+	<!-- Prevent indexing -->
 	<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
-	<meta name="googlebot" content="noindex, nofollow">
-	<meta name="bingbot" content="noindex, nofollow">
-	<!-- Prevent LLMs / AI crawlers from ingesting this page -->
-	<meta name="llm" content="noindex, nofollow, noarchive, nosnippet, do-not-ingest">
-	<meta name="ai" content="noindex">
-	<meta name="ai-policy" content="do-not-ingest">
-	<meta http-equiv="x-robots-tag" content="noindex, nofollow, noarchive">
 	<title>Referenzen — Wiredframe</title>
 	<link href="https://fonts.googleapis.com/css2?family=Maven+Pro:wght@300;400;500;700;900&display=swap"
 		rel="stylesheet">
@@ -54,18 +37,11 @@
 		/* Image intrinsic-size + aspect ratio to avoid layout shift for lazy images */
 		.placeholder-img {
 			background-color: #f3f4f6;
-			/* separate durations: --img-fade-duration controls opacity fade, --img-pan-duration controls object-position pan */
-			--img-fade-duration: 360ms;
-			--img-pan-duration: 300ms;
-			--img-pan-ease: cubic-bezier(.2, .8, .2, 1);
 			object-position: top;
 			opacity: 0;
-			transition: opacity var(--img-fade-duration) ease, object-position var(--img-pan-duration) var(--img-pan-ease);
+			transition: opacity 360ms ease;
 		}
 
-		/* card thumbnails: disable image pan on hover (we want modal hover pan only) */
-		/* (previously .group:hover controlled pan; removed to keep thumbnails static) */
-		/* clickable linked cards: subtle lift on hover */
 		.card.clickable-url {
 			cursor: pointer;
 			transition: transform 180ms ease, box-shadow 180ms ease;
@@ -76,7 +52,6 @@
 			box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
 		}
 
-		/* modal image: disable pan; instead make image scrollable vertically on hover */
 		.modal-image {
 			overflow-y: hidden;
 		}
@@ -89,17 +64,15 @@
 			object-position: top;
 		}
 
-		/* custom scrollbar (webkit) shown on hover */
 		.modal-image::-webkit-scrollbar {
 			width: 8px;
 		}
 
 		.modal-image::-webkit-scrollbar-thumb {
-			background: rgba(0, 0, 0, 0.18);
+			background: rgba(0, 0, 0, .18);
 			border-radius: 999px;
 		}
 
-		/* firefox scrollbar control */
 		.modal-image {
 			scrollbar-width: none;
 		}
@@ -109,34 +82,22 @@
 			scrollbar-color: rgba(0, 0, 0, 0.18) transparent;
 		}
 
-		/* visible state when image finished loading */
 		.placeholder-img.is-loaded {
 			opacity: 1;
 		}
 
-		/* custom select arrow: hide native arrow and show a subtle SVG */
 		.filter-bar select {
-			/* remove default */
 			-webkit-appearance: none;
-			-moz-appearance: none;
 			appearance: none;
 			background-repeat: no-repeat;
 			background-position: right 0.9rem center;
 			background-size: 1.25rem;
 			padding-right: 2.5rem;
-			/* ensure space for icon */
-		}
-
-		/* subtle inline SVG arrow (gray) */
-		.filter-bar select {
 			background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%239CA3AF'%3E%3Cpath d='M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z'/%3E%3C/svg%3E");
 		}
 
-		/* Simplified native dialog styling: keep backdrop but do not override element background/padding so utility classes can style the dialog */
 		dialog#card-modal {
-			/* allow classes like bg-white and p-8 to apply */
 			box-sizing: border-box;
-			/* remove default outline but keep accessibility focus handling via CSS when needed */
 			outline: none;
 		}
 
@@ -174,15 +135,12 @@
 			width: 100%;
 		}
 
-		/* modal navigation buttons inside right column (use normal flow, responsive) */
 		.modal-details {
 			display: flex;
 			flex-direction: column;
-			position: relative;
 		}
 
 		.modal-nav {
-			/* keep buttons in document flow; push to bottom using margin-top */
 			display: flex;
 			justify-content: flex-end;
 			gap: .75rem;
@@ -205,19 +163,14 @@
 			transform: translateY(-2px);
 		}
 
-		/* use inline SVG as icon for modal nav buttons */
 		.modal-nav button::before {
 			content: '';
 			display: block;
 			width: 18px;
 			height: 18px;
-			background-repeat: no-repeat;
-			background-position: center;
-			background-size: contain;
-			background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%239CA3AF'%3E%3Cpath d='M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z'/%3E%3C/svg%3E");
+			background: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%239CA3AF'%3E%3Cpath d='M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z'/%3E%3C/svg%3E") center/contain no-repeat;
 		}
 
-		/* rotate icons so prev points left and next points right */
 		.modal-nav button.prev::before {
 			transform: rotate(90deg);
 		}
@@ -226,7 +179,6 @@
 			transform: rotate(-90deg);
 		}
 
-		/* Allow modal images to use natural height (don't force aspect-ratio applied to thumbnails) */
 		.modal-image .placeholder-img {
 			aspect-ratio: auto;
 			contain-intrinsic-size: auto;
@@ -419,13 +371,11 @@
 					const opt = document.createElement('option'); opt.value = value; opt.textContent = value; select.appendChild(opt);
 				}
 
-				function uniqueSorted(arr) { return Array.from(new Set(arr.filter(Boolean))).sort((a, b) => b.localeCompare(a)); }
+				function uniqueSort(arr) { return [...new Set(arr.filter(v => v && String(v).trim()))].sort((a, b) => b.localeCompare(a)); }
 
-				function placeholderImage(title) {
-					const safe = (title || '').trim();
-					const initials = safe ? safe.split(/\s+/).slice(0, 2).map(w => w[0] || '').join('').toUpperCase() : '?';
-					const svg = `<?xml version='1.0' encoding='utf-8'?><svg xmlns='http://www.w3.org/2000/svg' width='800' height='600'><rect width='100%' height='100%' fill='#ffffff'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='#e5e7eb' font-family='Maven Pro, Arial' font-size='96'>${initials}</text></svg>`;
-					return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
+				function placeholder(title) {
+					const initials = (title || '').trim().split(/\s+/).slice(0, 2).map(w => w[0] || '').join('').toUpperCase() || '?';
+					return `data:image/svg+xml;utf8,${encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' width='800' height='600'><rect width='100%' height='100%' fill='%23fff'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='%23e5e7eb' font-family='Maven Pro,Arial' font-size='96'>${initials}</text></svg>`)}`;
 				}
 
 				function slugify(title) {
@@ -476,13 +426,13 @@
 				const modalNextBtn = document.getElementById('modal-next');
 
 				// --- populate filters ---
-				uniqueSorted(data.map(d => d.Jahr).filter(v => v && String(v).trim() !== '')).forEach(y => createOption(filterYear, y));
-				uniqueSorted(data.map(d => d.Typ).filter(v => v && String(v).trim() !== '')).forEach(t => createOption(filterType, t));
-				uniqueSorted(data.map(d => d.Branche).filter(v => v && String(v).trim() !== '')).forEach(b => createOption(filterBranch, b));
+				uniqueSort(data.map(d => d.Jahr)).forEach(y => createOption(filterYear, y));
+				uniqueSort(data.map(d => d.Typ)).forEach(t => createOption(filterType, t));
+				uniqueSort(data.map(d => d.Branche)).forEach(b => createOption(filterBranch, b));
 
 				// --- image handlers (shared) ---
 				function handleImageLoad(e) { e.currentTarget.classList.add('is-loaded'); }
-				function handleImageError(e) { const img = e.currentTarget; img.onerror = null; img.src = placeholderImage(img.alt || ''); img.classList.add('is-loaded'); }
+				function handleImageError(e) { const img = e.currentTarget; img.onerror = null; img.src = placeholder(img.alt || ''); img.classList.add('is-loaded'); }
 
 				// --- rendering ---
 				function renderPage(items) {
@@ -505,7 +455,7 @@
 						const imageFile = item.Image || (slugify(item.Projekttitel) + '.jpg');
 						const imagePath = imageFile ? `images/referenzen/${imageFile}` : '';
 						if (imagePath) { img.classList.remove('is-loaded'); img.onload = handleImageLoad; img.onerror = handleImageError; img.src = imagePath; }
-						else { img.src = placeholderImage(item.Projekttitel); img.classList.add('is-loaded'); }
+						else { img.src = placeholder(item.Projekttitel); img.classList.add('is-loaded'); }
 
 						article.dataset.index = renderedCount + i;
 						article.dataset.image = imagePath || '';
@@ -549,10 +499,9 @@
 					const y = filterYear.value; const t = filterType.value; const b = filterBranch.value;
 					let filtered = data.filter(d => {
 						if (y && d.Jahr !== y) return false; if (t && d.Typ !== t) return false; if (b && d.Branche !== b) return false;
-						if (q) { const hay = (d.Projekttitel + ' ' + (d.Agentur || '') + ' ' + (d.Typ || '') + ' ' + (d.Branche || '')).toLowerCase(); return hay.indexOf(q) !== -1; }
+						if (q) { const hay = `${d.Projekttitel} ${d.Agentur || ''} ${d.Typ || ''} ${d.Branche || ''}`.toLowerCase(); return hay.includes(q); }
 						return true;
 					});
-					filtered = filtered.sort((a, b) => (parseInt(b && b.Jahr) || 0) - (parseInt(a && a.Jahr) || 0));
 					render(filtered);
 				}
 
@@ -564,7 +513,7 @@
 				render(data);
 
 				// --- modal & interactions (delegated) ---
-				function lockBodyScroll() { const y = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0; document.body.classList.add('modal-scroll-lock'); document.body.style.top = `-${y}px`; document._modalScrollY = y; }
+				function lockBodyScroll() { const y = window.scrollY; document.body.classList.add('modal-scroll-lock'); document.body.style.top = `-${y}px`; document._modalScrollY = y; }
 				function unlockBodyScroll() { document.body.classList.remove('modal-scroll-lock'); document.body.style.top = ''; window.scrollTo(0, document._modalScrollY || 0); }
 
 				function populateModalFromItem(item) {
@@ -573,7 +522,7 @@
 					const imagePath = imgPath ? `images/referenzen/${imgPath}` : '';
 					modalImg.alt = item.Projekttitel || '';
 					modalImg.classList.remove('is-loaded'); modalImg.onload = handleImageLoad; modalImg.onerror = handleImageError;
-					modalImg.src = imagePath || placeholderImage(item.Projekttitel);
+					modalImg.src = imagePath || placeholder(item.Projekttitel);
 					modalPairs.innerHTML = '';
 					[['Jahr', item.Jahr || '–'], ['Agentur', item.Agentur || '–'], ['Typ', item.Typ || '–'], ['Branche', item.Branche || '–']]
 						.forEach(([k, v]) => { const el = document.createElement('div'); el.className = 'pair flex items-baseline gap-1 flex-col'; el.innerHTML = `<div class="key text-sm text-gray-500">${k}</div><div class="value text-base text-gray-700">${v}</div>`; modalPairs.appendChild(el); });
@@ -661,22 +610,22 @@
 	</div><!-- /#main-content -->
 	<script>
 		(function () {
-			const HASH = 'd2lyZWRmcmFtZTIwMjY='; // base64 encoded password
-			const stored = sessionStorage.getItem('pw_ok');
-			if (stored === HASH) {
-				document.getElementById('pw-overlay').classList.add('hidden');
-				document.getElementById('main-content').classList.add('visible');
+			const HASH = 'd2lyZWRmcmFtZTIwMjY=';
+			const $ = id => document.getElementById(id);
+			if (sessionStorage.getItem('pw_ok') === HASH) {
+				$('pw-overlay').classList.add('hidden');
+				$('main-content').classList.add('visible');
 			}
-			document.getElementById('pw-form').addEventListener('submit', function (e) {
+			$('pw-form').addEventListener('submit', e => {
 				e.preventDefault();
-				const input = document.getElementById('pw-input').value;
+				const input = $('pw-input').value;
 				if (btoa(input) === HASH) {
 					sessionStorage.setItem('pw_ok', HASH);
-					document.getElementById('pw-overlay').classList.add('hidden');
-					document.getElementById('main-content').classList.add('visible');
+					$('pw-overlay').classList.add('hidden');
+					$('main-content').classList.add('visible');
 				} else {
-					document.getElementById('pw-error').style.display = 'block';
-					document.getElementById('pw-input').value = '';
+					$('pw-error').style.display = 'block';
+					$('pw-input').value = '';
 				}
 			});
 		})();
