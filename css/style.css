@@ -859,7 +859,7 @@ button {
 		flex-direction: column;
 		padding: var(--spacing-sm) var(--spacing-lg) var(--spacing-xl);
 		background: var(--color-white);
-		box-shadow: 0 35px 40px -10px rgba(4, 46, 62, 0.15), 0 35px 40px -10px rgba(4, 46, 62, 0.08);
+		box-shadow: 0 10px 40px -10px rgba(4, 46, 62, 0.15), 0 10px 40px -10px rgba(4, 46, 62, 0.08);
 		z-index: 999;
 		opacity: 0;
 		visibility: hidden;
