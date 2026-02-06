@@ -707,8 +707,9 @@ button {
 	width: 60px;
 	height: 60px;
 	margin: 0 auto var(--spacing-lg);
-	border-radius: 50%;
-	background: var(--color-border);
+	border-radius: var(--border-radius);
+	corner-shape: squircle;
+	background: var(--color-text);
 	transition: background var(--transition-fast);
 }
 
