@@ -95,45 +95,33 @@
 	};
 
 	// ========================================
-	// Counter Animation
+	// Counter Animation (Infinite)
 	// ========================================
-	const animateCounter = (el, start, end, duration) => {
-		let startTime = null;
-		const diff = end - start;
-		const easeOut = t => t * (2 - t);
-
-		const step = (timestamp) => {
-			if (!startTime) startTime = timestamp;
-			const progress = Math.min((timestamp - startTime) / duration, 1);
-			const current = Math.floor(start + diff * easeOut(progress));
-			el.textContent = current;
-
-			if (progress < 1) {
-				requestAnimationFrame(step);
-			}
-		};
-
-		requestAnimationFrame(step);
-	};
-
 	const initCounter = () => {
-		const counter = document.querySelector('[data-counter]');
+		const counter = document.querySelector('.counter');
 		if (!counter) return;
 
-		const target = parseInt(counter.dataset.counter, 10);
-		let started = false;
+		// Startwert: Basis + Tage seit 01.01.2024 (bleibt 6-stellig)
+		const baseValue = 100000;
+		const startDate = new Date('2024-01-01');
+		const daysPassed = Math.floor((Date.now() - startDate.getTime()) / (1000 * 60 * 60 * 24));
+		let value = baseValue + daysPassed * 50;
 
-		const observer = new IntersectionObserver((entries) => {
-			entries.forEach(entry => {
-				if (entry.isIntersecting && !started) {
-					started = true;
-					animateCounter(counter, 100000, target, 36000);
-					observer.disconnect();
-				}
-			});
-		}, { threshold: 0.5 });
+		const speed = 0.500; // Geschwindigkeit: Inkrement pro Millisekunde
+		let running = false, last = 0, acc = 0;
 
-		observer.observe(counter);
+		const tick = (t) => {
+			acc += (t - (last || t)) * speed;
+			last = t;
+			const inc = acc | 0;
+			if (inc) { value += inc; counter.textContent = value; acc -= inc; }
+			if (running) requestAnimationFrame(tick);
+		};
+
+		new IntersectionObserver(([e]) => {
+			if (e.isIntersecting && !running) { running = true; last = 0; requestAnimationFrame(tick); }
+			else if (!e.isIntersecting) running = false;
+		}, { threshold: 0.5 }).observe(counter);
 	};
 
 	// ========================================
