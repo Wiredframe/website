@@ -129,6 +129,7 @@ button {
 .section--dark {
 	background: var(--color-primary);
 	border-radius: var(--border-radius);
+	corner-shape: squircle;
 	margin-inline: var(--spacing-xl);
 }
 
@@ -171,6 +172,7 @@ button {
 	gap: var(--spacing-xs);
 	padding-top: var(--spacing-md);
 	border-radius: var(--border-radius-sm);
+	corner-shape: squircle;
 	margin-inline: var(--spacing-sm);
 }
 
@@ -463,6 +465,7 @@ button {
 	padding: var(--spacing-xs) var(--spacing-sm);
 	border: 3px solid var(--color-primary);
 	border-radius: var(--border-radius);
+	corner-shape: squircle;
 	font-size: var(--font-size-lg);
 	text-align: center;
 	transition: transform var(--transition-fast), background var(--transition-fast), color var(--transition-fast);
@@ -512,7 +515,8 @@ button {
 	width: 72px;
 	height: 72px;
 	margin-bottom: var(--spacing-md);
-	border-radius: 50%;
+	border-radius: var(--border-radius-sm);
+	corner-shape: squircle;
 	background: var(--color-primary);
 	color: var(--color-accent);
 	font-size: 40px;
@@ -744,7 +748,8 @@ button {
 	justify-content: center;
 	width: 60px;
 	height: 60px;
-	border-radius: 50%;
+	border-radius: var(--border-radius-sm);
+	corner-shape: squircle;
 	background: var(--color-accent);
 	transition: transform var(--transition-fast), opacity 0.3s ease;
 	opacity: 0;
