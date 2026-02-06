@@ -630,28 +630,7 @@
 			</p>
 		</footer>
 	</div><!-- /#main-content -->
-	<script>
-		(function () {
-			const HASH = 'd2lyZWRmcmFtZTIwMjY=';
-			const $ = id => document.getElementById(id);
-			if (sessionStorage.getItem('pw_ok') === HASH) {
-				$('pw-overlay').classList.add('hidden');
-				$('main-content').classList.add('visible');
-			}
-			$('pw-form').addEventListener('submit', e => {
-				e.preventDefault();
-				const input = $('pw-input').value;
-				if (btoa(input) === HASH) {
-					sessionStorage.setItem('pw_ok', HASH);
-					$('pw-overlay').classList.add('hidden');
-					$('main-content').classList.add('visible');
-				} else {
-					$('pw-error').style.display = 'block';
-					$('pw-input').value = '';
-				}
-			});
-		})();
-	</script>
+	<script>!function () { var _0x = ['\x70\x77\x2d', '\x6f\x76\x65\x72\x6c\x61\x79', '\x6d\x61\x69\x6e\x2d\x63\x6f\x6e\x74\x65\x6e\x74', '\x68\x69\x64\x64\x65\x6e', '\x76\x69\x73\x69\x62\x6c\x65'], _0xc = function (i) { return document.getElementById(i) }, _0xh = String.fromCharCode.apply(null, [100, 50, 108, 121, 90, 87, 82, 109, 99, 109, 70, 116, 90, 84, 73, 119, 77, 106, 89, 61]), _0xs = 'pw_ok', _0xa = function () { _0xc(_0x[0] + _0x[1]).classList.add(_0x[3]); _0xc(_0x[2]).classList.add(_0x[4]) }; if (sessionStorage.getItem(_0xs) === _0xh) _0xa(); _0xc(_0x[0] + 'form').addEventListener('submit', function (e) { e.preventDefault(); var v = _0xc(_0x[0] + 'input').value; if (btoa(v) === _0xh) { sessionStorage.setItem(_0xs, _0xh); _0xa() } else { _0xc(_0x[0] + 'error').style.display = 'block'; _0xc(_0x[0] + 'input').value = '' } }); }();</script>
 </body>
 
 </html>

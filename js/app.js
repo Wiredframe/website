@@ -7,6 +7,24 @@
 	'use strict';
 
 	// ========================================
+	// Logo Animation Replay on Click/Touch
+	// ========================================
+	const initLogoAnimReplay = () => {
+		const logoAnim = document.querySelector('.logo-anim');
+		if (!logoAnim) return;
+
+		logoAnim.style.cursor = 'pointer';
+		logoAnim.addEventListener('click', () => {
+			logoAnim.classList.remove('is-animating');
+			// Force reflow to restart animation
+			void logoAnim.offsetWidth;
+			logoAnim.classList.add('is-animating');
+		});
+		// Start with animation class
+		logoAnim.classList.add('is-animating');
+	};
+
+	// ========================================
 	// Scroll Reveal Animation (IntersectionObserver)
 	// ========================================
 	const initScrollReveal = () => {
@@ -188,6 +206,7 @@
 	// Initialize All
 	// ========================================
 	const init = () => {
+		initLogoAnimReplay();
 		initScrollReveal();
 		initCounter();
 		initMobileMenu();

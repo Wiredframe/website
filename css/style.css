@@ -285,7 +285,10 @@ button {
 	width: 296px;
 	height: 296px;
 	inset: 0;
-	animation: logoRotate1 1s ease-out 0.1s forwards;
+}
+
+.logo-anim.is-animating .logo-anim__ring--1 {
+	animation: logoRotate1 1.3s ease-out 0.13s forwards;
 }
 
 .logo-anim__ring--2 {
@@ -293,7 +296,10 @@ button {
 	height: 213px;
 	left: 40px;
 	top: 40px;
-	animation: logoRotate2 0.9s ease-out 0.2s forwards;
+}
+
+.logo-anim.is-animating .logo-anim__ring--2 {
+	animation: logoRotate2 1.17s ease-out 0.26s forwards;
 }
 
 .logo-anim__ring--3 {
@@ -301,7 +307,10 @@ button {
 	height: 127px;
 	left: 83px;
 	top: 83px;
-	animation: logoRotate3 0.8s ease-out 0.3s forwards;
+}
+
+.logo-anim.is-animating .logo-anim__ring--3 {
+	animation: logoRotate3 1.04s ease-out 0.39s forwards;
 }
 
 .logo-anim__dot {
@@ -311,7 +320,10 @@ button {
 	left: 165px;
 	top: 92px;
 	opacity: 0;
-	animation: logoPop 0.5s ease-out 0.65s forwards;
+}
+
+.logo-anim.is-animating .logo-anim__dot {
+	animation: logoPop 0.65s ease-out 0.65s forwards;
 }
 
 @keyframes logoRotate1 {
