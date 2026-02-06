@@ -1027,6 +1027,10 @@ button {
    Responsive: Mobile (max 767px)
    =========================================== */
 @media (max-width: 767px) {
+	.nav.nav {
+		padding: var(--spacing-sm) var(--spacing-sm);
+	}
+
 	.heading {
 		font-size: 50px;
 		text-align: center;
