@@ -104,11 +104,7 @@
     "sameAs": []
   }
   </script>
-  <!-- Performance: Preconnect to external resources -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Maven+Pro:wght@300;400;500;700;900&display=swap"
-    rel="stylesheet">
+  <!-- Fonts are now loaded locally from /fonts/ -->
   <link rel="stylesheet" href="css/style.css">
   <link rel="shortcut icon" href="images/ArtBoard1_2.png" type="image/x-icon">
   <link rel="apple-touch-icon" href="images/ArtBoard1_3.png">
@@ -119,14 +115,14 @@
   <a href="#wahrheit" class="skip-link">Zum Inhalt springen</a>
   <!-- Back to Top -->
   <a href="#home" class="back-to-top" aria-label="Nach oben scrollen">
-    <img src="images/icons8_Collapse_Arrow_1.svg" width="32" alt="">
+    <img src="images/icons8_Collapse_Arrow_1.svg" width="32" height="32" alt="">
   </a>
   <main>
     <!-- Hero Section -->
     <section class="section section--hero" id="home">
       <nav class="nav">
         <a class="nav__logo" href="#home">
-          <img class="nav__logo-img" src="images/logo1.svg" alt="Wiredframe Logo">
+          <img class="nav__logo-img" src="images/logo1.svg" alt="Wiredframe Logo" width="417" height="96">
         </a>
         <button class="nav__toggle" aria-label="Menü öffnen" aria-expanded="false">
           <span class="nav__hamburger">
@@ -146,10 +142,11 @@
       </nav>
       <div class="container content">
         <div class="logo-anim">
-          <img class="logo-anim__ring logo-anim__ring--1" src="images/Slice2.svg" alt="">
-          <img class="logo-anim__ring logo-anim__ring--2" src="images/Slice3.svg" alt="">
-          <img class="logo-anim__ring logo-anim__ring--3" src="images/Slice4.svg" alt="">
-          <img class="logo-anim__dot" src="images/Slice5.svg" alt="">
+          <img class="logo-anim__ring logo-anim__ring--1" src="images/Slice2.svg" alt="" width="296" height="296"
+            fetchpriority="high">
+          <img class="logo-anim__ring logo-anim__ring--2" src="images/Slice3.svg" alt="" width="213" height="213">
+          <img class="logo-anim__ring logo-anim__ring--3" src="images/Slice4.svg" alt="" width="128" height="127">
+          <img class="logo-anim__dot" src="images/Slice5.svg" alt="" width="33" height="30">
         </div>
       </div>
       <div class="container content content--start" data-animate>
@@ -158,7 +155,7 @@
       </div>
       <div class="container content is-visible">
         <a class="btn" href="#wahrheit"> Die ganze Wahrheit <span class="btn__arrow"><img src="images/arrow-down.svg"
-              alt=""></span>
+              alt="" width="24" height="24"></span>
         </a>
       </div>
     </section>
@@ -220,7 +217,7 @@
       </div>
       <div class="container services" data-animate="stagger">
         <article class="service">
-          <img class="service__icon" src="images/icons8_Web_Design.svg" alt="">
+          <img class="service__icon" src="images/icons8_Web_Design.svg" alt="" width="100" height="100">
           <div>
             <h2 class="service__title">UI/UX Design mit Figma</h2>
             <p class="service__text">Moderne User Interfaces und User Experience Design mit Figma, FigJam, Dev Mode und
@@ -228,7 +225,7 @@
           </div>
         </article>
         <article class="service">
-          <img class="service__icon" src="images/icons8_Code.svg" alt="">
+          <img class="service__icon" src="images/icons8_Code.svg" alt="" width="100" height="100">
           <div>
             <h2 class="service__title">Figma-to-Code Workflows</h2>
             <p class="service__text">Nahtloser Übergang von Figma zu Code mit Dev Mode, Code Connect und strukturierten
@@ -236,7 +233,7 @@
           </div>
         </article>
         <article class="service">
-          <img class="service__icon" src="images/icons8_Database.svg" alt="">
+          <img class="service__icon" src="images/icons8_Database.svg" alt="" width="100" height="100">
           <div>
             <h2 class="service__title">Design Systems & Tokens</h2>
             <p class="service__text">Aufbau und Pflege von Design Systemen mit Design Tokens, Komponenten-Bibliotheken
@@ -244,7 +241,7 @@
           </div>
         </article>
         <article class="service">
-          <img class="service__icon" src="images/icons8_Natural_User_Interface_2.svg" alt="">
+          <img class="service__icon" src="images/icons8_Natural_User_Interface_2.svg" alt="" width="100" height="100">
           <div>
             <h2 class="service__title">Agentic Coding & AI</h2>
             <p class="service__text">KI-unterstützte Design-to-Code Pipelines mit GitHub Copilot, Cursor und anderen AI
@@ -326,9 +323,9 @@
     <div class="retro">
       <div id="hit-counter" class="retro__counter"></div>
       <div class="retro__badges">
-        <img src="images/frontpage-1996.gif" alt="Frontpage 1996 Badge">
-        <img src="images/get-flash-player-1996.gif" alt="Get Flash Player Badge">
-        <img src="images/netscape-1996.gif" alt="Netscape Now Badge">
+        <img src="images/frontpage-1996.gif" alt="Frontpage 1996 Badge" width="114" height="43">
+        <img src="images/get-flash-player-1996.gif" alt="Get Flash Player Badge" width="88" height="31">
+        <img src="images/netscape-1996.gif" alt="Netscape Now Badge" width="88" height="31">
       </div>
       <a href="index_dos.html" class="retro__link">Zur MS-DOS Version -&gt;</a>
     </div>
@@ -341,7 +338,7 @@
   <section class="section section--impressum" id="impressum">
     <div class="impressum">
       <a href="#kontakt" class="impressum__close" data-impressum="close" aria-label="Impressum schließen">
-        <img src="images/icons8_Delete_1.svg" alt="">
+        <img src="images/icons8_Delete_1.svg" alt="" width="20" height="20">
       </a>
       <h3 class="impressum__title">Impressum</h3>
       <div class="impressum__text">
