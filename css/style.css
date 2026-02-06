@@ -9,6 +9,7 @@
 	/* Colors */
 	--color-primary: #042E3E;
 	--color-accent: #3FF390;
+	--color-accent-dark: hsl(160, 100%, 39%);
 	--color-text: #aebab3;
 	--color-text-muted: #b4bdbf;
 	--color-white: #fff;
@@ -420,6 +421,10 @@ button {
 	padding-top: var(--spacing-lg);
 	font-size: var(--font-size-2xl);
 	color: var(--color-accent);
+}
+
+.subtitle--hero {
+	color: var(--color-accent-dark);
 }
 
 .subtitle--service {
