@@ -766,8 +766,20 @@ button {
 }
 
 /* ===========================================
-   BLOCK: Back to Top (CSS Scroll-Driven)
+   BLOCK: Back to Top (Pure CSS Scroll-Driven)
    =========================================== */
+@keyframes show-back-to-top {
+	from {
+		opacity: 0;
+		pointer-events: none;
+	}
+
+	to {
+		opacity: 1;
+		pointer-events: auto;
+	}
+}
+
 .back-to-top {
 	position: fixed;
 	top: 30px;
@@ -781,9 +793,13 @@ button {
 	border-radius: var(--border-radius);
 	corner-shape: squircle;
 	background: var(--color-accent);
-	transition: transform var(--transition-fast), opacity 0.3s ease;
+	transition: transform var(--transition-fast);
 	opacity: 0;
 	pointer-events: none;
+	/* CSS Scroll-Driven Animation */
+	animation: show-back-to-top linear forwards;
+	animation-timeline: scroll();
+	animation-range: 300px 301px;
 }
 
 .back-to-top:hover {

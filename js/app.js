@@ -28,73 +28,6 @@
 	};
 
 	// ========================================
-	// Smooth Scroll für Anchor Links (Chrome Fix)
-	// ========================================
-	const initSmoothScroll = () => {
-		// CSS scroll-behavior: smooth übernimmt das Scrolling
-		// JavaScript setzt nur den scroll-position manuell für bessere Kontrolle
-		document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-			anchor.addEventListener('click', function (e) {
-				const targetId = this.getAttribute('href');
-				if (targetId === '#') return;
-
-				const targetElement = document.querySelector(targetId);
-				if (!targetElement) return;
-
-				e.preventDefault();
-
-				// Nutze window.scrollTo statt scrollIntoView (Chrome-kompatibler)
-				const top = targetElement.getBoundingClientRect().top + window.pageYOffset;
-
-				// Temporär CSS smooth deaktivieren, dann JS smooth nutzen
-				document.documentElement.style.scrollBehavior = 'auto';
-				window.scrollTo({
-					top: top,
-					behavior: 'smooth'
-				});
-
-				// CSS smooth wieder aktivieren nach Animation
-				setTimeout(() => {
-					document.documentElement.style.scrollBehavior = '';
-				}, 1000);
-
-				// Update URL
-				history.pushState(null, null, targetId);
-			});
-		});
-	};
-
-	// ========================================
-	// Back to Top Button
-	// ========================================
-	const initBackToTop = () => {
-		const backToTop = document.querySelector('.back-to-top');
-		if (!backToTop) return;
-
-		// Initial state
-		backToTop.style.opacity = '0';
-		backToTop.style.pointerEvents = 'none';
-
-		// Show/hide based on scroll position
-		let ticking = false;
-		window.addEventListener('scroll', () => {
-			if (!ticking) {
-				window.requestAnimationFrame(() => {
-					if (window.scrollY > 300) {
-						backToTop.style.opacity = '1';
-						backToTop.style.pointerEvents = 'auto';
-					} else {
-						backToTop.style.opacity = '0';
-						backToTop.style.pointerEvents = 'none';
-					}
-					ticking = false;
-				});
-				ticking = true;
-			}
-		});
-	};
-
-	// ========================================
 	// Counter Animation (Infinite)
 	// ========================================
 	const initCounter = () => {
@@ -256,8 +189,6 @@
 	// ========================================
 	const init = () => {
 		initScrollReveal();
-		initSmoothScroll();
-		initBackToTop();
 		initCounter();
 		initMobileMenu();
 		initImpressum();
