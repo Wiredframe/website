@@ -32,8 +32,8 @@
    =========================================== */
 :root {
 	/* Colors */
-	--color-primary: oklch(18% 0.303 193);
-	--color-accent: oklch(87% 0.34 170);
+	--color-primary: #003e50;
+	--color-accent: #4cf799;
 	--color-text: #aebab3;
 	--color-text-muted: #b4bdbf;
 	--color-white: #fff;
