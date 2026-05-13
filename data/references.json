@@ -1,1478 +1,1487 @@
 [
-  {
-    "Jahr": "2025",
-    "Projekttitel": "Naturkundemuseum Karlsruhe",
-    "Typ": "Website",
-    "Branche": "Öffentliche Einrichtung",
-    "Agentur": "Ausschreibung",
-    "Image": "naturkundemuseum-karlsruhe.jpg",
-    "URL": "https://www.figma.com/proto/Gs563gV4LkeIGLmREXXeKU/Staatliches-Museum-fu%CC%88r-Naturkunde-Karlsruhe?page-id=0%3A1&node-id=13546-130&p=f&viewport=456%2C25%2C0.04&t=evtEs739QpJH7z9I-1&scaling=scale-down-width&content-scaling=fixed&starting-point-node-id=13546%3A130&show-proto-sidebar=1"
-  },
-  {
-    "Jahr": "2025",
-    "Projekttitel": "Stadt Unterschleißheim",
-    "Typ": "Website",
-    "Branche": "Öffentliche Einrichtung",
-    "Agentur": "wiredframe",
-    "Image": "stadt-unterschleissheim.jpg",
-    "URL": "https://www.figma.com/proto/7xpm078ThimqcEvnRCllTV/Stadt-Unterschlei%C3%9Fheim---Design-System-2025?page-id=0%3A1&node-id=14018-4850&p=f&viewport=618%2C303%2C0.02&t=nuynliMuCFPfkV0I-8&scaling=scale-down-width&content-scaling=fixed&starting-point-node-id=14018%3A4850&show-proto-sidebar=1&hide-ui=1"
-  },
-  {
-    "Jahr": "2025",
-    "Projekttitel": "Bildungsportal Heidekreis",
-    "Typ": "Website",
-    "Branche": "Öffentliche Einrichtung",
-    "Agentur": "Ausschreibung",
-    "Image": "bildungsportal-heidekreis.jpg",
-    "URL": "https://www.figma.com/proto/rUk3Tvfg0xN938VlnbPUgS/-3393-Bildungsportal-Heidekreis?page-id=11769%3A16&node-id=13502-3293&viewport=803%2C-782%2C0.19&t=OOg8goWyZSCWpKRD-8&scaling=scale-down-width&content-scaling=fixed&starting-point-node-id=13502%3A3293&hide-ui=1"
-  },
-  {
-    "Jahr": "2025",
-    "Projekttitel": "SBC Franken",
-    "Typ": "Website",
-    "Branche": "Photovoltaik / Technik",
-    "Agentur": "ideenmühle",
-    "Image": "sbc-franken.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2024",
-    "Projekttitel": "AUKOM",
-    "Typ": "Website",
-    "Branche": "Messtechnik / Industrie",
-    "Agentur": "datamints",
-    "Image": "aukom.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2024",
-    "Projekttitel": "AUKOM Webapp",
-    "Typ": "Website",
-    "Branche": "Messtechnik / Industrie",
-    "Agentur": "datamints",
-    "Image": "aukom-app.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2025",
-    "Projekttitel": "Schaffelhuber",
-    "Typ": "Shopware",
-    "Branche": "Ersatzteilehandel",
-    "Agentur": "datamints",
-    "Image": "schaffelhuber.jpg",
-    "URL": "https://www.figma.com/proto/Yc8nq7wcfkjOlnNTNCa3zK/Schaffelhuber---Shopware-6-UI-Design?page-id=0%3A1&node-id=13501-25&viewport=1311%2C-68%2C0.14&t=EOmAztMCOpm6qEoV-8&scaling=scale-down-width&content-scaling=fixed&starting-point-node-id=13501%3A25&show-proto-sidebar=1&hide-ui=1"
-  },
-  {
-    "Jahr": "2025",
-    "Projekttitel": "Kraft Baustoffe",
-    "Typ": "Shopware",
-    "Branche": "Baustoffhandel",
-    "Agentur": "netgrade",
-    "Image": "kraft-baustoffe.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2025",
-    "Projekttitel": "BioM Biotech Cluster",
-    "Typ": "Website",
-    "Branche": "Biotechnologie",
-    "Agentur": "datamints",
-    "Image": "biom-biotech-cluster.jpg",
-    "URL": "https://www.figma.com/proto/i7hwhfdeQtKVLJNXx9WjLa/BioM---Website-Design-System-2025?page-id=0%3A1&node-id=13769-6581&viewport=585%2C-5427%2C0.22&t=iTyCVRXa5L7nOMcv-8&scaling=scale-down-width&content-scaling=fixed&starting-point-node-id=13769%3A6581&show-proto-sidebar=1&hide-ui=1"
-  },
-  {
-    "Jahr": "2024",
-    "Projekttitel": "Memodo Shop Relaunch",
-    "Typ": "Shopware",
-    "Branche": "Photovoltaik",
-    "Agentur": "datamints",
-    "Image": "memodo-shop-relaunch.jpg",
-    "URL": "https://www.figma.com/proto/LIaG2YfoFN9iY1NPJ7qdRd/Memodo---Onlineshop-Design-System?page-id=410%3A7173&node-id=410-7302&p=f&viewport=25%2C147%2C0.51&t=Ji5vt5dtLmqKwlYl-8&scaling=scale-down-width&content-scaling=fixed&starting-point-node-id=410%3A7302&show-proto-sidebar=1&hide-ui=1"
-  },
-  {
-    "Jahr": "2024",
-    "Projekttitel": "Radio Eins Shop",
-    "Typ": "Shopware",
-    "Branche": "Medien / Merchandising",
-    "Agentur": "netgrade",
-    "Image": "radio-eins-shop.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2024",
-    "Projekttitel": "RBB Shop / Sandmännchen Shop",
-    "Typ": "Shopware",
-    "Branche": "Medien / Merchandising",
-    "Agentur": "netgrade",
-    "Image": "rbb-shop-sandmaennchen-shop.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2024",
-    "Projekttitel": "IHK Service Portal",
-    "Typ": "Website",
-    "Branche": "Öffentliche Einrichtung",
-    "Agentur": "netgrade",
-    "Image": "ihk-service-portal.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2024",
-    "Projekttitel": "United Immunity",
-    "Typ": "Website",
-    "Branche": "Pharma / Medizin",
-    "Agentur": "datamints",
-    "Image": "united-immunity.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2024",
-    "Projekttitel": "LVKM",
-    "Typ": "Website",
-    "Branche": "Sozialverband",
-    "Agentur": "datamints",
-    "Image": "lvkm.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2023",
-    "Projekttitel": "Memodo Website",
-    "Typ": "Website",
-    "Branche": "Photovoltaik",
-    "Agentur": "datamints",
-    "Image": "memodo-website.jpg",
-    "URL": "https://www.figma.com/proto/Ilx0zUPQSRSMhIl6XZcQBn/Memodo---Website-Design-System?page-id=0%3A1&node-id=1605-3581&p=f&viewport=834%2C25%2C0.04&t=X4UpSqmSlJMGULQz-8&scaling=scale-down-width&content-scaling=fixed&starting-point-node-id=1605%3A3581&show-proto-sidebar=1&hide-ui=1"
-  },
-  {
-    "Jahr": "2023",
-    "Projekttitel": "Lupus Produkte Shop",
-    "Typ": "Shopware",
-    "Branche": "Bürobedarf",
-    "Agentur": "datamints",
-    "Image": "lupus-produkte-shop.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2023",
-    "Projekttitel": "Tunze Aquarientechnik",
-    "Typ": "Website",
-    "Branche": "Aquaristik",
-    "Agentur": "datamints",
-    "Image": "tunze-aquarientechnik.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2023",
-    "Projekttitel": "HMR Jacob",
-    "Typ": "Website",
-    "Branche": "Maschinenbau / Werkzeughandel",
-    "Agentur": "datamints",
-    "Image": "hmr-jacob.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2023",
-    "Projekttitel": "IWEST Onlineshop",
-    "Typ": "Shopware",
-    "Branche": "Tiernahrung / E-Commerce",
-    "Agentur": "datamints",
-    "Image": "iwest-onlineshop.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2022",
-    "Projekttitel": "Ausbildungskompass",
-    "Typ": "Website",
-    "Branche": "Bildung / Karriere",
-    "Agentur": "datamints",
-    "Image": "ausbildungskompass.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2022",
-    "Projekttitel": "Hieber Lindberg Shopware",
-    "Typ": "Shopware",
-    "Branche": "Einzelhandel / Lebensmittel",
-    "Agentur": "datamints",
-    "Image": "hieber-lindberg-shopware.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2022",
-    "Projekttitel": "Piercingline Shopware",
-    "Typ": "Shopware",
-    "Branche": "Schmuck / E-Commerce",
-    "Agentur": "netgrade",
-    "Image": "piercingline-shopware.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2022",
-    "Projekttitel": "Alzheimergesellschaft München",
-    "Typ": "Website",
-    "Branche": "Soziale Einrichtung / Gesundheit",
-    "Agentur": "datamints",
-    "Image": "alzheimergesellschaft-muenchen.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2022",
-    "Projekttitel": "Beleduc Lernspielwaren",
-    "Typ": "Website",
-    "Branche": "Spielwaren / Bildung",
-    "Agentur": "netgrade",
-    "Image": "beleduc-lernspielwaren.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2022",
-    "Projekttitel": "ZVK Network Intelligence",
-    "Typ": "Website",
-    "Branche": "IT / Netzwerktechnik",
-    "Agentur": "eveca",
-    "Image": "zvk-network.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2022",
-    "Projekttitel": "Herbert Fleischmann",
-    "Typ": "Website",
-    "Branche": "Industrie / Anlagenbau",
-    "Agentur": "datamints",
-    "Image": "herbert-fleischmann.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2022",
-    "Projekttitel": "Gustav Mahler Gesellschaft",
-    "Typ": "Website",
-    "Branche": "Kultur / Verein",
-    "Agentur": "datamints",
-    "Image": "gustav-mahler-gesellschaft.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2021",
-    "Projekttitel": "SKS Shop",
-    "Typ": "Shopware",
-    "Branche": "E-Commerce / Klebemitteln",
-    "Agentur": "datamints",
-    "Image": "sks-shopware.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2021",
-    "Projekttitel": "EasyLAN",
-    "Typ": "Website",
-    "Branche": "Netzwerktechnik / Industrie",
-    "Agentur": "eveca",
-    "Image": "easy-lan.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2021",
-    "Projekttitel": "Willburger System",
-    "Typ": "Website",
-    "Branche": "Industrie",
-    "Agentur": "eveca",
-    "Image": "willburger-system.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2021",
-    "Projekttitel": "Stadtwerke Weilheim",
-    "Typ": "Website",
-    "Branche": "Energieversorger",
-    "Agentur": "datamints",
-    "Image": "stadtwerke-weilheim.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2021",
-    "Projekttitel": "SG Post-Süd Regensburg",
-    "Typ": "Website",
-    "Branche": "Sportverein",
-    "Agentur": "eveca",
-    "Image": "sg-post-sued-regensburg.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2020",
-    "Projekttitel": "Zechbauer",
-    "Typ": "Website",
-    "Branche": "Zigarren / Handel",
-    "Agentur": "datamints",
-    "Image": "zechbauer.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2020",
-    "Projekttitel": "Verlag Österreich",
-    "Typ": "Website",
-    "Branche": "Verlag / Medien",
-    "Agentur": "datamints",
-    "Image": "verlag-oesterreich.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2020",
-    "Projekttitel": "KJE Hilfe Garmisch",
-    "Typ": "Website",
-    "Branche": "Soziale Einrichtung / Jugendhilfe",
-    "Agentur": "datamints",
-    "Image": "kje-hilfe-garmisch.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2020",
-    "Projekttitel": "Flat-Jack OnlineShop",
-    "Typ": "Shopware",
-    "Branche": "Autozubehör / Technik",
-    "Agentur": "datamints",
-    "Image": "flat-jack.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2020",
-    "Projekttitel": "Rabeler Fruchtchips",
-    "Typ": "Website",
-    "Branche": "Lebensmittel / Produktion",
-    "Agentur": "datamints",
-    "Image": "rabeler-fruchtchips.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2020",
-    "Projekttitel": "Schindhelm Architekten",
-    "Typ": "Website",
-    "Branche": "Architektur / Bauwesen",
-    "Agentur": "datamints",
-    "Image": "schindhelm-architekten.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2020",
-    "Projekttitel": "PR Agentur – Die Himmelsschreiber",
-    "Typ": "Website",
-    "Branche": "PR / Kommunikation",
-    "Agentur": "datamints",
-    "Image": "pr-agentur-die-himmelsschreiber.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2020",
-    "Projekttitel": "Psychotherapiepraxis Dr. Loohs",
-    "Typ": "Website",
-    "Branche": "Gesundheit / Psychotherapie",
-    "Agentur": "eveca",
-    "Image": "psychotherapiepraxis-dr-loohs.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2020",
-    "Projekttitel": "Stadtwerke Unterschleißheim",
-    "Typ": "Website",
-    "Branche": "Energieversorger",
-    "Agentur": "datamints",
-    "Image": "stadtwerke-unterschleissheim.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2020",
-    "Projekttitel": "Olmogo",
-    "Typ": "App",
-    "Branche": "Software / Webentwicklung",
-    "Agentur": "wiredframe",
-    "Image": "olmogo-app.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2019",
-    "Projekttitel": "IWEST Website",
-    "Typ": "Website",
-    "Branche": "Tiernahrung / Agrar",
-    "Agentur": "datamints",
-    "Image": "iwest-website.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2019",
-    "Projekttitel": "Olmogo",
-    "Typ": "Website",
-    "Branche": "Software / Webentwicklung",
-    "Agentur": "wiredframe",
-    "Image": "olmogo.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2019",
-    "Projekttitel": "FRONTERIS Immobilien",
-    "Typ": "Website",
-    "Branche": "Immobilien / Projektentwicklung",
-    "Agentur": "eveca",
-    "Image": "fronteris-immobilien.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2019",
-    "Projekttitel": "Andreas Teusch Parkett-Service",
-    "Typ": "Website",
-    "Branche": "Handwerk / Innenausbau",
-    "Agentur": "denkdigital",
-    "Image": "andreas-teusch-parkett-service.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2019",
-    "Projekttitel": "ahg Immobilien Frankfurt",
-    "Typ": "Website",
-    "Branche": "Immobilien / Makler",
-    "Agentur": "denkdigital",
-    "Image": "ahg-immobilien-frankfurt.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2019",
-    "Projekttitel": "PRESBER Neue Arbeitswelten",
-    "Typ": "Website",
-    "Branche": "Innenarchitektur / Bürodesign",
-    "Agentur": "denkdigital",
-    "Image": "presber-neue-arbeitswelten.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2019",
-    "Projekttitel": "d.center ZELLNER group",
-    "Typ": "Website",
-    "Branche": "IT / Systemintegration",
-    "Agentur": "eveca",
-    "Image": "dcenter-zellner-group.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2019",
-    "Projekttitel": "Diakonie Passau",
-    "Typ": "Website",
-    "Branche": "Soziale Einrichtung / Kirche",
-    "Agentur": "eveca",
-    "Image": "diakonie-passau.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2019",
-    "Projekttitel": "AS-LED Lighting",
-    "Typ": "Website",
-    "Branche": "Beleuchtung / Technik",
-    "Agentur": "datamints",
-    "Image": "as-led-lighting.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2019",
-    "Projekttitel": "Lernbiene",
-    "Typ": "Shopware",
-    "Branche": "Bildung / Verlag",
-    "Agentur": "datamints",
-    "Image": "lernbiene.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2019",
-    "Projekttitel": "Bechtold Blechbearbeitung",
-    "Typ": "Website",
-    "Branche": "Metallverarbeitung / Industrie",
-    "Agentur": "datamints",
-    "Image": "bechtold-blechbearbeitung.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2018",
-    "Projekttitel": "Bodenfrost Bikes and Fashion",
-    "Typ": "Shopware",
-    "Branche": "Mode / Fahrradhandel",
-    "Agentur": "datamints",
-    "Image": "bodenfrost-bikes-and-fashion.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2018",
-    "Projekttitel": "IB FEY Ingenieurbüro für Bauwesen",
-    "Typ": "Website",
-    "Branche": "Bauwesen / Ingenieurwesen",
-    "Agentur": "datamints",
-    "Image": "ib-fey-ingenieurbuero-fuer-bauwesen.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2017",
-    "Projekttitel": "World Wide Spirits",
-    "Typ": "CosmoShop",
-    "Branche": "Spirituosen / Handel",
-    "Agentur": "CosmoShop",
-    "Image": "world-wide-spirits.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2017",
-    "Projekttitel": "Bavaria Selection",
-    "Typ": "Shopware",
-    "Branche": "Spirituosen / Handel",
-    "Agentur": "datamints",
-    "Image": "bavaria-selection.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2017",
-    "Projekttitel": "LACUNA Fondsgesellschaft",
-    "Typ": "Website",
-    "Branche": "Finanzdienstleistungen",
-    "Agentur": "eveca",
-    "Image": "lacuna-fondsgesellschaft.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2017",
-    "Projekttitel": "IfTA Messe Überwachen Schützen",
-    "Typ": "Website",
-    "Branche": "Messtechnik / Industrie",
-    "Agentur": "datamints",
-    "Image": "ifta-messe-ueberwachen-schuetzen.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2017",
-    "Projekttitel": "Grassl Bergbrennerei",
-    "Typ": "CosmoShop",
-    "Branche": "Spirituosen / Manufaktur",
-    "Agentur": "CosmoShop",
-    "Image": "grassl-bergbrennerei.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2016",
-    "Projekttitel": "Europapark",
-    "Typ": "CosmoShop",
-    "Branche": "Freizeit / Event / Merch",
-    "Agentur": "CosmoShop",
-    "Image": "europpark.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2016",
-    "Projekttitel": "Intertrainment",
-    "Typ": "Website",
-    "Branche": "Freizeit / Entertainment",
-    "Agentur": "datamints",
-    "Image": "intertrainment.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2016",
-    "Projekttitel": "NTT Data The Open",
-    "Typ": "Website",
-    "Branche": "IT / Consulting",
-    "Agentur": "datamints",
-    "Image": "ntt-data-the-open.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2016",
-    "Projekttitel": "brz Organisation und Bauinformatik",
-    "Typ": "Website",
-    "Branche": "Bauinformatik / Software",
-    "Agentur": "datamints",
-    "Image": "brz-organisation-und-bauinformatik.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2016",
-    "Projekttitel": "Stadtwerke Penzberg",
-    "Typ": "Website",
-    "Branche": "Energieversorger",
-    "Agentur": "datamints",
-    "Image": "stadtwerke-penzberg.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2016",
-    "Projekttitel": "Wei(s)ser Stadtvogel",
-    "Typ": "Website",
-    "Branche": "Tourismus / Stadtführungen",
-    "Agentur": "datamints",
-    "Image": "weisser-stadtvogel.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2016",
-    "Projekttitel": "BMW SERA",
-    "Typ": "App",
-    "Branche": "Automotive / Forschung",
-    "Agentur": "datamints",
-    "Image": "bmw-sera.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2016",
-    "Projekttitel": "Vodafone Merchandising",
-    "Typ": "CosmoShop",
-    "Branche": "Telekommunikation / Merch",
-    "Agentur": "CosmoShop",
-    "Image": "vodafone-merchandising.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2016",
-    "Projekttitel": "Cedon",
-    "Typ": "CosmoShop",
-    "Branche": "Design / Geschenkartikel",
-    "Agentur": "CosmoShop",
-    "Image": "cedon.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2016",
-    "Projekttitel": "NEHS GmbH",
-    "Typ": "CosmoShop",
-    "Branche": "Medizintechnik / Handel",
-    "Agentur": "CosmoShop",
-    "Image": "nehs-gmbh.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2015",
-    "Projekttitel": "Landhaus Hub Café Bistro Extra",
-    "Typ": "Website",
-    "Branche": "Gastronomie",
-    "Agentur": "wiredframe",
-    "Image": "landhaus-hub-caf-bistro-extra.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2015",
-    "Projekttitel": "Schnittpunkt Haardesign",
-    "Typ": "Website",
-    "Branche": "Friseur / Lifestyle",
-    "Agentur": "denkdigital",
-    "Image": "schnittpunkt-haardesign.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2015",
-    "Projekttitel": "Tierschutzverein München",
-    "Typ": "Website",
-    "Branche": "Tierschutz / NGO",
-    "Agentur": "datamints",
-    "Image": "tierschutzverein-muenchen.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2015",
-    "Projekttitel": "Oberland Magazin",
-    "Typ": "Website",
-    "Branche": "Verlag / Regionalmagazin",
-    "Agentur": "datamints",
-    "Image": "oberland-magazin.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2015",
-    "Projekttitel": "Unternehmerrunde Regensburg",
-    "Typ": "Website",
-    "Branche": "Wirtschaft / Netzwerk",
-    "Agentur": "eveca",
-    "Image": "unternehmerrunde-regensburg.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2015",
-    "Projekttitel": "Café Latte Art Wiesbaden",
-    "Typ": "App",
-    "Branche": "Gastronomie / Lifestyle",
-    "Agentur": "denkdigital",
-    "Image": "caf-latte-art-wiesbaden.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2015",
-    "Projekttitel": "Linn High Therm",
-    "Typ": "Website",
-    "Branche": "Industrie / Anlagenbau",
-    "Agentur": "eveca",
-    "Image": "linn-high-therm.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2015",
-    "Projekttitel": "credo-online Bistum Augsburg",
-    "Typ": "Website",
-    "Branche": "Kirche / Bildung",
-    "Agentur": "datamints",
-    "Image": "credo-online-bistum-augsburg.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2015",
-    "Projekttitel": "Jet Electronics",
-    "Typ": "Website",
-    "Branche": "Elektronik / Handel",
-    "Agentur": "datamints",
-    "Image": "jet-electronics.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2014",
-    "Projekttitel": "Haslinger Metallbau",
-    "Typ": "Website",
-    "Branche": "Metallbau / Industrie",
-    "Agentur": "datamints",
-    "Image": "haslinger-metallbau.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2014",
-    "Projekttitel": "Werkhof Regensburg",
-    "Typ": "Website",
-    "Branche": "Sozialunternehmen / Werkstätten",
-    "Agentur": "eveca",
-    "Image": "werkhof-regensburg.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2014",
-    "Projekttitel": "QFS Quality First Software",
-    "Typ": "Website",
-    "Branche": "Softwareentwicklung / Testing",
-    "Agentur": "datamints",
-    "Image": "qfs-quality-first-software.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2014",
-    "Projekttitel": "Scharl Unternehmensgruppe",
-    "Typ": "Website",
-    "Branche": "Immobilien / Projektentwicklung",
-    "Agentur": "datamints",
-    "Image": "scharl-unternehmensgruppe.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2014",
-    "Projekttitel": "Seehausen am Staffelsee",
-    "Typ": "Website",
-    "Branche": "Kommune / Tourismus",
-    "Agentur": "datamints",
-    "Image": "seehausen-am-staffelsee.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2014",
-    "Projekttitel": "Capcomp Supercapacitors",
-    "Typ": "Website",
-    "Branche": "Elektronik / Komponenten",
-    "Agentur": "datamints",
-    "Image": "capcomp-supercapacitors.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2014",
-    "Projekttitel": "AbbVie Care",
-    "Typ": "Website",
-    "Branche": "Pharma / Patientenservice",
-    "Agentur": "datamints",
-    "Image": "abbvie-care.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2014",
-    "Projekttitel": "Ingenieurbüro Vogt",
-    "Typ": "Website",
-    "Branche": "Ingenieurwesen / Bauwesen",
-    "Agentur": "datamints",
-    "Image": "ingenieurbuero-vogt.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2014",
-    "Projekttitel": "The Whisky Store",
-    "Typ": "Website",
-    "Branche": "Spirituosen / Handel",
-    "Agentur": "datamints",
-    "Image": "the-whisky-store.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2013",
-    "Projekttitel": "Stefanie Schütt Coaching",
-    "Typ": "Website",
-    "Branche": "Coaching / Beratung",
-    "Agentur": "datamints",
-    "Image": "stefanie-schuett-coaching.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2013",
-    "Projekttitel": "stadler / schott Beratung für Unternehmenskultur",
-    "Typ": "Website",
-    "Branche": "Unternehmensberatung",
-    "Agentur": "datamints",
-    "Image": "stadler-schott-beratung-fuer-unternehmenskultur.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2013",
-    "Projekttitel": "fiduCon Wirtschaftsprüfungsgesellschaft",
-    "Typ": "Website",
-    "Branche": "Wirtschaftsprüfung / Finanzen",
-    "Agentur": "datamints",
-    "Image": "fiducon-wirtschaftspruefungsgesellschaft.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2013",
-    "Projekttitel": "Stadt Unterschleißheim",
-    "Typ": "Website",
-    "Branche": "Öffentliche Einrichtung",
-    "Agentur": "datamints",
-    "Image": "stadt-unterschleissheim-2.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2013",
-    "Projekttitel": "Aquariush Unterschleißheim",
-    "Typ": "Website",
-    "Branche": "Freizeitbad / Kommune",
-    "Agentur": "datamints",
-    "Image": "aquariush-unterschleissheim.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2013",
-    "Projekttitel": "Toycar Shop",
-    "Typ": "OXID eShop",
-    "Branche": "Modellautos / Spielwaren",
-    "Agentur": "datamints",
-    "Image": "toycar-shop.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2013",
-    "Projekttitel": "Tintoy World",
-    "Typ": "OXID eShop",
-    "Branche": "Spielwaren / Sammlerartikel",
-    "Agentur": "datamints",
-    "Image": "tintoy-world.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2013",
-    "Projekttitel": "Augsburger Spielzeugkiste",
-    "Typ": "OXID eShop",
-    "Branche": "Spielwaren / Fachhandel",
-    "Agentur": "datamints",
-    "Image": "augsburger-spielzeugkiste.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2013",
-    "Projekttitel": "The Monarch Hotel Bad Gögging",
-    "Typ": "Website",
-    "Branche": "Hotellerie / Wellness",
-    "Agentur": "datamints",
-    "Image": "the-monarch-hotel-bad-goegging.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2013",
-    "Projekttitel": "MBMedien Verlag",
-    "Typ": "Website",
-    "Branche": "Verlag / Medien",
-    "Agentur": "datamints",
-    "Image": "mbmedien-verlag.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2013",
-    "Projekttitel": "Check Organic",
-    "Typ": "Website",
-    "Branche": "Nachhaltigkeit / Zertifizierung",
-    "Agentur": "datamints",
-    "Image": "check-organic.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2012",
-    "Projekttitel": "NK23 eShop",
-    "Typ": "OXID eShop",
-    "Branche": "Einzelhandel / Fashion",
-    "Agentur": "datamints",
-    "Image": "nk23-shop.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2012",
-    "Projekttitel": "vhs Mainburg e.V.",
-    "Typ": "Website",
-    "Branche": "Bildung / Erwachsenenbildung",
-    "Agentur": "datamints",
-    "Image": "vhs-mainburg-ev.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2012",
-    "Projekttitel": "Inheco - Industrial heating & cooling",
-    "Typ": "Website",
-    "Branche": "Industrie / Laborautomation",
-    "Agentur": "datamints",
-    "Image": "inheco-industrial-heating-and-cooling.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2012",
-    "Projekttitel": "Nishiki Fireworks",
-    "Typ": "OXID eShop",
-    "Branche": "Feuerwerk / Eventhandel",
-    "Agentur": "datamints",
-    "Image": "nishiki-fireworks.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2012",
-    "Projekttitel": "krämmel Stadt-Land-Fluss",
-    "Typ": "Website",
-    "Branche": "Immobilien / Bauunternehmen",
-    "Agentur": "datamints",
-    "Image": "kraemmel-stadt-land-fluss.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2012",
-    "Projekttitel": "DEGA expo-team",
-    "Typ": "Website",
-    "Branche": "Messebau / Eventdienstleister",
-    "Agentur": "datamints",
-    "Image": "dega-expo-team.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2012",
-    "Projekttitel": "EMT Ingenieur-gesellschaft",
-    "Typ": "Website",
-    "Branche": "Ingenieurwesen / Planung",
-    "Agentur": "datamints",
-    "Image": "emt-ingenieur-gesellschaft.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2012",
-    "Projekttitel": "Sanyo Electronics -Panasonic",
-    "Typ": "Website",
-    "Branche": "Elektronik / Technologie",
-    "Agentur": "datamints",
-    "Image": "sanyo-electronics-panasonic.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2012",
-    "Projekttitel": "The Whisky Store Seeshaupt",
-    "Typ": "OXID eShop",
-    "Branche": "Spirituosen / Handel",
-    "Agentur": "datamints",
-    "Image": "the-whisky-store-2.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2012",
-    "Projekttitel": "vitarama",
-    "Typ": "OXID eShop",
-    "Branche": "Gesundheit / Nahrungsergänzung",
-    "Agentur": "datamints",
-    "Image": "vitarama.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2011",
-    "Projekttitel": "krämmel Ressourcenplanung",
-    "Typ": "Website",
-    "Branche": "Immobilien / Bauplanung",
-    "Agentur": "datamints",
-    "Image": "kraemmel-ressourcenplanung.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2011",
-    "Projekttitel": "Neuert Metallbau",
-    "Typ": "Website",
-    "Branche": "Metallbau / Industrie",
-    "Agentur": "datamints",
-    "Image": "neuert-metallbau.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2011",
-    "Projekttitel": "Saustark24",
-    "Typ": "OXID eShop",
-    "Branche": "Deko / Geschenkartikel",
-    "Agentur": "datamints",
-    "Image": "saustark24.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2011",
-    "Projekttitel": "Kunst Ausstellung Mainburg",
-    "Typ": "Website",
-    "Branche": "Kunst / Kultur",
-    "Agentur": "datamints",
-    "Image": "kunst-ausstellung-mainburg.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2011",
-    "Projekttitel": "smart things",
-    "Typ": "Website",
-    "Branche": "Elektronik / Einzelhandel",
-    "Agentur": "datamints",
-    "Image": "smart-things.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2011",
-    "Projekttitel": "Stadtwerke Landsberg",
-    "Typ": "Website",
-    "Branche": "Energieversorger",
-    "Agentur": "datamints",
-    "Image": "stadtwerke-landsberg.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2011",
-    "Projekttitel": "Steuerkanzlei Riege",
-    "Typ": "Website",
-    "Branche": "Steuerberatung / Finanzen",
-    "Agentur": "datamints",
-    "Image": "steuerkanzlei-riege.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2010",
-    "Projekttitel": "checkpoint Shop",
-    "Typ": "OXID eShop",
-    "Branche": "Mode / Streetwear",
-    "Agentur": "datamints",
-    "Image": "checkpoint-shop.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2010",
-    "Projekttitel": "Evangelische Kirchengemeinde GAP",
-    "Typ": "Website",
-    "Branche": "Kirche / Gemeinde",
-    "Agentur": "datamints",
-    "Image": "evangelische-kirchengemeinde-gap.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2010",
-    "Projekttitel": "The Monarch Hotel Bad Gögging",
-    "Typ": "Website",
-    "Branche": "Hotellerie / Wellness",
-    "Agentur": "datamints",
-    "Image": "the-monarch-hotel-bad-goegging-2.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2010",
-    "Projekttitel": "krämmel",
-    "Typ": "Website",
-    "Branche": "Bauunternehmen / Immobilien",
-    "Agentur": "datamints",
-    "Image": "kraemmel.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2010",
-    "Projekttitel": "Projekt JugendCoaching",
-    "Typ": "Website",
-    "Branche": "Bildung / Jugendhilfe",
-    "Agentur": "datamints",
-    "Image": "projekt-jugendcoaching.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2010",
-    "Projekttitel": "The Whisky Store",
-    "Typ": "Website",
-    "Branche": "Spirituosen / Handel",
-    "Agentur": "datamints",
-    "Image": "the-whisky-store-website.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2010",
-    "Projekttitel": "TQ Group",
-    "Typ": "Website",
-    "Branche": "Elektronik / Industrie",
-    "Agentur": "datamints",
-    "Image": "tq-group.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2010",
-    "Projekttitel": "trendy planets",
-    "Typ": "OXID eShop",
-    "Branche": "Mode / Lifestyle",
-    "Agentur": "datamints",
-    "Image": "trendy-planets.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2010",
-    "Projekttitel": "Schneefernerhaus Zugspitze",
-    "Typ": "Website",
-    "Branche": "Forschung / Umwelt",
-    "Agentur": "datamints",
-    "Image": "schneefernerhaus-zugspitze.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2010",
-    "Projekttitel": "WEMA Zerspanungstechnik",
-    "Typ": "Website",
-    "Branche": "Maschinenbau / Industrie",
-    "Agentur": "datamints",
-    "Image": "wema-zerspanungstechnik.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2009",
-    "Projekttitel": "Heuboden Murnau",
-    "Typ": "Website",
-    "Branche": "Gastronomie",
-    "Agentur": "wiredframe",
-    "Image": "heuboden-murnau.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2009",
-    "Projekttitel": "St. Eurach Land und Golfclub",
-    "Typ": "Website",
-    "Branche": "Freizeit / Sport",
-    "Agentur": "wiredframe",
-    "Image": "st-eurach-land-und-golfclub.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2009",
-    "Projekttitel": "Walhaus an de Miälwellen",
-    "Typ": "Website",
-    "Branche": "Hotellerie",
-    "Agentur": "wiredframe",
-    "Image": "walhaus-an-de-miaelwellen.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2009",
-    "Projekttitel": "Landgasthof und Hotel Krone",
-    "Typ": "Website",
-    "Branche": "Hotellerie",
-    "Agentur": "wiredframe",
-    "Image": "landgasthof-und-hotel-krone.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2009",
-    "Projekttitel": "Gasthof Lutz",
-    "Typ": "Website",
-    "Branche": "Hotellerie",
-    "Agentur": "wiredframe",
-    "Image": "gasthof-lutz.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2009",
-    "Projekttitel": "Schlossgasthof Strasser",
-    "Typ": "Website",
-    "Branche": "Hotellerie",
-    "Agentur": "wiredframe",
-    "Image": "schlossgasthof-strasser.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2009",
-    "Projekttitel": "Hotel Pension Matschun",
-    "Typ": "Website",
-    "Branche": "Hotellerie",
-    "Agentur": "wiredframe",
-    "Image": "hotel-pension-matschun.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2009",
-    "Projekttitel": "Hotel zur Kloster-Mühle",
-    "Typ": "Website",
-    "Branche": "Hotellerie",
-    "Agentur": "wiredframe",
-    "Image": "hotel-zur-kloster-muehle.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2009",
-    "Projekttitel": "Wimmer Weißbräu Gasthof",
-    "Typ": "Website",
-    "Branche": "Hotellerie",
-    "Agentur": "wiredframe",
-    "Image": "wimmer-weissbraeu-gasthof.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2009",
-    "Projekttitel": "Posthotel Traube",
-    "Typ": "Website",
-    "Branche": "Hotellerie",
-    "Agentur": "wiredframe",
-    "Image": "posthotel-traube.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2009",
-    "Projekttitel": "Landhotel Klotzbücher",
-    "Typ": "Website",
-    "Branche": "Hotellerie",
-    "Agentur": "wiredframe",
-    "Image": "landhotel-klotzbuecher.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2009",
-    "Projekttitel": "DeLaVista Faschion",
-    "Typ": "Website",
-    "Branche": "Mode / Einzelhandel",
-    "Agentur": "wiredframe",
-    "Image": "delavista-faschion.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2009",
-    "Projekttitel": "Aurora Hotel Dachau",
-    "Typ": "Website",
-    "Branche": "Hotellerie",
-    "Agentur": "wiredframe",
-    "Image": "aurora-hotel-dachau.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2009",
-    "Projekttitel": "checkpoint Shop",
-    "Typ": "XT-Commerce Shop",
-    "Branche": "Mode / Streetwear",
-    "Agentur": "datamints",
-    "Image": "checkpoint-shop-2.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2009",
-    "Projekttitel": "Kinder-, Jugend- und Erwachsenenhilfe e.V.",
-    "Typ": "Website",
-    "Branche": "Soziale Einrichtung / Bildung",
-    "Agentur": "datamints",
-    "Image": "kinder-jugend-und-erwachsenenhilfe-ev.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2009",
-    "Projekttitel": "Krämmel Baukonfigurator",
-    "Typ": "Website",
-    "Branche": "Bauwesen / Immobilien",
-    "Agentur": "datamints",
-    "Image": "kraemmel-baukonfigurator.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2009",
-    "Projekttitel": "LUVRA Hydraulik und Regeltechnik",
-    "Typ": "Website",
-    "Branche": "Maschinenbau / Hydraulik",
-    "Agentur": "datamints",
-    "Image": "luvra-hydraulik-und-regeltechnik.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2009",
-    "Projekttitel": "Mein Gesundes Brot",
-    "Typ": "Website",
-    "Branche": "Lebensmittel / Bäckerei",
-    "Agentur": "datamints",
-    "Image": "mein-gesundes-brot.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2009",
-    "Projekttitel": "NT 4 Admins",
-    "Typ": "Website",
-    "Branche": "IT / Community",
-    "Agentur": "datamints",
-    "Image": "nt-4-admins.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2009",
-    "Projekttitel": "Raum + Gestaltung Probst",
-    "Typ": "Website",
-    "Branche": "Innenarchitektur / Design",
-    "Agentur": "datamints",
-    "Image": "raum-gestaltung-probst.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2009",
-    "Projekttitel": "Singer Sondermaschinen",
-    "Typ": "Website",
-    "Branche": "Maschinenbau / Sondertechnik",
-    "Agentur": "datamints",
-    "Image": "singer-sondermaschinen.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2009",
-    "Projekttitel": "Spatzennest e.V.",
-    "Typ": "Website",
-    "Branche": "Kindergarten / Soziale Einrichtung",
-    "Agentur": "datamints",
-    "Image": "spatzennest-ev.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2009",
-    "Projekttitel": "IC-Elektronik",
-    "Typ": "Website",
-    "Branche": "Elektronik / Industrie",
-    "Agentur": "datamints",
-    "Image": "ic-elektronik.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2009",
-    "Projekttitel": "Solar TC",
-    "Typ": "Website",
-    "Branche": "Photovoltaik / Technik",
-    "Agentur": "datamints",
-    "Image": "solar-tc.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2009",
-    "Projekttitel": "TUNZE Aquairentechnik",
-    "Typ": "Website",
-    "Branche": "Aquaristik / Technik",
-    "Agentur": "datamints",
-    "Image": "tunze-aquairentechnik.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2009",
-    "Projekttitel": "TuS Geretsried e.V",
-    "Typ": "Website",
-    "Branche": "Sportverein",
-    "Agentur": "datamints",
-    "Image": "tus-geretsried-ev.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2009",
-    "Projekttitel": "Von Bredow, Lütteke und Partner",
-    "Typ": "Website",
-    "Branche": "Rechtsanwälte / Kanzlei",
-    "Agentur": "datamints",
-    "Image": "von-bredow-luetteke-und-partner.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2009",
-    "Projekttitel": "Janet Mattis Airbrush",
-    "Typ": "Website",
-    "Branche": "Kunst / Airbrush",
-    "Agentur": "datamints",
-    "Image": "janet-mattis-airbrush.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2008",
-    "Projekttitel": "FSC Forest Stewardship Council",
-    "Typ": "Website",
-    "Branche": "Umwelt / NGO",
-    "Agentur": "datamints",
-    "Image": "fsc-forest-stewardship-council.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2008",
-    "Projekttitel": "Gruber HKSK",
-    "Typ": "Website",
-    "Branche": "Handwerk / Sanitär",
-    "Agentur": "datamints",
-    "Image": "gruber-hksk.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2008",
-    "Projekttitel": "Gesundheitsakademie Mainburg",
-    "Typ": "Website",
-    "Branche": "Bildung / Gesundheit",
-    "Agentur": "datamints",
-    "Image": "gesundheitsakademie-mainburg.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2008",
-    "Projekttitel": "Moviepool",
-    "Typ": "Website",
-    "Branche": "Filmproduktion",
-    "Agentur": "datamitns",
-    "Image": "moviepool.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2008",
-    "Projekttitel": "Stellwerk Penzberg",
-    "Typ": "Website",
-    "Branche": "Ausbildungsportal",
-    "Agentur": "datamints",
-    "Image": "stellwerk-penzberg.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2008",
-    "Projekttitel": "Neokeltic Shop",
-    "Typ": "XT-Commerce Shop",
-    "Branche": "Einzelhandel",
-    "Agentur": "wiredframe",
-    "Image": "neokeltic-shop.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2007",
-    "Projekttitel": "Diakonie Weilheim-Bad-Tölz",
-    "Typ": "Website",
-    "Branche": "Soziale Einrichtung",
-    "Agentur": "datamints",
-    "Image": "diakonie-weilheim-bad-toelz.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2007",
-    "Projekttitel": "MyHandicap",
-    "Typ": "Website",
-    "Branche": "Inklusion / NGO",
-    "Agentur": "datamints",
-    "Image": "myhandicap.jpg",
-    "URL": ""
-  },
-  {
-    "Jahr": "2007",
-    "Projekttitel": "VHS Business Akademie",
-    "Typ": "Website",
-    "Branche": "Bildung",
-    "Agentur": "datamints",
-    "Image": "vhs-business-akademie.jpg",
-    "URL": ""
-  }
+	{
+		"Jahr": "2026",
+		"Projekttitel": "BVT Unternehmensgruppe",
+		"Typ": "Website",
+		"Branche": "Investmentfondsgesellschaft",
+		"Agentur": "datamints",
+		"Image": "bvt-unternehmensgruppe.jpg",
+		"URL": "https://www.figma.com/proto/68Hog0AJYFg2WGzfWMVwJc/BVT-derigo---Website-Design-System?node-id=13501-2124&viewport=572%2C-578%2C0.1&t=zgDgHvyfC8iBkN7X-8&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=13501%3A2124&show-proto-sidebar=1&page-id=0%3A1&hide-ui=1"
+	},
+	{
+		"Jahr": "2025",
+		"Projekttitel": "Naturkundemuseum Karlsruhe",
+		"Typ": "Website",
+		"Branche": "Öffentliche Einrichtung",
+		"Agentur": "Ausschreibung",
+		"Image": "naturkundemuseum-karlsruhe.jpg",
+		"URL": "https://www.figma.com/proto/Gs563gV4LkeIGLmREXXeKU/Staatliches-Museum-fu%CC%88r-Naturkunde-Karlsruhe?page-id=0%3A1&node-id=13546-130&p=f&viewport=456%2C25%2C0.04&t=evtEs739QpJH7z9I-1&scaling=scale-down-width&content-scaling=fixed&starting-point-node-id=13546%3A130&show-proto-sidebar=1"
+	},
+	{
+		"Jahr": "2025",
+		"Projekttitel": "Stadt Unterschleißheim",
+		"Typ": "Website",
+		"Branche": "Öffentliche Einrichtung",
+		"Agentur": "wiredframe",
+		"Image": "stadt-unterschleissheim.jpg",
+		"URL": "https://www.figma.com/proto/7xpm078ThimqcEvnRCllTV/Stadt-Unterschlei%C3%9Fheim---Design-System-2025?page-id=0%3A1&node-id=14018-4850&p=f&viewport=618%2C303%2C0.02&t=nuynliMuCFPfkV0I-8&scaling=scale-down-width&content-scaling=fixed&starting-point-node-id=14018%3A4850&show-proto-sidebar=1&hide-ui=1"
+	},
+	{
+		"Jahr": "2025",
+		"Projekttitel": "Bildungsportal Heidekreis",
+		"Typ": "Website",
+		"Branche": "Öffentliche Einrichtung",
+		"Agentur": "Ausschreibung",
+		"Image": "bildungsportal-heidekreis.jpg",
+		"URL": "https://www.figma.com/proto/rUk3Tvfg0xN938VlnbPUgS/-3393-Bildungsportal-Heidekreis?page-id=11769%3A16&node-id=13502-3293&viewport=803%2C-782%2C0.19&t=OOg8goWyZSCWpKRD-8&scaling=scale-down-width&content-scaling=fixed&starting-point-node-id=13502%3A3293&hide-ui=1"
+	},
+	{
+		"Jahr": "2025",
+		"Projekttitel": "SBC Franken",
+		"Typ": "Website",
+		"Branche": "Photovoltaik / Technik",
+		"Agentur": "ideenmühle",
+		"Image": "sbc-franken.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2024",
+		"Projekttitel": "AUKOM",
+		"Typ": "Website",
+		"Branche": "Messtechnik / Industrie",
+		"Agentur": "datamints",
+		"Image": "aukom.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2024",
+		"Projekttitel": "AUKOM Webapp",
+		"Typ": "Website",
+		"Branche": "Messtechnik / Industrie",
+		"Agentur": "datamints",
+		"Image": "aukom-app.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2025",
+		"Projekttitel": "Schaffelhuber",
+		"Typ": "Shopware",
+		"Branche": "Ersatzteilehandel",
+		"Agentur": "datamints",
+		"Image": "schaffelhuber.jpg",
+		"URL": "https://www.figma.com/proto/Yc8nq7wcfkjOlnNTNCa3zK/Schaffelhuber---Shopware-6-UI-Design?page-id=0%3A1&node-id=13501-25&viewport=1311%2C-68%2C0.14&t=EOmAztMCOpm6qEoV-8&scaling=scale-down-width&content-scaling=fixed&starting-point-node-id=13501%3A25&show-proto-sidebar=1&hide-ui=1"
+	},
+	{
+		"Jahr": "2025",
+		"Projekttitel": "Kraft Baustoffe",
+		"Typ": "Shopware",
+		"Branche": "Baustoffhandel",
+		"Agentur": "netgrade",
+		"Image": "kraft-baustoffe.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2025",
+		"Projekttitel": "BioM Biotech Cluster",
+		"Typ": "Website",
+		"Branche": "Biotechnologie",
+		"Agentur": "datamints",
+		"Image": "biom-biotech-cluster.jpg",
+		"URL": "https://www.figma.com/proto/i7hwhfdeQtKVLJNXx9WjLa/BioM---Website-Design-System-2025?page-id=0%3A1&node-id=13769-6581&viewport=585%2C-5427%2C0.22&t=iTyCVRXa5L7nOMcv-8&scaling=scale-down-width&content-scaling=fixed&starting-point-node-id=13769%3A6581&show-proto-sidebar=1&hide-ui=1"
+	},
+	{
+		"Jahr": "2024",
+		"Projekttitel": "Memodo Shop Relaunch",
+		"Typ": "Shopware",
+		"Branche": "Photovoltaik",
+		"Agentur": "datamints",
+		"Image": "memodo-shop-relaunch.jpg",
+		"URL": "https://www.figma.com/proto/LIaG2YfoFN9iY1NPJ7qdRd/Memodo---Onlineshop-Design-System?page-id=410%3A7173&node-id=410-7302&p=f&viewport=25%2C147%2C0.51&t=Ji5vt5dtLmqKwlYl-8&scaling=scale-down-width&content-scaling=fixed&starting-point-node-id=410%3A7302&show-proto-sidebar=1&hide-ui=1"
+	},
+	{
+		"Jahr": "2024",
+		"Projekttitel": "Radio Eins Shop",
+		"Typ": "Shopware",
+		"Branche": "Medien / Merchandising",
+		"Agentur": "netgrade",
+		"Image": "radio-eins-shop.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2024",
+		"Projekttitel": "RBB Shop / Sandmännchen Shop",
+		"Typ": "Shopware",
+		"Branche": "Medien / Merchandising",
+		"Agentur": "netgrade",
+		"Image": "rbb-shop-sandmaennchen-shop.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2024",
+		"Projekttitel": "IHK Service Portal",
+		"Typ": "Website",
+		"Branche": "Öffentliche Einrichtung",
+		"Agentur": "netgrade",
+		"Image": "ihk-service-portal.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2024",
+		"Projekttitel": "United Immunity",
+		"Typ": "Website",
+		"Branche": "Pharma / Medizin",
+		"Agentur": "datamints",
+		"Image": "united-immunity.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2024",
+		"Projekttitel": "LVKM",
+		"Typ": "Website",
+		"Branche": "Sozialverband",
+		"Agentur": "datamints",
+		"Image": "lvkm.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2023",
+		"Projekttitel": "Memodo Website",
+		"Typ": "Website",
+		"Branche": "Photovoltaik",
+		"Agentur": "datamints",
+		"Image": "memodo-website.jpg",
+		"URL": "https://www.figma.com/proto/Ilx0zUPQSRSMhIl6XZcQBn/Memodo---Website-Design-System?page-id=0%3A1&node-id=1605-3581&p=f&viewport=834%2C25%2C0.04&t=X4UpSqmSlJMGULQz-8&scaling=scale-down-width&content-scaling=fixed&starting-point-node-id=1605%3A3581&show-proto-sidebar=1&hide-ui=1"
+	},
+	{
+		"Jahr": "2023",
+		"Projekttitel": "Lupus Produkte Shop",
+		"Typ": "Shopware",
+		"Branche": "Bürobedarf",
+		"Agentur": "datamints",
+		"Image": "lupus-produkte-shop.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2023",
+		"Projekttitel": "Tunze Aquarientechnik",
+		"Typ": "Website",
+		"Branche": "Aquaristik",
+		"Agentur": "datamints",
+		"Image": "tunze-aquarientechnik.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2023",
+		"Projekttitel": "HMR Jacob",
+		"Typ": "Website",
+		"Branche": "Maschinenbau / Werkzeughandel",
+		"Agentur": "datamints",
+		"Image": "hmr-jacob.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2023",
+		"Projekttitel": "IWEST Onlineshop",
+		"Typ": "Shopware",
+		"Branche": "Tiernahrung / E-Commerce",
+		"Agentur": "datamints",
+		"Image": "iwest-onlineshop.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2022",
+		"Projekttitel": "Ausbildungskompass",
+		"Typ": "Website",
+		"Branche": "Bildung / Karriere",
+		"Agentur": "datamints",
+		"Image": "ausbildungskompass.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2022",
+		"Projekttitel": "Hieber Lindberg Shopware",
+		"Typ": "Shopware",
+		"Branche": "Einzelhandel / Lebensmittel",
+		"Agentur": "datamints",
+		"Image": "hieber-lindberg-shopware.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2022",
+		"Projekttitel": "Piercingline Shopware",
+		"Typ": "Shopware",
+		"Branche": "Schmuck / E-Commerce",
+		"Agentur": "netgrade",
+		"Image": "piercingline-shopware.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2022",
+		"Projekttitel": "Alzheimergesellschaft München",
+		"Typ": "Website",
+		"Branche": "Soziale Einrichtung / Gesundheit",
+		"Agentur": "datamints",
+		"Image": "alzheimergesellschaft-muenchen.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2022",
+		"Projekttitel": "Beleduc Lernspielwaren",
+		"Typ": "Website",
+		"Branche": "Spielwaren / Bildung",
+		"Agentur": "netgrade",
+		"Image": "beleduc-lernspielwaren.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2022",
+		"Projekttitel": "ZVK Network Intelligence",
+		"Typ": "Website",
+		"Branche": "IT / Netzwerktechnik",
+		"Agentur": "eveca",
+		"Image": "zvk-network.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2022",
+		"Projekttitel": "Herbert Fleischmann",
+		"Typ": "Website",
+		"Branche": "Industrie / Anlagenbau",
+		"Agentur": "datamints",
+		"Image": "herbert-fleischmann.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2022",
+		"Projekttitel": "Gustav Mahler Gesellschaft",
+		"Typ": "Website",
+		"Branche": "Kultur / Verein",
+		"Agentur": "datamints",
+		"Image": "gustav-mahler-gesellschaft.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2021",
+		"Projekttitel": "SKS Shop",
+		"Typ": "Shopware",
+		"Branche": "E-Commerce / Klebemitteln",
+		"Agentur": "datamints",
+		"Image": "sks-shopware.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2021",
+		"Projekttitel": "EasyLAN",
+		"Typ": "Website",
+		"Branche": "Netzwerktechnik / Industrie",
+		"Agentur": "eveca",
+		"Image": "easy-lan.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2021",
+		"Projekttitel": "Willburger System",
+		"Typ": "Website",
+		"Branche": "Industrie",
+		"Agentur": "eveca",
+		"Image": "willburger-system.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2021",
+		"Projekttitel": "Stadtwerke Weilheim",
+		"Typ": "Website",
+		"Branche": "Energieversorger",
+		"Agentur": "datamints",
+		"Image": "stadtwerke-weilheim.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2021",
+		"Projekttitel": "SG Post-Süd Regensburg",
+		"Typ": "Website",
+		"Branche": "Sportverein",
+		"Agentur": "eveca",
+		"Image": "sg-post-sued-regensburg.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2020",
+		"Projekttitel": "Zechbauer",
+		"Typ": "Website",
+		"Branche": "Zigarren / Handel",
+		"Agentur": "datamints",
+		"Image": "zechbauer.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2020",
+		"Projekttitel": "Verlag Österreich",
+		"Typ": "Website",
+		"Branche": "Verlag / Medien",
+		"Agentur": "datamints",
+		"Image": "verlag-oesterreich.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2020",
+		"Projekttitel": "KJE Hilfe Garmisch",
+		"Typ": "Website",
+		"Branche": "Soziale Einrichtung / Jugendhilfe",
+		"Agentur": "datamints",
+		"Image": "kje-hilfe-garmisch.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2020",
+		"Projekttitel": "Flat-Jack OnlineShop",
+		"Typ": "Shopware",
+		"Branche": "Autozubehör / Technik",
+		"Agentur": "datamints",
+		"Image": "flat-jack.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2020",
+		"Projekttitel": "Rabeler Fruchtchips",
+		"Typ": "Website",
+		"Branche": "Lebensmittel / Produktion",
+		"Agentur": "datamints",
+		"Image": "rabeler-fruchtchips.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2020",
+		"Projekttitel": "Schindhelm Architekten",
+		"Typ": "Website",
+		"Branche": "Architektur / Bauwesen",
+		"Agentur": "datamints",
+		"Image": "schindhelm-architekten.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2020",
+		"Projekttitel": "PR Agentur – Die Himmelsschreiber",
+		"Typ": "Website",
+		"Branche": "PR / Kommunikation",
+		"Agentur": "datamints",
+		"Image": "pr-agentur-die-himmelsschreiber.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2020",
+		"Projekttitel": "Psychotherapiepraxis Dr. Loohs",
+		"Typ": "Website",
+		"Branche": "Gesundheit / Psychotherapie",
+		"Agentur": "eveca",
+		"Image": "psychotherapiepraxis-dr-loohs.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2020",
+		"Projekttitel": "Stadtwerke Unterschleißheim",
+		"Typ": "Website",
+		"Branche": "Energieversorger",
+		"Agentur": "datamints",
+		"Image": "stadtwerke-unterschleissheim.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2020",
+		"Projekttitel": "Olmogo",
+		"Typ": "App",
+		"Branche": "Software / Webentwicklung",
+		"Agentur": "wiredframe",
+		"Image": "olmogo-app.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2019",
+		"Projekttitel": "IWEST Website",
+		"Typ": "Website",
+		"Branche": "Tiernahrung / Agrar",
+		"Agentur": "datamints",
+		"Image": "iwest-website.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2019",
+		"Projekttitel": "Olmogo",
+		"Typ": "Website",
+		"Branche": "Software / Webentwicklung",
+		"Agentur": "wiredframe",
+		"Image": "olmogo.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2019",
+		"Projekttitel": "FRONTERIS Immobilien",
+		"Typ": "Website",
+		"Branche": "Immobilien / Projektentwicklung",
+		"Agentur": "eveca",
+		"Image": "fronteris-immobilien.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2019",
+		"Projekttitel": "Andreas Teusch Parkett-Service",
+		"Typ": "Website",
+		"Branche": "Handwerk / Innenausbau",
+		"Agentur": "denkdigital",
+		"Image": "andreas-teusch-parkett-service.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2019",
+		"Projekttitel": "ahg Immobilien Frankfurt",
+		"Typ": "Website",
+		"Branche": "Immobilien / Makler",
+		"Agentur": "denkdigital",
+		"Image": "ahg-immobilien-frankfurt.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2019",
+		"Projekttitel": "PRESBER Neue Arbeitswelten",
+		"Typ": "Website",
+		"Branche": "Innenarchitektur / Bürodesign",
+		"Agentur": "denkdigital",
+		"Image": "presber-neue-arbeitswelten.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2019",
+		"Projekttitel": "d.center ZELLNER group",
+		"Typ": "Website",
+		"Branche": "IT / Systemintegration",
+		"Agentur": "eveca",
+		"Image": "dcenter-zellner-group.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2019",
+		"Projekttitel": "Diakonie Passau",
+		"Typ": "Website",
+		"Branche": "Soziale Einrichtung / Kirche",
+		"Agentur": "eveca",
+		"Image": "diakonie-passau.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2019",
+		"Projekttitel": "AS-LED Lighting",
+		"Typ": "Website",
+		"Branche": "Beleuchtung / Technik",
+		"Agentur": "datamints",
+		"Image": "as-led-lighting.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2019",
+		"Projekttitel": "Lernbiene",
+		"Typ": "Shopware",
+		"Branche": "Bildung / Verlag",
+		"Agentur": "datamints",
+		"Image": "lernbiene.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2019",
+		"Projekttitel": "Bechtold Blechbearbeitung",
+		"Typ": "Website",
+		"Branche": "Metallverarbeitung / Industrie",
+		"Agentur": "datamints",
+		"Image": "bechtold-blechbearbeitung.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2018",
+		"Projekttitel": "Bodenfrost Bikes and Fashion",
+		"Typ": "Shopware",
+		"Branche": "Mode / Fahrradhandel",
+		"Agentur": "datamints",
+		"Image": "bodenfrost-bikes-and-fashion.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2018",
+		"Projekttitel": "IB FEY Ingenieurbüro für Bauwesen",
+		"Typ": "Website",
+		"Branche": "Bauwesen / Ingenieurwesen",
+		"Agentur": "datamints",
+		"Image": "ib-fey-ingenieurbuero-fuer-bauwesen.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2017",
+		"Projekttitel": "World Wide Spirits",
+		"Typ": "CosmoShop",
+		"Branche": "Spirituosen / Handel",
+		"Agentur": "CosmoShop",
+		"Image": "world-wide-spirits.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2017",
+		"Projekttitel": "Bavaria Selection",
+		"Typ": "Shopware",
+		"Branche": "Spirituosen / Handel",
+		"Agentur": "datamints",
+		"Image": "bavaria-selection.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2017",
+		"Projekttitel": "LACUNA Fondsgesellschaft",
+		"Typ": "Website",
+		"Branche": "Finanzdienstleistungen",
+		"Agentur": "eveca",
+		"Image": "lacuna-fondsgesellschaft.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2017",
+		"Projekttitel": "IfTA Messe Überwachen Schützen",
+		"Typ": "Website",
+		"Branche": "Messtechnik / Industrie",
+		"Agentur": "datamints",
+		"Image": "ifta-messe-ueberwachen-schuetzen.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2017",
+		"Projekttitel": "Grassl Bergbrennerei",
+		"Typ": "CosmoShop",
+		"Branche": "Spirituosen / Manufaktur",
+		"Agentur": "CosmoShop",
+		"Image": "grassl-bergbrennerei.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2016",
+		"Projekttitel": "Europapark",
+		"Typ": "CosmoShop",
+		"Branche": "Freizeit / Event / Merch",
+		"Agentur": "CosmoShop",
+		"Image": "europpark.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2016",
+		"Projekttitel": "Intertrainment",
+		"Typ": "Website",
+		"Branche": "Freizeit / Entertainment",
+		"Agentur": "datamints",
+		"Image": "intertrainment.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2016",
+		"Projekttitel": "NTT Data The Open",
+		"Typ": "Website",
+		"Branche": "IT / Consulting",
+		"Agentur": "datamints",
+		"Image": "ntt-data-the-open.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2016",
+		"Projekttitel": "brz Organisation und Bauinformatik",
+		"Typ": "Website",
+		"Branche": "Bauinformatik / Software",
+		"Agentur": "datamints",
+		"Image": "brz-organisation-und-bauinformatik.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2016",
+		"Projekttitel": "Stadtwerke Penzberg",
+		"Typ": "Website",
+		"Branche": "Energieversorger",
+		"Agentur": "datamints",
+		"Image": "stadtwerke-penzberg.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2016",
+		"Projekttitel": "Wei(s)ser Stadtvogel",
+		"Typ": "Website",
+		"Branche": "Tourismus / Stadtführungen",
+		"Agentur": "datamints",
+		"Image": "weisser-stadtvogel.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2016",
+		"Projekttitel": "BMW SERA",
+		"Typ": "App",
+		"Branche": "Automotive / Forschung",
+		"Agentur": "datamints",
+		"Image": "bmw-sera.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2016",
+		"Projekttitel": "Vodafone Merchandising",
+		"Typ": "CosmoShop",
+		"Branche": "Telekommunikation / Merch",
+		"Agentur": "CosmoShop",
+		"Image": "vodafone-merchandising.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2016",
+		"Projekttitel": "Cedon",
+		"Typ": "CosmoShop",
+		"Branche": "Design / Geschenkartikel",
+		"Agentur": "CosmoShop",
+		"Image": "cedon.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2016",
+		"Projekttitel": "NEHS GmbH",
+		"Typ": "CosmoShop",
+		"Branche": "Medizintechnik / Handel",
+		"Agentur": "CosmoShop",
+		"Image": "nehs-gmbh.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2015",
+		"Projekttitel": "Landhaus Hub Café Bistro Extra",
+		"Typ": "Website",
+		"Branche": "Gastronomie",
+		"Agentur": "wiredframe",
+		"Image": "landhaus-hub-caf-bistro-extra.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2015",
+		"Projekttitel": "Schnittpunkt Haardesign",
+		"Typ": "Website",
+		"Branche": "Friseur / Lifestyle",
+		"Agentur": "denkdigital",
+		"Image": "schnittpunkt-haardesign.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2015",
+		"Projekttitel": "Tierschutzverein München",
+		"Typ": "Website",
+		"Branche": "Tierschutz / NGO",
+		"Agentur": "datamints",
+		"Image": "tierschutzverein-muenchen.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2015",
+		"Projekttitel": "Oberland Magazin",
+		"Typ": "Website",
+		"Branche": "Verlag / Regionalmagazin",
+		"Agentur": "datamints",
+		"Image": "oberland-magazin.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2015",
+		"Projekttitel": "Unternehmerrunde Regensburg",
+		"Typ": "Website",
+		"Branche": "Wirtschaft / Netzwerk",
+		"Agentur": "eveca",
+		"Image": "unternehmerrunde-regensburg.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2015",
+		"Projekttitel": "Café Latte Art Wiesbaden",
+		"Typ": "App",
+		"Branche": "Gastronomie / Lifestyle",
+		"Agentur": "denkdigital",
+		"Image": "caf-latte-art-wiesbaden.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2015",
+		"Projekttitel": "Linn High Therm",
+		"Typ": "Website",
+		"Branche": "Industrie / Anlagenbau",
+		"Agentur": "eveca",
+		"Image": "linn-high-therm.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2015",
+		"Projekttitel": "credo-online Bistum Augsburg",
+		"Typ": "Website",
+		"Branche": "Kirche / Bildung",
+		"Agentur": "datamints",
+		"Image": "credo-online-bistum-augsburg.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2015",
+		"Projekttitel": "Jet Electronics",
+		"Typ": "Website",
+		"Branche": "Elektronik / Handel",
+		"Agentur": "datamints",
+		"Image": "jet-electronics.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2014",
+		"Projekttitel": "Haslinger Metallbau",
+		"Typ": "Website",
+		"Branche": "Metallbau / Industrie",
+		"Agentur": "datamints",
+		"Image": "haslinger-metallbau.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2014",
+		"Projekttitel": "Werkhof Regensburg",
+		"Typ": "Website",
+		"Branche": "Sozialunternehmen / Werkstätten",
+		"Agentur": "eveca",
+		"Image": "werkhof-regensburg.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2014",
+		"Projekttitel": "QFS Quality First Software",
+		"Typ": "Website",
+		"Branche": "Softwareentwicklung / Testing",
+		"Agentur": "datamints",
+		"Image": "qfs-quality-first-software.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2014",
+		"Projekttitel": "Scharl Unternehmensgruppe",
+		"Typ": "Website",
+		"Branche": "Immobilien / Projektentwicklung",
+		"Agentur": "datamints",
+		"Image": "scharl-unternehmensgruppe.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2014",
+		"Projekttitel": "Seehausen am Staffelsee",
+		"Typ": "Website",
+		"Branche": "Kommune / Tourismus",
+		"Agentur": "datamints",
+		"Image": "seehausen-am-staffelsee.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2014",
+		"Projekttitel": "Capcomp Supercapacitors",
+		"Typ": "Website",
+		"Branche": "Elektronik / Komponenten",
+		"Agentur": "datamints",
+		"Image": "capcomp-supercapacitors.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2014",
+		"Projekttitel": "AbbVie Care",
+		"Typ": "Website",
+		"Branche": "Pharma / Patientenservice",
+		"Agentur": "datamints",
+		"Image": "abbvie-care.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2014",
+		"Projekttitel": "Ingenieurbüro Vogt",
+		"Typ": "Website",
+		"Branche": "Ingenieurwesen / Bauwesen",
+		"Agentur": "datamints",
+		"Image": "ingenieurbuero-vogt.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2014",
+		"Projekttitel": "The Whisky Store",
+		"Typ": "Website",
+		"Branche": "Spirituosen / Handel",
+		"Agentur": "datamints",
+		"Image": "the-whisky-store.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2013",
+		"Projekttitel": "Stefanie Schütt Coaching",
+		"Typ": "Website",
+		"Branche": "Coaching / Beratung",
+		"Agentur": "datamints",
+		"Image": "stefanie-schuett-coaching.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2013",
+		"Projekttitel": "stadler / schott Beratung für Unternehmenskultur",
+		"Typ": "Website",
+		"Branche": "Unternehmensberatung",
+		"Agentur": "datamints",
+		"Image": "stadler-schott-beratung-fuer-unternehmenskultur.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2013",
+		"Projekttitel": "fiduCon Wirtschaftsprüfungsgesellschaft",
+		"Typ": "Website",
+		"Branche": "Wirtschaftsprüfung / Finanzen",
+		"Agentur": "datamints",
+		"Image": "fiducon-wirtschaftspruefungsgesellschaft.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2013",
+		"Projekttitel": "Stadt Unterschleißheim",
+		"Typ": "Website",
+		"Branche": "Öffentliche Einrichtung",
+		"Agentur": "datamints",
+		"Image": "stadt-unterschleissheim-2.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2013",
+		"Projekttitel": "Aquariush Unterschleißheim",
+		"Typ": "Website",
+		"Branche": "Freizeitbad / Kommune",
+		"Agentur": "datamints",
+		"Image": "aquariush-unterschleissheim.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2013",
+		"Projekttitel": "Toycar Shop",
+		"Typ": "OXID eShop",
+		"Branche": "Modellautos / Spielwaren",
+		"Agentur": "datamints",
+		"Image": "toycar-shop.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2013",
+		"Projekttitel": "Tintoy World",
+		"Typ": "OXID eShop",
+		"Branche": "Spielwaren / Sammlerartikel",
+		"Agentur": "datamints",
+		"Image": "tintoy-world.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2013",
+		"Projekttitel": "Augsburger Spielzeugkiste",
+		"Typ": "OXID eShop",
+		"Branche": "Spielwaren / Fachhandel",
+		"Agentur": "datamints",
+		"Image": "augsburger-spielzeugkiste.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2013",
+		"Projekttitel": "The Monarch Hotel Bad Gögging",
+		"Typ": "Website",
+		"Branche": "Hotellerie / Wellness",
+		"Agentur": "datamints",
+		"Image": "the-monarch-hotel-bad-goegging.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2013",
+		"Projekttitel": "MBMedien Verlag",
+		"Typ": "Website",
+		"Branche": "Verlag / Medien",
+		"Agentur": "datamints",
+		"Image": "mbmedien-verlag.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2013",
+		"Projekttitel": "Check Organic",
+		"Typ": "Website",
+		"Branche": "Nachhaltigkeit / Zertifizierung",
+		"Agentur": "datamints",
+		"Image": "check-organic.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2012",
+		"Projekttitel": "NK23 eShop",
+		"Typ": "OXID eShop",
+		"Branche": "Einzelhandel / Fashion",
+		"Agentur": "datamints",
+		"Image": "nk23-shop.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2012",
+		"Projekttitel": "vhs Mainburg e.V.",
+		"Typ": "Website",
+		"Branche": "Bildung / Erwachsenenbildung",
+		"Agentur": "datamints",
+		"Image": "vhs-mainburg-ev.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2012",
+		"Projekttitel": "Inheco - Industrial heating & cooling",
+		"Typ": "Website",
+		"Branche": "Industrie / Laborautomation",
+		"Agentur": "datamints",
+		"Image": "inheco-industrial-heating-and-cooling.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2012",
+		"Projekttitel": "Nishiki Fireworks",
+		"Typ": "OXID eShop",
+		"Branche": "Feuerwerk / Eventhandel",
+		"Agentur": "datamints",
+		"Image": "nishiki-fireworks.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2012",
+		"Projekttitel": "krämmel Stadt-Land-Fluss",
+		"Typ": "Website",
+		"Branche": "Immobilien / Bauunternehmen",
+		"Agentur": "datamints",
+		"Image": "kraemmel-stadt-land-fluss.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2012",
+		"Projekttitel": "DEGA expo-team",
+		"Typ": "Website",
+		"Branche": "Messebau / Eventdienstleister",
+		"Agentur": "datamints",
+		"Image": "dega-expo-team.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2012",
+		"Projekttitel": "EMT Ingenieur-gesellschaft",
+		"Typ": "Website",
+		"Branche": "Ingenieurwesen / Planung",
+		"Agentur": "datamints",
+		"Image": "emt-ingenieur-gesellschaft.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2012",
+		"Projekttitel": "Sanyo Electronics -Panasonic",
+		"Typ": "Website",
+		"Branche": "Elektronik / Technologie",
+		"Agentur": "datamints",
+		"Image": "sanyo-electronics-panasonic.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2012",
+		"Projekttitel": "The Whisky Store Seeshaupt",
+		"Typ": "OXID eShop",
+		"Branche": "Spirituosen / Handel",
+		"Agentur": "datamints",
+		"Image": "the-whisky-store-2.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2012",
+		"Projekttitel": "vitarama",
+		"Typ": "OXID eShop",
+		"Branche": "Gesundheit / Nahrungsergänzung",
+		"Agentur": "datamints",
+		"Image": "vitarama.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2011",
+		"Projekttitel": "krämmel Ressourcenplanung",
+		"Typ": "Website",
+		"Branche": "Immobilien / Bauplanung",
+		"Agentur": "datamints",
+		"Image": "kraemmel-ressourcenplanung.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2011",
+		"Projekttitel": "Neuert Metallbau",
+		"Typ": "Website",
+		"Branche": "Metallbau / Industrie",
+		"Agentur": "datamints",
+		"Image": "neuert-metallbau.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2011",
+		"Projekttitel": "Saustark24",
+		"Typ": "OXID eShop",
+		"Branche": "Deko / Geschenkartikel",
+		"Agentur": "datamints",
+		"Image": "saustark24.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2011",
+		"Projekttitel": "Kunst Ausstellung Mainburg",
+		"Typ": "Website",
+		"Branche": "Kunst / Kultur",
+		"Agentur": "datamints",
+		"Image": "kunst-ausstellung-mainburg.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2011",
+		"Projekttitel": "smart things",
+		"Typ": "Website",
+		"Branche": "Elektronik / Einzelhandel",
+		"Agentur": "datamints",
+		"Image": "smart-things.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2011",
+		"Projekttitel": "Stadtwerke Landsberg",
+		"Typ": "Website",
+		"Branche": "Energieversorger",
+		"Agentur": "datamints",
+		"Image": "stadtwerke-landsberg.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2011",
+		"Projekttitel": "Steuerkanzlei Riege",
+		"Typ": "Website",
+		"Branche": "Steuerberatung / Finanzen",
+		"Agentur": "datamints",
+		"Image": "steuerkanzlei-riege.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2010",
+		"Projekttitel": "checkpoint Shop",
+		"Typ": "OXID eShop",
+		"Branche": "Mode / Streetwear",
+		"Agentur": "datamints",
+		"Image": "checkpoint-shop.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2010",
+		"Projekttitel": "Evangelische Kirchengemeinde GAP",
+		"Typ": "Website",
+		"Branche": "Kirche / Gemeinde",
+		"Agentur": "datamints",
+		"Image": "evangelische-kirchengemeinde-gap.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2010",
+		"Projekttitel": "The Monarch Hotel Bad Gögging",
+		"Typ": "Website",
+		"Branche": "Hotellerie / Wellness",
+		"Agentur": "datamints",
+		"Image": "the-monarch-hotel-bad-goegging-2.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2010",
+		"Projekttitel": "krämmel",
+		"Typ": "Website",
+		"Branche": "Bauunternehmen / Immobilien",
+		"Agentur": "datamints",
+		"Image": "kraemmel.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2010",
+		"Projekttitel": "Projekt JugendCoaching",
+		"Typ": "Website",
+		"Branche": "Bildung / Jugendhilfe",
+		"Agentur": "datamints",
+		"Image": "projekt-jugendcoaching.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2010",
+		"Projekttitel": "The Whisky Store",
+		"Typ": "Website",
+		"Branche": "Spirituosen / Handel",
+		"Agentur": "datamints",
+		"Image": "the-whisky-store-website.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2010",
+		"Projekttitel": "TQ Group",
+		"Typ": "Website",
+		"Branche": "Elektronik / Industrie",
+		"Agentur": "datamints",
+		"Image": "tq-group.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2010",
+		"Projekttitel": "trendy planets",
+		"Typ": "OXID eShop",
+		"Branche": "Mode / Lifestyle",
+		"Agentur": "datamints",
+		"Image": "trendy-planets.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2010",
+		"Projekttitel": "Schneefernerhaus Zugspitze",
+		"Typ": "Website",
+		"Branche": "Forschung / Umwelt",
+		"Agentur": "datamints",
+		"Image": "schneefernerhaus-zugspitze.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2010",
+		"Projekttitel": "WEMA Zerspanungstechnik",
+		"Typ": "Website",
+		"Branche": "Maschinenbau / Industrie",
+		"Agentur": "datamints",
+		"Image": "wema-zerspanungstechnik.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2009",
+		"Projekttitel": "Heuboden Murnau",
+		"Typ": "Website",
+		"Branche": "Gastronomie",
+		"Agentur": "wiredframe",
+		"Image": "heuboden-murnau.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2009",
+		"Projekttitel": "St. Eurach Land und Golfclub",
+		"Typ": "Website",
+		"Branche": "Freizeit / Sport",
+		"Agentur": "wiredframe",
+		"Image": "st-eurach-land-und-golfclub.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2009",
+		"Projekttitel": "Walhaus an de Miälwellen",
+		"Typ": "Website",
+		"Branche": "Hotellerie",
+		"Agentur": "wiredframe",
+		"Image": "walhaus-an-de-miaelwellen.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2009",
+		"Projekttitel": "Landgasthof und Hotel Krone",
+		"Typ": "Website",
+		"Branche": "Hotellerie",
+		"Agentur": "wiredframe",
+		"Image": "landgasthof-und-hotel-krone.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2009",
+		"Projekttitel": "Gasthof Lutz",
+		"Typ": "Website",
+		"Branche": "Hotellerie",
+		"Agentur": "wiredframe",
+		"Image": "gasthof-lutz.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2009",
+		"Projekttitel": "Schlossgasthof Strasser",
+		"Typ": "Website",
+		"Branche": "Hotellerie",
+		"Agentur": "wiredframe",
+		"Image": "schlossgasthof-strasser.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2009",
+		"Projekttitel": "Hotel Pension Matschun",
+		"Typ": "Website",
+		"Branche": "Hotellerie",
+		"Agentur": "wiredframe",
+		"Image": "hotel-pension-matschun.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2009",
+		"Projekttitel": "Hotel zur Kloster-Mühle",
+		"Typ": "Website",
+		"Branche": "Hotellerie",
+		"Agentur": "wiredframe",
+		"Image": "hotel-zur-kloster-muehle.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2009",
+		"Projekttitel": "Wimmer Weißbräu Gasthof",
+		"Typ": "Website",
+		"Branche": "Hotellerie",
+		"Agentur": "wiredframe",
+		"Image": "wimmer-weissbraeu-gasthof.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2009",
+		"Projekttitel": "Posthotel Traube",
+		"Typ": "Website",
+		"Branche": "Hotellerie",
+		"Agentur": "wiredframe",
+		"Image": "posthotel-traube.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2009",
+		"Projekttitel": "Landhotel Klotzbücher",
+		"Typ": "Website",
+		"Branche": "Hotellerie",
+		"Agentur": "wiredframe",
+		"Image": "landhotel-klotzbuecher.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2009",
+		"Projekttitel": "DeLaVista Faschion",
+		"Typ": "Website",
+		"Branche": "Mode / Einzelhandel",
+		"Agentur": "wiredframe",
+		"Image": "delavista-faschion.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2009",
+		"Projekttitel": "Aurora Hotel Dachau",
+		"Typ": "Website",
+		"Branche": "Hotellerie",
+		"Agentur": "wiredframe",
+		"Image": "aurora-hotel-dachau.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2009",
+		"Projekttitel": "checkpoint Shop",
+		"Typ": "XT-Commerce Shop",
+		"Branche": "Mode / Streetwear",
+		"Agentur": "datamints",
+		"Image": "checkpoint-shop-2.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2009",
+		"Projekttitel": "Kinder-, Jugend- und Erwachsenenhilfe e.V.",
+		"Typ": "Website",
+		"Branche": "Soziale Einrichtung / Bildung",
+		"Agentur": "datamints",
+		"Image": "kinder-jugend-und-erwachsenenhilfe-ev.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2009",
+		"Projekttitel": "Krämmel Baukonfigurator",
+		"Typ": "Website",
+		"Branche": "Bauwesen / Immobilien",
+		"Agentur": "datamints",
+		"Image": "kraemmel-baukonfigurator.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2009",
+		"Projekttitel": "LUVRA Hydraulik und Regeltechnik",
+		"Typ": "Website",
+		"Branche": "Maschinenbau / Hydraulik",
+		"Agentur": "datamints",
+		"Image": "luvra-hydraulik-und-regeltechnik.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2009",
+		"Projekttitel": "Mein Gesundes Brot",
+		"Typ": "Website",
+		"Branche": "Lebensmittel / Bäckerei",
+		"Agentur": "datamints",
+		"Image": "mein-gesundes-brot.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2009",
+		"Projekttitel": "NT 4 Admins",
+		"Typ": "Website",
+		"Branche": "IT / Community",
+		"Agentur": "datamints",
+		"Image": "nt-4-admins.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2009",
+		"Projekttitel": "Raum + Gestaltung Probst",
+		"Typ": "Website",
+		"Branche": "Innenarchitektur / Design",
+		"Agentur": "datamints",
+		"Image": "raum-gestaltung-probst.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2009",
+		"Projekttitel": "Singer Sondermaschinen",
+		"Typ": "Website",
+		"Branche": "Maschinenbau / Sondertechnik",
+		"Agentur": "datamints",
+		"Image": "singer-sondermaschinen.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2009",
+		"Projekttitel": "Spatzennest e.V.",
+		"Typ": "Website",
+		"Branche": "Kindergarten / Soziale Einrichtung",
+		"Agentur": "datamints",
+		"Image": "spatzennest-ev.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2009",
+		"Projekttitel": "IC-Elektronik",
+		"Typ": "Website",
+		"Branche": "Elektronik / Industrie",
+		"Agentur": "datamints",
+		"Image": "ic-elektronik.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2009",
+		"Projekttitel": "Solar TC",
+		"Typ": "Website",
+		"Branche": "Photovoltaik / Technik",
+		"Agentur": "datamints",
+		"Image": "solar-tc.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2009",
+		"Projekttitel": "TUNZE Aquairentechnik",
+		"Typ": "Website",
+		"Branche": "Aquaristik / Technik",
+		"Agentur": "datamints",
+		"Image": "tunze-aquairentechnik.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2009",
+		"Projekttitel": "TuS Geretsried e.V",
+		"Typ": "Website",
+		"Branche": "Sportverein",
+		"Agentur": "datamints",
+		"Image": "tus-geretsried-ev.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2009",
+		"Projekttitel": "Von Bredow, Lütteke und Partner",
+		"Typ": "Website",
+		"Branche": "Rechtsanwälte / Kanzlei",
+		"Agentur": "datamints",
+		"Image": "von-bredow-luetteke-und-partner.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2009",
+		"Projekttitel": "Janet Mattis Airbrush",
+		"Typ": "Website",
+		"Branche": "Kunst / Airbrush",
+		"Agentur": "datamints",
+		"Image": "janet-mattis-airbrush.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2008",
+		"Projekttitel": "FSC Forest Stewardship Council",
+		"Typ": "Website",
+		"Branche": "Umwelt / NGO",
+		"Agentur": "datamints",
+		"Image": "fsc-forest-stewardship-council.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2008",
+		"Projekttitel": "Gruber HKSK",
+		"Typ": "Website",
+		"Branche": "Handwerk / Sanitär",
+		"Agentur": "datamints",
+		"Image": "gruber-hksk.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2008",
+		"Projekttitel": "Gesundheitsakademie Mainburg",
+		"Typ": "Website",
+		"Branche": "Bildung / Gesundheit",
+		"Agentur": "datamints",
+		"Image": "gesundheitsakademie-mainburg.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2008",
+		"Projekttitel": "Moviepool",
+		"Typ": "Website",
+		"Branche": "Filmproduktion",
+		"Agentur": "datamitns",
+		"Image": "moviepool.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2008",
+		"Projekttitel": "Stellwerk Penzberg",
+		"Typ": "Website",
+		"Branche": "Ausbildungsportal",
+		"Agentur": "datamints",
+		"Image": "stellwerk-penzberg.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2008",
+		"Projekttitel": "Neokeltic Shop",
+		"Typ": "XT-Commerce Shop",
+		"Branche": "Einzelhandel",
+		"Agentur": "wiredframe",
+		"Image": "neokeltic-shop.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2007",
+		"Projekttitel": "Diakonie Weilheim-Bad-Tölz",
+		"Typ": "Website",
+		"Branche": "Soziale Einrichtung",
+		"Agentur": "datamints",
+		"Image": "diakonie-weilheim-bad-toelz.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2007",
+		"Projekttitel": "MyHandicap",
+		"Typ": "Website",
+		"Branche": "Inklusion / NGO",
+		"Agentur": "datamints",
+		"Image": "myhandicap.jpg",
+		"URL": ""
+	},
+	{
+		"Jahr": "2007",
+		"Projekttitel": "VHS Business Akademie",
+		"Typ": "Website",
+		"Branche": "Bildung",
+		"Agentur": "datamints",
+		"Image": "vhs-business-akademie.jpg",
+		"URL": ""
+	}
 ]
