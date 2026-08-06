@@ -100,9 +100,9 @@
 	   eine Überschrift auf keinem Viewport kleiner werden als der Fließtext. */
 	--fs-text: clamp(1.25rem, min(2.1vw, 2.9vh), 1.4rem);
 	--fs-h4: calc(var(--fs-text) * 1.4);
-	--fs-h3: clamp(1.9rem, min(3.4vw, 4.4vh), 2.6rem);
-	--fs-h2: clamp(2.3rem, min(6.4vw, 8vh), 4.4rem);
-	--fs-h1: clamp(2.2rem, min(7.6vw, 9.4vh), 5.2rem);
+	--fs-h3: clamp(2.1rem, min(3.4vw, 4.4vh), 2.6rem);
+	--fs-h2: clamp(2.6rem, min(6.4vw, 8vh), 4.4rem);
+	--fs-h1: clamp(2.6rem, min(7.6vw, 9.4vh), 5.2rem);
 	/* Sonderfälle: Schaugrößen und Bedienelemente */
 	--fs-counter: clamp(4rem, min(19vw, 21vh), 11rem);
 	--fs-ui: clamp(1rem, min(1.8vw, 2.4vh), 1.3rem);
@@ -328,6 +328,8 @@ body.dock-invers .dock :focus-visible {
 	/* Wie viel der Pfeil über den Anschnitt hinaus in die Karte ragt.
 	   Wird negativ, sobald der Anschnitt breit genug ist. */
 	--clear: calc(var(--btn) + 18px - var(--peek));
+	/* Ankerpunkt für die Pfeile, siehe bei ::scroll-button() weiter unten */
+	anchor-name: --schiene;
 	display: grid;
 	grid-auto-flow: column;
 	grid-auto-columns: calc((100% - (var(--cols) - 1) * var(--gap)) / var(--cols));
@@ -442,7 +444,17 @@ body.dock-invers .dock :focus-visible {
 
 .rail::scroll-button(*) {
 	position: absolute;
-	top: 50%;
+	/* Die Pfeile beziehen ihr top nicht auf die Schiene, auch nicht auf
+	   das Panel, sondern auf den Bildschirm: bei ::scroll-button() macht
+	   ein position: relative am Scrollcontainer keinen Bezugsrahmen. Ein
+	   glattes 50% zentriert sie deshalb im Viewport, und weil das Panel
+	   unten die Höhe der Bedienzeile freihält, liegt die Schienenmitte um
+	   deren halbe Höhe darüber. Nachgemessen: 364 gegen 406.
+
+	   Der Abzug holt sie zurück. Wo Anker bekannt sind, übernimmt gleich
+	   darunter anchor(center) und rechnet gar nicht mehr, sondern greift
+	   die Mitte der Schiene direkt ab. */
+	top: calc(50% - var(--dock-h) / 2);
 	z-index: 3;
 	width: var(--btn);
 	height: var(--btn);
@@ -492,6 +504,13 @@ body.dock-invers .dock :focus-visible {
 	--chevron-next: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='9 18 15 12 9 6'/%3E%3C/svg%3E");
 }
 
+@supports (anchor-name: --a) {
+	.rail::scroll-button(*) {
+		position-anchor: --schiene;
+		top: anchor(center);
+	}
+}
+
 #profil .rail::scroll-button(*) {
 	background-color: var(--color-primary);
 }
@@ -511,18 +530,18 @@ body.dock-invers .dock :focus-visible {
 	/* Weniger eng als zuvor: die alte Grotesk vertrug -0.02em, eine Serif
 	   mit ihren Serifen braucht die Luft zwischen den Buchstaben. */
 	letter-spacing: -0.01em;
-	text-wrap: balance;
+	text-wrap: pretty;
 }
 
 .hero {
 	max-width: 20ch;
 	font-size: var(--fs-h1);
-	line-height: 1.02;
+	line-height: 1.1;
 }
 
 .title {
 	font-size: var(--fs-h2);
-	line-height: 1.03;
+	line-height: 1.1;
 }
 
 .subtitle {
@@ -1006,6 +1025,36 @@ body.dock-invers:not(:has(#impressum:popover-open)) .dock {
 	transition: background var(--fast), color var(--fast), transform var(--fast), opacity var(--fast);
 }
 
+/* ----------------------------------------
+   Milchglas unter den durchscheinenden Flächen
+   ----------------------------------------
+   Nur die beiden halbtransparenten Elemente bekommen es: der Menüknopf
+   und die Pille des Indikators. Der Weiter-Button ist deckend, dort wäre
+   ein Blur reine Rechenarbeit ohne Wirkung, deshalb ist er ausgenommen.
+
+   Die leichte Sättigung dazu ist der Grund, warum es nach Glas aussieht
+   und nicht nach Nebel: Blur allein wäscht die Farben hinter der Fläche
+   aus, ein Schuss Sättigung holt sie zurück.
+
+   Das Präfix steht dabei, weil Safari die Eigenschaft bis heute nur
+   damit kennt. */
+.ctrl:not(.ctrl--next),
+.pager {
+	-webkit-backdrop-filter: blur(14px) saturate(160%);
+	backdrop-filter: blur(14px) saturate(160%);
+}
+
+/* Wer weniger Transparenz eingestellt hat, bekommt statt Glas eine
+   ruhige, deckende Fläche. */
+@media (prefers-reduced-transparency: reduce) {
+
+	.ctrl:not(.ctrl--next),
+	.pager {
+		-webkit-backdrop-filter: none;
+		backdrop-filter: none;
+	}
+}
+
 .ctrl:hover {
 	background: var(--dock-flaeche-hover);
 }
@@ -1417,6 +1466,15 @@ body:has(#menu:popover-open) .burger span:nth-child(3) {
 	   Lücke zwischen den drei Spalten enger. */
 	.dock {
 		gap: 8px;
+		/* Weniger Luft nach unten. Der feste Sockel von 34px oben in der
+		   Grundregel ist auf dem Handy zu viel: solange die Leiste des
+		   Browsers unten steht, hält sie den Platz schon selbst frei, und
+		   env() meldet in diesem Zustand 0. Die 34px kämen also obendrauf.
+
+		   Mit einem kleinen Sockel bleibt beides richtig: 10px, während
+		   die Leiste steht, und der volle Wert von env(), sobald sie
+		   eingeklappt ist und der Home-Indikator freiliegt. */
+		padding-bottom: max(10px, env(safe-area-inset-bottom));
 	}
 
 	.pager {
@@ -1463,3 +1521,4 @@ body:has(#menu:popover-open) .burger span:nth-child(3) {
 		transition-duration: 1ms;
 	}
 }
+
