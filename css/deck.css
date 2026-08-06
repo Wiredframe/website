@@ -13,27 +13,43 @@
  * Die gesamte Bewegung macht der Browser. JavaScript kümmert sich nur um
  * Zustand (aktive Section), Farbe und Inhalte (GitHub, Zähler).
  */
-
 /* ===========================================
-   Local Fonts (Maven Pro)
+   Local Fonts
+   -------------------------------------------
+   Beide Schriften sind Variable Fonts und liegen lokal im Projekt, nicht
+   bei Google. Das spart einen Fremdaufruf und die Frage, ob dabei eine
+   IP-Adresse in die USA wandert.
+
+   Brawler kommt als eine Datei mit der Achse 400 bis 700, Latin und
+   Latin-Ext zusammen. Von Onest werden nur diese beiden Subsets geladen;
+   Kyrillisch und Vietnamesisch, die Google mitliefert, braucht die Seite
+   nicht.
    =========================================== */
 @font-face {
-	font-family: 'Maven Pro';
+	font-family: 'Brawler';
 	font-style: normal;
-	font-weight: 300 900;
+	font-weight: 400 700;
 	font-display: swap;
-	src: url('../fonts/MavenPro-latin.woff2') format('woff2');
+	src: url('../fonts/Brawler-variable.woff2') format('woff2');
+}
+
+@font-face {
+	font-family: 'Onest';
+	font-style: normal;
+	font-weight: 100 900;
+	font-display: swap;
+	src: url('../fonts/Onest-latin.woff2') format('woff2');
 	unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
 		U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
 		U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
 @font-face {
-	font-family: 'Maven Pro';
+	font-family: 'Onest';
 	font-style: normal;
-	font-weight: 300 900;
+	font-weight: 100 900;
 	font-display: swap;
-	src: url('../fonts/MavenPro-latin-ext.woff2') format('woff2');
+	src: url('../fonts/Onest-latin-ext.woff2') format('woff2');
 	unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
 		U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
 		U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
@@ -42,7 +58,6 @@
 /* ===========================================
    Tokens
    =========================================== */
-
 /* Ein festes Farbthema. Grundton und Akzent sind gesetzt, die übrigen
    fünf Rollen daraus abgeleitet: gleiche Regel, gleiche Mathematik wie im
    Generator, der die Seite eine Zeit lang bei jedem Aufruf neu eingefärbt
@@ -66,22 +81,25 @@
    Gemessen: Akzent auf Grundton 9,79 : 1, Fließtext darauf 8,53 : 1,
    Tiefe auf Akzent 14,47 : 1, Grundton auf Weiß 12,30 : 1. */
 :root {
-	--color-primary: #19392b;
-	--color-accent: #b6f56d;
+	/* 	--color-primary: #19392B; */
+	--color-primary: #193239;
+	--color-accent: #beff8a;
 	--color-accent-strong: #a9e85f;
-	--color-ink: #0c1503;
+	--color-ink: #2b493d;
 	--color-text: #d4d4d4;
-	--color-white: #f8fdfb;
-	--color-canvas: #e8f1ec;
-
-	--font-family: 'Maven Pro', system-ui, -apple-system, sans-serif;
-
+	/* 	--color-white: #f8fdfb;
+	--color-canvas: #e8f1ec; */
+	--color-white: #f0f6f3;
+	--color-canvas: #e2ebe6;
+	/* Serif für die Überschriften, Grotesk für alles andere */
+	--font-heading: 'Brawler', Georgia, 'Times New Roman', serif;
+	--font-family: 'Onest', system-ui, -apple-system, sans-serif;
 	/* Typo-Skala. Alle Größen folgen Breite UND Höhe, damit Querformat nicht
 	   platzt. Basis ist der Fließtext, jede Überschriftenstufe liegt über
 	   dessen Höchstwert (1.7rem), h4 wird direkt daraus abgeleitet. So kann
 	   eine Überschrift auf keinem Viewport kleiner werden als der Fließtext. */
-	--fs-text: clamp(1.25rem, min(2.1vw, 2.9vh), 1.7rem);
-	--fs-h4: calc(var(--fs-text) * 1.28);
+	--fs-text: clamp(1.25rem, min(2.1vw, 2.9vh), 1.4rem);
+	--fs-h4: calc(var(--fs-text) * 1.4);
 	--fs-h3: clamp(1.9rem, min(3.4vw, 4.4vh), 2.6rem);
 	--fs-h2: clamp(2.3rem, min(6.4vw, 8vh), 4.4rem);
 	--fs-h1: clamp(2.2rem, min(7.6vw, 9.4vh), 5.2rem);
@@ -90,12 +108,10 @@
 	--fs-ui: clamp(1rem, min(1.8vw, 2.4vh), 1.3rem);
 	--fs-sm: 0.875rem;
 	--weight-text: 400;
-	--weight-head: 500;
-
+	--weight-head: 600;
 	--space-sm: clamp(10px, 1.4vh, 16px);
 	--space-md: clamp(14px, 2.2vh, 26px);
 	--space-lg: clamp(20px, 3.4vh, 40px);
-
 	--edge: clamp(14px, 2.4vw, 34px);
 	--gutter: clamp(8px, 1.2vw, 16px);
 	--dock-h: 100px;
@@ -104,9 +120,19 @@
 	--radius-pill: 999px;
 	--btn: 53px;
 	--dot: 12px;
-
 	--fast: 200ms ease;
 	--ease: cubic-bezier(0.22, 1, 0.36, 1);
+	/* Das Muster der dunklen Flächen, ein nahtlos kachelndes SVG. Es liegt
+	   als Maske vor der Farbe und nicht als fertiges Bild, damit der Ton
+	   aus dem Token kommt und nicht in der Datei festgebacken ist.
+
+	   Gegenüber der Vorlage fehlt hier ein Element: sie brachte ein
+	   deckendes Rechteck über die ganze Kachel mit, gedacht als
+	   Hintergrund. Als Maske hätte das alles gleichmäßig eingefärbt und
+	   die Wellen verschluckt. Übrig sind nur die Linien. */
+	--muster: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='30' viewBox='0 0 1000 120'%3E%3Cg fill='none' stroke='%23222' stroke-width='10' stroke-opacity='1'%3E%3Cpath d='M-500 75c0 0 125-30 250-30S0 75 0 75s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3Cpath d='M-500 45c0 0 125-30 250-30S0 45 0 45s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3Cpath d='M-500 105c0 0 125-30 250-30S0 105 0 105s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3Cpath d='M-500 15c0 0 125-30 250-30S0 15 0 15s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3Cpath d='M-500-15c0 0 125-30 250-30S0-15 0-15s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3Cpath d='M-500 135c0 0 125-30 250-30S0 135 0 135s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3C/g%3E%3C/svg%3E");
+	--muster-groesse: 250px 30px;
+	--muster-staerke: 1%;
 }
 
 /* ===========================================
@@ -263,6 +289,18 @@ body.dock-invers .dock :focus-visible {
 	background: var(--color-primary);
 }
 
+/* Das Muster liegt als Pseudoelement über dem Panelgrund und unter dem
+   Inhalt: .stage und .rail tragen ein transform und werden dadurch später
+   gezeichnet. Es fängt keine Klicks ab und rührt das Layout nicht an. */
+.screen--dark .panel::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
+	background: color-mix(in srgb, var(--color-accent) var(--muster-staerke), transparent);
+	mask: var(--muster) 0 0 / var(--muster-groesse) repeat;
+}
+
 /* Zentrierte Sections ohne horizontale Tiefe */
 .stage {
 	display: flex;
@@ -334,7 +372,6 @@ body.dock-invers .dock :focus-visible {
 /* Leichte Reaktion auf Hover, nur für Zeigergeräte: auf dem Touchscreen
    bliebe der Zustand nach dem Antippen hängen. */
 @media (hover: hover) {
-
 	.cell:hover:not(.cell--title) {
 		transform: translateY(-4px);
 	}
@@ -469,13 +506,16 @@ body.dock-invers .dock :focus-visible {
 .hero,
 .title,
 .subtitle {
+	font-family: var(--font-heading);
 	font-weight: var(--weight-head);
-	letter-spacing: -0.02em;
+	/* Weniger eng als zuvor: die alte Grotesk vertrug -0.02em, eine Serif
+	   mit ihren Serifen braucht die Luft zwischen den Buchstaben. */
+	letter-spacing: -0.01em;
 	text-wrap: balance;
 }
 
 .hero {
-	max-width: 16ch;
+	max-width: 20ch;
 	font-size: var(--fs-h1);
 	line-height: 1.02;
 }
@@ -614,6 +654,7 @@ body.dock-invers .dock :focus-visible {
 	/* Auf dem Handy trägt die Zahl die Karte allein, seit die Icons weg
 	   sind. Der Sockel liegt deshalb deutlich höher: dort greift ohnehin
 	   nur er, weil 16vw auf schmalen Geräten darunter bleibt. */
+	font-family: Brawler, Georgia, 'Times New Roman', serif;
 	font-size: clamp(4.6rem, min(16vw, 14vh), 7rem);
 	font-weight: var(--weight-head);
 	line-height: 0.95;
@@ -706,8 +747,6 @@ body.dock-invers .dock :focus-visible {
 	border-radius: 50%;
 	background: var(--dot, var(--color-accent));
 }
-
-
 
 /* ===========================================
    Buttons in Inhalten
@@ -822,8 +861,8 @@ body.dock-invers .dock :focus-visible {
 	position: absolute;
 	width: 11%;
 	aspect-ratio: 33 / 30;
-	left: 55.5%;
-	top: 31%;
+	left: 53.5%;
+	top: 34%;
 	opacity: 0;
 }
 
@@ -920,7 +959,6 @@ body.dock-invers .dock :focus-visible {
 	--dock-punkt-aktiv: var(--color-primary);
 }
 
-
 /* Auf dunklem Panel dreht die Zeile ihre Töne um. Der Weiter-Button wird
    grün statt dunkelblau, sonst verschwände er im Untergrund.
 
@@ -936,6 +974,7 @@ body.dock-invers:not(:has(#impressum:popover-open)) .dock {
 	--dock-punkt-hover: color-mix(in srgb, var(--color-white) 60%, transparent);
 	--dock-punkt-aktiv: var(--color-accent);
 }
+
 /* Drei Spalten: die beiden Außenspalten sind per 1fr immer gleich breit,
    dadurch sitzt der Indikator exakt in der Bildschirmmitte, egal wie lang
    der Linktext auf dem Weiter-Button gerade ist. */
@@ -1276,6 +1315,7 @@ body:has(#menu:popover-open) .burger span:nth-child(3) {
 }
 
 .sheet__title {
+	font-family: var(--font-heading);
 	font-size: var(--fs-h3);
 	font-weight: var(--weight-head);
 	letter-spacing: -0.02em;
@@ -1422,5 +1462,4 @@ body:has(#menu:popover-open) .burger span:nth-child(3) {
 	.rail::scroll-button(*) {
 		transition-duration: 1ms;
 	}
-
 }
