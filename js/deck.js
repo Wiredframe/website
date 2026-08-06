@@ -21,6 +21,15 @@
 	const menu = document.getElementById('menu');
 	const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+	// ----------------------------------------
+	// Diagnose-Schalter (temporär, danach wieder raus)
+	// ----------------------------------------
+	// Über die Adresse einzeln abschaltbar, um den Rücksprung auf echten
+	// Geräten einzukreisen:  ?nosnap  ?nocounter  ?nofit
+	const off = new URLSearchParams(location.search);
+	const disabled = (name) => off.has(name);
+	if (disabled('nosnap')) root.style.scrollSnapType = 'none';
+
 	// ========================================
 	// 1 · Sprünge
 	// ----------------------------------------
@@ -30,14 +39,32 @@
 	// sonst fängt es den Sprung unterwegs ab und zieht zurück (auf Mobile der
 	// Normalfall). Die Anker-Links im Markup funktionieren auch ohne das hier.
 	// ========================================
-	// Wo der Browser selbst einrastet (Touch), überlässt man ihm auch die
-	// Bewegung. Eine eigene Animation würde dort gegen die Snap-Engine
-	// arbeiten: der Sprung startet, wird mittendrin abgefangen und auf die
-	// Ausgangs-Section zurückgezogen. Der native Anker-Sprung kennt das
-	// Problem nicht, weil beides dieselbe Engine ist.
-	const browserSnaps = matchMedia('(hover: none) and (pointer: coarse)');
-
 	const GLIDE_MS = 290;
+
+	// ----------------------------------------
+	// Einrasten und Sprünge vertragen sich nicht
+	// ----------------------------------------
+	// Scroll-Snap rastet nach jeder Layoutänderung erneut ein, und zwar
+	// bevorzugt auf das zuvor eingerastete Element. Für Wischen ist das
+	// richtig, für einen Sprung fatal: auf dem Handy klappt beim Scrollen
+	// die URL-Leiste ein, das ist eine Layoutänderung, und der Browser holt
+	// die Bewegung zurück auf die Ausgangs-Section. Deshalb schweigt das
+	// Einrasten für die Dauer des Sprungs und etwas darüber hinaus.
+	let snapTimer = 0;
+
+	const snapOn = () => {
+		clearTimeout(snapTimer);
+		root.style.removeProperty('scroll-snap-type');
+	};
+
+	const snapOff = (resumeAfter) => {
+		root.style.scrollSnapType = 'none';
+		clearTimeout(snapTimer);
+		snapTimer = setTimeout(snapOn, resumeAfter);
+	};
+
+	// Wer wischt, will einrasten: sofort wieder scharf schalten
+	addEventListener('touchstart', snapOn, { passive: true });
 	const easeInOut = (p) => (p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2);
 	const running = new Map();
 
@@ -86,10 +113,8 @@
 		if (!target || !target.classList.contains('screen')) return;
 		if (menu?.matches(':popover-open')) menu.hidePopover();
 
-		// Touch: der Browser springt selbst zum Anker und rastet sauber ein
-		if (browserSnaps.matches) return;
-
 		e.preventDefault();
+		snapOff(GLIDE_MS + 800);   // Sprungdauer plus Nachlauf für die URL-Leiste
 		stopGlide(window);
 		glide(window, 'y', Math.round(target.getBoundingClientRect().top + scrollY));
 	});
@@ -165,13 +190,6 @@
 			const base = running.has(rail) ? aim : atRest();
 			const next = Math.max(0, Math.min(cells.length - 1, base + dir));
 
-			// Touch: auch hier scrollt der Browser selbst, aus demselben Grund
-			if (browserSnaps.matches) {
-				aim = next;
-				cells[aim].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
-				return;
-			}
-
 			stopGlide(rail);
 			aim = next;
 			rail.style.scrollSnapType = 'none';
@@ -204,6 +222,7 @@
 	const MIN_FIT = 0.7;
 
 	const fit = (screen) => {
+		if (disabled('nofit')) return;
 		const panel = screen.querySelector('.panel');
 		const box = panel?.querySelector('.stage, .rail');
 		if (!box) return;
@@ -255,7 +274,7 @@
 	};
 
 	function startCounter() {
-		if (!counterEl || counterRaf) return;
+		if (!counterEl || counterRaf || disabled('nocounter')) return;
 		counterLast = 0;
 		counterRaf = requestAnimationFrame(counterTick);
 	}
