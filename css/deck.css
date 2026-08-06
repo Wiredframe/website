@@ -2,7 +2,8 @@
  * Wiredframe – wiredframe.de
  *
  * Aufbau:
- *   vertikal   = echte Sections untereinander, eine pro Screen (Scroll-Snap y)
+ *   vertikal   = echte Sections untereinander, eine pro Screen, frei
+ *                scrollbar. Anker-Links landen trotzdem auf der Kante.
  *   horizontal = Grid-Reihen innerhalb einer Section (Scroll-Snap x),
  *                Nachbarspalten bleiben angeschnitten sichtbar
  *   Bedienung  = eine Zeile unten: Menü links, Indikator mittig, Weiter
@@ -10,7 +11,7 @@
  *                Fläche darüber (natives Popover).
  *
  * Die gesamte Bewegung macht der Browser. JavaScript kümmert sich nur um
- * Zustand (aktive Section) und Inhalte (GitHub, Zähler).
+ * Zustand (aktive Section), Farbe und Inhalte (GitHub, Zähler).
  */
 
 /* ===========================================
@@ -166,30 +167,35 @@ html.theme-blende {
 }
 
 html {
-	/* Am Zeigegerät bleibt Scrollen frei: Maus und Trackpad rasten nicht
-	   ein, weil das Eingreifen in die eigene Scrollbewegung mehr stört als
-	   hilft. Die Sprünge über Indikator, Weiter-Button und Menü landen
-	   trotzdem exakt auf der Kante: sie sind gewöhnliche Anker-Links, und
-	   ein Anker springt auf den Anfang seiner Section. Bewegt wird dabei
-	   von scroll-behavior, nicht von JavaScript. */
-	scroll-snap-type: none;
+	/* Vertikal wird bewusst nicht eingerastet, auf keinem Gerät.
+	   Scroll-Snap rastet nach jeder Layoutänderung neu ein und bevorzugt
+	   dabei die zuvor eingerastete Section. Auf dem Handy ist aber das
+	   Einklappen der URL-Leiste genau so eine Layoutänderung, und sie
+	   kommt als Reaktion auf den Sprung, also erst wenn er vorbei ist.
+	   Der Browser holte die Seite damit zuverlässig auf die Ausgangs-
+	   Section zurück. Dagegen half nur, das Einrasten während und nach
+	   jedem Sprung stummzuschalten, und für so wenig Gewinn ist das zu
+	   viel Umgehung.
+
+	   Ohne Einrasten bleibt alles Wesentliche: die Sprünge über Indikator,
+	   Weiter-Button und Menü landen exakt auf der Sectionkante, denn es
+	   sind gewöhnliche Anker-Links, und ein Anker springt auf den Anfang
+	   seines Ziels. Bewegt wird von scroll-behavior, nicht von JavaScript.
+
+	   In den Reihen quer bleibt das Einrasten dagegen: dort scrollt ein
+	   eigener Container, dessen Größe sich nicht ändert.
+
+	   Ohne Einrasten braucht es auch kein overscroll-behavior mehr. Das
+	   stand hier nur, um das Überziehen am Rand zu unterbinden, und hat
+	   dabei das native Ziehen zum Neuladen mit abgeschaltet. Das kann der
+	   Browser jetzt wieder selbst. */
 	scroll-behavior: smooth;
 	scrollbar-width: none;
-	overscroll-behavior-y: none;
 	-webkit-text-size-adjust: 100%;
 }
 
 html::-webkit-scrollbar {
 	display: none;
-}
-
-/* Auf Touch-Geräten ist das Einrasten dagegen genau richtig: dort wischt
-   man in Bildschirmen, nicht in Pixeln. pointer: coarse trifft Finger,
-   nicht Maus oder Trackpad. */
-@media (hover: none) and (pointer: coarse) {
-	html {
-		scroll-snap-type: y mandatory;
-	}
 }
 
 body.app {
@@ -280,8 +286,6 @@ body.dock-invers .dock :focus-visible {
 	height: 100vh;
 	height: 100lvh;
 	padding: var(--gutter);
-	scroll-snap-align: start;
-	scroll-snap-stop: always;
 }
 
 .panel {
@@ -586,14 +590,16 @@ body.dock-invers .dock :focus-visible {
 /* ===========================================
    Schaugröße: der laufende Zähler
    -------------------------------------------
-   Dieser Zähler ist der Grund, warum das Einrasten auf dem Handy einen
-   Sprung zurückgerissen hat: er tauscht in jedem Frame seinen Text aus,
-   und Scroll-Snap rastet nach jeder Layoutänderung erneut ein, bevorzugt
-   auf die Section, aus der man gerade wegspringt.
+   Der Zähler tauscht in jedem Frame seinen Text aus. Eine Box, die dabei
+   ihre Breite ändert, würde sechzig Mal pro Sekunde die ganze Bühne neu
+   umbrechen. Deshalb ist sie fest vermessen und über contain abgedichtet:
+   was drinnen passiert, kann das Layout ringsum nicht mehr anfassen,
+   egal wer die Zahl hochzählt.
 
-   Der Riegel dagegen steht hier und nicht im Skript: die Box ist fest
-   vermessen und über contain abgedichtet. Was drinnen passiert, kann das
-   Layout ringsum nicht mehr anfassen, egal wer die Zahl hochzählt.
+   Das galt lange als der Grund für den Rücksprung auf dem Handy. War es
+   nicht: der lag am vertikalen Scroll-Snap, das inzwischen ganz weg ist,
+   siehe den Kommentar bei html. Die Abdichtung bleibt trotzdem, sie ist
+   auch ohne diesen Anlass richtig.
 
    Gezählt wird in deck.js. Der Umweg über eine animierte registrierte
    Eigenschaft und counter() war kurz drin, scheitert aber an WebKit:
@@ -1399,8 +1405,9 @@ body:has(#menu:popover-open) .burger span:nth-child(3) {
 .sheet--text {
 	bottom: auto;
 	height: auto;
-	/* Hier dvh und nicht lvh: die Fläche schwebt über allem und nimmt am
-	   Einrasten nicht teil, sie darf also der sichtbaren Höhe folgen. */
+	/* Hier dvh und nicht lvh: die Fläche schwebt über allem und soll immer
+	   in den tatsächlich sichtbaren Bereich passen, auch bei ausgefahrener
+	   URL-Leiste. Die Sections messen aus anderem Grund mit lvh. */
 	max-height: calc(100dvh - 2 * var(--gutter));
 	overflow-y: auto;
 	overscroll-behavior: contain;

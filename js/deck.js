@@ -1,11 +1,10 @@
 /**
  * Wiredframe – wiredframe.de
  *
- * Die Bewegung macht der Browser: Scroll-Snap vertikal für die Sections,
- * Scroll-Snap horizontal für die Grid-Reihen, deren Pfeile als native
- * Scroll-Buttons, natives Popover für Menü und Impressum, den laufenden
- * Zähler eine animierte CSS-Eigenschaft. JavaScript kümmert sich nur
- * noch um drei Dinge:
+ * Die Bewegung macht der Browser: Anker-Links und scroll-behavior für die
+ * Sections, Scroll-Snap quer in den Grid-Reihen, deren Pfeile als native
+ * Scroll-Buttons, natives Popover für Menü und Impressum. JavaScript
+ * kümmert sich nur noch um drei Dinge:
  *
  *   1. welche Section gerade aktiv ist (Indikator, Linktext, Zählerlauf)
  *   2. eine Notbremse gegen Überlauf auf sehr kleinen Screens
@@ -29,12 +28,14 @@
 	// ========================================
 	// 0 · Sprünge macht der Browser
 	// ----------------------------------------
-	// Die Anker-Links im Markup genügen: scroll-behavior bewegt, scroll-snap
-	// lässt auf der Sectionkante einrasten, und beides ist dieselbe Engine,
-	// die sich deshalb nicht selbst in die Quere kommt. Eine eigene Animation
-	// stand hier früher und musste dafür das Einrasten stummschalten, weil
-	// auf dem Handy die einklappende URL-Leiste eine Layoutänderung ist und
-	// Scroll-Snap danach zurück auf die Ausgangs-Section zieht.
+	// Die Anker-Links im Markup genügen, scroll-behavior bewegt. Von hier
+	// wird nichts gescrollt und nichts am Scrollen nachgeholfen.
+	//
+	// Hier stand zweimal eine Umgehung für vertikales Scroll-Snap, erst ein
+	// eigener Scroller, dann ein Stummschalten während der Sprünge. Beide
+	// sind weg, weil das vertikale Einrasten selbst weg ist: es zog auf dem
+	// Handy nach jedem Sprung zurück auf die Ausgangs-Section, sobald die
+	// URL-Leiste einklappte. Die Begründung steht in deck.css.
 	//
 	// Bleibt eine Kleinigkeit: popovertarget ist auf <a> nicht erlaubt, das
 	// Menü muss also von Hand zugehen, wenn einer seiner Links springt.
@@ -141,7 +142,7 @@
 
 	// Am Fenster zu horchen wäre zu grob: resize feuert auf dem Handy auch,
 	// wenn nur die URL-Leiste ein- oder ausfährt, und rechnet dann mitten im
-	// Scrollen neu. Die Panelhöhe bleibt dabei konstant, weil .screen mit svh
+	// Scrollen neu. Die Panelhöhe bleibt dabei konstant, weil .screen mit lvh
 	// misst. Ein Observer auf den Panels sieht deshalb nur echte Änderungen.
 	const panelSize = new ResizeObserver(relayout);
 	screens.forEach((s) => {
@@ -155,9 +156,8 @@
 	const logo = document.querySelector('.logo-anim');
 
 	// Die Animation selbst steht im CSS, hier wird sie nur zurückgespult.
-	// Nicht über das Entfernen und Neusetzen einer Klasse: das braucht ein
-	// erzwungenes Reflow dazwischen, und ein Reflow am Ende eines Sprungs
-	// ist genau das, woran sich das Einrasten stößt.
+	// Nicht über das Entfernen und Neusetzen einer Klasse: das bräuchte ein
+	// erzwungenes Reflow dazwischen, und das mitten in einem Sprung.
 	const replayLogo = () => logo?.getAnimations({ subtree: true }).forEach((a) => {
 		a.currentTime = 0;
 		a.play();
