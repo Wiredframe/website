@@ -88,7 +88,7 @@
 	// kleines Element: was auf einem Button knackig aussieht, wird über
 	// eine halbe Section gezogen anstrengend.
 	// const GRUND = [0.332, 0.026];
-	const GRUND = [0.332, 0.026];
+	const GRUND = [0.30, 0.03];
 
 	// Text und Fläche werden hier bewusst auseinandergehalten.
 	//
@@ -141,7 +141,7 @@
 	// übereinander, Aubergine mit Koralle wie eines. Die Marke selbst
 	// liegt bei 70 Grad, das ist hier inzwischen das obere Ende und kommt
 	// nicht mehr vor: die Paare sind nah beieinander, fast monochrom.
-	const WINKEL = [20, -20, 30, -30, 40, -40, 50, -50];
+	const WINKEL = [20, -20, 30, -30, 40, -40];
 
 	const meta = document.querySelector('meta[name="theme-color"]');
 	const suche = new URLSearchParams(location.search);
