@@ -43,64 +43,36 @@
    Tokens
    =========================================== */
 
-/* Die sechs Farbtoken werden angemeldet, damit der Browser sie als Farbe
-   versteht statt als beliebige Zeichenkette. Nur dann lassen sie sich
-   überblenden, und genau das braucht der Wechsel beim Tap auf das Signet.
-   Die Werte darunter würfelt js/theme.js bei jedem Aufruf neu und schreibt
-   sie direkt auf <html>. Der :root-Block bleibt trotzdem stehen: er ist
-   der Stand ohne JavaScript, und zugleich die einzige Quelle in Browsern,
-   die @property nicht kennen. Dort fehlt dann nur die Blende. */
-@property --color-primary {
-	syntax: "<color>";
-	inherits: true;
-	initial-value: #003e50;
-}
+/* Ein festes Farbthema. Grundton und Akzent sind gesetzt, die übrigen
+   fünf Rollen daraus abgeleitet: gleiche Regel, gleiche Mathematik wie im
+   Generator, der die Seite eine Zeit lang bei jedem Aufruf neu eingefärbt
+   hat. Die Herleitung steht weiterhin in js/theme.js, die Datei wird nur
+   nicht mehr geladen.
 
-@property --color-accent {
-	syntax: "<color>";
-	inherits: true;
-	initial-value: #4cf799;
-}
+   In OKLCH ist L wahrnehmungsbezogen. Deshalb tragen die Rollen feste
+   Helligkeiten und unterscheiden sich sonst nur im Farbton, und deshalb
+   ist der Kontrast hier eine Eigenschaft der Zahlen und nicht ein
+   glücklicher Zufall.
 
-@property --color-accent-strong {
-	syntax: "<color>";
-	inherits: true;
-	initial-value: #42eb8e;
-}
+     Rolle                  L      C      Ton   wofür
+     --color-primary        0.315  0.046  163   dunkle Flächen, Text auf hell
+     --color-accent         0.900  0.179  130   Überschriften, Zähler, Buttons
+     --color-accent-strong  0.860  0.179  130   dieselbe Farbe im Hover
+     --color-ink            0.180  0.040  130   Schrift auf Akzentflächen
+     --color-text           0.870  0      grau  Fließtext auf Dunkel
+     --color-white          0.990  0.006  163   helle Panels, Off-White
+     --color-canvas         0.950  0.012  163   Grund hinter den Panels
 
-/* Schrift auf gefüllten Akzentflächen, siehe js/theme.js */
-@property --color-ink {
-	syntax: "<color>";
-	inherits: true;
-	initial-value: #003e50;
-}
-
-@property --color-text {
-	syntax: "<color>";
-	inherits: true;
-	initial-value: #c4d9df;
-}
-
-@property --color-white {
-	syntax: "<color>";
-	inherits: true;
-	initial-value: #fff;
-}
-
-@property --color-canvas {
-	syntax: "<color>";
-	inherits: true;
-	initial-value: #eef1f1;
-}
-
+   Gemessen: Akzent auf Grundton 9,79 : 1, Fließtext darauf 8,53 : 1,
+   Tiefe auf Akzent 14,47 : 1, Grundton auf Weiß 12,30 : 1. */
 :root {
-	--color-primary: #003e50;
-	--color-accent: #4cf799;
-	--color-accent-strong: #42eb8e;
-	--color-ink: #003e50;
-	--color-text: #c4d9df;
-	--color-white: #fff;
-	--color-canvas: #eef1f1;
+	--color-primary: #19392b;
+	--color-accent: #b6f56d;
+	--color-accent-strong: #a9e85f;
+	--color-ink: #0c1503;
+	--color-text: #d4d4d4;
+	--color-white: #f8fdfb;
+	--color-canvas: #e8f1ec;
 
 	--font-family: 'Maven Pro', system-ui, -apple-system, sans-serif;
 
@@ -135,24 +107,6 @@
 
 	--fast: 200ms ease;
 	--ease: cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-/* Die Blende beim Themewechsel. Sie steht nur hier, an der Wurzel, denn
-   die Token erben: der Browser rechnet den Zwischenwert einmal aus, und
-   alles darunter bekommt ihn über die Vererbung mit. Reine Neuzeichnung,
-   kein Layout, damit auch nichts, woran das Einrasten sich stoßen könnte.
-
-   Scharf wird die Regel erst, wenn js/theme.js nach dem ersten Bild die
-   Klasse setzt. Ohne das würde der Seitenaufbau selbst überblenden. */
-html.theme-blende {
-	transition:
-		--color-primary 400ms var(--ease),
-		--color-accent 400ms var(--ease),
-		--color-accent-strong 400ms var(--ease),
-		--color-ink 400ms var(--ease),
-		--color-text 400ms var(--ease),
-		--color-white 400ms var(--ease),
-		--color-canvas 400ms var(--ease);
 }
 
 /* ===========================================
@@ -873,122 +827,6 @@ body.dock-invers .dock :focus-visible {
 	opacity: 0;
 }
 
-/* ----------------------------------------
-   Die Einladung zum Signet
-   ----------------------------------------
-   Ohne einen Hinweis kommt niemand auf die Idee, das Signet anzutippen.
-   Sie erscheint erst nach ein paar Sekunden, deshalb liegt sie im
-   Popover: die oberste Ebene ist aus dem Fluss genommen, die Blase kann
-   die Höhe der Bühne also nicht anfassen, wenn sie auftaucht. Genau das
-   wäre sonst eine Layoutänderung mitten auf der Startsection.
-
-   Das Ein- und Ausblenden macht CSS allein. Damit ein Übergang aus
-   display: none heraus überhaupt läuft, braucht es die beiden diskreten
-   Eigenschaften in der transition-Liste und einen Startzustand. */
-.signet-hinweis {
-	position: fixed;
-	left: 50%;
-	bottom: calc(var(--dock-h) + var(--space-md));
-	margin: 0;
-	padding: 7px 15px;
-	border: none;
-	/* Popover bringen vom Browser overflow: auto mit. Das schnitte das
-	   Häkchen ab, denn es ragt unten aus der Blase heraus. */
-	overflow: visible;
-	border-radius: var(--radius-pill);
-	corner-shape: squircle;
-	background: var(--color-primary);
-	color: var(--color-canvas);
-	/* Der Schatten liegt als Filter auf dem ganzen Element und umfasst
-	   deshalb auch das Häkchen. Ein box-shadow endete an der Kante der
-	   Blase und ließe die Spitze schattenlos stehen. */
-	filter: drop-shadow(0 5px 12px color-mix(in srgb, var(--color-primary) 30%, transparent));
-	font-size: var(--fs-sm);
-	white-space: nowrap;
-	opacity: 0;
-	translate: -50% 8px;
-	transition:
-		opacity 320ms var(--ease),
-		translate 320ms var(--ease),
-		overlay 320ms allow-discrete,
-		display 320ms allow-discrete;
-}
-
-.signet-hinweis:popover-open {
-	opacity: 1;
-	translate: -50% 0;
-}
-
-@starting-style {
-	.signet-hinweis:popover-open {
-		opacity: 0;
-		translate: -50% 8px;
-	}
-}
-
-/* Wo Anker bekannt sind, hängt die Blase direkt unter dem Signet und
-   verschwindet mit ihm aus dem Bild. Ohne Ankerunterstützung bleibt sie
-   über der Bedienzeile stehen, was ebenfalls funktioniert. */
-@supports (anchor-name: --a) {
-	.logo-anim {
-		anchor-name: --signet;
-	}
-
-	/* Über dem Signet. Unterhalb läge die Blase auf der Schlagzeile, oben
-	   ist der Platz dagegen frei.
-
-	   Bewusst ohne position-try-fallbacks: eine umklappende Blase hätte
-	   ihr Häkchen weiterhin unten und zeigte dann ins Leere. In @position-try
-	   sind nur Positions- und Größenangaben erlaubt, die Spitze ließe sich
-	   dort also nicht mitdrehen. */
-	.signet-hinweis {
-		position-anchor: --signet;
-		position-visibility: anchors-visible;
-		bottom: anchor(top);
-		top: auto;
-		left: auto;
-		justify-self: anchor-center;
-		/* Platz für das Häkchen ist im Abstand schon eingerechnet */
-		margin-bottom: calc(var(--space-sm) + 7px);
-		translate: 0 -8px;
-	}
-
-	/* Das Sprechblasenhäkchen. Es zeigt auf das Signet und beantwortet
-	   damit die Frage, die eine schwebende Blase sonst offen lässt:
-	   angetippt werden will nicht sie, sondern das Ding darunter. */
-	.signet-hinweis::after {
-		content: "";
-		position: absolute;
-		top: 100%;
-		left: 50%;
-		/* das eine Pixel Überlappung verhindert einen Haarriss zur Blase */
-		translate: -50% -1px;
-		border: 7px solid transparent;
-		border-bottom: 0;
-		border-top-color: var(--color-primary);
-	}
-
-	.signet-hinweis:popover-open {
-		translate: 0 0;
-	}
-
-	@starting-style {
-		.signet-hinweis:popover-open {
-			translate: 0 -8px;
-		}
-	}
-
-	.signet-hinweis:popover-open {
-		translate: 0 0;
-	}
-
-	@starting-style {
-		.signet-hinweis:popover-open {
-			translate: 0 8px;
-		}
-	}
-}
-
 /* Die Animation hing früher an einer Klasse, die JavaScript setzen musste.
    Sie läuft jetzt einfach beim Laden. Zum Wiederholen spult deck.js sie
    über die Web Animations API zurück, ganz ohne Klassenwechsel und ohne
@@ -1573,10 +1411,7 @@ body:has(#menu:popover-open) .burger span:nth-child(3) {
 		animation-duration: 1ms !important;
 	}
 
-	/* Der Themewechsel geschieht dann sofort, ohne Blende */
-	html.theme-blende,
 	.logo-anim,
-	.signet-hinweis,
 	.sheet,
 	.chip,
 	.btn,

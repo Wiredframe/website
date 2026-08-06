@@ -10,8 +10,9 @@
  *   2. eine Notbremse gegen Überlauf auf sehr kleinen Screens
  *   3. Inhalte: Jahre, Mail-Schutz, GitHub
  *
- * Die Farben stehen woanders: js/theme.js würfelt sie und läuft dafür
- * schon im <head>. Hier wird nur der Tap auf das Signet weitergereicht.
+ * Die Farben stehen fest in css/deck.css. Sie stammen aus js/theme.js,
+ * das sie eine Zeit lang bei jedem Aufruf neu gewürfelt hat; die Datei
+ * liegt noch im Projekt, wird aber nicht mehr geladen.
  */
 (() => {
 	'use strict';
@@ -51,7 +52,6 @@
 
 	const setCurrent = (i) => {
 		if (i === current || i < 0) return;
-		const ersterAufruf = current === -1;
 		current = i;
 
 		chips.forEach((chip, n) => {
@@ -64,20 +64,8 @@
 		nextLabel.textContent = screens[i].dataset.next || 'Weiter';
 		nextLink.setAttribute('aria-label', nextLabel.textContent);
 
-		// Farbe und Signet gehören zusammen: wo das Signet neu anläuft,
-		// wird auch gewürfelt. Das trifft jede Rückkehr zur Startsection,
-		// egal ob über das Menü, den Weiter-Button am Ende des Decks, den
-		// Indikator oder von Hand gescrollt.
-		//
-		// Nur der allererste Aufruf bleibt außen vor: dort hat js/theme.js
-		// im <head> längst gewürfelt, ein zweiter Wurf verwürfe den ersten
-		// noch vor dem ersten Bild.
-		if (screens[i].id === 'home') {
-			if (!ersterAufruf) window.wfTheme?.();
-			replayLogo();
-		} else {
-			hinweisWeg(); // wer weiterscrollt, braucht die Einladung nicht mehr
-		}
+		// Zurück auf der Startsection läuft das Signet neu an
+		if (screens[i].id === 'home') replayLogo();
 		zaehlerLaufen(screens[i].id === 'wahrheit');
 	};
 
@@ -163,37 +151,7 @@
 		a.play();
 	});
 
-	// ----------------------------------------
-	// Die Einladung zum Signet
-	// ----------------------------------------
-	// Dass das Signet die Farben würfelt, sieht man ihm nicht an. Nach ein
-	// paar Sekunden Ruhe sagt es eine Blase. Sie verschwindet, sobald der
-	// Hinweis überflüssig geworden ist: nach dem ersten Tap, oder wenn die
-	// Startsection ohnehin verlassen wird. Aussehen und Ein- und
-	// Ausblenden stehen vollständig im CSS, hier wird nur geschaltet.
-	const hinweis = document.getElementById('signet-hinweis');
-	let hinweisUhr = setTimeout(() => {
-		if (current === 0 && hinweis && !hinweis.matches(':popover-open')) hinweis.showPopover();
-	}, 3500);
-
-	const hinweisWeg = () => {
-		clearTimeout(hinweisUhr);
-		if (hinweis?.matches(':popover-open')) hinweis.hidePopover();
-	};
-
-	// Wer mit dem Zeiger auf dem Signet landet, hat den Hinweis nicht mehr
-	// nötig. Das erspart nebenbei ein Zucken: die Blase hängt am Signet,
-	// und das dreht sich beim Überfahren leicht, wodurch ihre Ankerbox
-	// wandert. Ist sie da schon weg, sieht man davon nichts.
-	logo?.addEventListener('pointerenter', hinweisWeg);
-
-	// Ein Tap auf das Signet würfelt zugleich ein neues Farbthema. Die
-	// Farben selbst macht js/theme.js, das schon im <head> gelaufen ist.
-	logo?.addEventListener('click', () => {
-		hinweisWeg();
-		window.wfTheme?.();
-		replayLogo();
-	});
+	logo?.addEventListener('click', replayLogo);
 
 	document.querySelectorAll('[data-years]').forEach((el) => {
 		el.textContent = new Date().getFullYear() - 2005;

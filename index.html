@@ -29,7 +29,7 @@
 		content="Freelance Designer für Figma-to-Code Workflows, Design Systems & Agentic Coding.">
 	<meta name="twitter:image" content="https://wiredframe.de/images/og-image.png">
 	<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-	<meta name="theme-color" content="#003e50">
+	<meta name="theme-color" content="#19392b">
 	<meta name="robots" content="index, follow">
 	<!-- Schema.org Structured Data for LLMs & SEO -->
 	<script type="application/ld+json">
@@ -108,13 +108,10 @@
   }
   </script>
 	<!-- Fonts are now loaded locally from /fonts/ -->
-	<link rel="stylesheet" href="css/deck.css?v=26">
-	<link rel="stylesheet" href="css/icons.css?v=26">
+	<link rel="stylesheet" href="css/deck.css?v=27">
+	<link rel="stylesheet" href="css/icons.css?v=27">
 	<link rel="shortcut icon" href="images/shortcut-icon.svg" type="image/x-icon">
 	<link rel="apple-touch-icon" href="images/shortcut-icon.svg">
-	<!-- Würfelt das Farbthema. Bewusst blockierend und bewusst hier oben:
-	     läuft es später, blitzt für einen Frame das alte Thema auf. -->
-	<script src="js/theme.js?v=26"></script>
 </head>
 
 <body class="app">
@@ -127,23 +124,16 @@
 			<div class="panel">
 				<div class="stage">
 					<!-- Ein echter Button, kein Bild mit Klickhandler: das Signet
-					     würfelt die Farben der Seite und muss deshalb auch per
+					     spielt seine Animation neu ab und muss deshalb auch per
 					     Tastatur erreichbar sein. Die Formen kommen als Masken
-					     aus deck.css, damit sie sich mitfärben können. -->
+					     aus deck.css und tragen dadurch die Themefarben. -->
 					<button class="logo-anim" type="button"
-						aria-label="Wiredframe Signet, antippen für neue Farben">
+						aria-label="Wiredframe Signet, antippen für die Animation">
 						<span class="logo-anim__ring logo-anim__ring--1"></span>
 						<span class="logo-anim__ring logo-anim__ring--2"></span>
 						<span class="logo-anim__ring logo-anim__ring--3"></span>
 						<span class="logo-anim__dot"></span>
 					</button>
-					<!-- Die Einladung. Ein Popover, damit die Blase in der obersten
-					     Ebene liegt und die Höhe der Bühne nicht anfassen kann.
-					     Für Screenreader ist sie stumm: dort steht der Hinweis
-					     bereits in der Beschriftung des Buttons. -->
-					<div class="signet-hinweis" id="signet-hinweis" popover="manual" aria-hidden="true">
-						Antippen für neue Farben
-					</div>
 					<h1 class="hero">Niemand hat die Absicht eine Website zu errichten!</h1>
 					<p class="text text--muted">Und doch passiert es jeden Tag, jetzt auch mit KI.</p>
 				</div>
@@ -423,7 +413,7 @@
 		</button>
 	</div>
 
-	<script src="js/deck.js?v=26"></script>
+	<script src="js/deck.js?v=27"></script>
 </body>
 
 </html>
