@@ -1,0 +1,1088 @@
+/**
+ * Wiredframe – wiredframe.de
+ *
+ * Aufbau:
+ *   vertikal   = echte Sections untereinander, eine pro Screen (Scroll-Snap y)
+ *   horizontal = Grid-Reihen innerhalb einer Section (Scroll-Snap x),
+ *                Nachbarspalten bleiben angeschnitten sichtbar
+ *   Bedienung  = eine Zeile unten: Menü links, Indikator mittig, Weiter
+ *                rechts. Menü und Impressum liegen als helle, eingerückte
+ *                Fläche darüber (natives Popover).
+ *
+ * Die gesamte Bewegung macht der Browser. JavaScript kümmert sich nur um
+ * Zustand (aktive Section) und Inhalte (GitHub, Zähler).
+ */
+
+/* ===========================================
+   Local Fonts (Maven Pro)
+   =========================================== */
+@font-face {
+	font-family: 'Maven Pro';
+	font-style: normal;
+	font-weight: 300 900;
+	font-display: swap;
+	src: url('../fonts/MavenPro-latin.woff2') format('woff2');
+	unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+		U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+		U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+	font-family: 'Maven Pro';
+	font-style: normal;
+	font-weight: 300 900;
+	font-display: swap;
+	src: url('../fonts/MavenPro-latin-ext.woff2') format('woff2');
+	unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+		U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+		U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* ===========================================
+   Tokens
+   =========================================== */
+:root {
+	--color-primary: #003e50;
+	--color-accent: #4cf799;
+	--color-text: #aebab3;
+	--color-white: #fff;
+	--color-canvas: #eef1f1;
+
+	--font-family: 'Maven Pro', system-ui, -apple-system, sans-serif;
+
+	/* Typo-Skala. Alle Größen folgen Breite UND Höhe, damit Querformat nicht
+	   platzt. Basis ist der Fließtext, jede Überschriftenstufe liegt über
+	   dessen Höchstwert (1.7rem), h4 wird direkt daraus abgeleitet. So kann
+	   eine Überschrift auf keinem Viewport kleiner werden als der Fließtext. */
+	--fs-text: clamp(1.25rem, min(2.1vw, 2.9vh), 1.7rem);
+	--fs-h4: calc(var(--fs-text) * 1.28);
+	--fs-h3: clamp(1.9rem, min(3.4vw, 4.4vh), 2.6rem);
+	--fs-h2: clamp(2.3rem, min(6.4vw, 8vh), 4.4rem);
+	--fs-h1: clamp(2.4rem, min(8.6vw, 10.5vh), 6rem);
+	/* Sonderfälle: Schaugrößen und Bedienelemente */
+	--fs-counter: clamp(4rem, min(19vw, 21vh), 11rem);
+	--fs-num: clamp(2.6rem, min(5.4vw, 7vh), 4.2rem);
+	--fs-ui: clamp(1rem, min(1.8vw, 2.4vh), 1.3rem);
+	--fs-sm: 0.875rem;
+	--weight-text: 400;
+	--weight-head: 500;
+
+	--space-sm: clamp(10px, 1.4vh, 16px);
+	--space-md: clamp(14px, 2.2vh, 26px);
+	--space-lg: clamp(20px, 3.4vh, 40px);
+
+	--edge: clamp(14px, 2.4vw, 34px);
+	--gutter: clamp(8px, 1.2vw, 16px);
+	--dock-h: 88px;
+	--radius-panel: clamp(20px, 3vw, 40px);
+	--radius-cell: clamp(16px, 2vw, 28px);
+	--radius-pill: 999px;
+	--btn: 53px;
+	--dot: 12px;
+
+	--fast: 200ms ease;
+	--ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ===========================================
+   Base
+   =========================================== */
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	/* Der Browser übernimmt die Navigation: eine Section pro Geste.
+	   scroll-snap-stop verhindert, dass ein Schwung mehrere Sections
+	   überspringt. */
+	scroll-snap-type: y mandatory;
+	scroll-behavior: smooth;
+	scrollbar-width: none;
+	overscroll-behavior-y: none;
+	-webkit-text-size-adjust: 100%;
+}
+
+html::-webkit-scrollbar {
+	display: none;
+}
+
+body.app {
+	font-family: var(--font-family);
+	font-size: 16px;
+	line-height: 1.5;
+	color: var(--color-primary);
+	background: var(--color-canvas);
+	-webkit-font-smoothing: antialiased;
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+	display: block;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+button {
+	font: inherit;
+	color: inherit;
+	cursor: pointer;
+	border: none;
+	background: none;
+}
+
+/* Fokusring nur bei Tastaturbedienung, nie beim Klicken mit der Maus */
+:focus {
+	outline: none;
+}
+
+:focus-visible {
+	outline: 3px solid var(--color-accent);
+	outline-offset: 3px;
+	border-radius: 6px;
+}
+
+.skip-link {
+	position: absolute;
+	left: -9999px;
+	z-index: 999;
+	padding: 12px 18px;
+	background: var(--color-primary);
+	color: var(--color-accent);
+	border-radius: 12px;
+}
+
+.skip-link:focus-visible {
+	left: 12px;
+	top: 12px;
+}
+
+/* ===========================================
+   BLOCK: Screen (vertikale Ebene)
+   -------------------------------------------
+   svh statt dvh: die Höhe bleibt konstant, auch wenn auf dem Handy die
+   URL-Leiste ein- und ausfährt. Sonst verschieben sich mitten im Sprung
+   alle Section-Positionen und das Snapping zieht zurück an den Start.
+   =========================================== */
+.screen {
+	position: relative;
+	height: 100vh;
+	height: 100svh;
+	padding: var(--gutter);
+	padding-bottom: calc(var(--dock-h) + var(--gutter));
+	scroll-snap-align: start;
+	scroll-snap-stop: always;
+}
+
+.panel {
+	position: relative;
+	display: grid;
+	grid-template-columns: minmax(0, 1fr);
+	align-content: center;
+	height: 100%;
+	border-radius: var(--radius-panel);
+	corner-shape: squircle;
+	background: var(--color-white);
+	overflow: hidden;
+}
+
+.screen--dark .panel {
+	background: var(--color-primary);
+}
+
+/* Zentrierte Sections ohne horizontale Tiefe */
+.stage {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: var(--space-md);
+	width: 100%;
+	max-width: 1100px;
+	margin: 0 auto;
+	padding: clamp(40px, 8vh, 90px) clamp(28px, 4vw, 60px);
+	text-align: center;
+	transform: scale(var(--fit, 1));
+}
+
+/* ===========================================
+   BLOCK: Rail (horizontale Ebene)
+   -------------------------------------------
+   Das Paar aus padding-inline und scroll-padding-inline sorgt dafür, dass
+   links und rechts immer die Nachbarspalte angeschnitten sichtbar bleibt.
+   =========================================== */
+.rail {
+	--cols: 1;
+	--peek: clamp(24px, 7vw, 56px);
+	--gap: clamp(14px, 1.8vw, 26px);
+	/* Wie viel der Pfeil über den Anschnitt hinaus in die Karte ragt.
+	   Wird negativ, sobald der Anschnitt breit genug ist. */
+	--clear: calc(var(--btn) + 18px - var(--peek));
+	display: grid;
+	grid-auto-flow: column;
+	grid-auto-columns: calc((100% - (var(--cols) - 1) * var(--gap)) / var(--cols));
+	gap: var(--gap);
+	align-items: stretch;
+	padding: var(--space-md) var(--peek);
+	scroll-padding-inline: var(--peek);
+	overflow-x: auto;
+	overflow-y: hidden;
+	scroll-snap-type: x mandatory;
+	overscroll-behavior-x: contain;
+	scrollbar-width: none;
+	transform: scale(var(--fit, 1));
+}
+
+.rail::-webkit-scrollbar {
+	display: none;
+}
+
+.cell {
+	--pad: clamp(20px, 2.6vw, 40px);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: var(--space-sm);
+	min-height: min(58vh, 500px);
+	padding: var(--pad) max(var(--pad), var(--clear));
+	border-radius: var(--radius-cell);
+	corner-shape: squircle;
+	background: color-mix(in srgb, var(--color-primary) 5%, transparent);
+	text-align: center;
+	scroll-snap-align: start;
+	scroll-snap-stop: always;
+}
+
+.screen--dark .cell {
+	background: color-mix(in srgb, var(--color-white) 8%, transparent);
+}
+
+/* Der Titel ist selbst eine Grid-Spalte, nur eben keine Karte */
+.cell--title,
+.screen--dark .cell--title {
+	align-items: flex-start;
+	gap: var(--space-md);
+	padding-inline: 0 max(0px, var(--clear));
+	background: none;
+	text-align: left;
+}
+
+@media (min-width: 700px) {
+	.rail {
+		--cols: 2;
+		--peek: clamp(48px, 6vw, 72px);
+	}
+
+	.cell--title {
+		grid-column: span 2;
+	}
+}
+
+@media (min-width: 1100px) {
+	.rail {
+		--cols: 3;
+		--peek: clamp(64px, 6vw, 96px);
+	}
+}
+
+/* Pfeile in den angeschnittenen Rändern, nur für Zeigergeräte */
+.railnav {
+	position: absolute;
+	top: 50%;
+	z-index: 3;
+	display: grid;
+	place-items: center;
+	width: var(--btn);
+	height: var(--btn);
+	translate: 0 -50%;
+	border-radius: var(--radius-pill);
+	corner-shape: squircle;
+	background: var(--color-accent);
+	color: var(--color-primary);
+	box-shadow: 0 12px 26px -14px rgba(0, 62, 80, 0.7);
+	transition: transform var(--fast), opacity var(--fast);
+}
+
+.railnav:hover {
+	transform: scale(1.12);
+}
+
+/* Auf den grünen Statistik-Karten geht ein grüner Pfeil unter */
+.railnav--primary {
+	background: var(--color-primary);
+	color: var(--color-white);
+}
+
+.railnav--prev {
+	left: clamp(6px, 1vw, 14px);
+}
+
+.railnav--next {
+	right: clamp(6px, 1vw, 14px);
+}
+
+.railnav svg {
+	width: 22px;
+	height: 22px;
+}
+
+.railnav[disabled] {
+	opacity: 0;
+	pointer-events: none;
+}
+
+/* ===========================================
+   Typografie
+   -------------------------------------------
+   Vier Klassen für sämtliche Inhalte: hero, title, subtitle, text.
+   Größen kommen aus der Skala oben, Farben aus dem Kontext. Dunkle
+   Sections schalten selbst um, deshalb gibt es keine --light Varianten.
+   =========================================== */
+.hero,
+.title,
+.subtitle {
+	font-weight: var(--weight-head);
+	letter-spacing: -0.02em;
+	text-wrap: balance;
+}
+
+.hero {
+	max-width: 16ch;
+	font-size: var(--fs-h1);
+	line-height: 1.02;
+}
+
+.title {
+	font-size: var(--fs-h2);
+	line-height: 1.03;
+}
+
+.subtitle {
+	font-size: var(--fs-h4);
+	line-height: 1.15;
+}
+
+.text {
+	max-width: 62ch;
+	font-size: var(--fs-text);
+	font-weight: var(--weight-text);
+	line-height: 1.45;
+	text-wrap: pretty;
+}
+
+.text--muted {
+	/* 68% statt 55%: bleibt über dem Kontrastminimum für große Schrift */
+	color: color-mix(in srgb, currentColor 68%, transparent);
+}
+
+.text--accent {
+	color: var(--color-accent);
+}
+
+/* Auf dunklem Grund kippen Überschriften und Fließtext gemeinsam */
+.screen--dark .title,
+.screen--dark .subtitle {
+	color: var(--color-accent);
+}
+
+.screen--dark .text {
+	color: var(--color-text);
+}
+
+.screen--dark .text--accent {
+	color: var(--color-accent);
+}
+
+/* Schaugrößen: Zahlen, die als Bild wirken */
+.counter {
+	font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+	font-size: var(--fs-counter);
+	font-variant-numeric: tabular-nums;
+	color: var(--color-accent);
+	line-height: 0.95;
+	letter-spacing: -0.03em;
+}
+
+/* ===========================================
+   Zell-Inhalte
+   =========================================== */
+.num {
+	display: grid;
+	place-items: center;
+	width: calc(var(--fs-num) * 1.6);
+	height: calc(var(--fs-num) * 1.6);
+	flex-shrink: 0;
+	border-radius: var(--radius-pill);
+	corner-shape: squircle;
+	background: var(--color-primary);
+	color: var(--color-accent);
+	font-size: var(--fs-num);
+	font-weight: 500;
+	line-height: 1;
+}
+
+.cell__icon {
+	width: clamp(64px, 9vh, 104px);
+}
+
+/* Stat-Karten */
+.cell--stat {
+	gap: 2px;
+	background: var(--color-accent);
+}
+
+.stat__value {
+	font-size: clamp(3.4rem, min(9vw, 13vh), 7rem);
+	font-weight: var(--weight-head);
+	line-height: 0.95;
+	letter-spacing: -0.03em;
+	color: var(--color-primary);
+}
+
+/* Beschriftung auf der grünen Statistik-Karte etwas zurückgenommen */
+.cell--stat .text {
+	color: color-mix(in srgb, var(--color-primary) 75%, transparent);
+	line-height: 1.2;
+}
+
+/* Foto füllt die Karte, Radius und Form kommen aus .cell */
+.cell--photo {
+	background: url('../images/portrait.jpg') center / cover no-repeat;
+	padding: 0;
+}
+
+/* ===========================================
+   Repo-Karten (Inhalt kommt aus deck.js)
+   =========================================== */
+.cell--repo {
+	align-items: flex-start;
+	justify-content: flex-start;
+	text-align: left;
+}
+
+.repo__icon {
+	display: grid;
+	place-items: center;
+	width: 52px;
+	height: 52px;
+	border-radius: var(--radius-pill);
+	corner-shape: squircle;
+	background: var(--color-primary);
+	color: var(--color-accent);
+}
+
+.repo__icon svg {
+	width: 26px;
+	height: 26px;
+}
+
+.cell--repo .subtitle {
+	overflow-wrap: anywhere;
+}
+
+.repo__desc {
+	color: color-mix(in srgb, var(--color-primary) 75%, transparent);
+	display: -webkit-box;
+	-webkit-line-clamp: 4;
+	line-clamp: 4;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+
+.repo__meta {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 12px;
+	margin-top: auto;
+	font-size: var(--fs-sm);
+	color: color-mix(in srgb, var(--color-primary) 65%, transparent);
+}
+
+.repo__lang {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+}
+
+.repo__dot {
+	width: 11px;
+	height: 11px;
+	border-radius: 50%;
+	background: var(--dot, var(--color-accent));
+}
+
+.cell--repo:hover {
+	background: color-mix(in srgb, var(--color-accent) 24%, transparent);
+}
+
+/* ===========================================
+   Buttons in Inhalten
+   =========================================== */
+.btn-row {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: var(--space-sm);
+}
+
+.btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	padding: 13px 24px;
+	border: 2.5px solid var(--color-primary);
+	border-radius: var(--radius-pill);
+	corner-shape: squircle;
+	font-size: var(--fs-ui);
+	transition: transform var(--fast), background var(--fast), color var(--fast), border-color var(--fast);
+}
+
+.btn:hover {
+	background: var(--color-accent);
+	border-color: var(--color-accent);
+	color: var(--color-primary);
+	transform: scale(1.05);
+}
+
+.btn--light {
+	border-color: var(--color-accent);
+	color: var(--color-accent);
+}
+
+/* ===========================================
+   Logo-Animation (Hero)
+   =========================================== */
+.logo-anim {
+	position: relative;
+	width: clamp(120px, 22vh, 260px);
+	aspect-ratio: 1;
+	cursor: pointer;
+}
+
+.logo-anim__ring {
+	position: absolute;
+	width: 100%;
+	transform: rotate(180deg);
+}
+
+.logo-anim__ring--2 {
+	width: 72%;
+	top: 14%;
+	left: 14%;
+}
+
+.logo-anim__ring--3 {
+	width: 43%;
+	top: 28.5%;
+	left: 28.5%;
+}
+
+.logo-anim__dot {
+	position: absolute;
+	width: 11%;
+	left: 55.5%;
+	top: 31%;
+	opacity: 0;
+}
+
+.logo-anim.is-animating .logo-anim__ring--1 {
+	animation: logoRotate 1.3s ease-out 0.13s forwards;
+}
+
+.logo-anim.is-animating .logo-anim__ring--2 {
+	animation: logoRotate 1.17s ease-out 0.26s forwards;
+}
+
+.logo-anim.is-animating .logo-anim__ring--3 {
+	animation: logoRotate 1.04s ease-out 0.39s forwards;
+}
+
+.logo-anim.is-animating .logo-anim__dot {
+	animation: logoPop 0.65s ease-out 0.65s forwards;
+}
+
+@keyframes logoRotate {
+	0% {
+		transform: rotate(180deg);
+	}
+
+	50% {
+		transform: rotate(-11deg);
+	}
+
+	65% {
+		transform: rotate(5deg);
+	}
+
+	78% {
+		transform: rotate(-2.5deg);
+	}
+
+	88% {
+		transform: rotate(1.2deg);
+	}
+
+	100% {
+		transform: rotate(0deg);
+	}
+}
+
+@keyframes logoPop {
+	0% {
+		opacity: 0;
+		transform: scale(0);
+	}
+
+	50% {
+		opacity: 1;
+		transform: scale(1.25);
+	}
+
+	70% {
+		transform: scale(0.92);
+	}
+
+	100% {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+
+/* ===========================================
+   BLOCK: Dock (Bedienzeile am unteren Rand)
+   -------------------------------------------
+   Menü links, Indikator mittig, Navigation rechts. Die Zeile liegt in ihrer
+   eigenen Bahn unter den Panels, deshalb braucht sie keine Umschaltung
+   zwischen hellen und dunklen Sections.
+   =========================================== */
+/* Drei Spalten: die beiden Außenspalten sind per 1fr immer gleich breit,
+   dadurch sitzt der Indikator exakt in der Bildschirmmitte, egal wie lang
+   der Linktext auf dem Weiter-Button gerade ist. */
+.dock {
+	position: fixed;
+	inset: auto 0 0 0;
+	z-index: 60;
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+	align-items: center;
+	gap: 10px;
+	min-height: var(--dock-h);
+	padding: 10px clamp(10px, 2vw, 24px);
+	padding-bottom: max(10px, env(safe-area-inset-bottom));
+	background: var(--color-canvas);
+}
+
+.ctrl {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	flex: 0 0 auto;
+	border-radius: var(--radius-pill);
+	corner-shape: squircle;
+	background: color-mix(in srgb, var(--color-primary) 8%, transparent);
+	color: var(--color-primary);
+	transition: background var(--fast), color var(--fast), transform var(--fast), opacity var(--fast);
+}
+
+.ctrl:hover {
+	background: color-mix(in srgb, var(--color-primary) 15%, transparent);
+}
+
+.ctrl:active {
+	transform: scale(0.94);
+}
+
+.ctrl--round {
+	width: var(--btn);
+	height: var(--btn);
+	aspect-ratio: 1;
+	flex: 0 0 var(--btn);
+}
+
+.ctrl--round svg {
+	width: 24px;
+	height: 24px;
+}
+
+.ctrl--menu {
+	justify-self: start;
+}
+
+/* Weiter ist der primäre Weg durch die Seite und deshalb dunkel */
+.ctrl--next {
+	justify-self: end;
+	min-width: 0;
+	padding: 13px 22px 13px 26px;
+	background: var(--color-primary);
+	color: var(--color-white);
+	gap: 10px;
+}
+
+.ctrl--next:hover {
+	background: var(--color-accent);
+	color: var(--color-primary);
+}
+
+.ctrl__label {
+	min-width: 0;
+	font-size: var(--fs-ui);
+	font-weight: 500;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+/* Der Chevron sitzt direkt auf der Buttonfläche, ohne eigenen Kreis */
+.ctrl__icon {
+	display: grid;
+	place-items: center;
+	flex-shrink: 0;
+}
+
+.ctrl__icon svg {
+	width: 24px;
+	height: 24px;
+}
+
+/* Hamburger. Kein Morph zum X: das Menü liegt bildschirmfüllend darüber,
+   der Button ist im offenen Zustand gar nicht zu sehen. */
+.burger {
+	display: grid;
+	gap: 5px;
+	width: 24px;
+}
+
+.burger span {
+	display: block;
+	height: 2px;
+	border-radius: 2px;
+	background: currentColor;
+}
+
+/* --- Indikator: Punkte, die aktuelle Section als breiterer Balken -------- */
+.pager {
+	/* Bezugspunkt für das Mittigrücken in deck.js: ohne das messen die
+	   Punkte ihre Position gegen die ganze Dock-Zeile. */
+	position: relative;
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	min-width: 0;
+	padding: 11px 13px;
+	border-radius: var(--radius-pill);
+	corner-shape: squircle;
+	background: color-mix(in srgb, var(--color-primary) 7%, transparent);
+	overflow-x: auto;
+	overscroll-behavior-x: contain;
+	scrollbar-width: none;
+	scroll-behavior: smooth;
+}
+
+.pager::-webkit-scrollbar {
+	display: none;
+}
+
+.chip {
+	flex: 0 0 auto;
+	width: var(--dot);
+	height: var(--dot);
+	border-radius: var(--radius-pill);
+	background: color-mix(in srgb, var(--color-primary) 25%, transparent);
+	transition: width 420ms var(--ease), background var(--fast);
+}
+
+/* Der Name bleibt für Screenreader erhalten, ist aber nicht zu sehen */
+.chip span {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	clip-path: inset(50%);
+	white-space: nowrap;
+}
+
+.chip:hover {
+	background: color-mix(in srgb, var(--color-primary) 50%, transparent);
+}
+
+.chip[aria-current="true"] {
+	/* gleiche Höhe wie die Punkte, nur länger: bleibt eine runde Form */
+	width: calc(var(--dot) * 3);
+	background: var(--color-primary);
+}
+
+/* ===========================================
+   BLOCK: Sheets (Menü und Impressum, natives Popover)
+   =========================================== */
+/* Menü und Impressum teilen sich eine Fläche: eingerückt und abgerundet
+   wie die Sections selbst, hell, mit dem Logo als Kopf. */
+.sheet {
+	position: fixed;
+	inset: var(--gutter);
+	width: auto;
+	max-width: none;
+	height: auto;
+	max-height: none;
+	margin: 0;
+	padding: 0;
+	border: none;
+	border-radius: var(--radius-panel);
+	corner-shape: squircle;
+	background: var(--color-white);
+	color: var(--color-primary);
+	overflow: hidden;
+}
+
+.sheet:not(:popover-open) {
+	display: none;
+}
+
+.sheet::backdrop {
+	/* deckt auch die Bedienzeile im Randbereich ruhig ab */
+	background: color-mix(in srgb, var(--color-primary) 62%, transparent);
+}
+
+/* Das Menü kommt ohne Abdunklung aus, es deckt ohnehin fast alles ab */
+.menu::backdrop {
+	background: none;
+}
+
+.sheet__inner {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	gap: var(--space-lg);
+	height: 100%;
+	padding: clamp(28px, 6vw, 90px);
+}
+
+.sheet__close {
+	position: absolute;
+	top: var(--edge);
+	right: var(--edge);
+	display: grid;
+	place-items: center;
+	width: var(--btn);
+	height: var(--btn);
+	aspect-ratio: 1;
+	border-radius: var(--radius-pill);
+	corner-shape: squircle;
+	background: color-mix(in srgb, var(--color-primary) 8%, transparent);
+	color: var(--color-primary);
+	transition: background var(--fast);
+}
+
+.sheet__close:hover {
+	background: color-mix(in srgb, var(--color-primary) 16%, transparent);
+}
+
+.sheet__close svg {
+	width: 22px;
+	height: 22px;
+}
+
+.menu__nav {
+	display: flex;
+	flex-direction: column;
+	gap: clamp(8px, 1.9vh, 22px);
+	/* auto oben und unten: die Liste steht mittig, die Meta-Zeile bleibt
+	   trotzdem am unteren Rand kleben */
+	margin-block: auto;
+}
+
+.menu__nav a {
+	width: fit-content;
+	font-size: clamp(1.7rem, min(5.4vw, 6.6vh), 3.6rem);
+	font-weight: 300;
+	line-height: 1.04;
+	letter-spacing: -0.015em;
+	transition: color var(--fast), transform var(--fast);
+}
+
+.menu__nav a:hover {
+	color: color-mix(in srgb, var(--color-primary) 55%, transparent);
+	transform: translateX(10px);
+}
+
+.menu__meta {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--space-sm) var(--space-lg);
+	font-size: var(--fs-sm);
+	color: color-mix(in srgb, var(--color-primary) 60%, transparent);
+}
+
+.menu__meta a:hover,
+.menu__meta button:hover {
+	color: var(--color-primary);
+}
+
+/* Impressum: der Text steckt in keinem eigenen Scrollkasten, die Fläche
+   selbst wächst mit dem Inhalt. Erst wenn sie höher als der Bildschirm
+   würde, scrollt die Fläche als Ganzes. */
+.sheet--text {
+	bottom: auto;
+	height: auto;
+	max-height: calc(100svh - 2 * var(--gutter));
+	overflow-y: auto;
+	overscroll-behavior: contain;
+	scrollbar-width: thin;
+	scrollbar-color: color-mix(in srgb, var(--color-primary) 25%, transparent) transparent;
+}
+
+.sheet--text .sheet__inner {
+	justify-content: flex-start;
+	gap: var(--space-md);
+	height: auto;
+	padding-top: clamp(70px, 12vh, 130px);
+	padding-bottom: clamp(28px, 6vh, 70px);
+}
+
+.sheet__text {
+	max-width: 70ch;
+	font-size: var(--fs-sm);
+	font-weight: var(--weight-text);
+	line-height: 1.65;
+	color: color-mix(in srgb, var(--color-primary) 78%, transparent);
+}
+
+.sheet__text p+p {
+	margin-top: 0.9em;
+}
+
+.sheet__title {
+	font-size: var(--fs-h3);
+	font-weight: var(--weight-head);
+	letter-spacing: -0.02em;
+}
+
+.sheet__sub {
+	margin-top: 1.6em;
+	font-size: var(--fs-ui);
+	font-weight: var(--weight-head);
+	color: var(--color-primary);
+}
+
+.sheet__text .sheet__sub:first-child {
+	margin-top: 0;
+}
+
+/* Ein- und Ausblenden ohne JavaScript */
+@supports (transition-behavior: allow-discrete) {
+	.sheet {
+		opacity: 0;
+		translate: 0 2%;
+		transition: opacity 260ms var(--ease), translate 260ms var(--ease), display 260ms allow-discrete, overlay 260ms allow-discrete;
+	}
+
+	.sheet:popover-open {
+		opacity: 1;
+		translate: 0 0;
+	}
+
+	@starting-style {
+		.sheet:popover-open {
+			opacity: 0;
+			translate: 0 2%;
+		}
+	}
+}
+
+/* ===========================================
+   Responsive
+   =========================================== */
+@media (max-width: 620px) {
+	:root {
+		--btn: 50px;
+		--dot: 11px;
+		--dock-h: 78px;
+	}
+
+	/* kein Platz für den Linktext: Weiter wird wieder rund */
+	.ctrl__label {
+		display: none;
+	}
+
+	.ctrl--next {
+		width: var(--btn);
+		height: var(--btn);
+		aspect-ratio: 1;
+		flex: 0 0 var(--btn);
+		padding: 0;
+	}
+
+	.ctrl--next .ctrl__icon svg {
+		width: 24px;
+		height: 24px;
+	}
+
+	/* mehr Luft zum Rand: Spalten rücken weiter ein, Inhalte weiter hinein */
+	.rail {
+		--peek: clamp(30px, 8vw, 56px);
+	}
+
+	.cell {
+		--pad: clamp(26px, 7vw, 36px);
+	}
+
+	.dock {
+		gap: 6px;
+		padding-inline: 10px;
+	}
+
+	.dock {
+		gap: 8px;
+	}
+
+	.pager {
+		gap: 8px;
+		padding: 7px 8px;
+	}
+
+	.menu__nav {
+		gap: 32px;
+	}
+}
+
+@media (max-height: 460px) {
+	.cell {
+		min-height: 0;
+	}
+
+	.stage {
+		padding-block: clamp(50px, 9vh, 80px);
+	}
+}
+
+/* ===========================================
+   Reduced Motion
+   =========================================== */
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+
+	.logo-anim.is-animating * {
+		animation-duration: 1ms !important;
+	}
+
+	.sheet,
+	.chip,
+	.btn,
+	.ctrl,
+	.railnav {
+		transition-duration: 1ms;
+	}
+
+	.pager {
+		scroll-behavior: auto;
+	}
+}
