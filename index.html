@@ -108,9 +108,13 @@
   }
   </script>
 	<!-- Fonts are now loaded locally from /fonts/ -->
-	<link rel="stylesheet" href="css/deck.css?v=6">
+	<link rel="stylesheet" href="css/deck.css?v=24">
+	<link rel="stylesheet" href="css/icons.css?v=24">
 	<link rel="shortcut icon" href="images/shortcut-icon.svg" type="image/x-icon">
 	<link rel="apple-touch-icon" href="images/shortcut-icon.svg">
+	<!-- Würfelt das Farbthema. Bewusst blockierend und bewusst hier oben:
+	     läuft es später, blitzt für einen Frame das alte Thema auf. -->
+	<script src="js/theme.js?v=24"></script>
 </head>
 
 <body class="app">
@@ -122,14 +126,23 @@
 		<section class="screen" id="home" aria-label="Start" data-next="Die ganze Wahrheit">
 			<div class="panel">
 				<div class="stage">
-					<div class="logo-anim" role="img" aria-label="Wiredframe Signet">
-						<img class="logo-anim__ring logo-anim__ring--1" src="images/Slice2.svg" alt="" width="296"
-							height="296" fetchpriority="high">
-						<img class="logo-anim__ring logo-anim__ring--2" src="images/Slice3.svg" alt="" width="213"
-							height="213">
-						<img class="logo-anim__ring logo-anim__ring--3" src="images/Slice4.svg" alt="" width="128"
-							height="127">
-						<img class="logo-anim__dot" src="images/Slice5.svg" alt="" width="33" height="30">
+					<!-- Ein echter Button, kein Bild mit Klickhandler: das Signet
+					     würfelt die Farben der Seite und muss deshalb auch per
+					     Tastatur erreichbar sein. Die Formen kommen als Masken
+					     aus deck.css, damit sie sich mitfärben können. -->
+					<button class="logo-anim" type="button"
+						aria-label="Wiredframe Signet, antippen für neue Farben">
+						<span class="logo-anim__ring logo-anim__ring--1"></span>
+						<span class="logo-anim__ring logo-anim__ring--2"></span>
+						<span class="logo-anim__ring logo-anim__ring--3"></span>
+						<span class="logo-anim__dot"></span>
+					</button>
+					<!-- Die Einladung. Ein Popover, damit die Blase in der obersten
+					     Ebene liegt und die Höhe der Bühne nicht anfassen kann.
+					     Für Screenreader ist sie stumm: dort steht der Hinweis
+					     bereits in der Beschriftung des Buttons. -->
+					<div class="signet-hinweis" id="signet-hinweis" popover="manual" aria-hidden="true">
+						Antippen für neue Farben
 					</div>
 					<h1 class="hero">Niemand hat die Absicht eine Website zu errichten!</h1>
 					<p class="text text--muted">Und doch passiert es jeden Tag, jetzt auch mit KI.</p>
@@ -141,11 +154,15 @@
 		<section class="screen screen--dark" id="wahrheit" aria-label="Wahrheit" data-next="Wie konnte es dazu kommen?">
 			<div class="panel">
 				<div class="stage">
-					<p class="counter" data-counter>0</p>
+					<!-- Die Zahl kommt aus dem Pseudoelement, siehe deck.css. Für
+					     Screenreader ist sie nichts wert: die Aussage trägt der Satz
+					     darunter, eine im Sekundentakt wechselnde Zahl nur Lärm. -->
+					<p class="counter" aria-hidden="true"></p>
 					<p class="text text--accent">Prompts werden gerade abgefeuert, mit fragwürdigem Ergebnis.</p>
-					<p class="text">Jeden Tag entstehen unzählige Websites, die schon bei Fertigstellung
-						veraltet, inkonsistent oder schlicht unbrauchbar sind. KI macht diesen Prozess vor allem
-						schneller, nicht besser.</p>
+					<p class="text">Jeden Tag werden unzählige Websites gebaut und hinter dem Rücken der Nutzer
+						einfach online gestellt. Besonders tragisch: viele bemerken es nicht einmal, denn oft sind
+						sie schon bei Fertigstellung veraltet, inkonsistent oder schlicht unbrauchbar. KI macht das
+						Ganze vor allem schneller, nicht besser.</p>
 				</div>
 			</div>
 		</section>
@@ -156,46 +173,36 @@
 				<div class="rail" tabindex="0" role="group" aria-label="Ursachen, horizontal">
 					<article class="cell cell--title">
 						<h2 class="title">Wie konnte es nur dazu kommen?</h2>
-						<p class="text">Sechs Tatsachen, die Websites lieber verschweigen.</p>
+						<p class="text">Viele Websites sind bis heute traumatisiert und wollen über das Erlebte
+							nicht sprechen. Experten ist es dennoch gelungen aufzudecken, wie sie massenweise
+							hergestellt werden. Die Tatsachen sind schockierend:</p>
 					</article>
 					<article class="cell">
-						<span class="num">1</span>
+						<span class="cell__icon icon--magie" aria-hidden="true"></span>
 						<p class="text">KI generiert Code schneller als du „Figma Dev Mode“ sagen kannst.</p>
 					</article>
 					<article class="cell">
-						<span class="num">2</span>
+						<span class="cell__icon icon--tokens" aria-hidden="true"></span>
 						<p class="text">Design Tokens existieren, aber niemand nutzt sie konsistent.</p>
 					</article>
 					<article class="cell">
-						<span class="num">3</span>
+						<span class="cell__icon icon--geist" aria-hidden="true"></span>
 						<p class="text">Agentic Coding: Die KI entscheidet jetzt selbst, was sie baut.</p>
 					</article>
 					<article class="cell">
-						<span class="num">4</span>
+						<span class="cell__icon icon--meeting" aria-hidden="true"></span>
 						<p class="text">Meetings über das Design dauern länger als das Design selbst.</p>
 					</article>
 					<article class="cell">
-						<span class="num">5</span>
+						<span class="cell__icon icon--stapel" aria-hidden="true"></span>
 						<p class="text">Figma-Files mit 99+ Seiten, aber keiner weiß, wo das finale Design liegt.
 						</p>
 					</article>
 					<article class="cell">
-						<span class="num">6</span>
+						<span class="cell__icon icon--wanze" aria-hidden="true"></span>
 						<p class="text">„Figma-to-Code“ heißt oft: Copy-Paste und debuggen bis Mitternacht.</p>
 					</article>
 				</div>
-				<button class="railnav railnav--prev" type="button" aria-label="Vorheriges Element">
-					<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"
-						stroke-linejoin="round" aria-hidden="true">
-						<polyline points="15 18 9 12 15 6"></polyline>
-					</svg>
-				</button>
-				<button class="railnav railnav--next" type="button" aria-label="Nächstes Element">
-					<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"
-						stroke-linejoin="round" aria-hidden="true">
-						<polyline points="9 18 15 12 9 6"></polyline>
-					</svg>
-				</button>
 			</div>
 		</section>
 
@@ -205,44 +212,34 @@
 				<div class="rail" tabindex="0" role="group" aria-label="Leistungen, horizontal">
 					<article class="cell cell--title">
 						<h2 class="title">Wiredframe hilft</h2>
-						<p class="text">Das einzige Gegenmittel: Leidenschaft und die richtigen Workflows.
-							Seit <span data-years></span> Jahren spezialisiert auf:</p>
+						<p class="text">Das einzig bekannte Gegenmittel gegen schlechtes Webdesign ist
+							Leidenschaft, gepaart mit den richtigen Workflows. Egal ob neues Projekt oder Relaunch:
+							seit <span data-years></span> Jahren spezialisiert auf:</p>
 					</article>
 					<article class="cell">
-						<img class="cell__icon" src="images/icons8_Web_Design.svg" alt="" width="100" height="100">
+						<span class="cell__icon icon--stift" aria-hidden="true"></span>
 						<h3 class="subtitle">UI/UX Design mit Figma</h3>
-						<p class="text">Interfaces und Experience Design mit Figma, FigJam und Dev Mode.</p>
+						<p class="text">Moderne Interfaces und Experience Design mit Figma, FigJam und Dev Mode.</p>
 					</article>
 					<article class="cell">
-						<img class="cell__icon" src="images/icons8_Code.svg" alt="" width="100" height="100">
+						<span class="cell__icon icon--code" aria-hidden="true"></span>
 						<h3 class="subtitle">Figma-to-Code Workflows</h3>
-						<p class="text">Sauberer Übergang von Design zu Code mit Code Connect und echtem Handoff.
-						</p>
+						<p class="text">Nahtloser Übergang von Figma zu Code mit Code Connect und einem Handoff,
+							der diesen Namen verdient.</p>
 					</article>
 					<article class="cell">
-						<img class="cell__icon" src="images/icons8_Database.svg" alt="" width="100" height="100">
+						<span class="cell__icon icon--system" aria-hidden="true"></span>
 						<h3 class="subtitle">Design Systems &amp; Tokens</h3>
-						<p class="text">Komponenten-Bibliotheken und Tokens für konsistente Markenauftritte.</p>
+						<p class="text">Tokens, Komponenten-Bibliotheken und Styleguides für Markenauftritte, die
+							konsistent bleiben.</p>
 					</article>
 					<article class="cell">
-						<img class="cell__icon" src="images/icons8_Natural_User_Interface_2.svg" alt="" width="100"
-							height="100">
+						<span class="cell__icon icon--chip" aria-hidden="true"></span>
 						<h3 class="subtitle">Agentic Coding &amp; AI</h3>
-						<p class="text">KI-gestützte Design-to-Code Pipelines mit Cursor, Copilot und Claude.</p>
+						<p class="text">KI-gestützte Design-to-Code Pipelines mit Cursor, Copilot und Claude. Damit
+							die KI baut, was du meinst.</p>
 					</article>
 				</div>
-				<button class="railnav railnav--prev" type="button" aria-label="Vorheriges Element">
-					<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"
-						stroke-linejoin="round" aria-hidden="true">
-						<polyline points="15 18 9 12 15 6"></polyline>
-					</svg>
-				</button>
-				<button class="railnav railnav--next" type="button" aria-label="Nächstes Element">
-					<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"
-						stroke-linejoin="round" aria-hidden="true">
-						<polyline points="9 18 15 12 9 6"></polyline>
-					</svg>
-				</button>
 			</div>
 		</section>
 
@@ -252,8 +249,9 @@
 				<div class="rail" tabindex="0" role="group" aria-label="Profil, horizontal">
 					<article class="cell cell--title">
 						<h2 class="title">Was ist Wiredframe?</h2>
-						<p class="text">Ulf Schuster, unabhängiger UI/UX Designer und Digital Creator. Remote und
-							kollaborativ, von der ersten Idee bis zum Launch.</p>
+						<p class="text">Wiredframe, das ist Ulf Schuster: unabhängiger UI/UX Designer und Digital
+							Creator aus Leidenschaft. Remote und kollaborativ, von der ersten Idee bis zum Launch.
+						</p>
 					</article>
 					<article class="cell cell--stat">
 						<p class="text">mehr als</p>
@@ -270,18 +268,6 @@
 					</article>
 					<article class="cell cell--photo" role="img" aria-label="Porträt von Ulf Schuster"></article>
 				</div>
-				<button class="railnav railnav--prev railnav--primary" type="button" aria-label="Vorheriges Element">
-					<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"
-						stroke-linejoin="round" aria-hidden="true">
-						<polyline points="15 18 9 12 15 6"></polyline>
-					</svg>
-				</button>
-				<button class="railnav railnav--next railnav--primary" type="button" aria-label="Nächstes Element">
-					<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"
-						stroke-linejoin="round" aria-hidden="true">
-						<polyline points="9 18 15 12 9 6"></polyline>
-					</svg>
-				</button>
 			</div>
 		</section>
 
@@ -291,22 +277,13 @@
 				<div class="rail" id="repos-rail" tabindex="0" role="group" aria-label="Repositories, horizontal">
 					<article class="cell cell--title">
 						<h2 class="title">Aktuell in Arbeit</h2>
-						<p class="text">Öffentliche Repositories, live von GitHub geladen und nach dem letzten Commit
-							sortiert.</p>
+						<p class="text">Öffentliche Repositories, Tools und Experimente, live von GitHub geladen und
+							nach dem letzten Commit sortiert. Schwerpunkt: Figma-to-Code, Design Systems und
+							Agentic Coding.</p>
+						<p class="text text--muted">Designprojekte lassen sich schlecht committen. Referenzen zeige
+							ich gern, <a href="#kontakt">eine kurze Nachricht</a> genügt.</p>
 					</article>
 				</div>
-				<button class="railnav railnav--prev" type="button" aria-label="Vorheriges Element">
-					<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"
-						stroke-linejoin="round" aria-hidden="true">
-						<polyline points="15 18 9 12 15 6"></polyline>
-					</svg>
-				</button>
-				<button class="railnav railnav--next" type="button" aria-label="Nächstes Element">
-					<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"
-						stroke-linejoin="round" aria-hidden="true">
-						<polyline points="9 18 15 12 9 6"></polyline>
-					</svg>
-				</button>
 			</div>
 		</section>
 
@@ -315,8 +292,10 @@
 			<div class="panel">
 				<div class="stage">
 					<h2 class="title">Kontakt</h2>
-					<p class="text">Erreichbarkeit? Fast immer. Außer ich bin gerade beim Kreativlüften aufm
-						Sattel unterwegs. Für gute Ideen und kreative Teams bin ich zu haben.</p>
+					<p class="text">Erreichbarkeit? Fast immer! Außer ich bin gerade beim Kreativlüften aufm
+						Sattel unterwegs oder sortiere meine Gedanken zwischen Pixeln und Pflanzen. Für gute Ideen,
+						ehrliche Projekte und kreative Teams bin ich aber immer zu haben. Schreib mir einfach, ich
+						freu mich drauf.</p>
 					<div class="btn-row">
 						<a class="btn btn--light"
 							href="https://outlook.office.com/book/EinGesprchvereinbaren@wiredframe.onmicrosoft.com/?ismsaljsauthenabled"
@@ -396,7 +375,7 @@
 			<div class="sheet__text">
 				<p class="sheet__sub">Allgemeine Angaben</p>
 				<p>Ulf Schuster<br>Sindelsdorferstraße 27a<br>82377 Penzberg<br><br>eMail:
-					<span id="impressum-email" style="unicode-bidi:bidi-override;direction:rtl;">ed.emarfderiw@ofni</span>
+					<span class="mail-rueckwaerts">ed.emarfderiw@ofni</span>
 				</p>
 				<p class="sheet__sub">Inhaltlich Verantwortlicher gemäß §6 MDStV</p>
 				<p>Ulf Schuster</p>
@@ -428,6 +407,10 @@
 					dieser Seite sind nur für den privaten, nicht kommerziellen Gebrauch gestattet. Die Betreiber der
 					Seiten sind bemüht, stets die Urheberrechte anderer zu beachten bzw. auf selbst erstellte sowie
 					lizenzfreie Werke zurückzugreifen.</p>
+				<p class="sheet__sub">Bildnachweis</p>
+				<p>Die Icons stammen aus dem Solar Icon Set von 480 Design und stehen unter der Lizenz
+					<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY
+						4.0</a>.</p>
 			</div>
 		</div>
 		<button class="sheet__close" type="button" popovertarget="impressum" popovertargetaction="hide"
@@ -440,7 +423,7 @@
 		</button>
 	</div>
 
-	<script src="js/deck.js?v=6"></script>
+	<script src="js/deck.js?v=24"></script>
 </body>
 
 </html>

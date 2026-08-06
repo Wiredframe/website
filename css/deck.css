@@ -41,10 +41,62 @@
 /* ===========================================
    Tokens
    =========================================== */
+
+/* Die sechs Farbtoken werden angemeldet, damit der Browser sie als Farbe
+   versteht statt als beliebige Zeichenkette. Nur dann lassen sie sich
+   überblenden, und genau das braucht der Wechsel beim Tap auf das Signet.
+   Die Werte darunter würfelt js/theme.js bei jedem Aufruf neu und schreibt
+   sie direkt auf <html>. Der :root-Block bleibt trotzdem stehen: er ist
+   der Stand ohne JavaScript, und zugleich die einzige Quelle in Browsern,
+   die @property nicht kennen. Dort fehlt dann nur die Blende. */
+@property --color-primary {
+	syntax: "<color>";
+	inherits: true;
+	initial-value: #003e50;
+}
+
+@property --color-accent {
+	syntax: "<color>";
+	inherits: true;
+	initial-value: #4cf799;
+}
+
+@property --color-accent-strong {
+	syntax: "<color>";
+	inherits: true;
+	initial-value: #42eb8e;
+}
+
+/* Schrift auf gefüllten Akzentflächen, siehe js/theme.js */
+@property --color-ink {
+	syntax: "<color>";
+	inherits: true;
+	initial-value: #003e50;
+}
+
+@property --color-text {
+	syntax: "<color>";
+	inherits: true;
+	initial-value: #c4d9df;
+}
+
+@property --color-white {
+	syntax: "<color>";
+	inherits: true;
+	initial-value: #fff;
+}
+
+@property --color-canvas {
+	syntax: "<color>";
+	inherits: true;
+	initial-value: #eef1f1;
+}
+
 :root {
 	--color-primary: #003e50;
 	--color-accent: #4cf799;
 	--color-accent-strong: #42eb8e;
+	--color-ink: #003e50;
 	--color-text: #c4d9df;
 	--color-white: #fff;
 	--color-canvas: #eef1f1;
@@ -62,7 +114,6 @@
 	--fs-h1: clamp(2.2rem, min(7.6vw, 9.4vh), 5.2rem);
 	/* Sonderfälle: Schaugrößen und Bedienelemente */
 	--fs-counter: clamp(4rem, min(19vw, 21vh), 11rem);
-	--fs-num: clamp(2.6rem, min(5.4vw, 7vh), 4.2rem);
 	--fs-ui: clamp(1rem, min(1.8vw, 2.4vh), 1.3rem);
 	--fs-sm: 0.875rem;
 	--weight-text: 400;
@@ -74,7 +125,7 @@
 
 	--edge: clamp(14px, 2.4vw, 34px);
 	--gutter: clamp(8px, 1.2vw, 16px);
-	--dock-h: 88px;
+	--dock-h: 100px;
 	--radius-panel: clamp(20px, 3vw, 40px);
 	--radius-cell: clamp(16px, 2vw, 28px);
 	--radius-pill: 999px;
@@ -83,6 +134,24 @@
 
 	--fast: 200ms ease;
 	--ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Die Blende beim Themewechsel. Sie steht nur hier, an der Wurzel, denn
+   die Token erben: der Browser rechnet den Zwischenwert einmal aus, und
+   alles darunter bekommt ihn über die Vererbung mit. Reine Neuzeichnung,
+   kein Layout, damit auch nichts, woran das Einrasten sich stoßen könnte.
+
+   Scharf wird die Regel erst, wenn js/theme.js nach dem ersten Bild die
+   Klasse setzt. Ohne das würde der Seitenaufbau selbst überblenden. */
+html.theme-blende {
+	transition:
+		--color-primary 400ms var(--ease),
+		--color-accent 400ms var(--ease),
+		--color-accent-strong 400ms var(--ease),
+		--color-ink 400ms var(--ease),
+		--color-text 400ms var(--ease),
+		--color-white 400ms var(--ease),
+		--color-canvas 400ms var(--ease);
 }
 
 /* ===========================================
@@ -100,7 +169,9 @@ html {
 	/* Am Zeigegerät bleibt Scrollen frei: Maus und Trackpad rasten nicht
 	   ein, weil das Eingreifen in die eigene Scrollbewegung mehr stört als
 	   hilft. Die Sprünge über Indikator, Weiter-Button und Menü landen
-	   trotzdem exakt auf der Kante, das macht die Animation in deck.js. */
+	   trotzdem exakt auf der Kante: sie sind gewöhnliche Anker-Links, und
+	   ein Anker springt auf den Anfang seiner Section. Bewegt wird dabei
+	   von scroll-behavior, nicht von JavaScript. */
 	scroll-snap-type: none;
 	scroll-behavior: smooth;
 	scrollbar-width: none;
@@ -155,9 +226,17 @@ button {
 }
 
 :focus-visible {
-	outline: 3px solid var(--color-accent);
+	outline: 3px solid var(--color-primary);
 	outline-offset: 3px;
 	border-radius: 6px;
+}
+
+/* Der Akzent ist von Haus aus eine helle Farbe. Auf einer hellen Karte
+   wäre ein Ring daraus kaum zu sehen, deshalb trägt er dort den Grundton
+   und wechselt nur dort, wo er auf Dunkel liegt. */
+.screen--dark :focus-visible,
+body.dock-invers .dock :focus-visible {
+	outline-color: var(--color-accent);
 }
 
 .skip-link {
@@ -178,16 +257,29 @@ button {
 /* ===========================================
    BLOCK: Screen (vertikale Ebene)
    -------------------------------------------
-   svh statt dvh: die Höhe bleibt konstant, auch wenn auf dem Handy die
-   URL-Leiste ein- und ausfährt. Sonst verschieben sich mitten im Sprung
-   alle Section-Positionen und das Snapping zieht zurück an den Start.
+   Die Höhe muss zwei Bedingungen erfüllen, und nur eine Einheit erfüllt
+   beide.
+
+   Erstens muss sie konstant sein. Fährt auf dem Handy die URL-Leiste ein
+   und aus, ist das bei dvh eine Layoutänderung, mitten im Scrollen. Scroll-
+   Snap rastet danach neu ein und zieht bevorzugt auf die Ausgangs-Section
+   zurück. dvh scheidet damit aus.
+
+   Zweitens muss sie den Bildschirm wirklich füllen. svh ist die Höhe bei
+   ausgefahrener Leiste und damit zu klein, sobald die Leiste einklappt:
+   die Section endet dann über dem Bildschirmrand, während die Bedienzeile
+   am Rand klebt, und die Knöpfe hängen halb über der Kante.
+
+   lvh erfüllt beides: die Höhe bei eingeklappter Leiste, und genauso
+   konstant wie svh. Bei ausgefahrener Leiste ist die Section etwas höher
+   als der sichtbare Bereich; verdeckt wird davon nichts, weil das Panel
+   unten ohnehin die Höhe der Bedienzeile frei hält.
    =========================================== */
 .screen {
 	position: relative;
 	height: 100vh;
-	height: 100svh;
+	height: 100lvh;
 	padding: var(--gutter);
-	padding-bottom: calc(var(--dock-h) + var(--gutter));
 	scroll-snap-align: start;
 	scroll-snap-stop: always;
 }
@@ -198,6 +290,11 @@ button {
 	grid-template-columns: minmax(0, 1fr);
 	align-content: center;
 	height: 100%;
+	/* Das Panel reicht bis ganz nach unten, seine Farbe läuft also hinter
+	   der Bedienzeile durch. Der Inhalt bleibt trotzdem frei von ihr: die
+	   Höhe der Zeile steht hier als Innenabstand, nicht als Außenabstand
+	   am .screen. Sonst wäre das Panel kürzer statt der Inhalt höher. */
+	padding-bottom: var(--dock-h);
 	border-radius: var(--radius-panel);
 	corner-shape: squircle;
 	background: var(--color-white);
@@ -331,50 +428,77 @@ button {
 	}
 }
 
-/* Pfeile in den angeschnittenen Rändern, nur für Zeigergeräte */
-.railnav {
+/* ===========================================
+   Pfeile in den angeschnittenen Rändern
+   -------------------------------------------
+   ::scroll-button() erzeugt der Browser selbst am Scrollcontainer. Er rückt
+   damit eine Snap-Position weiter, schaltet an den Enden von allein auf
+   :disabled und lässt die Knöpfe stehen, während der Inhalt darunter
+   wegscrollt. Das ersetzt die frühere Pixelrechnung in deck.js komplett.
+
+   Der Chevron kommt als Hintergrundbild, weil content kein SVG-Markup
+   aufnimmt. Deshalb steht die Strichfarbe zweimal fest verdrahtet in der
+   Grafik, statt aus currentColor zu kommen.
+   =========================================== */
+.rail {
+	--chevron-prev: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23191919' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='15 18 9 12 15 6'/%3E%3C/svg%3E");
+	--chevron-next: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23191919' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='9 18 15 12 9 6'/%3E%3C/svg%3E");
+}
+
+.rail::scroll-button(*) {
 	position: absolute;
 	top: 50%;
 	z-index: 3;
-	display: grid;
-	place-items: center;
 	width: var(--btn);
 	height: var(--btn);
 	translate: 0 -50%;
+	/* Der button-Reset weiter oben erreicht Pseudoelemente nicht, sonst
+	   säße hier der graue Rahmen des Browsers. */
+	appearance: none;
+	border: none;
+	padding: 0;
+	cursor: pointer;
 	border-radius: var(--radius-pill);
 	corner-shape: squircle;
-	background: var(--color-accent);
-	color: var(--color-primary);
-	box-shadow: 0 12px 26px -14px rgba(0, 62, 80, 0.7);
+	background-color: var(--color-accent);
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 22px;
+	box-shadow: 0 12px 26px -14px color-mix(in srgb, var(--color-primary) 70%, transparent);
 	transition: transform var(--fast), opacity var(--fast);
 }
 
-.railnav:hover {
+/* Der zweite Teil von content ist der Name für Screenreader */
+.rail::scroll-button(inline-start) {
+	content: "" / "Vorheriges Element";
+	left: clamp(6px, 1vw, 14px);
+	background-image: var(--chevron-prev);
+}
+
+.rail::scroll-button(inline-end) {
+	content: "" / "Nächstes Element";
+	right: clamp(6px, 1vw, 14px);
+	background-image: var(--chevron-next);
+}
+
+.rail::scroll-button(*):hover {
 	transform: scale(1.12);
 }
 
-/* Auf den grünen Statistik-Karten geht ein grüner Pfeil unter */
-.railnav--primary {
-	background: var(--color-primary);
-	color: var(--color-white);
-}
-
-.railnav--prev {
-	left: clamp(6px, 1vw, 14px);
-}
-
-.railnav--next {
-	right: clamp(6px, 1vw, 14px);
-}
-
-.railnav svg {
-	width: 22px;
-	height: 22px;
-}
-
-.railnav[disabled] {
+/* Am Anfang und am Ende der Reihe schaltet der Browser selbst ab */
+.rail::scroll-button(*):disabled {
 	opacity: 0;
 	pointer-events: none;
+}
+
+/* Auf den grünen Statistik-Karten ginge ein grüner Pfeil unter */
+#profil .rail {
+	--chevron-prev: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='15 18 9 12 15 6'/%3E%3C/svg%3E");
+	--chevron-next: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='9 18 15 12 9 6'/%3E%3C/svg%3E");
+}
+
+#profil .rail::scroll-button(*) {
+	background-color: var(--color-primary);
 }
 
 /* ===========================================
@@ -425,6 +549,20 @@ button {
 	color: var(--color-accent);
 }
 
+/* Links im Fließtext einer Karte. Die Unterstreichung ist hier das
+   einzige Erkennungszeichen, denn die Farbe erbt der Link vom Absatz.
+   Die Repo-Karten sind selbst ein <a>, sie werden davon nicht getroffen. */
+.cell .text a {
+	text-decoration: underline;
+	text-decoration-thickness: 1px;
+	text-underline-offset: 0.18em;
+	transition: opacity var(--fast);
+}
+
+.cell .text a:hover {
+	opacity: 0.7;
+}
+
 /* Auf dunklem Grund kippen Überschriften und Fließtext gemeinsam */
 .screen--dark .title,
 .screen--dark .subtitle {
@@ -435,40 +573,75 @@ button {
 	color: var(--color-text);
 }
 
+/* Die Einleitungszeile trug früher den Akzent. Der ist inzwischen zu
+   dunkel für normale Textgröße, und farbiger Fließtext war ohnehin das,
+   was die Seite monochrom hat wirken lassen. Sie hebt sich jetzt über
+   die Helligkeit ab statt über den Farbton: heller als der Fließtext
+   darunter, aber genauso neutral. Farbe tragen nur noch Überschriften,
+   der Zähler und die Bedienelemente. */
 .screen--dark .text--accent {
-	color: var(--color-accent);
+	color: var(--color-white);
 }
 
-/* Schaugrößen: Zahlen, die als Bild wirken */
+/* ===========================================
+   Schaugröße: der laufende Zähler
+   -------------------------------------------
+   Dieser Zähler ist der Grund, warum das Einrasten auf dem Handy einen
+   Sprung zurückgerissen hat: er tauscht in jedem Frame seinen Text aus,
+   und Scroll-Snap rastet nach jeder Layoutänderung erneut ein, bevorzugt
+   auf die Section, aus der man gerade wegspringt.
+
+   Der Riegel dagegen steht hier und nicht im Skript: die Box ist fest
+   vermessen und über contain abgedichtet. Was drinnen passiert, kann das
+   Layout ringsum nicht mehr anfassen, egal wer die Zahl hochzählt.
+
+   Gezählt wird in deck.js. Der Umweg über eine animierte registrierte
+   Eigenschaft und counter() war kurz drin, scheitert aber an WebKit:
+   sobald die Animation läuft, liefert counter-reset dort keinen gültigen
+   Wert mehr und die Zahl fällt auf 0.
+   =========================================== */
 .counter {
+	display: block;
+	/* Sechs Ziffern, ohne Tausenderpunkt. Zusammen mit tabular-nums bleibt
+	   die Breite dadurch wirklich konstant, und genau das ist die
+	   Voraussetzung für das Containment eine Zeile weiter unten. */
+	width: 6ch;
+	height: 0.95em;
+	margin-inline: auto;
+	contain: layout;
 	font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 	font-size: var(--fs-counter);
 	font-variant-numeric: tabular-nums;
 	color: var(--color-accent);
 	line-height: 0.95;
 	letter-spacing: -0.03em;
+	text-align: center;
+	white-space: nowrap;
 }
 
 /* ===========================================
    Zell-Inhalte
    =========================================== */
-.num {
-	display: grid;
-	place-items: center;
-	width: calc(var(--fs-num) * 1.6);
-	height: calc(var(--fs-num) * 1.6);
+/* -------------------------------------------
+   Icons
+   -------------------------------------------
+   Die Zeichnungen selbst stehen in css/icons.css, je eine pro --icon.
+   Hier liegt nur die Mechanik: das Icon ist keine Grafik, sondern eine
+   Maske vor einer Fläche in currentColor. Deshalb färbt es sich selbst
+   um, sobald es in einem anderen Kontext steht.
+   ------------------------------------------- */
+.cell__icon {
+	width: clamp(56px, 8vh, 88px);
+	aspect-ratio: 1;
 	flex-shrink: 0;
-	border-radius: var(--radius-pill);
-	corner-shape: squircle;
-	background: var(--color-primary);
-	color: var(--color-accent);
-	font-size: var(--fs-num);
-	font-weight: 500;
-	line-height: 1;
+	background: currentColor;
+	-webkit-mask: var(--icon) center / contain no-repeat;
+	mask: var(--icon) center / contain no-repeat;
+	color: var(--color-primary);
 }
 
-.cell__icon {
-	width: clamp(64px, 9vh, 104px);
+.screen--dark .cell__icon {
+	color: var(--color-accent);
 }
 
 /* Stat-Karten */
@@ -478,16 +651,21 @@ button {
 }
 
 .stat__value {
-	font-size: clamp(3.4rem, min(9vw, 13vh), 7rem);
+	/* Auf dem Handy trägt die Zahl die Karte allein, seit die Icons weg
+	   sind. Der Sockel liegt deshalb deutlich höher: dort greift ohnehin
+	   nur er, weil 16vw auf schmalen Geräten darunter bleibt. */
+	font-size: clamp(4.6rem, min(16vw, 14vh), 7rem);
 	font-weight: var(--weight-head);
 	line-height: 0.95;
 	letter-spacing: -0.03em;
-	color: var(--color-primary);
+	color: var(--color-ink);
 }
 
-/* Beschriftung auf der grünen Statistik-Karte etwas zurückgenommen */
+/* Beschriftung auf der gefüllten Statistik-Karte etwas zurückgenommen */
 .cell--stat .text {
-	color: color-mix(in srgb, var(--color-primary) 75%, transparent);
+	/* 82 statt 75 Prozent: darunter fällt die Beschriftung auf dem
+	   gefüllten Akzent unter das Kontrastminimum für normale Schrift. */
+	color: color-mix(in srgb, var(--color-ink) 82%, transparent);
 	line-height: 1.2;
 }
 
@@ -596,7 +774,7 @@ button {
 .btn:hover {
 	background: var(--color-accent);
 	border-color: var(--color-accent);
-	color: var(--color-primary);
+	color: var(--color-ink);
 	transform: scale(1.05);
 }
 
@@ -613,47 +791,215 @@ button {
 	width: clamp(150px, 27vh, 330px);
 	aspect-ratio: 1;
 	cursor: pointer;
+	/* scale und rotate stehen als eigene Eigenschaften, nicht in einem
+	   gemeinsamen transform. Sonst kämen sie sich mit der Rotation der
+	   Ringe in die Quere, die dieselbe Achse benutzt. */
+	transition: scale var(--fast), rotate var(--fast);
+}
+
+/* Angedeutete Drehung beim Überfahren: das Signet kündigt an, dass ein
+   Tap es in Bewegung setzt. Nur am Zeigegerät, auf dem Touchscreen bliebe
+   der Zustand nach dem Antippen hängen. */
+@media (hover: hover) {
+	.logo-anim:hover {
+		rotate: -7deg;
+	}
+}
+
+.logo-anim:active {
+	scale: 0.92;
+}
+
+/* Die vier Teile des Signets sind einfarbige Vollflächen, für eine Maske
+   also der Idealfall: die Datei gibt nur die Form vor, die Farbe kommt
+   aus currentColor. Damit färbt sich das Signet bei jedem Wurf mit.
+   Dasselbe Verfahren nutzt icons.css schon für die Solar-Icons.
+
+   <span> hat keine eigene Größe, anders als das <img> davor. Deshalb
+   braucht jeder Teil ein aspect-ratio. */
+.logo-anim__ring,
+.logo-anim__dot {
+	background: currentColor;
+	mask: var(--signet) center / contain no-repeat;
 }
 
 .logo-anim__ring {
 	position: absolute;
 	width: 100%;
+	aspect-ratio: 1;
 	transform: rotate(180deg);
 }
 
+/* Der äußere Ring braucht seinen Platz ausdrücklich. Als <img> stand er
+   noch am Anfang des Flusses, im <button> läge seine Ausgangsposition
+   dagegen mittig, und der Ring rutschte nach rechts unten weg. */
+.logo-anim__ring--1 {
+	--signet: url("../images/Slice2.svg");
+	color: var(--color-canvas);
+	top: 0;
+	left: 0;
+}
+
 .logo-anim__ring--2 {
+	--signet: url("../images/Slice3.svg");
+	color: var(--color-primary);
 	width: 72%;
 	top: 14%;
 	left: 14%;
 }
 
 .logo-anim__ring--3 {
+	--signet: url("../images/Slice4.svg");
+	color: var(--color-accent);
 	width: 43%;
 	top: 28.5%;
 	left: 28.5%;
 }
 
 .logo-anim__dot {
+	--signet: url("../images/Slice5.svg");
+	color: var(--color-primary);
 	position: absolute;
 	width: 11%;
+	aspect-ratio: 33 / 30;
 	left: 55.5%;
 	top: 31%;
 	opacity: 0;
 }
 
-.logo-anim.is-animating .logo-anim__ring--1 {
+/* ----------------------------------------
+   Die Einladung zum Signet
+   ----------------------------------------
+   Ohne einen Hinweis kommt niemand auf die Idee, das Signet anzutippen.
+   Sie erscheint erst nach ein paar Sekunden, deshalb liegt sie im
+   Popover: die oberste Ebene ist aus dem Fluss genommen, die Blase kann
+   die Höhe der Bühne also nicht anfassen, wenn sie auftaucht. Genau das
+   wäre sonst eine Layoutänderung mitten auf der Startsection.
+
+   Das Ein- und Ausblenden macht CSS allein. Damit ein Übergang aus
+   display: none heraus überhaupt läuft, braucht es die beiden diskreten
+   Eigenschaften in der transition-Liste und einen Startzustand. */
+.signet-hinweis {
+	position: fixed;
+	left: 50%;
+	bottom: calc(var(--dock-h) + var(--space-md));
+	margin: 0;
+	padding: 7px 15px;
+	border: none;
+	/* Popover bringen vom Browser overflow: auto mit. Das schnitte das
+	   Häkchen ab, denn es ragt unten aus der Blase heraus. */
+	overflow: visible;
+	border-radius: var(--radius-pill);
+	corner-shape: squircle;
+	background: var(--color-primary);
+	color: var(--color-canvas);
+	/* Der Schatten liegt als Filter auf dem ganzen Element und umfasst
+	   deshalb auch das Häkchen. Ein box-shadow endete an der Kante der
+	   Blase und ließe die Spitze schattenlos stehen. */
+	filter: drop-shadow(0 5px 12px color-mix(in srgb, var(--color-primary) 30%, transparent));
+	font-size: var(--fs-sm);
+	white-space: nowrap;
+	opacity: 0;
+	translate: -50% 8px;
+	transition:
+		opacity 320ms var(--ease),
+		translate 320ms var(--ease),
+		overlay 320ms allow-discrete,
+		display 320ms allow-discrete;
+}
+
+.signet-hinweis:popover-open {
+	opacity: 1;
+	translate: -50% 0;
+}
+
+@starting-style {
+	.signet-hinweis:popover-open {
+		opacity: 0;
+		translate: -50% 8px;
+	}
+}
+
+/* Wo Anker bekannt sind, hängt die Blase direkt unter dem Signet und
+   verschwindet mit ihm aus dem Bild. Ohne Ankerunterstützung bleibt sie
+   über der Bedienzeile stehen, was ebenfalls funktioniert. */
+@supports (anchor-name: --a) {
+	.logo-anim {
+		anchor-name: --signet;
+	}
+
+	/* Über dem Signet. Unterhalb läge die Blase auf der Schlagzeile, oben
+	   ist der Platz dagegen frei.
+
+	   Bewusst ohne position-try-fallbacks: eine umklappende Blase hätte
+	   ihr Häkchen weiterhin unten und zeigte dann ins Leere. In @position-try
+	   sind nur Positions- und Größenangaben erlaubt, die Spitze ließe sich
+	   dort also nicht mitdrehen. */
+	.signet-hinweis {
+		position-anchor: --signet;
+		position-visibility: anchors-visible;
+		bottom: anchor(top);
+		top: auto;
+		left: auto;
+		justify-self: anchor-center;
+		/* Platz für das Häkchen ist im Abstand schon eingerechnet */
+		margin-bottom: calc(var(--space-sm) + 7px);
+		translate: 0 -8px;
+	}
+
+	/* Das Sprechblasenhäkchen. Es zeigt auf das Signet und beantwortet
+	   damit die Frage, die eine schwebende Blase sonst offen lässt:
+	   angetippt werden will nicht sie, sondern das Ding darunter. */
+	.signet-hinweis::after {
+		content: "";
+		position: absolute;
+		top: 100%;
+		left: 50%;
+		/* das eine Pixel Überlappung verhindert einen Haarriss zur Blase */
+		translate: -50% -1px;
+		border: 7px solid transparent;
+		border-bottom: 0;
+		border-top-color: var(--color-primary);
+	}
+
+	.signet-hinweis:popover-open {
+		translate: 0 0;
+	}
+
+	@starting-style {
+		.signet-hinweis:popover-open {
+			translate: 0 -8px;
+		}
+	}
+
+	.signet-hinweis:popover-open {
+		translate: 0 0;
+	}
+
+	@starting-style {
+		.signet-hinweis:popover-open {
+			translate: 0 8px;
+		}
+	}
+}
+
+/* Die Animation hing früher an einer Klasse, die JavaScript setzen musste.
+   Sie läuft jetzt einfach beim Laden. Zum Wiederholen spult deck.js sie
+   über die Web Animations API zurück, ganz ohne Klassenwechsel und ohne
+   das erzwungene Reflow, das dafür nötig gewesen wäre. */
+.logo-anim__ring--1 {
 	animation: logoRotate 1.3s ease-out 0.13s forwards;
 }
 
-.logo-anim.is-animating .logo-anim__ring--2 {
+.logo-anim__ring--2 {
 	animation: logoRotate 1.17s ease-out 0.26s forwards;
 }
 
-.logo-anim.is-animating .logo-anim__ring--3 {
+.logo-anim__ring--3 {
 	animation: logoRotate 1.04s ease-out 0.39s forwards;
 }
 
-.logo-anim.is-animating .logo-anim__dot {
+.logo-anim__dot {
 	animation: logoPop 0.65s ease-out 0.65s forwards;
 }
 
@@ -707,10 +1053,45 @@ button {
 /* ===========================================
    BLOCK: Dock (Bedienzeile am unteren Rand)
    -------------------------------------------
-   Menü links, Indikator mittig, Navigation rechts. Die Zeile liegt in ihrer
-   eigenen Bahn unter den Panels, deshalb braucht sie keine Umschaltung
-   zwischen hellen und dunklen Sections.
+   Menü links, Indikator mittig, Navigation rechts. Die Zeile hat keine
+   eigene Fläche mehr, sie schwebt über dem Panel. Damit liegt mal Weiß,
+   mal Dunkelblau darunter, und die Bedienelemente müssen mitschalten.
+
+   Sämtliche Töne stehen deshalb als Token hier oben und werden weiter
+   unten nur noch abgerufen. Umgeschaltet wird über eine einzige Klasse
+   am body, gesetzt vom Beobachter in deck.js, der ohnehin schon weiß,
+   welche Section gerade dran ist. Kosten pro Frame: keine.
+
+   Verworfen: mix-blend-mode: difference wäre der bekannte Trick, kehrt
+   aber Farben um, statt Markenfarben zu setzen (der grüne Weiter-Button
+   zerfiele), und ist als fixierte Ebene auf iOS teuer.
    =========================================== */
+.dock {
+	--dock-schrift: var(--color-primary);
+	--dock-flaeche: color-mix(in srgb, var(--color-primary) 8%, transparent);
+	--dock-flaeche-hover: color-mix(in srgb, var(--color-primary) 15%, transparent);
+	--dock-pille: color-mix(in srgb, var(--color-primary) 7%, transparent);
+	--dock-punkt: color-mix(in srgb, var(--color-primary) 25%, transparent);
+	--dock-punkt-hover: color-mix(in srgb, var(--color-primary) 50%, transparent);
+	--dock-punkt-aktiv: var(--color-primary);
+}
+
+
+/* Auf dunklem Panel dreht die Zeile ihre Töne um. Der Weiter-Button wird
+   grün statt dunkelblau, sonst verschwände er im Untergrund.
+
+   Ausgenommen bei offenem Impressum: dessen helle Fläche schiebt sich bis
+   unter die Bedienzeile, dann läge Weiß auf Weiß. Das Menü ist davon nicht
+   betroffen, es endet oberhalb der Zeile. */
+body.dock-invers:not(:has(#impressum:popover-open)) .dock {
+	--dock-schrift: var(--color-white);
+	--dock-flaeche: color-mix(in srgb, var(--color-white) 14%, transparent);
+	--dock-flaeche-hover: color-mix(in srgb, var(--color-white) 26%, transparent);
+	--dock-pille: color-mix(in srgb, var(--color-white) 10%, transparent);
+	--dock-punkt: color-mix(in srgb, var(--color-white) 32%, transparent);
+	--dock-punkt-hover: color-mix(in srgb, var(--color-white) 60%, transparent);
+	--dock-punkt-aktiv: var(--color-accent);
+}
 /* Drei Spalten: die beiden Außenspalten sind per 1fr immer gleich breit,
    dadurch sitzt der Indikator exakt in der Bildschirmmitte, egal wie lang
    der Linktext auf dem Weiter-Button gerade ist. */
@@ -723,9 +1104,11 @@ button {
 	align-items: center;
 	gap: 10px;
 	min-height: var(--dock-h);
-	padding: 10px clamp(10px, 2vw, 24px);
-	padding-bottom: max(10px, env(safe-area-inset-bottom));
-	background: var(--color-canvas);
+	/* Abstand zur Panelkante, waagerecht wie senkrecht. Die Zeile sitzt
+	   jetzt auf der Fläche statt daneben, deshalb braucht sie echte Luft
+	   zum Rand: sonst kleben die Knöpfe an der abgerundeten Ecke. */
+	padding: 12px calc(var(--gutter) + clamp(20px, 2.8vw, 30px));
+	padding-bottom: max(34px, env(safe-area-inset-bottom));
 }
 
 .ctrl {
@@ -735,13 +1118,13 @@ button {
 	flex: 0 0 auto;
 	border-radius: var(--radius-pill);
 	corner-shape: squircle;
-	background: color-mix(in srgb, var(--color-primary) 8%, transparent);
-	color: var(--color-primary);
+	background: var(--dock-flaeche);
+	color: var(--dock-schrift);
 	transition: background var(--fast), color var(--fast), transform var(--fast), opacity var(--fast);
 }
 
 .ctrl:hover {
-	background: color-mix(in srgb, var(--color-primary) 15%, transparent);
+	background: var(--dock-flaeche-hover);
 }
 
 .ctrl:active {
@@ -764,19 +1147,21 @@ button {
 	justify-self: start;
 }
 
-/* Weiter ist der primäre Weg durch die Seite und deshalb dunkel */
+/* Weiter ist der primäre Weg durch die Seite und deshalb der einzige
+   Button mit voller Fläche. Er bleibt in beiden Varianten grün: unter ihm
+   liegt nie eine grüne Fläche, deshalb sticht er auf Weiß wie auf
+   Dunkelblau. Muss nach .ctrl stehen, beide sind gleich spezifisch. */
 .ctrl--next {
 	justify-self: end;
 	min-width: 0;
 	padding: 13px 22px 13px 26px;
-	background: var(--color-primary);
-	color: var(--color-white);
 	gap: 10px;
+	background: var(--color-accent);
+	color: var(--color-ink);
 }
 
 .ctrl--next:hover {
-	background: var(--color-accent);
-	color: var(--color-primary);
+	background: var(--color-accent-strong);
 }
 
 .ctrl__label {
@@ -803,7 +1188,7 @@ button {
 /* Bei offenem Menü wird aus dem Button das grüne X */
 body:has(#menu:popover-open) .ctrl--menu {
 	background: var(--color-accent);
-	color: var(--color-primary);
+	color: var(--color-ink);
 }
 
 /* Hamburger, wird bei offenem Menü zum X */
@@ -835,8 +1220,7 @@ body:has(#menu:popover-open) .burger span:nth-child(3) {
 
 /* --- Indikator: Punkte, die aktuelle Section als breiterer Balken -------- */
 .pager {
-	/* Bezugspunkt für das Mittigrücken in deck.js: ohne das messen die
-	   Punkte ihre Position gegen die ganze Dock-Zeile. */
+	/* Bezugspunkt für die vergrößerte Tippfläche der Punkte weiter unten */
 	position: relative;
 	display: flex;
 	align-items: center;
@@ -845,15 +1229,13 @@ body:has(#menu:popover-open) .burger span:nth-child(3) {
 	padding: 11px 13px;
 	border-radius: var(--radius-pill);
 	corner-shape: squircle;
-	background: color-mix(in srgb, var(--color-primary) 7%, transparent);
-	overflow-x: auto;
-	overscroll-behavior-x: contain;
-	scrollbar-width: none;
-	scroll-behavior: smooth;
-}
-
-.pager::-webkit-scrollbar {
-	display: none;
+	background: var(--dock-pille);
+	transition: background var(--fast);
+	/* clip statt auto: der Indikator ist kein Scrollbereich, sondern eine
+	   Anzeige. Mit auto wurde er zum Scrollcontainer und ließ sich am Finger
+	   seitlich verschieben, was wie ein Bedienelement aussah, aber keines
+	   ist. clip schneidet ab, ohne dass etwas zu greifen wäre. */
+	overflow: clip;
 }
 
 .chip {
@@ -862,7 +1244,7 @@ body:has(#menu:popover-open) .burger span:nth-child(3) {
 	width: var(--dot);
 	height: var(--dot);
 	border-radius: var(--radius-pill);
-	background: color-mix(in srgb, var(--color-primary) 25%, transparent);
+	background: var(--dock-punkt);
 	transition: width 420ms var(--ease), background var(--fast);
 }
 
@@ -893,13 +1275,13 @@ body:has(#menu:popover-open) .burger span:nth-child(3) {
 }
 
 .chip:hover {
-	background: color-mix(in srgb, var(--color-primary) 50%, transparent);
+	background: var(--dock-punkt-hover);
 }
 
 .chip[aria-current="true"] {
 	/* gleiche Höhe wie die Punkte, nur länger: bleibt eine runde Form */
 	width: calc(var(--dot) * 3);
-	background: var(--color-primary);
+	background: var(--dock-punkt-aktiv);
 }
 
 /* ===========================================
@@ -1017,7 +1399,9 @@ body:has(#menu:popover-open) .burger span:nth-child(3) {
 .sheet--text {
 	bottom: auto;
 	height: auto;
-	max-height: calc(100svh - 2 * var(--gutter));
+	/* Hier dvh und nicht lvh: die Fläche schwebt über allem und nimmt am
+	   Einrasten nicht teil, sie darf also der sichtbaren Höhe folgen. */
+	max-height: calc(100dvh - 2 * var(--gutter));
 	overflow-y: auto;
 	overscroll-behavior: contain;
 	scrollbar-width: thin;
@@ -1029,7 +1413,9 @@ body:has(#menu:popover-open) .burger span:nth-child(3) {
 	gap: var(--space-md);
 	height: auto;
 	padding-top: clamp(70px, 12vh, 130px);
-	padding-bottom: clamp(28px, 6vh, 70px);
+	/* Platz für die Bedienzeile, die bis in diese Fläche hineinragt: sonst
+	   stünden die letzten Zeilen hinter den Knöpfen. */
+	padding-bottom: calc(var(--dock-h) + clamp(28px, 6vh, 70px));
 }
 
 .sheet__text {
@@ -1061,6 +1447,29 @@ body:has(#menu:popover-open) .burger span:nth-child(3) {
 	margin-top: 0;
 }
 
+/* Der globale a-Reset nimmt Links die Unterstreichung. Im Fließtext des
+   Impressums müssen sie aber als Links erkennbar sein, der Lizenzhinweis
+   verweist ja auf die Lizenz selbst. */
+.sheet__text a {
+	text-decoration: underline;
+	text-decoration-thickness: 1px;
+	text-underline-offset: 0.18em;
+	text-decoration-color: color-mix(in srgb, currentColor 45%, transparent);
+	transition: text-decoration-color var(--fast);
+}
+
+.sheet__text a:hover {
+	text-decoration-color: currentColor;
+}
+
+/* Mail-Schutz im Impressum: die Adresse steht verdreht im Quelltext und
+   wird allein von der Schriftrichtung wieder herumgedreht. Kein Skript
+   nötig, und ein Sammelroboter liest ed.emarfderiw@ofni. */
+.mail-rueckwaerts {
+	unicode-bidi: bidi-override;
+	direction: rtl;
+}
+
 /* Ein- und Ausblenden ohne JavaScript */
 @supports (transition-behavior: allow-discrete) {
 	.sheet {
@@ -1089,7 +1498,7 @@ body:has(#menu:popover-open) .burger span:nth-child(3) {
 	:root {
 		--btn: 50px;
 		--dot: 11px;
-		--dock-h: 78px;
+		--dock-h: 88px;
 	}
 
 	/* kein Platz für den Linktext: Weiter wird wieder rund */
@@ -1119,11 +1528,8 @@ body:has(#menu:popover-open) .burger span:nth-child(3) {
 		--pad: clamp(26px, 7vw, 36px);
 	}
 
-	.dock {
-		gap: 6px;
-		padding-inline: 10px;
-	}
-
+	/* Der Abstand zum Rand kommt aus der Grundregel, hier wird nur die
+	   Lücke zwischen den drei Spalten enger. */
 	.dock {
 		gap: 8px;
 	}
@@ -1156,19 +1562,23 @@ body:has(#menu:popover-open) .burger span:nth-child(3) {
 		scroll-behavior: auto;
 	}
 
-	.logo-anim.is-animating * {
+	.logo-anim * {
 		animation-duration: 1ms !important;
 	}
 
+	/* Der Themewechsel geschieht dann sofort, ohne Blende */
+	html.theme-blende,
+	.logo-anim,
+	.signet-hinweis,
 	.sheet,
 	.chip,
 	.btn,
-	.ctrl,
-	.railnav {
+	.ctrl {
 		transition-duration: 1ms;
 	}
 
-	.pager {
-		scroll-behavior: auto;
+	.rail::scroll-button(*) {
+		transition-duration: 1ms;
 	}
+
 }

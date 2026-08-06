@@ -2,138 +2,55 @@
  * Wiredframe – wiredframe.de
  *
  * Die Bewegung macht der Browser: Scroll-Snap vertikal für die Sections,
- * Scroll-Snap horizontal für die Grid-Reihen, natives Popover für Menü und
- * Impressum. JavaScript kümmert sich nur um vier Dinge:
+ * Scroll-Snap horizontal für die Grid-Reihen, deren Pfeile als native
+ * Scroll-Buttons, natives Popover für Menü und Impressum, den laufenden
+ * Zähler eine animierte CSS-Eigenschaft. JavaScript kümmert sich nur
+ * noch um drei Dinge:
  *
- *   1. Sprünge über Menü, Indikator, Weiter und die Reihen-Pfeile
- *   2. welche Section gerade aktiv ist (Indikator, Linktext)
- *   3. eine Notbremse gegen Überlauf auf sehr kleinen Screens
- *   4. Inhalte: Zähler, Jahre, Mail-Schutz, GitHub
+ *   1. welche Section gerade aktiv ist (Indikator, Linktext, Zählerlauf)
+ *   2. eine Notbremse gegen Überlauf auf sehr kleinen Screens
+ *   3. Inhalte: Jahre, Mail-Schutz, GitHub
+ *
+ * Die Farben stehen woanders: js/theme.js würfelt sie und läuft dafür
+ * schon im <head>. Hier wird nur der Tap auf das Signet weitergereicht.
  */
 (() => {
 	'use strict';
 
-	const root = document.documentElement;
 	const screens = [...document.querySelectorAll('.screen')];
 	const chips = [...document.querySelectorAll('.chip')];
 	const nextLink = document.getElementById('nav-next');
 	const nextLabel = document.querySelector('[data-next-label]');
 	const menu = document.getElementById('menu');
-	const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-	// ----------------------------------------
-	// Diagnose-Schalter (temporär, danach wieder raus)
-	// ----------------------------------------
-	// Über die Adresse einzeln abschaltbar, um den Rücksprung auf echten
-	// Geräten einzukreisen:  ?nosnap  ?nocounter  ?nofit
-	const off = new URLSearchParams(location.search);
-	const disabled = (name) => off.has(name);
-	if (disabled('nosnap')) root.style.scrollSnapType = 'none';
+	const counterEl = document.querySelector('.counter');
+	// Wer Bewegung abbestellt hat, bekommt die Zahl als Standbild
+	const reduziert = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 	// ========================================
-	// 1 · Sprünge
+	// 0 · Sprünge macht der Browser
 	// ----------------------------------------
-	// Eine Animation für beide Achsen. Natives Smooth-Scrolling ist je nach
-	// Browser unterschiedlich schnell und fliegt bei weiten Sprüngen durch
-	// alle Zwischenschritte. Das harte Snapping pausiert während der Bewegung,
-	// sonst fängt es den Sprung unterwegs ab und zieht zurück (auf Mobile der
-	// Normalfall). Die Anker-Links im Markup funktionieren auch ohne das hier.
+	// Die Anker-Links im Markup genügen: scroll-behavior bewegt, scroll-snap
+	// lässt auf der Sectionkante einrasten, und beides ist dieselbe Engine,
+	// die sich deshalb nicht selbst in die Quere kommt. Eine eigene Animation
+	// stand hier früher und musste dafür das Einrasten stummschalten, weil
+	// auf dem Handy die einklappende URL-Leiste eine Layoutänderung ist und
+	// Scroll-Snap danach zurück auf die Ausgangs-Section zieht.
+	//
+	// Bleibt eine Kleinigkeit: popovertarget ist auf <a> nicht erlaubt, das
+	// Menü muss also von Hand zugehen, wenn einer seiner Links springt.
 	// ========================================
-	const GLIDE_MS = 290;
-
-	// ----------------------------------------
-	// Einrasten und Sprünge vertragen sich nicht
-	// ----------------------------------------
-	// Scroll-Snap rastet nach jeder Layoutänderung erneut ein, und zwar
-	// bevorzugt auf das zuvor eingerastete Element. Für Wischen ist das
-	// richtig, für einen Sprung fatal: auf dem Handy klappt beim Scrollen
-	// die URL-Leiste ein, das ist eine Layoutänderung, und der Browser holt
-	// die Bewegung zurück auf die Ausgangs-Section. Deshalb schweigt das
-	// Einrasten für die Dauer des Sprungs und etwas darüber hinaus.
-	let snapTimer = 0;
-
-	const snapOn = () => {
-		clearTimeout(snapTimer);
-		root.style.removeProperty('scroll-snap-type');
-	};
-
-	const snapOff = (resumeAfter) => {
-		root.style.scrollSnapType = 'none';
-		clearTimeout(snapTimer);
-		snapTimer = setTimeout(snapOn, resumeAfter);
-	};
-
-	// Wer wischt, will einrasten: sofort wieder scharf schalten
-	addEventListener('touchstart', snapOn, { passive: true });
-	const easeInOut = (p) => (p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2);
-	const running = new Map();
-
-	const stopGlide = (scroller) => {
-		const state = running.get(scroller);
-		if (!state) return;
-		cancelAnimationFrame(state.id);
-		running.delete(scroller);
-		state.onEnd();
-	};
-
-	const glide = (scroller, axis, to, onEnd = () => { }) => {
-		stopGlide(scroller);
-		const key = axis === 'y' ? 'top' : 'left';
-		const from = scroller === window
-			? (axis === 'y' ? scrollY : scrollX)
-			: (axis === 'y' ? scroller.scrollTop : scroller.scrollLeft);
-
-		if (reduceMotion || Math.abs(to - from) < 2) {
-			scroller.scrollTo({ [key]: to, behavior: 'instant' });
-			onEnd();
-			return;
-		}
-
-		const start = performance.now();
-		const state = { id: 0, onEnd };
-		running.set(scroller, state);
-
-		const tick = (now) => {
-			const p = Math.min(1, (now - start) / GLIDE_MS);
-			scroller.scrollTo({ [key]: Math.round(from + (to - from) * easeInOut(p)), behavior: 'instant' });
-			if (p < 1) {
-				state.id = requestAnimationFrame(tick);
-				return;
-			}
-			running.delete(scroller);
-			onEnd();
-		};
-		state.id = requestAnimationFrame(tick);
-	};
-
 	document.addEventListener('click', (e) => {
-		const link = e.target.closest('a[href^="#"]');
-		if (!link) return;
-		const target = document.getElementById(decodeURIComponent(link.getAttribute('href').slice(1)));
-		if (!target || !target.classList.contains('screen')) return;
-		if (menu?.matches(':popover-open')) menu.hidePopover();
-
-		e.preventDefault();
-		snapOff(GLIDE_MS + 800);   // Sprungdauer plus Nachlauf für die URL-Leiste
-		stopGlide(window);
-		glide(window, 'y', Math.round(target.getBoundingClientRect().top + scrollY));
+		if (e.target.closest('a[href^="#"]') && menu?.matches(':popover-open')) menu.hidePopover();
 	});
 
-	// Echtes Scrollen hat Vorrang vor einer laufenden Animation. Auf
-	// touchstart zu hören wäre falsch: ein Tipp auf einen Button ist noch
-	// kein Scrollen, würde den gerade gestarteten Sprung aber abbrechen und
-	// das Einrasten mitten in der Bewegung zurückholen.
-	const yieldToUser = () => [...running.keys()].forEach(stopGlide);
-	addEventListener('wheel', yieldToUser, { passive: true });
-	addEventListener('touchmove', yieldToUser, { passive: true });
-
 	// ========================================
-	// 2 · Aktive Section
+	// 1 · Aktive Section
 	// ========================================
 	let current = -1;
 
 	const setCurrent = (i) => {
 		if (i === current || i < 0) return;
+		const ersterAufruf = current === -1;
 		current = i;
 
 		chips.forEach((chip, n) => {
@@ -146,9 +63,21 @@
 		nextLabel.textContent = screens[i].dataset.next || 'Weiter';
 		nextLink.setAttribute('aria-label', nextLabel.textContent);
 
-		if (screens[i].id === 'home') replayLogo();
-		if (screens[i].id === 'wahrheit') startCounter();
-		else stopCounter();
+		// Farbe und Signet gehören zusammen: wo das Signet neu anläuft,
+		// wird auch gewürfelt. Das trifft jede Rückkehr zur Startsection,
+		// egal ob über das Menü, den Weiter-Button am Ende des Decks, den
+		// Indikator oder von Hand gescrollt.
+		//
+		// Nur der allererste Aufruf bleibt außen vor: dort hat js/theme.js
+		// im <head> längst gewürfelt, ein zweiter Wurf verwürfe den ersten
+		// noch vor dem ersten Bild.
+		if (screens[i].id === 'home') {
+			if (!ersterAufruf) window.wfTheme?.();
+			replayLogo();
+		} else {
+			hinweisWeg(); // wer weiterscrollt, braucht die Einladung nicht mehr
+		}
+		zaehlerLaufen(screens[i].id === 'wahrheit');
 	};
 
 	// Aktiv ist, was die Bildschirmmitte kreuzt
@@ -159,70 +88,41 @@
 	}, { rootMargin: '-45% 0px -45% 0px' });
 	screens.forEach((s) => observer.observe(s));
 
-	// ========================================
-	// 3 · Horizontale Reihen: Pfeile für Zeigergeräte
-	// ========================================
-	const railSyncs = [...document.querySelectorAll('.rail')].map((rail) => {
-		const panel = rail.closest('.panel');
-		const prev = panel.querySelector('.railnav--prev');
-		const next = panel.querySelector('.railnav--next');
-		if (!prev || !next) return null;
+	// ----------------------------------------
+	// Worauf die Bedienzeile liegt
+	// ----------------------------------------
+	// Bewusst eine zweite Messung. Der Indikator oben fragt nach der Section
+	// in der Bildschirmmitte, das ist für ihn richtig. Die Bedienzeile liegt
+	// aber ganz unten auf dem Panel und braucht die Farbe genau unter sich,
+	// sonst schaltet sie beim Scrollen von Hand eine halbe Seite zu spät um.
+	//
+	// Die Wurzel wird deshalb auf ein schmales Band zusammengeschnitten, das
+	// auf der Mitte der Zeile liegt. So gibt es immer genau eine Section, die
+	// es kreuzt, und die Umschaltung kann nicht zwischen zweien flackern.
+	const dock = document.querySelector('.dock');
+	let dockBeobachter;
 
-		const pad = () => parseFloat(getComputedStyle(rail).scrollPaddingLeft) || 0;
-
-		// Welche Spalte steht gerade vorn?
-		const atRest = () => {
-			const from = rail.scrollLeft + pad();
-			const cells = [...rail.children];
-			let best = 0;
-			cells.forEach((c, i) => {
-				if (Math.abs(c.offsetLeft - from) < Math.abs(cells[best].offsetLeft - from)) best = i;
+	const dockBeobachten = () => {
+		if (!dock) return;
+		dockBeobachter?.disconnect();
+		const mitte = Math.round(dock.offsetHeight / 2);
+		dockBeobachter = new IntersectionObserver((eintraege) => {
+			eintraege.forEach((e) => {
+				if (e.isIntersecting) {
+					document.body.classList.toggle('dock-invers', e.target.classList.contains('screen--dark'));
+				}
 			});
-			return best;
-		};
-
-		// Ziel ist immer eine Snap-Kante, nie eine feste Pixelzahl. Läuft schon
-		// eine Animation, zählt der Klick auf deren Ziel weiter, statt auf die
-		// Momentanposition. So kann man mehrfach klicken, ohne zu warten.
-		let aim = 0;
-		const step = (dir) => {
-			const cells = [...rail.children];
-			const base = running.has(rail) ? aim : atRest();
-			const next = Math.max(0, Math.min(cells.length - 1, base + dir));
-
-			stopGlide(rail);
-			aim = next;
-			rail.style.scrollSnapType = 'none';
-			glide(rail, 'x', cells[aim].offsetLeft - pad(), () => {
-				rail.style.removeProperty('scroll-snap-type');
-				// Am Ende der Reihe bleibt die Spalte hinter dem Ziel zurück,
-				// weil weiter nicht gescrollt werden kann. Dann zählt die
-				// echte Position, sonst geht der erste Klick zurück ins Leere.
-				aim = atRest();
-			});
-		};
-
-		const sync = () => {
-			const max = rail.scrollWidth - rail.clientWidth - 2;
-			prev.disabled = rail.scrollLeft <= 2;
-			next.disabled = max <= 0 || rail.scrollLeft >= max;
-		};
-
-		prev.addEventListener('click', () => step(-1));
-		next.addEventListener('click', () => step(1));
-		rail.addEventListener('scroll', sync, { passive: true });
-		sync();
-		return sync;
-	}).filter(Boolean);
+		}, { rootMargin: `-${Math.max(0, innerHeight - mitte - 1)}px 0px -${Math.max(0, mitte - 1)}px 0px` });
+		screens.forEach((s) => dockBeobachter.observe(s));
+	};
 
 	// ========================================
-	// 4 · Notbremse: Inhalt größer als der Screen wird herunterskaliert.
+	// 2 · Notbremse: Inhalt größer als der Screen wird herunterskaliert.
 	//     Greift nur in Ausnahmefällen, etwa im Querformat auf dem Handy.
 	// ========================================
 	const MIN_FIT = 0.7;
 
 	const fit = (screen) => {
-		if (disabled('nofit')) return;
 		const panel = screen.querySelector('.panel');
 		const box = panel?.querySelector('.stage, .rail');
 		if (!box) return;
@@ -232,82 +132,126 @@
 		box.style.setProperty('--fit', (need > avail ? Math.max(MIN_FIT, avail / need) : 1).toFixed(4));
 	};
 
+	// Das Band der Bedienzeile hängt an der Fensterhöhe, deshalb wird der
+	// Beobachter bei jeder echten Größenänderung neu aufgespannt.
 	const relayout = () => {
 		screens.forEach(fit);
-		railSyncs.forEach((sync) => sync());
+		dockBeobachten();
 	};
 
-	let resizeRaf = 0;
-	addEventListener('resize', () => {
-		cancelAnimationFrame(resizeRaf);
-		resizeRaf = requestAnimationFrame(relayout);
+	// Am Fenster zu horchen wäre zu grob: resize feuert auf dem Handy auch,
+	// wenn nur die URL-Leiste ein- oder ausfährt, und rechnet dann mitten im
+	// Scrollen neu. Die Panelhöhe bleibt dabei konstant, weil .screen mit svh
+	// misst. Ein Observer auf den Panels sieht deshalb nur echte Änderungen.
+	const panelSize = new ResizeObserver(relayout);
+	screens.forEach((s) => {
+		const panel = s.querySelector('.panel');
+		if (panel) panelSize.observe(panel);
 	});
 
 	// ========================================
-	// 5 · Inhalte
+	// 3 · Inhalte
 	// ========================================
 	const logo = document.querySelector('.logo-anim');
 
-	const replayLogo = () => {
-		if (!logo) return;
-		logo.classList.remove('is-animating');
-		void logo.offsetWidth;
-		logo.classList.add('is-animating');
+	// Die Animation selbst steht im CSS, hier wird sie nur zurückgespult.
+	// Nicht über das Entfernen und Neusetzen einer Klasse: das braucht ein
+	// erzwungenes Reflow dazwischen, und ein Reflow am Ende eines Sprungs
+	// ist genau das, woran sich das Einrasten stößt.
+	const replayLogo = () => logo?.getAnimations({ subtree: true }).forEach((a) => {
+		a.currentTime = 0;
+		a.play();
+	});
+
+	// ----------------------------------------
+	// Die Einladung zum Signet
+	// ----------------------------------------
+	// Dass das Signet die Farben würfelt, sieht man ihm nicht an. Nach ein
+	// paar Sekunden Ruhe sagt es eine Blase. Sie verschwindet, sobald der
+	// Hinweis überflüssig geworden ist: nach dem ersten Tap, oder wenn die
+	// Startsection ohnehin verlassen wird. Aussehen und Ein- und
+	// Ausblenden stehen vollständig im CSS, hier wird nur geschaltet.
+	const hinweis = document.getElementById('signet-hinweis');
+	let hinweisUhr = setTimeout(() => {
+		if (current === 0 && hinweis && !hinweis.matches(':popover-open')) hinweis.showPopover();
+	}, 3500);
+
+	const hinweisWeg = () => {
+		clearTimeout(hinweisUhr);
+		if (hinweis?.matches(':popover-open')) hinweis.hidePopover();
 	};
 
-	logo?.addEventListener('click', replayLogo);
+	// Wer mit dem Zeiger auf dem Signet landet, hat den Hinweis nicht mehr
+	// nötig. Das erspart nebenbei ein Zucken: die Blase hängt am Signet,
+	// und das dreht sich beim Überfahren leicht, wodurch ihre Ankerbox
+	// wandert. Ist sie da schon weg, sieht man davon nichts.
+	logo?.addEventListener('pointerenter', hinweisWeg);
 
-	const counterEl = document.querySelector('[data-counter]');
-	let counterRaf = 0, counterLast = 0, counterRest = 0;
-	let counterValue = 100000 + Math.floor((Date.now() - new Date('2024-01-01').getTime()) / 864e5) * 50;
-
-	const counterTick = (t) => {
-		counterRest += (t - (counterLast || t)) * 0.5;
-		counterLast = t;
-		const inc = counterRest | 0;
-		if (inc) {
-			counterValue += inc;
-			counterRest -= inc;
-			counterEl.textContent = counterValue.toLocaleString('de-DE');
-		}
-		counterRaf = requestAnimationFrame(counterTick);
-	};
-
-	function startCounter() {
-		if (!counterEl || counterRaf || disabled('nocounter')) return;
-		counterLast = 0;
-		counterRaf = requestAnimationFrame(counterTick);
-	}
-
-	function stopCounter() {
-		cancelAnimationFrame(counterRaf);
-		counterRaf = 0;
-	}
+	// Ein Tap auf das Signet würfelt zugleich ein neues Farbthema. Die
+	// Farben selbst macht js/theme.js, das schon im <head> gelaufen ist.
+	logo?.addEventListener('click', () => {
+		hinweisWeg();
+		window.wfTheme?.();
+		replayLogo();
+	});
 
 	document.querySelectorAll('[data-years]').forEach((el) => {
 		el.textContent = new Date().getFullYear() - 2005;
 	});
 
-	// Mail-Schutz: die Adresse steht nur verdreht im Markup
-	(() => {
-		const parts = ['ed', 'emarfderiw', 'ofni'];
-		const rev = (s) => s.split('').reverse().join('');
-		const mail = `${rev(parts[2])}@${rev(parts[1])}.${rev(parts[0])}`;
+	// ----------------------------------------
+	// Der laufende Zähler
+	// ----------------------------------------
+	// Bewusst hier und nicht als CSS-Animation: der Umweg über eine
+	// animierte registrierte Eigenschaft und counter() scheitert an WebKit,
+	// dort fällt die Zahl auf 0, sobald die Animation läuft.
+	//
+	// Dass diese Schleife das Layout nicht mehr stört, liegt nicht an ihr,
+	// sondern an der abgedichteten Box in deck.css. Der Antrieb ist dafür
+	// ohne Belang, deshalb darf er ruhig wieder hier stehen.
+	let zaehlerRaf = 0, zaehlerZeit = 0, zaehlerRest = 0;
+	let zaehlerWert = 100000 + Math.floor((Date.now() - Date.parse('2024-01-01')) / 864e5) * 50;
 
-		document.getElementById('email-link')?.addEventListener('click', function () {
-			if (!this.dataset.ready) {
-				this.href = `mailto:${mail}`;
-				this.dataset.ready = '1';
-			}
-		});
+	// Ohne Tausenderpunkt: die Zahl wirkt hier als Bild, nicht als Betrag
+	const zaehlerZeigen = () => {
+		if (counterEl) counterEl.textContent = zaehlerWert;
+	};
 
-		const inImpressum = document.getElementById('impressum-email');
-		if (inImpressum) {
-			inImpressum.textContent = mail;
-			inImpressum.style.unicodeBidi = 'normal';
-			inImpressum.style.direction = 'ltr';
+	const zaehlerSchritt = (t) => {
+		zaehlerRest += (t - (zaehlerZeit || t)) * 0.5;
+		zaehlerZeit = t;
+		const plus = zaehlerRest | 0;
+		if (plus) {
+			zaehlerWert += plus;
+			zaehlerRest -= plus;
+			zaehlerZeigen();
 		}
-	})();
+		zaehlerRaf = requestAnimationFrame(zaehlerSchritt);
+	};
+
+	// Läuft nur, solange die Section zu sehen ist
+	const zaehlerLaufen = (an) => {
+		if (!counterEl || reduziert) return;
+		if (an && !zaehlerRaf) {
+			zaehlerZeit = 0;
+			zaehlerRaf = requestAnimationFrame(zaehlerSchritt);
+		} else if (!an) {
+			cancelAnimationFrame(zaehlerRaf);
+			zaehlerRaf = 0;
+		}
+	};
+
+	zaehlerZeigen();
+
+	// Mail-Schutz: die Adresse steht nur verdreht im Markup und wird erst
+	// beim Klick zusammengesetzt. Im Impressum kommt sie ganz ohne Skript
+	// aus, dort dreht die Schriftrichtung sie wieder herum (.mail-rueckwaerts).
+	document.getElementById('email-link')?.addEventListener('click', function () {
+		if (this.dataset.ready) return;
+		const rev = (s) => s.split('').reverse().join('');
+		this.href = `mailto:${rev('ofni')}@${rev('emarfderiw')}.${rev('ed')}`;
+		this.dataset.ready = '1';
+	});
 
 	// GitHub-Repos als weitere Spalten der Code-Reihe
 	const initRepos = () => {
