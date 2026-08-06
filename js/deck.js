@@ -30,7 +30,14 @@
 	// sonst fängt es den Sprung unterwegs ab und zieht zurück (auf Mobile der
 	// Normalfall). Die Anker-Links im Markup funktionieren auch ohne das hier.
 	// ========================================
-	const GLIDE_MS = 420;
+	// Wo der Browser selbst einrastet (Touch), überlässt man ihm auch die
+	// Bewegung. Eine eigene Animation würde dort gegen die Snap-Engine
+	// arbeiten: der Sprung startet, wird mittendrin abgefangen und auf die
+	// Ausgangs-Section zurückgezogen. Der native Anker-Sprung kennt das
+	// Problem nicht, weil beides dieselbe Engine ist.
+	const browserSnaps = matchMedia('(hover: none) and (pointer: coarse)');
+
+	const GLIDE_MS = 290;
 	const easeInOut = (p) => (p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2);
 	const running = new Map();
 
@@ -72,26 +79,28 @@
 		state.id = requestAnimationFrame(tick);
 	};
 
-	const goToSection = (el) => {
-		root.style.scrollSnapType = 'none';
-		glide(window, 'y', Math.round(el.getBoundingClientRect().top + scrollY),
-			() => root.style.removeProperty('scroll-snap-type'));
-	};
-
 	document.addEventListener('click', (e) => {
 		const link = e.target.closest('a[href^="#"]');
 		if (!link) return;
 		const target = document.getElementById(decodeURIComponent(link.getAttribute('href').slice(1)));
 		if (!target || !target.classList.contains('screen')) return;
-		e.preventDefault();
 		if (menu?.matches(':popover-open')) menu.hidePopover();
-		goToSection(target);
+
+		// Touch: der Browser springt selbst zum Anker und rastet sauber ein
+		if (browserSnaps.matches) return;
+
+		e.preventDefault();
+		stopGlide(window);
+		glide(window, 'y', Math.round(target.getBoundingClientRect().top + scrollY));
 	});
 
-	// Eine eigene Geste hat immer Vorrang vor einer laufenden Animation
+	// Echtes Scrollen hat Vorrang vor einer laufenden Animation. Auf
+	// touchstart zu hören wäre falsch: ein Tipp auf einen Button ist noch
+	// kein Scrollen, würde den gerade gestarteten Sprung aber abbrechen und
+	// das Einrasten mitten in der Bewegung zurückholen.
 	const yieldToUser = () => [...running.keys()].forEach(stopGlide);
 	addEventListener('wheel', yieldToUser, { passive: true });
-	addEventListener('touchstart', yieldToUser, { passive: true });
+	addEventListener('touchmove', yieldToUser, { passive: true });
 
 	// ========================================
 	// 2 · Aktive Section
@@ -136,16 +145,43 @@
 
 		const pad = () => parseFloat(getComputedStyle(rail).scrollPaddingLeft) || 0;
 
-		// Ziel ist immer die nächste Snap-Kante, nie eine feste Pixelzahl
+		// Welche Spalte steht gerade vorn?
+		const atRest = () => {
+			const from = rail.scrollLeft + pad();
+			const cells = [...rail.children];
+			let best = 0;
+			cells.forEach((c, i) => {
+				if (Math.abs(c.offsetLeft - from) < Math.abs(cells[best].offsetLeft - from)) best = i;
+			});
+			return best;
+		};
+
+		// Ziel ist immer eine Snap-Kante, nie eine feste Pixelzahl. Läuft schon
+		// eine Animation, zählt der Klick auf deren Ziel weiter, statt auf die
+		// Momentanposition. So kann man mehrfach klicken, ohne zu warten.
+		let aim = 0;
 		const step = (dir) => {
 			const cells = [...rail.children];
-			const from = rail.scrollLeft + pad();
-			const target = dir > 0
-				? cells.find((c) => c.offsetLeft > from + 4)
-				: cells.reverse().find((c) => c.offsetLeft < from - 4);
+			const base = running.has(rail) ? aim : atRest();
+			const next = Math.max(0, Math.min(cells.length - 1, base + dir));
+
+			// Touch: auch hier scrollt der Browser selbst, aus demselben Grund
+			if (browserSnaps.matches) {
+				aim = next;
+				cells[aim].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+				return;
+			}
+
+			stopGlide(rail);
+			aim = next;
 			rail.style.scrollSnapType = 'none';
-			glide(rail, 'x', (target ? target.offsetLeft : 0) - pad(),
-				() => rail.style.removeProperty('scroll-snap-type'));
+			glide(rail, 'x', cells[aim].offsetLeft - pad(), () => {
+				rail.style.removeProperty('scroll-snap-type');
+				// Am Ende der Reihe bleibt die Spalte hinter dem Ziel zurück,
+				// weil weiter nicht gescrollt werden kann. Dann zählt die
+				// echte Position, sonst geht der erste Klick zurück ins Leere.
+				aim = atRest();
+			});
 		};
 
 		const sync = () => {

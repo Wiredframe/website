@@ -44,7 +44,8 @@
 :root {
 	--color-primary: #003e50;
 	--color-accent: #4cf799;
-	--color-text: #aebab3;
+	--color-accent-strong: #42eb8e;
+	--color-text: #c4d9df;
 	--color-white: #fff;
 	--color-canvas: #eef1f1;
 
@@ -58,7 +59,7 @@
 	--fs-h4: calc(var(--fs-text) * 1.28);
 	--fs-h3: clamp(1.9rem, min(3.4vw, 4.4vh), 2.6rem);
 	--fs-h2: clamp(2.3rem, min(6.4vw, 8vh), 4.4rem);
-	--fs-h1: clamp(2.4rem, min(8.6vw, 10.5vh), 6rem);
+	--fs-h1: clamp(2.2rem, min(7.6vw, 9.4vh), 5.2rem);
 	/* Sonderfälle: Schaugrößen und Bedienelemente */
 	--fs-counter: clamp(4rem, min(19vw, 21vh), 11rem);
 	--fs-num: clamp(2.6rem, min(5.4vw, 7vh), 4.2rem);
@@ -96,10 +97,11 @@
 }
 
 html {
-	/* Der Browser übernimmt die Navigation: eine Section pro Geste.
-	   scroll-snap-stop verhindert, dass ein Schwung mehrere Sections
-	   überspringt. */
-	scroll-snap-type: y mandatory;
+	/* Am Zeigegerät bleibt Scrollen frei: Maus und Trackpad rasten nicht
+	   ein, weil das Eingreifen in die eigene Scrollbewegung mehr stört als
+	   hilft. Die Sprünge über Indikator, Weiter-Button und Menü landen
+	   trotzdem exakt auf der Kante, das macht die Animation in deck.js. */
+	scroll-snap-type: none;
 	scroll-behavior: smooth;
 	scrollbar-width: none;
 	overscroll-behavior-y: none;
@@ -108,6 +110,15 @@ html {
 
 html::-webkit-scrollbar {
 	display: none;
+}
+
+/* Auf Touch-Geräten ist das Einrasten dagegen genau richtig: dort wischt
+   man in Bildschirmen, nicht in Pixeln. pointer: coarse trifft Finger,
+   nicht Maus oder Trackpad. */
+@media (hover: none) and (pointer: coarse) {
+	html {
+		scroll-snap-type: y mandatory;
+	}
 }
 
 body.app {
@@ -258,10 +269,38 @@ button {
 	text-align: center;
 	scroll-snap-align: start;
 	scroll-snap-stop: always;
+	transition: background var(--fast), transform var(--fast);
 }
 
 .screen--dark .cell {
 	background: color-mix(in srgb, var(--color-white) 8%, transparent);
+}
+
+/* Leichte Reaktion auf Hover, nur für Zeigergeräte: auf dem Touchscreen
+   bliebe der Zustand nach dem Antippen hängen. */
+@media (hover: hover) {
+
+	.cell:hover:not(.cell--title) {
+		transform: translateY(-4px);
+	}
+
+	.cell:hover:not(.cell--title, .cell--stat, .cell--photo) {
+		background: color-mix(in srgb, var(--color-accent) 24%, transparent);
+	}
+
+	.screen--dark .cell:hover:not(.cell--title, .cell--stat, .cell--photo) {
+		background: color-mix(in srgb, var(--color-accent) 18%, transparent);
+	}
+
+	/* die grünen Karten wechseln in den kräftigeren Ton */
+	.cell--stat:hover {
+		background: var(--color-accent-strong);
+	}
+
+	/* das Foto zoomt in der Karte, statt sich einzufärben */
+	.cell--photo:hover::before {
+		transform: scale(1.15);
+	}
 }
 
 /* Der Titel ist selbst eine Grid-Spalte, nur eben keine Karte */
@@ -452,10 +491,21 @@ button {
 	line-height: 1.2;
 }
 
-/* Foto füllt die Karte, Radius und Form kommen aus .cell */
+/* Foto liegt als eigene Ebene in der Karte: so lässt es sich zoomen,
+   ohne dass der Rahmen mitwandert. Radius und Form kommen aus .cell. */
 .cell--photo {
-	background: url('../images/portrait.jpg') center / cover no-repeat;
+	position: relative;
 	padding: 0;
+	overflow: hidden;
+	background: none;
+}
+
+.cell--photo::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: url('../images/portrait.jpg') center / cover no-repeat;
+	transition: transform var(--fast);
 }
 
 /* ===========================================
@@ -519,9 +569,7 @@ button {
 	background: var(--dot, var(--color-accent));
 }
 
-.cell--repo:hover {
-	background: color-mix(in srgb, var(--color-accent) 24%, transparent);
-}
+
 
 /* ===========================================
    Buttons in Inhalten
@@ -562,7 +610,7 @@ button {
    =========================================== */
 .logo-anim {
 	position: relative;
-	width: clamp(120px, 22vh, 260px);
+	width: clamp(150px, 27vh, 330px);
 	aspect-ratio: 1;
 	cursor: pointer;
 }
@@ -752,6 +800,12 @@ button {
 	height: 24px;
 }
 
+/* Bei offenem Menü wird aus dem Button das grüne X */
+body:has(#menu:popover-open) .ctrl--menu {
+	background: var(--color-accent);
+	color: var(--color-primary);
+}
+
 /* Hamburger, wird bei offenem Menü zum X */
 .burger {
 	display: grid;
@@ -803,12 +857,29 @@ body:has(#menu:popover-open) .burger span:nth-child(3) {
 }
 
 .chip {
+	position: relative;
 	flex: 0 0 auto;
 	width: var(--dot);
 	height: var(--dot);
 	border-radius: var(--radius-pill);
 	background: color-mix(in srgb, var(--color-primary) 25%, transparent);
 	transition: width 420ms var(--ease), background var(--fast);
+}
+
+/* Am Finger ist ein 11px-Punkt kein Ziel, sondern ein Glücksspiel. Die
+   Tippfläche wächst deshalb unsichtbar über den Punkt hinaus, während die
+   Optik gleich bleibt. Die Abstände wachsen mit, damit sich benachbarte
+   Flächen nicht überlappen. */
+@media (hover: none) and (pointer: coarse) {
+	.pager {
+		gap: 18px;
+	}
+
+	.chip::after {
+		content: "";
+		position: absolute;
+		inset: -12px -9px;
+	}
 }
 
 /* Der Name bleibt für Screenreader erhalten, ist aber nicht zu sehen */
@@ -857,13 +928,9 @@ body:has(#menu:popover-open) .burger span:nth-child(3) {
 	display: none;
 }
 
+/* Beide Flächen kommen ohne Abdunklung aus, sie decken ohnehin fast
+   alles ab. */
 .sheet::backdrop {
-	/* deckt auch die Bedienzeile im Randbereich ruhig ab */
-	background: color-mix(in srgb, var(--color-primary) 62%, transparent);
-}
-
-/* Das Menü kommt ohne Abdunklung aus, es deckt ohnehin fast alles ab */
-.menu::backdrop {
 	background: none;
 }
 
