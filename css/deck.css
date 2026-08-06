@@ -752,8 +752,7 @@ button {
 	height: 24px;
 }
 
-/* Hamburger. Kein Morph zum X: das Menü liegt bildschirmfüllend darüber,
-   der Button ist im offenen Zustand gar nicht zu sehen. */
+/* Hamburger, wird bei offenem Menü zum X */
 .burger {
 	display: grid;
 	gap: 5px;
@@ -765,6 +764,19 @@ button {
 	height: 2px;
 	border-radius: 2px;
 	background: currentColor;
+	transition: transform var(--fast), opacity var(--fast);
+}
+
+body:has(#menu:popover-open) .burger span:nth-child(1) {
+	transform: translateY(7px) rotate(45deg);
+}
+
+body:has(#menu:popover-open) .burger span:nth-child(2) {
+	opacity: 0;
+}
+
+body:has(#menu:popover-open) .burger span:nth-child(3) {
+	transform: translateY(-7px) rotate(-45deg);
 }
 
 /* --- Indikator: Punkte, die aktuelle Section als breiterer Balken -------- */
@@ -853,6 +865,13 @@ button {
 /* Das Menü kommt ohne Abdunklung aus, es deckt ohnehin fast alles ab */
 .menu::backdrop {
 	background: none;
+}
+
+/* Das Menü endet über der Bedienzeile. So bleibt sein eigener Auslöser
+   sichtbar und schließt es an genau der Stelle wieder, an der er es
+   geöffnet hat. Ein zweiter Schließen-Button erübrigt sich damit. */
+.menu {
+	bottom: calc(var(--dock-h) + var(--gutter));
 }
 
 .sheet__inner {
