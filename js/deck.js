@@ -64,8 +64,9 @@
 		nextLabel.textContent = screens[i].dataset.next || 'Weiter';
 		nextLink.setAttribute('aria-label', nextLabel.textContent);
 
-		// Zurück auf der Startsection läuft das Signet neu an
-		if (screens[i].id === 'home') replayLogo();
+		// Zurück auf der Startsection läuft der ganze Auftritt neu an:
+		// Signet, Schlagzeile, Untertitel.
+		if (screens[i].id === 'home') replayHero();
 		zaehlerLaufen(screens[i].id === 'wahrheit');
 	};
 
@@ -143,13 +144,26 @@
 	// ========================================
 	const logo = document.querySelector('.logo-anim');
 
-	// Die Animation selbst steht im CSS, hier wird sie nur zurückgespult.
-	// Nicht über das Entfernen und Neusetzen einer Klasse: das bräuchte ein
-	// erzwungenes Reflow dazwischen, und das mitten in einem Sprung.
-	const replayLogo = () => logo?.getAnimations({ subtree: true }).forEach((a) => {
+	// Die Animationen selbst stehen im CSS, hier werden sie nur
+	// zurückgespult. Nicht über das Entfernen und Neusetzen einer Klasse:
+	// das bräuchte ein erzwungenes Reflow dazwischen, und das mitten in
+	// einem Sprung.
+	//
+	// Übergänge bleiben dabei unangetastet. getAnimations liefert sie mit,
+	// und ein zurückgespulter Hover sähe albern aus. Nur echte Keyframe-
+	// Animationen tragen einen animationName.
+	const wiederholen = (wurzel) => wurzel?.getAnimations({ subtree: true }).forEach((a) => {
+		if (!a.animationName) return;
 		a.currentTime = 0;
 		a.play();
 	});
+
+	// Zwei Reichweiten, mit Absicht. Wer das Signet antippt, meint das
+	// Signet. Wer zur Startsection zurückkehrt, soll den ganzen Auftritt
+	// noch einmal sehen, also auch Schlagzeile und Untertitel.
+	const heim = screens.find((s) => s.id === 'home');
+	const replayLogo = () => wiederholen(logo);
+	const replayHero = () => wiederholen(heim);
 
 	logo?.addEventListener('click', replayLogo);
 
