@@ -1,5 +1,5 @@
 /**
- * Wiredframe – wiredframe.de
+ * Wiredframe, wiredframe.de
  * Farbthemes würfeln
  *
  * Bei jedem Aufruf der Seite und bei jedem Tap auf das Signet entsteht ein

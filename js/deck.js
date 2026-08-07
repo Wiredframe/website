@@ -1,5 +1,5 @@
 /**
- * Wiredframe – wiredframe.de
+ * Wiredframe, wiredframe.de
  *
  * Die Bewegung macht der Browser: Anker-Links und scroll-behavior für die
  * Sections, Scroll-Snap quer in den Grid-Reihen, deren Pfeile als native
