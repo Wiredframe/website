@@ -108,8 +108,8 @@
   }
   </script>
 	<!-- Fonts are now loaded locally from /fonts/ -->
-	<link rel="stylesheet" href="css/deck.css?v=38">
-	<link rel="stylesheet" href="css/icons.css?v=38">
+	<link rel="stylesheet" href="css/deck.css?v=39">
+	<link rel="stylesheet" href="css/icons.css?v=39">
 	<link rel="shortcut icon" href="images/shortcut-icon.svg" type="image/x-icon">
 	<link rel="apple-touch-icon" href="images/shortcut-icon.svg">
 </head>
@@ -326,6 +326,14 @@
 	<!-- Menü-Deck -->
 	<div class="sheet menu" id="menu" popover>
 		<div class="sheet__inner">
+			<!-- Das Signet oben rechts. Dieselben Masken wie im Hero, nur
+			     stillgestellt: hier soll nichts rotieren. -->
+			<span class="menu__signet" aria-hidden="true">
+				<span class="logo-anim__ring logo-anim__ring--1"></span>
+				<span class="logo-anim__ring logo-anim__ring--2"></span>
+				<span class="logo-anim__ring logo-anim__ring--3"></span>
+				<span class="logo-anim__dot"></span>
+			</span>
 			<nav class="menu__nav" aria-label="Hauptmenü">
 				<a href="#home">Start</a>
 				<a href="#wahrheit">Wahrheit</a>
@@ -395,7 +403,7 @@
 			</svg>
 		</button>
 	</div>
-	<script src="js/deck.js?v=38"></script>
+	<script src="js/deck.js?v=39"></script>
 </body>
 
 </html>

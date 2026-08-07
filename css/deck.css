@@ -1236,6 +1236,9 @@ body:has(#menu:popover-open) .burger span:nth-child(3) {
 	background: var(--color-white);
 	color: var(--color-primary);
 	overflow: hidden;
+	/* Der Innenabstand steht als Token, weil das Signet oben rechts
+	   denselben Wert zum Rand halten soll wie der Inhalt. */
+	--sheet-pad: clamp(28px, 6vw, 90px);
 }
 
 .sheet:not(:popover-open) {
@@ -1261,7 +1264,7 @@ body:has(#menu:popover-open) .burger span:nth-child(3) {
 	justify-content: space-between;
 	gap: var(--space-lg);
 	height: 100%;
-	padding: clamp(28px, 6vw, 90px);
+	padding: var(--sheet-pad);
 }
 
 .sheet__close {
@@ -1296,6 +1299,43 @@ body:has(#menu:popover-open) .burger span:nth-child(3) {
 	/* auto oben und unten: die Liste steht mittig, die Meta-Zeile bleibt
 	   trotzdem am unteren Rand kleben */
 	margin-block: auto;
+}
+
+/* ----------------------------------------
+   Das Signet im Menü
+   ----------------------------------------
+   Waagerecht hält es denselben Abstand zum Rand wie der Inhalt, dafür
+   steht --sheet-pad. Senkrecht soll es auf der Höhe des ersten
+   Menüpunkts sitzen, und der ist kein fester Wert: die Liste steht
+   mittig, ihre Oberkante wandert also mit der Fensterhöhe. Deshalb wird
+   sie über den Anker direkt abgegriffen statt nachgerechnet. */
+.menu__nav a:first-child {
+	anchor-name: --erster-punkt;
+}
+
+.menu__signet {
+	position: absolute;
+	right: var(--sheet-pad);
+	/* Rückfall ohne Anker: oben bündig mit dem Innenabstand */
+	top: var(--sheet-pad);
+	width: clamp(52px, 7vw, 96px);
+	aspect-ratio: 1;
+	pointer-events: none;
+}
+
+/* Stillgestellt. Die Ringe stehen sonst auf ihrer Ausgangsdrehung und
+   der Punkt auf opacity 0, beides räumt erst die Animation weg. */
+.menu__signet * {
+	animation: none;
+	transform: none;
+	opacity: 1;
+}
+
+@supports (anchor-name: --a) {
+	.menu__signet {
+		position-anchor: --erster-punkt;
+		top: anchor(top);
+	}
 }
 
 .menu__nav a {
