@@ -1,72 +1,19 @@
+# wiredframe.de
+#
+# KI-Crawler sind bewusst erlaubt, Training eingeschlossen: die Seite soll in
+# den Antworten von ChatGPT, Claude, Perplexity, Gemini und Co. auftauchen.
+# Die frühere Sperrliste für GPTBot, ClaudeBot, CCBot und die übrigen ist
+# deshalb entfallen. Wer das zurückdrehen will, sperrt sie hier wieder einzeln.
+#
+# Kurzfassung für Sprachmodelle: /llms.txt
+
 User-agent: *
+Allow: /
+
+# Zwei Ausnahmen, beide aus demselben Grund: hier stehen Kundennamen.
+# Die Galerie ist zusätzlich auf noindex, die Startseite nutzt nur die
+# anonymisierte Fassung data/referenzen.json.
 Disallow: /projekte.html
+Disallow: /data/references.json
 
-# AI / LLM crawlers and scrapers
-User-agent: GPTBot
-Disallow: /
-
-User-agent: ChatGPT-User
-Disallow: /
-
-User-agent: OAI-SearchBot
-Disallow: /
-
-User-agent: ClaudeBot
-Disallow: /
-
-User-agent: Claude-Web
-Disallow: /
-
-User-agent: anthropic-ai
-Disallow: /
-
-User-agent: CCBot
-Disallow: /
-
-User-agent: Google-Extended
-Disallow: /
-
-User-agent: Applebot-Extended
-Disallow: /
-
-User-agent: Bytespider
-Disallow: /
-
-User-agent: PerplexityBot
-Disallow: /
-
-User-agent: Perplexity-User
-Disallow: /
-
-User-agent: Amazonbot
-Disallow: /
-
-User-agent: Diffbot
-Disallow: /
-
-User-agent: FacebookBot
-Disallow: /
-
-User-agent: meta-externalagent
-Disallow: /
-
-User-agent: ImagesiftBot
-Disallow: /
-
-User-agent: Omgilibot
-Disallow: /
-
-User-agent: Omgili
-Disallow: /
-
-User-agent: YouBot
-Disallow: /
-
-User-agent: cohere-ai
-Disallow: /
-
-User-agent: Timpibot
-Disallow: /
-
-User-agent: Webzio-Extended
-Disallow: /
+Sitemap: https://www.wiredframe.de/sitemap.xml

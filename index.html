@@ -13,98 +13,193 @@
 	<meta name="keywords"
 		content="UI Design, UX Design, Figma, Figma-to-Code, Design Systems, Agentic Coding, AI Design, Prototyping, No-Code, Low-Code, Webflow, Framer, Freelance Designer, Remote Designer">
 	<meta name="author" content="Ulf Schuster / Wiredframe">
-	<link rel="canonical" href="https://wiredframe.de/">
+	<link rel="canonical" href="https://www.wiredframe.de/">
 	<!-- Open Graph / Social -->
 	<meta property="og:type" content="website">
-	<meta property="og:url" content="https://wiredframe.de/">
+	<meta property="og:url" content="https://www.wiredframe.de/">
 	<meta property="og:title" content="Wiredframe: UI/UX Design & Figma-to-Code Workflows">
 	<meta property="og:description"
 		content="Freelance UI/UX Designer: Figma-to-Code, Design Systems, Agentic Coding & Prototyping. 20 Jahre Erfahrung, 200+ Projekte.">
-	<meta property="og:image" content="https://wiredframe.de/images/og-image.png">
+	<meta property="og:image" content="https://www.wiredframe.de/images/og-image.png">
+	<meta property="og:image:alt" content="Wiredframe, UI/UX Design und Figma-to-Code">
+	<meta property="og:image:width" content="1200">
+	<meta property="og:image:height" content="630">
+	<meta property="og:site_name" content="Wiredframe">
 	<meta property="og:locale" content="de_DE">
 	<!-- Twitter Card -->
 	<meta name="twitter:card" content="summary_large_image">
 	<meta name="twitter:title" content="Wiredframe: UI/UX Design & Figma-to-Code">
 	<meta name="twitter:description"
 		content="Freelance Designer für Figma-to-Code Workflows, Design Systems & Agentic Coding.">
-	<meta name="twitter:image" content="https://wiredframe.de/images/og-image.png">
+	<meta name="twitter:image" content="https://www.wiredframe.de/images/og-image.png">
 	<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 	<meta name="theme-color" content="#19392b">
-	<meta name="robots" content="index, follow">
-	<!-- Schema.org Structured Data for LLMs & SEO -->
+	<!-- max-snippet und max-image-preview heben die Kürzung auf: KI-Suchen und
+	     Antwortboxen dürfen damit den vollen Absatz zitieren statt 160 Zeichen. -->
+	<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+	<!-- Kurzfassung der Seite für Sprachmodelle, siehe /llms.txt -->
+	<link rel="alternate" type="text/markdown" href="/llms.txt" title="Wiredframe, Kurzfassung für Sprachmodelle">
+	<!-- Verweis auf das GitHub-Profil, dieselbe Person. Ergänzt sameAs im JSON-LD. -->
+	<link rel="me" href="https://github.com/Wiredframe">
+	<!-- Strukturierte Daten für Suchmaschinen und Sprachmodelle.
+	     Ein @graph mit vier verknüpften Knoten statt vier loser Blöcke: Studio,
+	     Person, Website und diese Seite verweisen über @id aufeinander, damit
+	     ein Parser sieht, dass hier eine Entität beschrieben wird und nicht vier.
+	     Die E-Mail steht bewusst nicht drin, sie ist im Seitentext geschützt.
+	     Die Langfassung dieser Angaben liegt in /llms.txt. -->
 	<script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    "name": "Wiredframe",
-    "alternateName": "Ulf Schuster - UI/UX Design",
-    "description": "Freelance UI/UX Designer spezialisiert auf Figma-to-Code Workflows, Design Systems, Agentic Coding und Prototyping. Remote-Zusammenarbeit mit Agenturen, Startups und Unternehmen.",
-    "url": "https://wiredframe.de",
-    "logo": "https://wiredframe.de/images/logo1.svg",
-    "image": "https://wiredframe.de/images/og-image.png",
-    "foundingDate": "2005",
-    "founder": {
-      "@type": "Person",
-      "name": "Ulf Schuster",
-      "jobTitle": "UI/UX Designer & Digital Creator",
-      "knowsAbout": ["UI Design", "UX Design", "Figma", "Figma-to-Code", "Design Systems", "Agentic Coding", "AI-assisted Design", "Prototyping", "Webflow", "Framer", "No-Code Development"]
-    },
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Sindelsdorferstraße 27a",
-      "addressLocality": "Penzberg",
-      "postalCode": "82377",
-      "addressCountry": "DE"
-    },
-    "areaServed": {
-      "@type": "GeoCircle",
-      "geoMidpoint": {
-        "@type": "GeoCoordinates",
-        "latitude": 47.7522,
-        "longitude": 11.3753
-      },
-      "geoRadius": "10000"
-    },
-    "serviceType": ["UI/UX Design", "Figma-to-Code", "Design Systems", "Prototyping", "Agentic Coding", "No-Code Development"],
-    "hasOfferCatalog": {
-      "@type": "OfferCatalog",
-      "name": "Design Services",
-      "itemListElement": [
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "UI/UX Design mit Figma",
-            "description": "Moderne User Interfaces und User Experience Design mit Figma, FigJam und aktuellen Design-Standards."
+    "@graph": [
+      {
+        "@type": ["ProfessionalService", "Organization"],
+        "@id": "https://www.wiredframe.de/#studio",
+        "name": "Wiredframe",
+        "alternateName": "Ulf Schuster, UI/UX Design",
+        "description": "Freelance UI/UX Designer spezialisiert auf Figma-to-Code Workflows, Design Systems, Agentic Coding und Prototyping. Remote-Zusammenarbeit mit Agenturen, Startups und Unternehmen.",
+        "url": "https://www.wiredframe.de/",
+        "logo": "https://www.wiredframe.de/images/logo1.svg",
+        "image": "https://www.wiredframe.de/images/og-image.png",
+        "foundingDate": "2005",
+        "knowsLanguage": ["de", "en", "it"],
+        "numberOfEmployees": {
+          "@type": "QuantitativeValue",
+          "value": 1
+        },
+        "founder": { "@id": "https://www.wiredframe.de/#ulf" },
+        "employee": { "@id": "https://www.wiredframe.de/#ulf" },
+        "vatID": "DE256451894",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Sindelsdorferstraße 27a",
+          "addressLocality": "Penzberg",
+          "addressRegion": "Bayern",
+          "postalCode": "82377",
+          "addressCountry": "DE"
+        },
+        "location": {
+          "@type": "Place",
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 47.7522,
+            "longitude": 11.3753
           }
         },
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Figma-to-Code Workflows",
-            "description": "Nahtloser Übergang von Design zu Code mit Figma Dev Mode, Code Connect und AI-gestützter Entwicklung."
+        "areaServed": [
+          { "@type": "Country", "name": "Deutschland" },
+          {
+            "@type": "GeoCircle",
+            "geoMidpoint": {
+              "@type": "GeoCoordinates",
+              "latitude": 47.7522,
+              "longitude": 11.3753
+            },
+            "geoRadius": "80000"
           }
+        ],
+        "availableLanguage": ["de", "en", "it"],
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "Projektanfragen",
+          "url": "https://outlook.office.com/book/EinGesprchvereinbaren@wiredframe.onmicrosoft.com/",
+          "availableLanguage": ["de", "en", "it"]
         },
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Design Systems & Komponenten",
-            "description": "Aufbau und Pflege von Design Systemen, Komponenten-Bibliotheken und Styleguides für konsistente Markenauftritte."
-          }
-        },
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Agentic Coding & AI Design",
-            "description": "KI-unterstützte Design-to-Code Pipelines mit GitHub Copilot, Cursor und anderen AI Tools."
-          }
+        "serviceType": ["UI/UX Design", "Figma-to-Code", "Design Systems", "Prototyping", "Agentic Coding", "No-Code Development"],
+        "sameAs": ["https://github.com/Wiredframe"],
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Design Services",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "UI/UX Design mit Figma",
+                "description": "Moderne User Interfaces und User Experience Design mit Figma, FigJam und aktuellen Design-Standards."
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Figma-to-Code Workflows",
+                "description": "Nahtloser Übergang von Design zu Code mit Figma Dev Mode, Code Connect und AI-gestützter Entwicklung."
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Design Systems und Komponenten",
+                "description": "Aufbau und Pflege von Design Systemen, Tokens, Komponenten-Bibliotheken und Styleguides für konsistente Markenauftritte."
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Agentic Coding und AI Design",
+                "description": "KI-unterstützte Design-to-Code Pipelines mit Cursor, GitHub Copilot und Claude, samt der Design-Vorgaben, an die sich diese Werkzeuge halten können."
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Prototyping",
+                "description": "Klickbare Prototypen zur Abstimmung, bevor Code entsteht."
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "No-Code und Low-Code Umsetzung",
+                "description": "Umsetzung in Webflow und Framer, wenn kein eigener Stack nötig ist."
+              }
+            }
+          ]
         }
-      ]
-    },
-    "sameAs": []
+      },
+      {
+        "@type": "Person",
+        "@id": "https://www.wiredframe.de/#ulf",
+        "name": "Ulf Schuster",
+        "givenName": "Ulf",
+        "familyName": "Schuster",
+        "jobTitle": "UI/UX Designer und Digital Creator",
+        "description": "Unabhängiger UI/UX Designer aus Penzberg, seit 2005 freiberuflich. Schwerpunkt: Figma, Design Systems, Figma-to-Code und KI-gestützte Design-to-Code Pipelines.",
+        "url": "https://www.wiredframe.de/",
+        "image": "https://www.wiredframe.de/images/portrait.jpg",
+        "worksFor": { "@id": "https://www.wiredframe.de/#studio" },
+        "brand": { "@id": "https://www.wiredframe.de/#studio" },
+        "knowsLanguage": ["de", "en", "it"],
+        "knowsAbout": ["UI Design", "UX Design", "Figma", "Figma Dev Mode", "Figma Code Connect", "Figma-to-Code", "Design Systems", "Design Tokens", "Agentic Coding", "AI-assisted Design", "Prototyping", "Webflow", "Framer", "No-Code Development", "Shopware", "OXID eShop"],
+        "sameAs": ["https://github.com/Wiredframe"]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://www.wiredframe.de/#website",
+        "url": "https://www.wiredframe.de/",
+        "name": "Wiredframe",
+        "inLanguage": "de-DE",
+        "publisher": { "@id": "https://www.wiredframe.de/#studio" }
+      },
+      {
+        "@type": ["WebPage", "ProfilePage"],
+        "@id": "https://www.wiredframe.de/#webpage",
+        "url": "https://www.wiredframe.de/",
+        "name": "UI/UX Design & Figma-to-Code | Freelance Designer für Agentic Coding & Design Systems",
+        "description": "Freelance UI/UX Designer seit 2005: Figma-to-Code Workflows, Design Systems, Agentic Coding, Prototyping und No-Code Entwicklung. Remote für Agenturen und Startups.",
+        "inLanguage": "de-DE",
+        "isPartOf": { "@id": "https://www.wiredframe.de/#website" },
+        "about": { "@id": "https://www.wiredframe.de/#studio" },
+        "mainEntity": { "@id": "https://www.wiredframe.de/#studio" },
+        "primaryImageOfPage": "https://www.wiredframe.de/images/og-image.png",
+        "dateModified": "2026-08-07",
+        "significantLink": "https://www.wiredframe.de/impressum.html"
+      }
+    ]
   }
   </script>
 	<!-- Fonts are now loaded locally from /fonts/ -->

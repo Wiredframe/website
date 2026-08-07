@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="de">
+
+<head>
+	<meta charset="utf-8">
+	<!-- Vorlage für images/og-image.png, gerendert von scripts/build-og-image.sh.
+	     Nicht Teil der Seite: liegt in scripts/ und wird nie ausgeliefert.
+	     Farben und Schriften kommen aus css/deck.css, das Signet aus index.html.
+	     Ändert sich dort etwas, hier nachziehen und das Skript erneut laufen lassen. -->
+	<style>
+		@font-face {
+			font-family: 'Brawler';
+			font-weight: 400 700;
+			src: url('../fonts/Brawler-variable.woff2') format('woff2');
+		}
+
+		@font-face {
+			font-family: 'Onest';
+			font-weight: 100 900;
+			src: url('../fonts/Onest-latin.woff2') format('woff2');
+		}
+
+		:root {
+			--color-primary: #193239;
+			--color-accent: #beff8a;
+			--color-ink: #2b493d;
+			--color-canvas: #e2ebe6;
+		}
+
+		html,
+		body {
+			margin: 0;
+			padding: 0;
+			overflow: hidden;
+		}
+
+		body {
+			width: 1200px;
+			height: 630px;
+			background: var(--color-canvas);
+			color: var(--color-primary);
+			font-family: 'Onest', system-ui, sans-serif;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			padding: 72px 80px;
+			box-sizing: border-box;
+		}
+
+		.signet {
+			width: 104px;
+			height: 104px;
+			display: block;
+			overflow: visible;
+		}
+
+		/* Dieselbe Rollenverteilung wie auf der Startseite, nur ohne Animation:
+		   Teil 1 liegt in der Grundfläche, 2 und 4 dunkel, 3 im Akzent. */
+		.teil--1 { fill: var(--color-canvas); }
+		.teil--2,
+		.teil--4 { fill: var(--color-primary); }
+		.teil--3 { fill: var(--color-accent); }
+		.signet path { stroke: var(--color-primary); stroke-width: 0.5; }
+
+		h1 {
+			font-family: 'Brawler', Georgia, serif;
+			font-weight: 700;
+			font-size: 88px;
+			line-height: 1.05;
+			letter-spacing: -0.015em;
+			margin: 0 0 18px;
+		}
+
+		.claim {
+			font-size: 38px;
+			line-height: 1.3;
+			font-weight: 500;
+			color: var(--color-ink);
+			margin: 0;
+			max-width: 26ch;
+		}
+
+		/* Der Begriff darf nicht umbrechen: die Auszeichnung liefe sonst
+		   über zwei Zeilen und zerschnitte den Namen. */
+		.claim b {
+			font-weight: 500;
+			white-space: nowrap;
+			background: linear-gradient(transparent 62%, var(--color-accent) 62%);
+		}
+
+		footer {
+			display: flex;
+			justify-content: space-between;
+			align-items: baseline;
+			font-size: 24px;
+			color: var(--color-ink);
+		}
+
+		footer .adresse {
+			font-weight: 600;
+			letter-spacing: 0.14em;
+			text-transform: uppercase;
+			font-size: 21px;
+		}
+	</style>
+</head>
+
+<body>
+	<svg class="signet" viewBox="0 0 69 69" aria-hidden="true">
+		<path class="teil--1" fill-rule="evenodd" clip-rule="evenodd"
+			d="M12.9711 12.9547C16.6459 9.28063 20.6445 5.6353 24.3704 2.9684C28.0064 0.366237 33.0337 -0.528008 37.1855 0.297172C39.7251 0.679906 42.233 1.61084 44.2942 3.08926C48.005 5.74897 51.9841 9.37487 55.6481 13.0346C55.664 13.0497 55.6776 13.0641 55.692 13.0792C55.7071 13.0929 55.7215 13.1072 55.7352 13.1224C59.3956 16.7857 63.0222 20.7662 65.6805 24.4756C67.1597 26.5382 68.0913 29.0454 68.474 31.5857C69.2978 35.7375 68.4035 40.7641 65.8021 44.4008C63.1359 48.1267 59.4906 52.1252 55.8158 55.7993C55.8136 55.8022 55.8093 55.8044 55.8071 55.8073C55.8042 55.8101 55.8021 55.8123 55.7992 55.8159C52.1244 59.4907 48.1265 63.136 44.4006 65.8022C40.7639 68.4037 35.7373 69.2979 31.5855 68.4742C29.0452 68.0914 26.538 67.159 24.4761 65.6806C20.7661 63.0224 16.7869 59.3965 13.1222 55.7353C13.1071 55.7216 13.0927 55.7058 13.079 55.6921C13.0632 55.6778 13.0495 55.6626 13.0344 55.6483C9.37397 51.9842 5.74879 48.0051 3.08979 44.2943C1.61065 42.2317 0.679718 39.7252 0.296983 37.1842C-0.528197 33.0339 0.367487 28.0058 2.96821 24.3706C5.63512 20.6432 9.28045 16.6454 12.9546 12.972L12.9711 12.9547Z" />
+		<path class="teil--2" fill-rule="evenodd" clip-rule="evenodd"
+			d="M39.58 9.60584C36.0865 9.94325 32.0383 10.826 28.1951 11.8512C28.1908 11.8512 28.1886 11.8526 28.1858 11.8533C28.1836 11.8533 28.1793 11.8548 28.1771 11.8548C24.3332 12.8799 20.3836 14.1296 17.1886 15.5742C7.44545 19.926 9.5289 27.5965 9.64761 28.8001C9.99293 32.2699 10.8785 36.29 11.9059 40.113H11.9044C11.9095 40.1289 11.9138 40.144 11.9174 40.1591C11.921 40.1749 11.9253 40.19 11.9303 40.2051C12.9613 44.0274 14.2152 47.949 15.6613 51.126C16.1613 52.2289 18.2124 59.9066 28.8368 58.8281C32.3304 58.4893 36.3786 57.6073 40.2217 56.5828C40.2261 56.5814 40.2282 56.5814 40.2311 56.5799C40.2333 56.5792 40.2376 56.5792 40.2397 56.5778C44.0836 55.554 48.0333 54.3037 51.2282 52.8584C60.9714 48.508 58.888 40.8375 58.7693 39.6339C58.4225 36.1627 57.5383 32.1433 56.511 28.3188C56.5074 28.3037 56.5031 28.29 56.4995 28.2742C56.4959 28.2591 56.4908 28.244 56.4865 28.2281C55.4556 24.4066 54.2016 20.485 52.7556 17.3066C52.2556 16.2051 50.2045 8.52599 39.58 9.60584Z" />
+		<path class="teil--3" fill-rule="evenodd" clip-rule="evenodd"
+			d="M41.2707 19.7785C39.0548 19.4087 36.4052 19.2821 33.8584 19.2785H33.8469C31.3009 19.2734 28.6512 19.39 26.4368 19.7504C19.6922 20.8173 19.7117 25.8857 19.5872 26.6468C19.2282 28.8411 19.1102 31.4626 19.1131 33.9871V34.0475C19.1188 36.572 19.2469 39.1936 19.6152 41.3893C19.7433 42.1504 19.7426 47.218 26.4901 48.3108C28.7073 48.6792 31.3563 48.8058 33.9038 48.8108H33.9153C36.4613 48.8166 39.1095 48.7001 41.3246 48.3375C48.07 47.2706 48.0491 42.2029 48.175 41.4425C48.5347 39.2483 48.652 36.6267 48.6484 34.1022V34.0425C48.6419 31.518 48.5153 28.8965 48.1469 26.7008C48.0189 25.9396 48.0203 20.8713 41.2707 19.7785Z" />
+		<path class="teil--4" fill-rule="evenodd" clip-rule="evenodd"
+			d="M36.5886 25.8022C36.4865 25.0512 36.439 24.2109 36.426 23.3497C37.6814 23.4008 38.9584 23.5123 40.039 23.726C43.6663 24.4281 43.5821 27.1857 43.6383 27.6015C43.7397 28.3526 43.7879 29.1929 43.7994 30.054C42.5447 30.003 41.2685 29.8929 40.1879 29.6778C36.5606 28.9756 36.6447 26.2181 36.5886 25.8022Z" />
+	</svg>
+
+	<div>
+		<h1>Wiredframe</h1>
+		<p class="claim">UI/UX Design, Design Systems und <b>Figma-to-Code</b></p>
+	</div>
+
+	<footer>
+		<span>Ulf Schuster, freiberuflich seit 2005</span>
+		<span class="adresse">wiredframe.de</span>
+	</footer>
+</body>
+
+</html>
