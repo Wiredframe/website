@@ -100,7 +100,7 @@
 	   eine Überschrift auf keinem Viewport kleiner werden als der Fließtext. */
 	--fs-text: clamp(1.2rem, min(2.1vw, 2.9vh), 1.4rem);
 	--fs-h4: calc(var(--fs-text) * 1.4);
-	--fs-h3: clamp(2.3rem, min(3.4vw, 4.4vh), 2.6rem);
+	--fs-h3: clamp(2.3rem, min(3.4vw, 4.4vh), 2.9em);
 	--fs-h2: clamp(2.6rem, min(6.4vw, 8vh), 4.4rem);
 	--fs-h1: clamp(2.6rem, min(7.6vw, 9.4vh), 5.2rem);
 	/* Sonderfälle: Schaugrößen und Bedienelemente */
@@ -407,7 +407,7 @@ body.dock-invers .dock :focus-visible {
 
 	/* das Foto zoomt in der Karte, statt sich einzufärben */
 	.cell--photo:hover::before {
-		transform: scale(1.15);
+		transform: scale(1.05);
 	}
 }
 
@@ -1130,7 +1130,6 @@ body.dock-invers .dock :focus-visible {
    Aufbau, Ausrichtung und Icongröße kommen unverändert von .cell, also
    mittig mit dem Sinnbild darüber wie in der Lösungs-Reihe. Hier steht
    nur, was davon abweicht. */
-
 /* Die Angaben rücken direkt unter den Satz. Das margin-top: auto der
    Repo-Karten schiebt sie an den unteren Rand, was zu einer
    linksbündigen Karte passt, nicht zu einer mittigen. Und die Farbe
@@ -1196,7 +1195,6 @@ body.dock-invers .dock :focus-visible {
 		background: var(--color-accent-strong);
 	}
 }
-
 
 /* ===========================================
    BLOCK: Dock (Bedienzeile am unteren Rand)
@@ -1776,7 +1774,6 @@ body:has(#menu:popover-open) .burger span:nth-child(3) {
    Reduced Motion
    =========================================== */
 @media (prefers-reduced-motion: reduce) {
-
 	.rail {
 		scroll-behavior: auto;
 	}
