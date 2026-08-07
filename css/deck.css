@@ -86,7 +86,7 @@
 	--color-accent: #beff8a;
 	--color-accent-strong: #a9e85f;
 	--color-ink: #2b493d;
-	--color-text: #d4d4d4;
+	--color-text: #9aadb2;
 	/* 	--color-white: #f8fdfb;
 	--color-canvas: #e8f1ec; */
 	--color-white: #f0f6f3;
@@ -98,9 +98,9 @@
 	   platzt. Basis ist der Fließtext, jede Überschriftenstufe liegt über
 	   dessen Höchstwert (1.7rem), h4 wird direkt daraus abgeleitet. So kann
 	   eine Überschrift auf keinem Viewport kleiner werden als der Fließtext. */
-	--fs-text: clamp(1.25rem, min(2.1vw, 2.9vh), 1.4rem);
+	--fs-text: clamp(1.2rem, min(2.1vw, 2.9vh), 1.4rem);
 	--fs-h4: calc(var(--fs-text) * 1.4);
-	--fs-h3: clamp(2.1rem, min(3.4vw, 4.4vh), 2.6rem);
+	--fs-h3: clamp(2.3rem, min(3.4vw, 4.4vh), 2.6rem);
 	--fs-h2: clamp(2.6rem, min(6.4vw, 8vh), 4.4rem);
 	--fs-h1: clamp(2.6rem, min(7.6vw, 9.4vh), 5.2rem);
 	/* Sonderfälle: Schaugrößen und Bedienelemente */
@@ -339,6 +339,11 @@ body.dock-invers .dock :focus-visible {
 	scroll-padding-inline: var(--peek);
 	overflow-x: auto;
 	overflow-y: hidden;
+	/* Ohne das springt die Reihe hart, wenn ein Pfeil gedrückt wird.
+	   scroll-behavior wird nicht vererbt, das smooth auf html gilt hier
+	   also nicht. Früher lag das Gleiten im Skript, seit die Pfeile
+	   native Scroll-Buttons sind, gehört es hierher. */
+	scroll-behavior: smooth;
 	scroll-snap-type: x mandatory;
 	overscroll-behavior-x: contain;
 	scrollbar-width: none;
@@ -598,7 +603,7 @@ body.dock-invers .dock :focus-visible {
 }
 
 /* Der Untertitel danach, ohne Versatz: er kommt einfach dazu */
-.hero + .text {
+.hero+.text {
 	animation: textBlende 0.5s 2.1s ease-out both;
 }
 
@@ -1063,7 +1068,6 @@ body.dock-invers .dock :focus-visible {
 	animation: signetDrehen 0.85s 2.19s ease-out both;
 }
 
-
 /* ===========================================
    BLOCK: Dock (Bedienzeile am unteren Rand)
    -------------------------------------------
@@ -1432,6 +1436,11 @@ body:has(#menu:popover-open) .burger span:nth-child(3) {
 	color: color-mix(in srgb, var(--color-primary) 60%, transparent);
 }
 
+.menu__meta a,
+.menu__meta button {
+	transition: color var(--fast);
+}
+
 .menu__meta a:hover,
 .menu__meta button:hover {
 	color: var(--color-primary);
@@ -1613,7 +1622,9 @@ body:has(#menu:popover-open) .burger span:nth-child(3) {
    Reduced Motion
    =========================================== */
 @media (prefers-reduced-motion: reduce) {
-	html {
+
+	html,
+	.rail {
 		scroll-behavior: auto;
 	}
 
@@ -1622,7 +1633,7 @@ body:has(#menu:popover-open) .burger span:nth-child(3) {
 	}
 
 	.hero .wort,
-	.hero + .text,
+	.hero+.text,
 	.logo-anim,
 	.sheet,
 	.chip,
@@ -1635,4 +1646,3 @@ body:has(#menu:popover-open) .burger span:nth-child(3) {
 		transition-duration: 1ms;
 	}
 }
-
