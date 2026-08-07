@@ -539,6 +539,79 @@ body.dock-invers .dock :focus-visible {
 	line-height: 1.1;
 }
 
+/* ----------------------------------------
+   Die Schlagzeile läuft ein
+   ----------------------------------------
+   Wort für Wort, wie ein Text, der gerade geschrieben wird. Das ist hier
+   kein beliebiger Effekt: die Zeile handelt von Websites, die eine
+   Maschine ausspuckt, und sieht dabei selbst aus, als entstünde sie
+   gerade.
+
+   Jedes Wort steckt in einem eigenen span, die Leerzeichen stehen im
+   Markup dazwischen. Der Zeilenumbruch arbeitet dadurch normal weiter,
+   auch das text-wrap aus der Überschriftenregel. Bewegt wird nichts, nur
+   die Deckkraft läuft hoch: dieselbe Bewegung wie beim Untertitel, ein
+   Keyframe genügt für beide.
+
+   Nach dem vierten Wort liegt eine Zäsur, gut eine halbe Sekunde statt
+   des Zehntels dazwischen. Der Satz ist eine Anspielung auf Ulbrichts
+   "Niemand hat die Absicht, eine Mauer zu errichten", und dort sitzt an
+   genau dieser Stelle das Komma. Die Pause macht das Zitat hörbar.
+
+   animation-fill-mode: both liefert den Startzustand schon während der
+   Verzögerung. Die Grundregel setzt deshalb keine opacity: 0, und wo
+   gar keine Animationen laufen, steht die Zeile einfach da. */
+.hero .wort {
+	animation: textBlende 0.35s ease-out both;
+}
+
+.hero .wort:nth-child(1) {
+	animation-delay: 0.4s;
+}
+
+.hero .wort:nth-child(2) {
+	animation-delay: 0.5s;
+}
+
+.hero .wort:nth-child(3) {
+	animation-delay: 0.6s;
+}
+
+.hero .wort:nth-child(4) {
+	animation-delay: 0.7s;
+}
+
+.hero .wort:nth-child(5) {
+	animation-delay: 1.35s;
+}
+
+.hero .wort:nth-child(6) {
+	animation-delay: 1.45s;
+}
+
+.hero .wort:nth-child(7) {
+	animation-delay: 1.55s;
+}
+
+.hero .wort:nth-child(8) {
+	animation-delay: 1.65s;
+}
+
+/* Der Untertitel danach, ohne Versatz: er kommt einfach dazu */
+.hero + .text {
+	animation: textBlende 0.5s 2.1s ease-out both;
+}
+
+@keyframes textBlende {
+	from {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 1;
+	}
+}
+
 .title {
 	font-size: var(--fs-h2);
 	line-height: 1.1;
@@ -809,6 +882,10 @@ body.dock-invers .dock :focus-visible {
 	width: clamp(150px, 27vh, 330px);
 	aspect-ratio: 1;
 	cursor: pointer;
+	/* Zwischen Signet und Schlagzeile mehr Luft als zwischen den übrigen
+	   Elementen der Bühne. Die setzt --space-md als Abstand, hier soll
+	   --space-lg stehen, der Unterschied wird aufgefüllt. */
+	margin-bottom: calc(var(--space-lg) - var(--space-md));
 	/* scale und rotate stehen als eigene Eigenschaften, nicht in einem
 	   gemeinsamen transform. Sonst kämen sie sich mit der Rotation der
 	   Ringe in die Quere, die dieselbe Achse benutzt. */
@@ -1544,6 +1621,8 @@ body:has(#menu:popover-open) .burger span:nth-child(3) {
 		animation-duration: 1ms !important;
 	}
 
+	.hero .wort,
+	.hero + .text,
 	.logo-anim,
 	.sheet,
 	.chip,
