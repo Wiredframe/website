@@ -1236,9 +1236,6 @@ body:has(#menu:popover-open) .burger span:nth-child(3) {
 	background: var(--color-white);
 	color: var(--color-primary);
 	overflow: hidden;
-	/* Der Innenabstand steht als Token, weil das Signet oben rechts
-	   denselben Wert zum Rand halten soll wie der Inhalt. */
-	--sheet-pad: clamp(28px, 6vw, 90px);
 }
 
 .sheet:not(:popover-open) {
@@ -1264,7 +1261,7 @@ body:has(#menu:popover-open) .burger span:nth-child(3) {
 	justify-content: space-between;
 	gap: var(--space-lg);
 	height: 100%;
-	padding: var(--sheet-pad);
+	padding: clamp(28px, 6vw, 90px);
 }
 
 .sheet__close {
@@ -1299,38 +1296,6 @@ body:has(#menu:popover-open) .burger span:nth-child(3) {
 	/* auto oben und unten: die Liste steht mittig, die Meta-Zeile bleibt
 	   trotzdem am unteren Rand kleben */
 	margin-block: auto;
-}
-
-/* ----------------------------------------
-   Die Wortmarke im Menü
-   ----------------------------------------
-   Sie steht inline im Markup, nicht als <img>: nur so lassen sich ihre
-   drei Farbflächen aus den Token speisen statt aus den festen Werten in
-   der Datei.
-
-   Waagerecht hält sie denselben Abstand zum Rand wie der Inhalt, dafür
-   steht --sheet-pad. Senkrecht sitzt sie auf der Höhe des ersten
-   Menüpunkts, und der ist kein fester Wert: die Liste steht mittig, ihre
-   Oberkante wandert also mit der Fensterhöhe. Deshalb wird sie über den
-   Anker abgegriffen statt nachgerechnet. */
-.menu__nav a:first-child {
-	anchor-name: --erster-punkt;
-}
-
-.menu__logo {
-	position: absolute;
-	right: var(--sheet-pad);
-	/* Rückfall ohne Anker: oben bündig mit dem Innenabstand */
-	top: var(--sheet-pad);
-	width: clamp(160px, 16vw, 250px);
-	height: auto;
-}
-
-@supports (anchor-name: --a) {
-	.menu__logo {
-		position-anchor: --erster-punkt;
-		top: anchor(top);
-	}
 }
 
 .menu__nav a {
@@ -1519,16 +1484,6 @@ body:has(#menu:popover-open) .burger span:nth-child(3) {
 
 	.menu__nav {
 		gap: 32px;
-	}
-
-	/* Auf dem Handy ist rechts neben den Menüpunkten kein Platz. Die
-	   Wortmarke geht deshalb zurück in den Fluss und steht über der
-	   Liste, linksbündig. Damit fällt auch die Ankerposition weg, static
-	   ignoriert die Randangaben ohnehin. */
-	.menu__logo {
-		position: static;
-		align-self: flex-start;
-		width: clamp(150px, 46vw, 210px);
 	}
 }
 
