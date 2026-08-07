@@ -64,9 +64,15 @@
 		nextLabel.textContent = screens[i].dataset.next || 'Weiter';
 		nextLink.setAttribute('aria-label', nextLabel.textContent);
 
-		// Zurück auf der Startsection läuft der ganze Auftritt neu an:
-		// Signet, Schlagzeile, Untertitel.
-		if (screens[i].id === 'home') replayHero();
+		// Was in den Blick kommt, blendet ein. Auf der Startsection ist das
+		// der ganze Auftritt aus Signet, Schlagzeile und Untertitel, sonst
+		// die Inhalte der Section. Beides steht im CSS, hier wird es nur
+		// zurückgespult.
+		//
+		// Das ersetzt das weiche Scrollen der Seite: statt die Fläche an
+		// den Leser vorbeifahren zu lassen, steht sie sofort still und der
+		// Inhalt kommt kurz nach.
+		einblenden(screens[i]);
 		zaehlerLaufen(screens[i].id === 'wahrheit');
 	};
 
@@ -159,11 +165,9 @@
 	});
 
 	// Zwei Reichweiten, mit Absicht. Wer das Signet antippt, meint das
-	// Signet. Wer zur Startsection zurückkehrt, soll den ganzen Auftritt
-	// noch einmal sehen, also auch Schlagzeile und Untertitel.
-	const heim = screens.find((s) => s.id === 'home');
+	// Signet. Wer eine Section betritt, bekommt deren ganzen Inhalt.
 	const replayLogo = () => wiederholen(logo);
-	const replayHero = () => wiederholen(heim);
+	const einblenden = (screen) => wiederholen(screen);
 
 	logo?.addEventListener('click', replayLogo);
 

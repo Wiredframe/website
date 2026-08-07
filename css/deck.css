@@ -157,10 +157,17 @@ html {
 	   jedem Sprung stummzuschalten, und für so wenig Gewinn ist das zu
 	   viel Umgehung.
 
-	   Ohne Einrasten bleibt alles Wesentliche: die Sprünge über Indikator,
-	   Weiter-Button und Menü landen exakt auf der Sectionkante, denn es
-	   sind gewöhnliche Anker-Links, und ein Anker springt auf den Anfang
-	   seines Ziels. Bewegt wird von scroll-behavior, nicht von JavaScript.
+	   Die Sprünge über Indikator, Weiter-Button und Menü landen exakt auf
+	   der Sectionkante, denn es sind gewöhnliche Anker-Links, und ein
+	   Anker springt auf den Anfang seines Ziels.
+
+	   Und zwar hart, ohne scroll-behavior: smooth. Eine ganze Seite, die
+	   an einem vorbeifährt, ist nicht schön, sondern anstrengend: gelesen
+	   wird auf ruhigen Flächen, und wer der Bewegung folgt statt zu
+	   lesen, ist nach drei Klicks im Impressum. Der Wechsel ist deshalb
+	   ein Schnitt, und was ankommt, blendet an Ort und Stelle ein. Das
+	   Gleiten in den Reihen quer bleibt davon unberührt: dort blättert
+	   man, dort liest man nicht.
 
 	   In den Reihen quer bleibt das Einrasten dagegen: dort scrollt ein
 	   eigener Container, dessen Größe sich nicht ändert.
@@ -169,7 +176,6 @@ html {
 	   stand hier nur, um das Überziehen am Rand zu unterbinden, und hat
 	   dabei das native Ziehen zum Neuladen mit abgeschaltet. Das kann der
 	   Browser jetzt wieder selbst. */
-	scroll-behavior: smooth;
 	scrollbar-width: none;
 	-webkit-text-size-adjust: 100%;
 }
@@ -365,7 +371,7 @@ body.dock-invers .dock :focus-visible {
 	padding: var(--pad) max(var(--pad), var(--clear));
 	border-radius: var(--radius-cell);
 	corner-shape: squircle;
-	background: color-mix(in srgb, var(--color-primary) 5%, transparent);
+	background: var(--color-canvas);
 	text-align: center;
 	scroll-snap-align: start;
 	scroll-snap-stop: always;
@@ -518,6 +524,49 @@ body.dock-invers .dock :focus-visible {
 
 #profil .rail::scroll-button(*) {
 	background-color: var(--color-primary);
+}
+
+/* ----------------------------------------
+   Die Inhalte einer Section blenden ein
+   ----------------------------------------
+   Kein Ersatz für die Bewegung, sondern ihr Gegenteil: die Fläche steht
+   sofort still, nur ihr Inhalt kommt kurz nach. Deshalb Deckkraft statt
+   Verschiebung, und deshalb kurz.
+
+   Ausgelöst wird es aus deck.js, das die Animationen zurückspult, sobald
+   eine Section in den Blick kommt. Die Startsection bleibt außen vor,
+   sie hat ihre eigene Choreografie aus Signet und Schlagzeile. */
+.screen:not(#home) .stage>*,
+.screen:not(#home) .rail>* {
+	animation: inhaltEin 260ms ease-out both;
+}
+
+.screen:not(#home) .stage> :nth-child(2),
+.screen:not(#home) .rail> :nth-child(2) {
+	animation-delay: 60ms;
+}
+
+.screen:not(#home) .stage> :nth-child(3),
+.screen:not(#home) .rail> :nth-child(3) {
+	animation-delay: 120ms;
+}
+
+/* Ab der vierten Spalte bleibt der Versatz stehen: die Code-Reihe holt
+   beliebig viele Karten von GitHub, und eine Treppe über zwanzig Stufen
+   wäre keine mehr. */
+.screen:not(#home) .stage> :nth-child(n+4),
+.screen:not(#home) .rail> :nth-child(n+4) {
+	animation-delay: 180ms;
+}
+
+@keyframes inhaltEin {
+	from {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 1;
+	}
 }
 
 /* ===========================================
@@ -1623,17 +1672,21 @@ body:has(#menu:popover-open) .burger span:nth-child(3) {
    =========================================== */
 @media (prefers-reduced-motion: reduce) {
 
-	html,
 	.rail {
 		scroll-behavior: auto;
 	}
 
-	.logo-anim * {
+	/* Animationen: das Signet, die Schlagzeile, die Inhalte der Sections.
+	   Sie standen vorher in der Liste darunter, die aber nur Übergänge
+	   verkürzt, und griffen deshalb gar nicht. */
+	.logo-anim *,
+	.hero .wort,
+	.hero+.text,
+	.screen .stage>*,
+	.screen .rail>* {
 		animation-duration: 1ms !important;
 	}
 
-	.hero .wort,
-	.hero+.text,
 	.logo-anim,
 	.sheet,
 	.chip,
