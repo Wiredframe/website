@@ -25,6 +25,7 @@
 			--color-accent: #beff8a;
 			--color-ink: #2b493d;
 			--color-canvas: #e2ebe6;
+			--color-white: #ecf3ef;
 		}
 
 		html,
@@ -42,33 +43,40 @@
 			font-family: 'Onest', system-ui, sans-serif;
 			display: flex;
 			flex-direction: column;
-			justify-content: space-between;
+			justify-content: space-evenly;
 			padding: 72px 80px;
 			box-sizing: border-box;
 		}
 
 		.signet {
-			width: 104px;
-			height: 104px;
+			width: 180px;
+			height: 180px;
 			display: block;
-			overflow: visible;
 		}
 
 		/* Dieselbe Rollenverteilung wie auf der Startseite, nur ohne Animation:
-		   Teil 1 liegt in der Grundfläche, 2 und 4 dunkel, 3 im Akzent. */
-		.teil--1 { fill: var(--color-canvas); }
+		   Teil 1 liegt in der Grundfläche, 2 und 4 dunkel, 3 im Akzent.
+
+		   Keine Kontur: auf der Startseite zieht die Animation den Strich nur
+		   zum Zeichnen und blendet ihn beim Füllen wieder aus. Der Endzustand,
+		   und nur der gehört hierher, ist reine Fläche. */
+		.teil--1 {
+			fill: var(--color-white);
+		}
+
 		.teil--2,
-		.teil--4 { fill: var(--color-primary); }
-		.teil--3 { fill: var(--color-accent); }
-		.signet path { stroke: var(--color-primary); stroke-width: 0.5; }
+		.teil--4 {
+			fill: var(--color-primary);
+		}
+
+		.teil--3 {
+			fill: var(--color-accent);
+		}
 
 		h1 {
-			font-family: 'Brawler', Georgia, serif;
-			font-weight: 700;
-			font-size: 88px;
-			line-height: 1.05;
-			letter-spacing: -0.015em;
-			margin: 0 0 18px;
+			font-family: 'Brawler', serif;
+			font-size: 96px;
+			line-height: 0.2;
 		}
 
 		.claim {
@@ -77,7 +85,7 @@
 			font-weight: 500;
 			color: var(--color-ink);
 			margin: 0;
-			max-width: 26ch;
+			max-width: 23ch;
 		}
 
 		/* Der Begriff darf nicht umbrechen: die Auszeichnung liefe sonst
@@ -86,21 +94,6 @@
 			font-weight: 500;
 			white-space: nowrap;
 			background: linear-gradient(transparent 62%, var(--color-accent) 62%);
-		}
-
-		footer {
-			display: flex;
-			justify-content: space-between;
-			align-items: baseline;
-			font-size: 24px;
-			color: var(--color-ink);
-		}
-
-		footer .adresse {
-			font-weight: 600;
-			letter-spacing: 0.14em;
-			text-transform: uppercase;
-			font-size: 21px;
 		}
 	</style>
 </head>
@@ -116,16 +109,8 @@
 		<path class="teil--4" fill-rule="evenodd" clip-rule="evenodd"
 			d="M36.5886 25.8022C36.4865 25.0512 36.439 24.2109 36.426 23.3497C37.6814 23.4008 38.9584 23.5123 40.039 23.726C43.6663 24.4281 43.5821 27.1857 43.6383 27.6015C43.7397 28.3526 43.7879 29.1929 43.7994 30.054C42.5447 30.003 41.2685 29.8929 40.1879 29.6778C36.5606 28.9756 36.6447 26.2181 36.5886 25.8022Z" />
 	</svg>
-
-	<div>
-		<h1>Wiredframe</h1>
-		<p class="claim">UI/UX Design, Design Systems und <b>Figma-to-Code</b></p>
-	</div>
-
-	<footer>
-		<span>Ulf Schuster, freiberuflich seit 2005</span>
-		<span class="adresse">wiredframe.de</span>
-	</footer>
+	<h1>wiredframe</h1>
+	<p class="claim">UI/UX Design, Design Systems und <b>Figma-to-Code</b></p>
 </body>
 
 </html>
