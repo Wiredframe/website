@@ -828,128 +828,165 @@ body.dock-invers .dock :focus-visible {
 	scale: 0.92;
 }
 
-/* Die vier Teile des Signets sind einfarbige Vollflächen, für eine Maske
-   also der Idealfall: die Datei gibt nur die Form vor, die Farbe kommt
-   aus currentColor. Damit färbt sich das Signet bei jedem Wurf mit.
-   Dasselbe Verfahren nutzt icons.css schon für die Solar-Icons.
+/* ----------------------------------------
+   Das Signet
+   ----------------------------------------
+   Vier Pfade in einem Koordinatensystem, inline im Markup. Vorher waren
+   es vier CSS-Masken, was für die Farben genügte. Eine Maske kennt aber
+   nur Deckung und keine Geometrie, und ohne Geometrie gibt es nichts zu
+   stricheln: für eine Kontur, die sich selbst zeichnet, muss es SVG sein.
 
-   <span> hat keine eigene Größe, anders als das <img> davor. Deshalb
-   braucht jeder Teil ein aspect-ratio. */
-.logo-anim__ring,
-.logo-anim__dot {
-	background: currentColor;
-	mask: var(--signet) center / contain no-repeat;
-}
-
-.logo-anim__ring {
-	position: absolute;
+   Die Farben kommen weiterhin aus den Token, jetzt über color und
+   currentColor statt über die Maskenfläche. */
+.signet {
+	display: block;
 	width: 100%;
-	aspect-ratio: 1;
-	transform: rotate(180deg);
+	height: 100%;
+	/* Die Kontur des äußeren Pfads liegt genau auf der viewBox-Kante und
+	   würde sonst zur Hälfte abgeschnitten. */
+	overflow: visible;
 }
 
-/* Der äußere Ring braucht seinen Platz ausdrücklich. Als <img> stand er
-   noch am Anfang des Flusses, im <button> läge seine Ausgangsposition
-   dagegen mittig, und der Ring rutschte nach rechts unten weg. */
-.logo-anim__ring--1 {
-	--signet: url("../images/Slice2.svg");
+.signet__teil--1 {
 	color: var(--color-canvas);
-	top: 0;
-	left: 0;
 }
 
-.logo-anim__ring--2 {
-	--signet: url("../images/Slice3.svg");
+.signet__teil--2,
+.signet__teil--4 {
 	color: var(--color-primary);
-	width: 72%;
-	top: 14%;
-	left: 14%;
 }
 
-.logo-anim__ring--3 {
-	--signet: url("../images/Slice4.svg");
+.signet__teil--3 {
 	color: var(--color-accent);
-	width: 43%;
-	top: 28.5%;
-	left: 28.5%;
 }
 
-.logo-anim__dot {
-	--signet: url("../images/Slice5.svg");
-	color: var(--color-primary);
-	position: absolute;
-	width: 11%;
-	aspect-ratio: 33 / 30;
-	left: 53.5%;
-	top: 34%;
-	opacity: 0;
+/* Ausgangszustand: nichts gefüllt, die Kontur vollständig weggeschoben.
+   pathLength normiert jeden Pfad auf die Länge 1, deshalb steht hier
+   überall dieselbe Zahl, egal wie lang der Pfad wirklich ist. */
+.signet path {
+	fill: currentColor;
+	fill-opacity: 0;
+	stroke: var(--color-primary);
+	/* Strichbreite in Nutzereinheiten, nicht über non-scaling-stroke.
+	   Jenes misst das Strichmuster in Bildschirmpunkten, pathLength
+	   normiert dagegen auf die Pfadlänge; zusammen ergab das eine Kontur,
+	   die selbst bei Offset 0 noch Lücken hatte. */
+	stroke-width: 0.5;
+	stroke-linecap: round;
+	stroke-dasharray: 1;
+	stroke-dashoffset: 1;
 }
 
-/* Die Animation hing früher an einer Klasse, die JavaScript setzen musste.
-   Sie läuft jetzt einfach beim Laden. Zum Wiederholen spult deck.js sie
-   über die Web Animations API zurück, ganz ohne Klassenwechsel und ohne
-   das erzwungene Reflow, das dafür nötig gewesen wäre. */
-.logo-anim__ring--1 {
-	animation: logoRotate 1.3s ease-out 0.13s forwards;
+.signet__teil {
+	/* Bezug der Drehung ist die eigene Form, nicht die ganze Fläche */
+	transform-box: fill-box;
+	transform-origin: center;
 }
 
-.logo-anim__ring--2 {
-	animation: logoRotate 1.17s ease-out 0.26s forwards;
+/* Der Ablauf hat drei Abschnitte, und sie greifen bewusst nicht
+   ineinander:
+
+     1. Zeichnen  Jede Kontur zieht sich von Anfang bis Ende zu, die vier
+                  Teile versetzt, also von außen nach innen.
+     2. Füllen    Die Farbe läuft ein, der Strich verschwindet dabei.
+     3. Drehen    Ganz zum Schluss, wenn das Signet fertig dasteht.
+
+   Die Trennung ist nicht Geschmack. Dreht sich ein Pfad, während er
+   gezeichnet wird, wandert der Anfang des Strichs mit, und statt einer
+   Linie, die sich zuzieht, sieht man verstreute Bögen.
+
+   Alle vier Teile drehen sich, jedes um seine eigene Mitte. */
+@keyframes signetZeichnen {
+	from {
+		stroke-dashoffset: 1;
+	}
+
+	to {
+		stroke-dashoffset: 0;
+	}
 }
 
-.logo-anim__ring--3 {
-	animation: logoRotate 1.04s ease-out 0.39s forwards;
+@keyframes signetFuellen {
+	to {
+		fill-opacity: 1;
+		stroke-opacity: 0;
+	}
 }
 
-.logo-anim__dot {
-	animation: logoPop 0.65s ease-out 0.65s forwards;
-}
+/* Eine halbe Drehung, und zwar von 180 Grad auf 0. Andersherum, also von
+   0 auf 180, endete das Signet um eine halbe Umdrehung verdreht: die
+   Formen sind organisch und nicht symmetrisch, das sähe man. So beginnt
+   es verdreht und rückt sich am Ende zurecht.
 
-@keyframes logoRotate {
+   Das Nachschwingen am Schluss verhindert, dass die Bewegung abrupt
+   stehen bleibt. */
+@keyframes signetDrehen {
 	0% {
-		transform: rotate(180deg);
+		rotate: 180deg;
 	}
 
 	50% {
-		transform: rotate(-11deg);
+		rotate: -11deg;
 	}
 
 	65% {
-		transform: rotate(5deg);
+		rotate: 5deg;
 	}
 
 	78% {
-		transform: rotate(-2.5deg);
+		rotate: -2.5deg;
 	}
 
 	88% {
-		transform: rotate(1.2deg);
+		rotate: 1.2deg;
 	}
 
 	100% {
-		transform: rotate(0deg);
+		rotate: 0deg;
 	}
 }
 
-@keyframes logoPop {
-	0% {
-		opacity: 0;
-		transform: scale(0);
-	}
+/* 1 · Zeichnen ab 0s, 0.8s je Teil, 0.18s versetzt: steht bei 1.34s.
+   2 · Füllen ab 1.35s, 0.45s je Teil: steht bei 2.04s. */
+.signet__teil--1 path {
+	animation: signetZeichnen 0.8s linear forwards,
+		signetFuellen 0.45s 1.35s ease-out forwards;
+}
 
-	50% {
-		opacity: 1;
-		transform: scale(1.25);
-	}
+.signet__teil--2 path {
+	animation: signetZeichnen 0.8s 0.18s linear forwards,
+		signetFuellen 0.45s 1.43s ease-out forwards;
+}
 
-	70% {
-		transform: scale(0.92);
-	}
+.signet__teil--3 path {
+	animation: signetZeichnen 0.8s 0.36s linear forwards,
+		signetFuellen 0.45s 1.51s ease-out forwards;
+}
 
-	100% {
-		opacity: 1;
-		transform: scale(1);
-	}
+.signet__teil--4 path {
+	animation: signetZeichnen 0.8s 0.54s linear forwards,
+		signetFuellen 0.45s 1.59s ease-out forwards;
+}
+
+/* 3 · Drehen ab 2.05s, wenn gefüllt ist: fertig bei 3.11s.
+
+   both statt forwards: der Startwert gilt dadurch schon während der
+   Verzögerung. Ohne das stünden die Teile bis 2.05s auf 0 Grad und
+   sprängen im Moment des Starts auf 180. */
+.signet__teil--1 {
+	animation: signetDrehen 0.85s 2.05s ease-out both;
+}
+
+.signet__teil--2 {
+	animation: signetDrehen 0.85s 2.12s ease-out both;
+}
+
+.signet__teil--3 {
+	animation: signetDrehen 0.85s 2.19s ease-out both;
+}
+
+.signet__teil--4 {
+	animation: signetDrehen 0.85s 2.26s ease-out both;
 }
 
 /* ===========================================
