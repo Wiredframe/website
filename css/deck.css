@@ -895,7 +895,8 @@ body.dock-invers .dock :focus-visible {
    gezeichnet wird, wandert der Anfang des Strichs mit, und statt einer
    Linie, die sich zuzieht, sieht man verstreute Bögen.
 
-   Alle vier Teile drehen sich, jedes um seine eigene Mitte. */
+   Der Punkt dreht nicht mit, dafür ist er zu klein: eine Drehung um
+   die eigene Mitte sähe man ihm kaum an, sie machte ihn nur unruhig. */
 @keyframes signetZeichnen {
 	from {
 		stroke-dashoffset: 1;
@@ -968,7 +969,7 @@ body.dock-invers .dock :focus-visible {
 		signetFuellen 0.45s 1.59s ease-out forwards;
 }
 
-/* 3 · Drehen ab 2.05s, wenn gefüllt ist: fertig bei 3.11s.
+/* 3 · Drehen ab 2.05s, wenn gefüllt ist: fertig bei 3.04s.
 
    both statt forwards: der Startwert gilt dadurch schon während der
    Verzögerung. Ohne das stünden die Teile bis 2.05s auf 0 Grad und
@@ -985,9 +986,6 @@ body.dock-invers .dock :focus-visible {
 	animation: signetDrehen 0.85s 2.19s ease-out both;
 }
 
-.signet__teil--4 {
-	animation: signetDrehen 0.85s 2.26s ease-out both;
-}
 
 /* ===========================================
    BLOCK: Dock (Bedienzeile am unteren Rand)
