@@ -277,8 +277,6 @@
 			JavaScript: '#f1e05a', Ruby: '#701516', Python: '#3572A5', Shell: '#89e051', Go: '#00ADD8',
 			Rust: '#dea584', Java: '#b07219', Kotlin: '#A97BFF', PHP: '#4F5D95', 'C++': '#f34b7d', 'C#': '#178600'
 		};
-		const ICON = '<svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.708A2.486 2.486 0 0 1 4.5 9h8ZM5 12.25a.25.25 0 0 1 .25-.25h3.5a.25.25 0 0 1 .25.25v3.25a.25.25 0 0 1-.4.2l-1.45-1.087a.249.249 0 0 0-.3 0L5.4 15.7a.25.25 0 0 1-.4-.2Z"></path></svg>';
-
 		const rtf = new Intl.RelativeTimeFormat('de', { numeric: 'auto' });
 		const timeAgo = (iso) => {
 			const diff = (Date.now() - new Date(iso).getTime()) / 1000;
@@ -290,7 +288,7 @@
 
 		const card = (r) => `
 			<a class="cell cell--repo" href="${esc(r.html_url)}" target="_blank" rel="noopener">
-				<span class="repo__icon">${ICON}</span>
+				<span class="repo__icon"><span class="repo__glyph icon--repo"></span></span>
 				<h3 class="subtitle">${esc(r.name)}</h3>
 				<p class="text repo__desc">${esc(r.description || 'Noch ohne Beschreibung, aber öffentlich einsehbar.')}</p>
 				<span class="repo__meta">

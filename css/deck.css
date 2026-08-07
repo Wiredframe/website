@@ -856,9 +856,14 @@ body.dock-invers .dock :focus-visible {
 	color: var(--color-accent);
 }
 
-.repo__icon svg {
+/* Dieselbe Mechanik wie .cell__icon: Maske vor einer Fläche in
+   currentColor, damit das Icon die Akzentfarbe des Kreises annimmt. */
+.repo__glyph {
 	width: 26px;
 	height: 26px;
+	background: currentColor;
+	-webkit-mask: var(--icon) center / contain no-repeat;
+	mask: var(--icon) center / contain no-repeat;
 }
 
 .cell--repo .subtitle {
