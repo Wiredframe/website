@@ -61,8 +61,8 @@
 /* Ein festes Farbthema. Grundton und Akzent sind gesetzt, die übrigen
    fünf Rollen daraus abgeleitet: gleiche Regel, gleiche Mathematik wie im
    Generator, der die Seite eine Zeit lang bei jedem Aufruf neu eingefärbt
-   hat. Die Herleitung steht weiterhin in js/theme.js, die Datei wird nur
-   nicht mehr geladen.
+   hat. Die Herleitung steht weiterhin in _archiv/js/theme.js, die Datei
+   wird nur nicht mehr geladen.
 
    In OKLCH ist L wahrnehmungsbezogen. Deshalb tragen die Rollen feste
    Helligkeiten und unterscheiden sich sonst nur im Farbton, und deshalb

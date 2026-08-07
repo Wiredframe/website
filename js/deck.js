@@ -10,9 +10,9 @@
  *   2. eine Notbremse gegen Überlauf auf sehr kleinen Screens
  *   3. Inhalte: Jahre, Mail-Schutz, GitHub
  *
- * Die Farben stehen fest in css/deck.css. Sie stammen aus js/theme.js,
- * das sie eine Zeit lang bei jedem Aufruf neu gewürfelt hat; die Datei
- * liegt noch im Projekt, wird aber nicht mehr geladen.
+ * Die Farben stehen fest in css/deck.css. Sie stammen aus theme.js, das
+ * sie eine Zeit lang bei jedem Aufruf neu gewürfelt hat; die Datei liegt
+ * unter _archiv/js/, wird aber nicht mehr geladen.
  */
 (() => {
 	'use strict';
