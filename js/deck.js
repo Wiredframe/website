@@ -241,7 +241,7 @@
 	// Art und Branche übernimmt und daraus einen Satz baut. Hier wird also
 	// nichts mehr verschwiegen, sondern nur noch gezeichnet.
 	const initReferenzen = () => {
-		const rail = document.getElementById('referenzen-rail');
+		const rail = document.getElementById('projekte-rail');
 		if (!rail) return;
 
 		const karte = (r) => `
@@ -256,7 +256,7 @@
 
 		// Die Einladung steht schon im Markup und soll die letzte Spalte
 		// bleiben, deshalb wird davor eingefügt und nicht ans Ende.
-		const einladung = document.getElementById('referenzen-einladung');
+		const einladung = document.getElementById('projekte-einladung');
 
 		fetch('data/referenzen.json')
 			.then((r) => { if (!r.ok) throw 0; return r.json(); })

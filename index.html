@@ -108,8 +108,8 @@
   }
   </script>
 	<!-- Fonts are now loaded locally from /fonts/ -->
-	<link rel="stylesheet" href="css/deck.css?v=69">
-	<link rel="stylesheet" href="css/icons.css?v=69">
+	<link rel="stylesheet" href="css/deck.css?v=70">
+	<link rel="stylesheet" href="css/icons.css?v=70">
 	<link rel="shortcut icon" href="images/shortcut-icon.svg" type="image/x-icon">
 	<link rel="apple-touch-icon" href="images/shortcut-icon.svg">
 </head>
@@ -246,7 +246,7 @@
 			</div>
 		</section>
 		<!-- 5 · Profil -->
-		<section class="screen" id="profil" aria-label="Profil" data-next="Zuletzt gebaut">
+		<section class="screen" id="profil" aria-label="Profil" data-next="Geheime Projekte">
 			<div class="panel">
 				<div class="rail" tabindex="0" role="group" aria-label="Profil, horizontal">
 					<article class="cell cell--title">
@@ -271,20 +271,21 @@
 				</div>
 			</div>
 		</section>
-		<!-- 6 · Referenzen -->
-		<section class="screen screen--dark" id="referenzen" aria-label="Referenzen" data-next="Aktuell in Arbeit">
+		<!-- 6 · Projekte -->
+		<section class="screen screen--dark" id="projekte" aria-label="Projekte" data-next="Aktuell in Arbeit">
 			<div class="panel">
-				<div class="rail" id="referenzen-rail" tabindex="0" role="group"
-					aria-label="Referenzen, horizontal">
+				<div class="rail" id="projekte-rail" tabindex="0" role="group"
+					aria-label="Projekte, horizontal">
 					<article class="cell cell--title">
-						<h2 class="title">Zuletzt gebaut</h2>
+						<h2 class="title">Geheime Projekte</h2>
 						<p class="text">Zehn Projekte, deren Namen nicht genannt werden dürfen. Verschwiegenheit
-							gehört zum Handwerk, hier stehen deshalb nur Branche, Art und Jahr. Was in keinem
-							Vertrag steht: Mit jedem dieser Auftraggeber würde ich sofort wieder arbeiten.</p>
+							gehört zum Handwerk, hier stehen deshalb nur Branche, Art und Jahr. In allen war ich
+							ein zuverlässiger, systemtreuer Kollaborateur: Termine gehalten, Absprachen
+							gehalten, Klappe gehalten.</p>
 					</article>
 					<!-- Bleibt am Ende der Reihe stehen: die Projektkarten schiebt
 					     deck.js davor ein, nicht dahinter. -->
-					<a class="cell cell--einladung" id="referenzen-einladung" href="#kontakt">
+					<a class="cell cell--einladung" id="projekte-einladung" href="#kontakt">
 						<span class="cell__icon icon--post" aria-hidden="true"></span>
 						<h3 class="subtitle">Und die echten Namen?</h3>
 						<p class="text">Die zeige ich gern, samt den Projekten dahinter. Nur eben nicht hier,
@@ -304,7 +305,7 @@
 							dem letzten Commit sortiert. Ein Designer, der programmiert, war in keiner
 							Stellenbeschreibung vorgesehen. Ich mache es trotzdem, und zwar mit Vergnügen: Wer
 							Design zu Ende denken will, muss es irgendwann selbst bauen.</p>
-						<p class="text text--muted">Gestaltung statt Code steht <a href="#referenzen">eine Section
+						<p class="text text--muted">Gestaltung statt Code steht <a href="#projekte">eine Section
 								vorher</a>.</p>
 					</article>
 				</div>
@@ -354,7 +355,7 @@
 			<a class="chip" href="#ursachen"><span>Ursachen</span></a>
 			<a class="chip" href="#loesung"><span>Lösung</span></a>
 			<a class="chip" href="#profil"><span>Profil</span></a>
-			<a class="chip" href="#referenzen"><span>Referenzen</span></a>
+			<a class="chip" href="#projekte"><span>Projekte</span></a>
 			<a class="chip" href="#repos"><span>Code</span></a>
 			<a class="chip" href="#kontakt"><span>Kontakt</span></a>
 		</nav>
@@ -377,7 +378,7 @@
 				<a href="#ursachen">Ursachen</a>
 				<a href="#loesung">Lösung</a>
 				<a href="#profil">Profil</a>
-				<a href="#referenzen">Referenzen</a>
+				<a href="#projekte">Projekte</a>
 				<a href="#repos">Code</a>
 				<a href="#kontakt">Kontakt</a>
 			</nav>
@@ -429,6 +430,19 @@
 				<p>Die Icons stammen aus dem Solar Icon Set von 480 Design und stehen unter der Lizenz <a
 						href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY
 						4.0</a>.</p>
+				<p>Das Hintergrundmuster der dunklen Flächen heißt „Wavey Fingerprint“ und stammt aus den <a
+						href="https://heropatterns.com/" target="_blank" rel="noopener">Hero Patterns</a> von Steve
+					Schoger. Es steht ebenfalls unter der Lizenz <a
+						href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY
+						4.0</a>.</p>
+				<p class="sheet__sub">Schriftnachweis</p>
+				<p>Die Überschriften stehen in der Brawler von Oleg Frolov und Haley Fiege für <a
+						href="https://github.com/cyrealtype/Brawler" target="_blank" rel="noopener">Cyreal</a>,
+					Copyright 2011 The Brawler Project Authors. Der übrige Text steht in der <a
+						href="https://github.com/simpals/onest" target="_blank" rel="noopener">Onest</a>, Copyright
+					2021 The Onest Project Authors. Beide Schriften stehen unter der <a
+						href="https://openfontlicense.org" target="_blank" rel="noopener">SIL Open Font License
+						1.1</a>.</p>
 			</div>
 		</div>
 		<button class="sheet__close" type="button" popovertarget="impressum" popovertargetaction="hide"
@@ -440,7 +454,7 @@
 			</svg>
 		</button>
 	</div>
-	<script src="js/deck.js?v=69"></script>
+	<script src="js/deck.js?v=70"></script>
 </body>
 
 </html>
