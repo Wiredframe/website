@@ -1,0 +1,62 @@
+[
+	{
+		"jahr": "2026",
+		"satz": "Website für ein Unternehmen aus dem Bereich Tourismus",
+		"technik": "",
+		"icon": "reise"
+	},
+	{
+		"jahr": "2026",
+		"satz": "Website für ein Unternehmen aus dem Bereich Küchen",
+		"technik": "",
+		"icon": "wohnen"
+	},
+	{
+		"jahr": "2026",
+		"satz": "Website für eine soziale Einrichtung",
+		"technik": "Payload",
+		"icon": "gesund"
+	},
+	{
+		"jahr": "2026",
+		"satz": "Website für eine Investmentfondsgesellschaft",
+		"technik": "",
+		"icon": "finanz"
+	},
+	{
+		"jahr": "2025",
+		"satz": "Website für eine öffentliche Einrichtung",
+		"technik": "",
+		"icon": "amt"
+	},
+	{
+		"jahr": "2025",
+		"satz": "Website für ein Unternehmen aus dem Bereich Photovoltaik",
+		"technik": "",
+		"icon": "energie"
+	},
+	{
+		"jahr": "2024",
+		"satz": "Website für ein Unternehmen aus dem Bereich Messtechnik",
+		"technik": "",
+		"icon": "technik"
+	},
+	{
+		"jahr": "2025",
+		"satz": "Onlineshop für ein Unternehmen aus dem Bereich Ersatzteilehandel",
+		"technik": "Shopware",
+		"icon": "handel"
+	},
+	{
+		"jahr": "2025",
+		"satz": "Onlineshop für ein Unternehmen aus dem Bereich Baustoffhandel",
+		"technik": "Shopware",
+		"icon": "wohnen"
+	},
+	{
+		"jahr": "2025",
+		"satz": "Website für ein Unternehmen aus dem Bereich Biotechnologie",
+		"technik": "",
+		"icon": "digital"
+	}
+]

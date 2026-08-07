@@ -108,8 +108,8 @@
   }
   </script>
 	<!-- Fonts are now loaded locally from /fonts/ -->
-	<link rel="stylesheet" href="css/deck.css?v=59">
-	<link rel="stylesheet" href="css/icons.css?v=59">
+	<link rel="stylesheet" href="css/deck.css?v=69">
+	<link rel="stylesheet" href="css/icons.css?v=69">
 	<link rel="shortcut icon" href="images/shortcut-icon.svg" type="image/x-icon">
 	<link rel="apple-touch-icon" href="images/shortcut-icon.svg">
 </head>
@@ -246,7 +246,7 @@
 			</div>
 		</section>
 		<!-- 5 · Profil -->
-		<section class="screen" id="profil" aria-label="Profil" data-next="Aktuell in Arbeit">
+		<section class="screen" id="profil" aria-label="Profil" data-next="Zuletzt gebaut">
 			<div class="panel">
 				<div class="rail" tabindex="0" role="group" aria-label="Profil, horizontal">
 					<article class="cell cell--title">
@@ -271,22 +271,46 @@
 				</div>
 			</div>
 		</section>
-		<!-- 6 · Repos -->
+		<!-- 6 · Referenzen -->
+		<section class="screen screen--dark" id="referenzen" aria-label="Referenzen" data-next="Aktuell in Arbeit">
+			<div class="panel">
+				<div class="rail" id="referenzen-rail" tabindex="0" role="group"
+					aria-label="Referenzen, horizontal">
+					<article class="cell cell--title">
+						<h2 class="title">Zuletzt gebaut</h2>
+						<p class="text">Zehn Projekte, deren Namen nicht genannt werden dürfen. Verschwiegenheit
+							gehört zum Handwerk, hier stehen deshalb nur Branche, Art und Jahr. Was in keinem
+							Vertrag steht: Mit jedem dieser Auftraggeber würde ich sofort wieder arbeiten.</p>
+					</article>
+					<!-- Bleibt am Ende der Reihe stehen: die Projektkarten schiebt
+					     deck.js davor ein, nicht dahinter. -->
+					<a class="cell cell--einladung" id="referenzen-einladung" href="#kontakt">
+						<span class="cell__icon icon--post" aria-hidden="true"></span>
+						<h3 class="subtitle">Und die echten Namen?</h3>
+						<p class="text">Die zeige ich gern, samt den Projekten dahinter. Nur eben nicht hier,
+							sondern im Gespräch. Eine kurze Nachricht genügt.</p>
+					</a>
+				</div>
+			</div>
+		</section>
+
+		<!-- 7 · Repos -->
 		<section class="screen" id="repos" aria-label="Code" data-next="Wie war nochmal die Fax-Nummer?">
 			<div class="panel">
 				<div class="rail" id="repos-rail" tabindex="0" role="group" aria-label="Repositories, horizontal">
 					<article class="cell cell--title">
 						<h2 class="title">Aktuell in Arbeit</h2>
-						<p class="text">Öffentliche Repositories, Tools und Experimente, live von GitHub geladen und
-							nach dem letzten Commit sortiert. Schwerpunkt: Figma-to-Code, Design Systems und Agentic
-							Coding.</p>
-						<p class="text">Designprojekte lassen sich schlecht committen. Referenzen zeige ich gern, <a
-								href="#kontakt">eine kurze Nachricht</a> genügt.</p>
+						<p class="text">Software, Apps, Skripte und KI-Workflows, live von GitHub geladen und nach
+							dem letzten Commit sortiert. Ein Designer, der programmiert, war in keiner
+							Stellenbeschreibung vorgesehen. Ich mache es trotzdem, und zwar mit Vergnügen: Wer
+							Design zu Ende denken will, muss es irgendwann selbst bauen.</p>
+						<p class="text text--muted">Gestaltung statt Code steht <a href="#referenzen">eine Section
+								vorher</a>.</p>
 					</article>
 				</div>
 			</div>
 		</section>
-		<!-- 7 · Kontakt -->
+		<!-- 8 · Kontakt -->
 		<section class="screen screen--dark" id="kontakt" aria-label="Kontakt" data-next="Zurück zum Start">
 			<div class="panel">
 				<div class="stage">
@@ -330,6 +354,7 @@
 			<a class="chip" href="#ursachen"><span>Ursachen</span></a>
 			<a class="chip" href="#loesung"><span>Lösung</span></a>
 			<a class="chip" href="#profil"><span>Profil</span></a>
+			<a class="chip" href="#referenzen"><span>Referenzen</span></a>
 			<a class="chip" href="#repos"><span>Code</span></a>
 			<a class="chip" href="#kontakt"><span>Kontakt</span></a>
 		</nav>
@@ -352,12 +377,12 @@
 				<a href="#ursachen">Ursachen</a>
 				<a href="#loesung">Lösung</a>
 				<a href="#profil">Profil</a>
+				<a href="#referenzen">Referenzen</a>
 				<a href="#repos">Code</a>
 				<a href="#kontakt">Kontakt</a>
 			</nav>
 			<div class="menu__meta">
 				<button type="button" popovertarget="impressum">Impressum</button>
-				<a href="index_dos.html">MS-DOS Version</a>
 			</div>
 		</div>
 	</div>
@@ -415,7 +440,7 @@
 			</svg>
 		</button>
 	</div>
-	<script src="js/deck.js?v=59"></script>
+	<script src="js/deck.js?v=69"></script>
 </body>
 
 </html>

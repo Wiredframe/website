@@ -389,15 +389,18 @@ body.dock-invers .dock :focus-visible {
 		transform: translateY(-4px);
 	}
 
-	.cell:hover:not(.cell--title, .cell--stat, .cell--photo) {
+	.cell:hover:not(.cell--title, .cell--stat, .cell--photo, .cell--einladung) {
 		background: color-mix(in srgb, var(--color-accent) 24%, transparent);
 	}
 
-	.screen--dark .cell:hover:not(.cell--title, .cell--stat, .cell--photo) {
+	.screen--dark .cell:hover:not(.cell--title, .cell--stat, .cell--photo, .cell--einladung) {
 		background: color-mix(in srgb, var(--color-accent) 18%, transparent);
 	}
 
-	/* die grünen Karten wechseln in den kräftigeren Ton */
+	/* Die gefüllten Karten wechseln stattdessen in den kräftigeren Ton.
+	   Sie stehen oben in der Ausnahmeliste, weil ein Schleier aus 18
+	   Prozent Akzent auf einer Fläche aus vollem Akzent nichts bewirkt,
+	   außer sie zu verwaschen. */
 	.cell--stat:hover {
 		background: var(--color-accent-strong);
 	}
@@ -1117,6 +1120,84 @@ body.dock-invers .dock :focus-visible {
 	animation: signetDrehen 0.85s 2.19s ease-out both;
 }
 
+/* ----------------------------------------
+   Referenzkarten
+   ----------------------------------------
+   Kein Screenshot, sondern ein Sinnbild der Branche: die Bilder in der
+   Quelle zeigen Kundenseiten und wären das Gegenteil von anonym. Das
+   Icon steht deshalb an ihrer Stelle, nicht als Schmuck.
+
+   Aufbau, Ausrichtung und Icongröße kommen unverändert von .cell, also
+   mittig mit dem Sinnbild darüber wie in der Lösungs-Reihe. Hier steht
+   nur, was davon abweicht. */
+
+/* Die Angaben rücken direkt unter den Satz. Das margin-top: auto der
+   Repo-Karten schiebt sie an den unteren Rand, was zu einer
+   linksbündigen Karte passt, nicht zu einer mittigen. Und die Farbe
+   dort ist aus dem Grundton gemischt, der auf dieser Section die Fläche
+   selbst ist. */
+.cell--referenz .repo__meta {
+	margin-top: 0;
+	justify-content: center;
+	/* Ungemischt. Bei 80 Prozent stand das Jahr auf der Karte nur bei
+	   3,5 : 1, und der Chip darunter noch tiefer. */
+	color: var(--color-text);
+}
+
+/* Die Technik steht als Chip, weil sie eine andere Art von Angabe ist
+   als das Jahr: keine Einordnung in der Zeit, sondern eine im Werkzeug.
+   Aus currentColor gemischt, damit sie auf hellem wie dunklem Grund
+   trägt, falls die Section einmal die Seite wechselt. */
+.referenz__technik {
+	padding: 3px 10px;
+	border-radius: var(--radius-pill);
+	corner-shape: squircle;
+	/* Kontur statt Füllung. Eine gefüllte Fläche hellt den Grund auf und
+	   nahm der Schrift darauf Kontrast: 3,75 statt der 4,58, die dasselbe
+	   Wort einen Millimeter weiter links hat. So steht es auf der Karte
+	   und behält deren Wert. */
+	border: 1px solid color-mix(in srgb, currentColor 35%, transparent);
+}
+
+/* ----------------------------------------
+   Die Einladung am Ende der Reihe
+   ----------------------------------------
+   Wer die Namen wirklich wissen will, soll fragen können. Die Karte
+   trägt deshalb als einzige den vollen Akzent: sie ist kein Projekt,
+   sondern die Aufforderung dazu. Farben wie die Statistik-Karten, also
+   Fläche im Akzent und Schrift in der eigens dafür gedachten Tiefe. */
+/* Der Sectionname steht mit davor, weil .screen--dark .cell die Fläche
+   sonst überschreibt: zwei Klassen schlagen eine. */
+.cell--einladung,
+.screen--dark .cell--einladung {
+	background: var(--color-accent);
+	color: var(--color-ink);
+}
+
+.cell--einladung .cell__icon,
+.cell--einladung .subtitle,
+.screen--dark .cell--einladung .subtitle {
+	color: var(--color-ink);
+}
+
+.cell--einladung .text {
+	color: color-mix(in srgb, var(--color-ink) 85%, transparent);
+}
+
+/* Der Hover steht hier unten und nicht oben bei den übrigen Karten. Dort
+   wäre er gleich spezifisch wie die Fläche zwei Regeln weiter oben, und
+   bei gleichem Gewicht gewinnt die spätere Regel: der kräftigere Ton käme
+   nie an. Die Karte ist aus dem allgemeinen Hover ausgenommen, ein
+   Schleier aus 18 Prozent Akzent auf vollem Akzent verwäscht ihn nur. */
+@media (hover: hover) {
+
+	.cell--einladung:hover,
+	.screen--dark .cell--einladung:hover {
+		background: var(--color-accent-strong);
+	}
+}
+
+
 /* ===========================================
    BLOCK: Dock (Bedienzeile am unteren Rand)
    -------------------------------------------
@@ -1465,7 +1546,12 @@ body:has(#menu:popover-open) .burger span:nth-child(3) {
 
 .menu__nav a {
 	width: fit-content;
-	font-size: clamp(1.7rem, min(5.4vw, 6.6vh), 3.6rem);
+	/* Acht Einträge, und die Höhe ist das knappe Maß, nicht die Breite.
+	   Deshalb steht der Höhenanteil vorn und der Breitenanteil großzügig
+	   dahinter: auf dem Telefon darf die Schrift groß bleiben, denn dort
+	   ist reichlich Breite und die Zeilen sind kurz. Gebremst wird sie
+	   erst, wenn das Fenster flach wird. */
+	font-size: clamp(1.8rem, min(11vw, 5vh), 3.2rem);
 	font-weight: 300;
 	line-height: 1.04;
 	letter-spacing: -0.015em;
@@ -1653,7 +1739,7 @@ body:has(#menu:popover-open) .burger span:nth-child(3) {
 	}
 
 	.menu__nav {
-		gap: 32px;
+		gap: clamp(12px, 2.6vh, 32px);
 	}
 }
 

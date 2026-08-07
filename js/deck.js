@@ -229,6 +229,43 @@
 		this.dataset.ready = '1';
 	});
 
+	// Beide Reihen unten setzen Markup aus Daten zusammen, deshalb steht
+	// das Maskieren hier oben und nicht zweimal darunter.
+	const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+	// ----------------------------------------
+	// Referenzen
+	// ----------------------------------------
+	// Die Datei data/referenzen.json ist bereits anonym: sie kennt weder
+	// Kundennamen noch Agenturen, weil werkzeuge/referenzen.py nur Jahr,
+	// Art und Branche übernimmt und daraus einen Satz baut. Hier wird also
+	// nichts mehr verschwiegen, sondern nur noch gezeichnet.
+	const initReferenzen = () => {
+		const rail = document.getElementById('referenzen-rail');
+		if (!rail) return;
+
+		const karte = (r) => `
+			<article class="cell cell--referenz">
+				<span class="cell__icon icon--${esc(r.icon)}" aria-hidden="true"></span>
+				<p class="text">${esc(r.satz)}</p>
+				<span class="repo__meta">
+					<span>${esc(r.jahr)}</span>
+					${r.technik ? `<span class="referenz__technik">${esc(r.technik)}</span>` : ''}
+				</span>
+			</article>`;
+
+		// Die Einladung steht schon im Markup und soll die letzte Spalte
+		// bleiben, deshalb wird davor eingefügt und nicht ans Ende.
+		const einladung = document.getElementById('referenzen-einladung');
+
+		fetch('data/referenzen.json')
+			.then((r) => { if (!r.ok) throw 0; return r.json(); })
+			.then((liste) => (einladung || rail).insertAdjacentHTML(
+				einladung ? 'beforebegin' : 'beforeend', liste.map(karte).join('')))
+			.catch(() => { })
+			.finally(relayout);
+	};
+
 	// GitHub-Repos als weitere Spalten der Code-Reihe
 	const initRepos = () => {
 		const rail = document.getElementById('repos-rail');
@@ -241,7 +278,6 @@
 			Rust: '#dea584', Java: '#b07219', Kotlin: '#A97BFF', PHP: '#4F5D95', 'C++': '#f34b7d', 'C#': '#178600'
 		};
 		const ICON = '<svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.708A2.486 2.486 0 0 1 4.5 9h8ZM5 12.25a.25.25 0 0 1 .25-.25h3.5a.25.25 0 0 1 .25.25v3.25a.25.25 0 0 1-.4.2l-1.45-1.087a.249.249 0 0 0-.3 0L5.4 15.7a.25.25 0 0 1-.4-.2Z"></path></svg>';
-		const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
 		const rtf = new Intl.RelativeTimeFormat('de', { numeric: 'auto' });
 		const timeAgo = (iso) => {
@@ -263,20 +299,75 @@
 				</span>
 			</a>`;
 
-		fetch(`https://api.github.com/users/${USER}/repos?per_page=100&sort=pushed&direction=desc`, { headers: { Accept: 'application/vnd.github+json' } })
-			.then((r) => { if (!r.ok) throw 0; return r.json(); })
-			.then((repos) => {
-				const list = (repos || []).filter((r) => !r.archived);
-				rail.insertAdjacentHTML('beforeend', list.map(card).join(''));
-			})
-			.catch(() => {
+		// ----------------------------------------
+		// Einmal am Tag holen, sonst aus dem Vorrat
+		// ----------------------------------------
+		// GitHub lässt ohne Anmeldung 60 Anfragen pro Stunde und IP zu. Das
+		// klingt viel, ist es aber nicht: die Grenze zählt pro IP, nicht pro
+		// Besucher, und hinter einem Mobilfunknetz oder einem Firmenanschluss
+		// teilen sich viele dieselbe. Ist sie erreicht, antwortet die API mit
+		// 403, und die Section stand dann leer da.
+		//
+		// Deshalb liegt die letzte Antwort im Browser des Besuchers. Geholt
+		// wird nur, wenn sie älter als einen Tag ist, und immer nur beim
+		// Aufruf der Seite: kein Timer, kein Nachladen im Hintergrund.
+		// Schlägt das Holen fehl, wird der alte Vorrat gezeigt, auch ein
+		// abgelaufener. Eine Woche alte Zeitangaben sind allemal besser als
+		// eine Karte, die sich entschuldigt.
+		const VORRAT = 'wf-repos';
+		const TAG = 24 * 60 * 60 * 1000;
+
+		const lesen = () => {
+			try {
+				const roh = localStorage.getItem(VORRAT);
+				if (!roh) return null;
+				const v = JSON.parse(roh);
+				return Array.isArray(v.liste) ? v : null;
+			} catch { return null; }
+		};
+
+		const schreiben = (liste) => {
+			try {
+				localStorage.setItem(VORRAT, JSON.stringify({ zeit: Date.now(), liste }));
+			} catch { /* privater Modus oder voll: dann eben ohne Vorrat */ }
+		};
+
+		const zeigen = (liste) => {
+			if (liste?.length) {
+				rail.insertAdjacentHTML('beforeend', liste.map(card).join(''));
+			} else {
 				rail.insertAdjacentHTML('beforeend', card({
 					html_url: `https://github.com/${USER}?tab=repositories`,
 					name: 'Ab zu GitHub',
 					description: 'Die Live-Vorschau lädt gerade nicht. Schau dir die Repositories direkt auf GitHub an.'
 				}));
+			}
+			relayout();
+		};
+
+		// Aus der Antwort wird nur behalten, was die Karte braucht. Sonst
+		// lägen hundert Repositories mit je vier Dutzend Feldern im Speicher
+		// des Besuchers, und die Fünf-Megabyte-Grenze ist schneller erreicht,
+		// als man denkt.
+		const knapp = (r) => ({
+			html_url: r.html_url, name: r.name, description: r.description,
+			language: r.language, pushed_at: r.pushed_at || r.updated_at
+		});
+
+		const vorrat = lesen();
+		if (vorrat && Date.now() - vorrat.zeit < TAG) {
+			zeigen(vorrat.liste);
+			return;
+		}
+
+		fetch(`https://api.github.com/users/${USER}/repos?per_page=100&sort=pushed&direction=desc`, { headers: { Accept: 'application/vnd.github+json' } })
+			.then((r) => { if (!r.ok) throw 0; return r.json(); })
+			.then((repos) => {
+				const liste = (repos || []).filter((r) => !r.archived).map(knapp);
+				schreiben(liste);
+				zeigen(liste);
 			})
-			.finally(relayout);
+			.catch(() => zeigen(vorrat?.liste));
 	};
 
 	// ========================================
@@ -284,6 +375,7 @@
 	// ========================================
 	setCurrent(0);
 	relayout();
+	initReferenzen();
 	initRepos();
 	document.fonts?.ready.then(relayout);
 })();
