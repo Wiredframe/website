@@ -1,17 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Nur die beiden Seiten, die indexiert werden sollen. projekte.html steht
-     bewusst nicht drin: die Galerie ist auf noindex und in robots.txt gesperrt. -->
+<!-- Nur die Startseite. Alles Rechtliche steht in ihrem Deck unter /#impressum.
+     projekte.html steht bewusst nicht drin: die Galerie ist auf noindex und in
+     robots.txt gesperrt. impressum.html und privacy.html ebenfalls nicht: beide
+     sind nur noch Weiterleitungen auf /#impressum und auf noindex. Sie halten
+     allein die Adressen, die extern hinterlegt sind. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 	<url>
 		<loc>https://www.wiredframe.de/</loc>
-		<lastmod>2026-08-07</lastmod>
+		<lastmod>2026-08-09</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>1.0</priority>
-	</url>
-	<url>
-		<loc>https://www.wiredframe.de/impressum.html</loc>
-		<lastmod>2026-08-07</lastmod>
-		<changefreq>yearly</changefreq>
-		<priority>0.3</priority>
 	</url>
 </urlset>

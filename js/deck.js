@@ -219,6 +219,124 @@
 
 	zaehlerZeigen();
 
+	// ========================================
+	// 4 · Pfeile der Schienen
+	// ----------------------------------------
+	// Zwei Dinge, die ::scroll-button() allein nicht leistet.
+	//
+	// Erstens kennen es Stand August 2026 nur Chromium-Browser. Wo es fehlt,
+	// legt der Zweig unten echte Knöpfe an, die genauso aussehen und
+	// genauso weit rücken. Sie sind Ersatz, kein Ersatzteil auf Dauer:
+	// sobald Safari und Firefox nachziehen, kann NATIVE_PFEILE true bleiben
+	// und dieser ganze Abschnitt fällt weg.
+	//
+	// Zweitens schaltet das Pseudoelement am Ende der Reihe von selbst auf
+	// :disabled, und das lässt sich nicht überstimmen. Der Rücksprung an den
+	// Anfang braucht deshalb in jedem Browser einen eigenen Knopf. Er sitzt
+	// genau dort, wo der native gerade auf opacity: 0 gegangen ist, und
+	// übernimmt dessen Platz, sobald die Reihe am Ende steht.
+	// ========================================
+	const NATIVE_PFEILE = CSS.supports('selector(::scroll-button(*))');
+
+	const knopf = (art, text) => {
+		const b = document.createElement('button');
+		b.type = 'button';
+		b.className = `rail-btn rail-btn--${art}`;
+		b.setAttribute('aria-label', text);
+		b.hidden = true;
+		return b;
+	};
+
+	document.querySelectorAll('.rail').forEach((rail) => {
+		// Ins Panel und nicht in die Section: das Pseudoelement rechnet
+		// gegen dasselbe Panel, nachgemessen in deck.css bei .rail-btn.
+		const buehne = rail.closest('.panel');
+		if (!buehne) return;
+
+		// Ohne native Pfeile braucht die Schiene beide Richtungen, mit ihnen
+		// nur den Rücksprung. Der trägt bewusst dieselbe Klasse wie der
+		// Vorwärtsknopf: gleiche Stelle, gleiches Aussehen, anderes Ziel.
+		const zurueck = NATIVE_PFEILE ? null : knopf('prev', 'Vorheriges Element');
+		const weiter = knopf('next', NATIVE_PFEILE ? 'Zurück zum Anfang' : 'Nächstes Element');
+		if (zurueck) buehne.append(zurueck);
+		buehne.append(weiter);
+
+		// Eine Snap-Position entspricht einer Spalte samt Abstand. Beides
+		// hängt an Container-Queries, wird also bei jedem Klick neu gemessen
+		// statt einmal beim Laden.
+		const schritt = () => {
+			const zelle = rail.querySelector('.cell');
+			if (!zelle) return rail.clientWidth;
+			const abstand = parseFloat(getComputedStyle(rail).columnGap) || 0;
+			return zelle.getBoundingClientRect().width + abstand;
+		};
+
+		const amAnfang = () => rail.scrollLeft <= 2;
+		const amEnde = () => rail.scrollLeft >= rail.scrollWidth - rail.clientWidth - 2;
+
+		const gleiten = (ziel) => {
+			rail.scrollTo({ left: ziel, behavior: reduziert ? 'instant' : 'smooth' });
+		};
+
+		zurueck?.addEventListener('click', () => gleiten(rail.scrollLeft - schritt()));
+
+		weiter.addEventListener('click', () => {
+			// Am Ende zurück auf Null, sonst eine Position weiter. Der native
+			// Knopf deckt den Normalfall bereits ab, dort bleibt nur der
+			// Rücksprung übrig.
+			if (amEnde()) gleiten(0);
+			else gleiten(rail.scrollLeft + schritt());
+		});
+
+		// Direkt im Handler und nicht über requestAnimationFrame gesammelt:
+		// Scroll-Ereignisse stellt der Browser ohnehin nur beim Aktualisieren
+		// der Darstellung zu, also höchstens einmal pro Bild. Die Sammelstelle
+		// sparte damit nichts und war nur eine Indirektion mehr.
+		const zeigen = () => {
+			// Steht alles nebeneinander, gibt es nichts zu blättern.
+			const scrollbar = rail.scrollWidth > rail.clientWidth + 2;
+			if (zurueck) zurueck.hidden = !scrollbar || amAnfang();
+			weiter.hidden = !scrollbar || (NATIVE_PFEILE && !amEnde());
+		};
+
+		rail.addEventListener('scroll', zeigen, { passive: true });
+		addEventListener('resize', zeigen);
+		// Die Reihen der Projekte und Repos werden erst nachträglich gefüllt.
+		// Ein ResizeObserver hilft dabei nicht: neue Karten verändern die
+		// Scrollbreite, nicht die Größe der Schiene selbst.
+		new MutationObserver(zeigen).observe(rail, { childList: true });
+		zeigen();
+	});
+
+	// ----------------------------------------
+	// Direktlink auf das Impressum
+	// ----------------------------------------
+	// Solange die Fläche zu ist, steht sie auf display:none. Ein Anker-Link
+	// auf #impressum findet sein Ziel deshalb nicht und springt nirgendwohin.
+	// Diese Zeilen machen aus wiredframe.de/#impressum einen Link, der die
+	// Fläche wirklich öffnet, egal ob beim Aufruf der Seite oder später.
+	//
+	// Der Knopf im Menü bleibt daneben bestehen: er öffnet nativ über
+	// popovertarget und funktioniert damit auch ohne Skript.
+	const impressum = document.getElementById('impressum');
+
+	const impressumAusHash = () => {
+		if (!impressum || location.hash !== '#impressum') return;
+		if (!impressum.matches(':popover-open')) impressum.showPopover();
+		if (menu?.matches(':popover-open')) menu.hidePopover();
+	};
+
+	// Beim Öffnen zieht die Adresse mit, damit sie sich kopieren und teilen
+	// lässt. replaceState und nicht pushState: das Impressum soll keinen
+	// eigenen Eintrag im Verlauf anlegen, der Zurück-Knopf gehört den Sections.
+	impressum?.addEventListener('toggle', (e) => {
+		if (e.newState === 'open') history.replaceState(null, '', '#impressum');
+		else if (location.hash === '#impressum') history.replaceState(null, '', location.pathname);
+	});
+
+	addEventListener('hashchange', impressumAusHash);
+	impressumAusHash();
+
 	// Mail-Schutz: die Adresse steht nur verdreht im Markup und wird erst
 	// beim Klick zusammengesetzt. Im Impressum kommt sie ganz ohne Skript
 	// aus, dort dreht die Schriftrichtung sie wieder herum (.mail-rueckwaerts).

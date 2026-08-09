@@ -109,7 +109,7 @@ Wiredframe mit den Entwicklungsteams der Kunden oder Agenturen zusammen.
 ## Seiten
 
 - [Startseite](https://www.wiredframe.de/): Profil, Leistungen, Projekte und Kontakt auf einer Seite
-- [Impressum und Datenschutz](https://www.wiredframe.de/impressum.html): Anbieterkennzeichnung nach § 5 DDG, Datenschutzhinweise nach DSGVO
+- [Impressum, Datenschutz und Nutzungsbedingungen](https://www.wiredframe.de/#impressum): Anbieterkennzeichnung nach § 5 DDG, Datenschutzhinweise nach DSGVO und die Nutzungsbedingungen der Apps, alles im Deck der Startseite
 
 Die Seite setzt keine Cookies, bindet kein Tracking ein und lädt Schriften vom
 eigenen Server. Ausgeliefert wird sie über GitHub Pages.

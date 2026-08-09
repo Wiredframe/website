@@ -451,7 +451,11 @@ body.dock-invers .dock :focus-visible {
    aufnimmt. Deshalb steht die Strichfarbe zweimal fest verdrahtet in der
    Grafik, statt aus currentColor zu kommen.
    =========================================== */
-.rail {
+/* Die Chevrons stehen an der Section und nicht an der Schiene, weil sie zwei
+   Abnehmer haben: das Pseudoelement erbt sie über die Schiene, die
+   Ersatzknöpfe aus deck.js hängen an der Section und säßen sonst außerhalb
+   der Vererbung. */
+.screen {
 	--chevron-prev: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23191919' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='15 18 9 12 15 6'/%3E%3C/svg%3E");
 	--chevron-next: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23191919' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='9 18 15 12 9 6'/%3E%3C/svg%3E");
 }
@@ -513,7 +517,7 @@ body.dock-invers .dock :focus-visible {
 }
 
 /* Auf den grünen Statistik-Karten ginge ein grüner Pfeil unter */
-#profil .rail {
+#profil {
 	--chevron-prev: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='15 18 9 12 15 6'/%3E%3C/svg%3E");
 	--chevron-next: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='9 18 15 12 9 6'/%3E%3C/svg%3E");
 }
@@ -526,6 +530,74 @@ body.dock-invers .dock :focus-visible {
 }
 
 #profil .rail::scroll-button(*) {
+	background-color: var(--color-primary);
+}
+
+/* ===========================================
+   Dieselben Pfeile ohne ::scroll-button()
+   -------------------------------------------
+   Stand August 2026 kennt nur Chromium die Scroll-Buttons. Damit Safari und
+   Firefox nicht ohne Pfeile dastehen, legt deck.js dort echte <button> an.
+   Sie sind der Notnagel, nicht der Normalfall: wo das Pseudoelement läuft,
+   bleibt es zuständig und die Knöpfe kommen gar nicht erst ins Markup.
+   Fällt der Notnagel eines Tages weg, ist das eine Zeile in deck.js und
+   dieser Block hier.
+
+   Die Deklarationen stehen bewusst doppelt und nicht in einer gemeinsamen
+   Selektorliste mit dem Pseudoelement: ein Browser verwirft die ganze Regel,
+   sobald ein Selektor darin unbekannt ist. Zusammengefasst bekämen also
+   ausgerechnet die Browser nichts, für die der Notnagel gedacht ist.
+
+   Bezugsrahmen ist .panel, dasselbe wie beim Pseudoelement. Waagerecht
+   nachgemessen an einer Probeseite, weil die Vermutung naheliegt, das
+   Pseudoelement rechne gegen den Viewport: Bei 1280 Pixeln Fensterbreite
+   steht der native Pfeil 28 Pixel vom Rand, bei 1800 Pixeln 30. Das ist
+   jedes Mal --gutter plus das clamp() unten, also die Einrückung des
+   Panels obendrauf. Das Panel ist demnach sehr wohl sein Bezugsrahmen.
+   Senkrecht geht die Rechnung ebenfalls auf: das Panel hält unten die
+   Bedienzeile frei, seine Inhaltsmitte liegt also um deren halbe Höhe
+   über der Mitte, und genau dort liegt die Schiene.
+   =========================================== */
+.rail-btn {
+	position: absolute;
+	top: calc(50% - var(--dock-h) / 2);
+	z-index: 3;
+	width: var(--btn);
+	height: var(--btn);
+	translate: 0 -50%;
+	appearance: none;
+	border: none;
+	padding: 0;
+	cursor: pointer;
+	border-radius: var(--radius-pill);
+	corner-shape: squircle;
+	background-color: var(--color-accent);
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 22px;
+	box-shadow: 0 12px 26px -14px color-mix(in srgb, var(--color-primary) 70%, transparent);
+	transition: transform var(--fast), opacity var(--fast);
+}
+
+.rail-btn[hidden] {
+	display: none;
+}
+
+.rail-btn--prev {
+	left: clamp(6px, 1vw, 14px);
+	background-image: var(--chevron-prev);
+}
+
+.rail-btn--next {
+	right: clamp(6px, 1vw, 14px);
+	background-image: var(--chevron-next);
+}
+
+.rail-btn:hover {
+	transform: scale(1.12);
+}
+
+#profil .rail-btn {
 	background-color: var(--color-primary);
 }
 
@@ -1798,6 +1870,7 @@ body:has(#menu:popover-open) .burger span:nth-child(3) {
 	.sheet,
 	.chip,
 	.btn,
+	.rail-btn,
 	.ctrl {
 		transition-duration: 1ms;
 	}
