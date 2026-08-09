@@ -5,29 +5,14 @@
 	<meta charset="utf-8">
 	<!-- Vorlage für images/og-image.png, gerendert von scripts/build-og-image.sh.
 	     Nicht Teil der Seite: liegt in scripts/ und wird nie ausgeliefert.
-	     Farben und Schriften kommen aus css/deck.css, das Signet aus index.html.
-	     Ändert sich dort etwas, hier nachziehen und das Skript erneut laufen lassen. -->
+	     Farben kommen aus css/deck.css, das Signet aus index.html.
+	     Ändert sich dort etwas, hier nachziehen und das Skript erneut laufen lassen.
+
+	     Bewusst nur das Signet auf heller Fläche: Titel, Domain und Beschreibung
+	     setzen die Apps (Safari, Messenger, Social) ohnehin selbst daneben.
+	     Alles, was hier zusätzlich stünde, wäre doppelt und in der Kachel zu klein.
+	     Das Signet sitzt mittig, damit ein quadratischer Beschnitt es nicht anschneidet. -->
 	<style>
-		@font-face {
-			font-family: 'Brawler';
-			font-weight: 400 700;
-			src: url('../fonts/Brawler-variable.woff2') format('woff2');
-		}
-
-		@font-face {
-			font-family: 'Onest';
-			font-weight: 100 900;
-			src: url('../fonts/Onest-latin.woff2') format('woff2');
-		}
-
-		:root {
-			--color-primary: #193239;
-			--color-accent: #beff8a;
-			--color-ink: #2b493d;
-			--color-canvas: #e2ebe6;
-			--color-white: #ecf3ef;
-		}
-
 		html,
 		body {
 			margin: 0;
@@ -38,19 +23,20 @@
 		body {
 			width: 1200px;
 			height: 630px;
-			background: var(--color-canvas);
-			color: var(--color-primary);
-			font-family: 'Onest', system-ui, sans-serif;
+			/* Exakt --color-canvas aus css/deck.css und exakt der theme-color
+			   in index.html. Eine Vorschaukarte färbt die Fläche unter dem Bild
+			   entweder aus theme-color oder aus dem Bild selbst: nur wenn beide
+			   denselben Wert tragen, bleibt die Karte oben wie unten einfarbig.
+			   Deshalb hier keinen eigenen, schöneren Ton wählen. */
+			background: #e2ebe6;
 			display: flex;
-			flex-direction: column;
-			justify-content: space-evenly;
-			padding: 72px 80px;
-			box-sizing: border-box;
+			align-items: center;
+			justify-content: center;
 		}
 
 		.signet {
-			width: 180px;
-			height: 180px;
+			width: 440px;
+			height: 440px;
 			display: block;
 		}
 
@@ -59,41 +45,22 @@
 
 		   Keine Kontur: auf der Startseite zieht die Animation den Strich nur
 		   zum Zeichnen und blendet ihn beim Füllen wieder aus. Der Endzustand,
-		   und nur der gehört hierher, ist reine Fläche. */
+		   und nur der gehört hierher, ist reine Fläche.
+
+		   Teil 1 liegt hier auf der Grundfarbe statt auf --color-white: sein
+		   Weiß säße sonst als kaum sichtbarer Hof um das Signet und läse in
+		   der kleinen Kachel als Fehler, nicht als Form. */
 		.teil--1 {
-			fill: var(--color-white);
+			fill: #e2ebe6;
 		}
 
 		.teil--2,
 		.teil--4 {
-			fill: var(--color-primary);
+			fill: #193239;
 		}
 
 		.teil--3 {
-			fill: var(--color-accent);
-		}
-
-		h1 {
-			font-family: 'Brawler', serif;
-			font-size: 96px;
-			line-height: 0.2;
-		}
-
-		.claim {
-			font-size: 38px;
-			line-height: 1.3;
-			font-weight: 500;
-			color: var(--color-ink);
-			margin: 0;
-			max-width: 23ch;
-		}
-
-		/* Der Begriff darf nicht umbrechen: die Auszeichnung liefe sonst
-		   über zwei Zeilen und zerschnitte den Namen. */
-		.claim b {
-			font-weight: 500;
-			white-space: nowrap;
-			background: linear-gradient(transparent 62%, var(--color-accent) 62%);
+			fill: #beff8a;
 		}
 	</style>
 </head>
@@ -109,8 +76,6 @@
 		<path class="teil--4" fill-rule="evenodd" clip-rule="evenodd"
 			d="M36.5886 25.8022C36.4865 25.0512 36.439 24.2109 36.426 23.3497C37.6814 23.4008 38.9584 23.5123 40.039 23.726C43.6663 24.4281 43.5821 27.1857 43.6383 27.6015C43.7397 28.3526 43.7879 29.1929 43.7994 30.054C42.5447 30.003 41.2685 29.8929 40.1879 29.6778C36.5606 28.9756 36.6447 26.2181 36.5886 25.8022Z" />
 	</svg>
-	<h1>wiredframe</h1>
-	<p class="claim">UI/UX Design, Design Systems und <b>Figma-to-Code</b></p>
 </body>
 
 </html>

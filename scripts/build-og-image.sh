@@ -5,8 +5,7 @@
 #
 # Aufruf (aus dem Projekt-Root):   bash scripts/build-og-image.sh
 #
-# Voraussetzung: Google Chrome. Die Schriften kommen aus fonts/, deshalb muss
-# die Vorlage aus dem Projekt heraus geladen werden und nicht aus /tmp.
+# Voraussetzung: Google Chrome.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
