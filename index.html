@@ -211,7 +211,9 @@
 	<link rel="stylesheet" href="css/deck.css?v=77">
 	<link rel="stylesheet" href="css/icons.css?v=76">
 	<link rel="shortcut icon" href="images/shortcut-icon.svg" type="image/x-icon">
-	<link rel="apple-touch-icon" href="images/shortcut-icon.svg">
+	<!-- Hier ein PNG und nicht die SVG von oben: apple-touch-icon nimmt kein
+	     SVG an. Gebaut aus scripts/touch-icon.html, siehe build-og-image.sh. -->
+	<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
 </head>
 
 <body class="app">
